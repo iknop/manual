@@ -1,0 +1,66 @@
+* {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+#topMenu{
+    background-color: #1988ff;
+    justify-content: space-between;
+}
+
+#topMenu .topMenues {
+    justify-content: flex-start;
+}
+.topMenues a, #myPageLink a {
+    text-align: center;
+}
+
+.topMenues a:hover, #myPageLink a:hover {
+    background-color: #1773da;
+    color: #fff;
+}
+#topMenu a.disabled:hover {
+    background-color: #1988ff;
+    cursor: default;
+}
+
+.topMenues a.active, #myPageLink a.active {
+    font-weight: bold;
+    background-color: #1773da;
+}
+
+#middleMenu {
+    background-color: #1773da;
+}
+
+#middleMenu .nav-item {
+    text-align: center;
+}
+
+#middleMenu .nav-item i,
+#myPageLink .nav-item i {
+    font-size: 1em;
+}
+
+#middleMenu .nav-item:hover {
+    background-color: #1773da;
+    color: #fff;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+table thead tr th {
+    white-space: nowrap;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody,
+table.dataTable.no-footer {
+    border-bottom: none;
+}
+
+.modal .modal-nullMessage {
+    color:#d50014;
+    font-weight: 600;
+}

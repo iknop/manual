@@ -1,0 +1,140 @@
+#page_content.contentWrap > main{
+    width: 1550px;
+}
+
+#page_content.contentWrap .searchSection{
+    width: 900px;
+    max-width: 900px;
+}
+
+#search-form, .dataTbForm{
+    width: 900px !important;
+    max-width: 900px !important;
+}
+
+#search-form .dateTxt{
+    width: 148px;
+}
+
+#search-form .dateDate{
+    width: 384px;
+}
+
+#search-form .btnCal{
+    margin-left: -26px;
+}
+
+#hc-type{
+    max-width: 120px !important;
+    margin-left: 5px !important;
+}
+
+#modality, #study-type, #patient-id, #use-yn{
+    max-width: 139px !important;
+}
+
+#requestColumnSection{
+    width: 175px;
+    max-width: 175px;
+}
+
+.form-control{
+    font-size: 0.8rem !important;
+}
+
+#page_content.contentWrap form#search-form > .form button.reset{
+    margin-top: 0px;
+}
+
+#page_content.contentWrap form#search-form > .form button.reset + button{
+    margin-left: 0px;
+    margin-top: 5px;
+}
+
+#request-table{
+    width: 100% !important;
+    min-width: 300px;
+}
+
+tr.selected td {
+    background-color: #a6b4cd !important;
+}
+
+#information-form{
+    box-shadow: 2px 2px 2px var(--reGray5);
+}
+
+#receptions-table thead th, #request-table thead th, #merge-reception-table thead th{
+    height: 32px;
+    position: relative;
+    color: var(--mainColor);
+    padding: 0.75rem !important;
+    vertical-align: middle;
+    background-color: var(--dTbThColor) !important;
+}
+
+#merge-reception-table input[type="checkbox"] + label {
+    text-align: center !important;
+    float: none;
+}
+
+table.dataTable.no-footer{
+    border-bottom: 1px solid lightgray;
+}
+
+#receptions-table tbody tr{
+    line-height: 23px;
+}
+
+#receptions-table{
+    min-width: 990px !important;
+}
+
+#request-table{
+    border: 1px solid lightgray;
+    border-top: 0px;
+}
+
+.nav-item.nav-link{
+    min-width: 96px;
+    height: 42px;
+    background-color: var(--tabBgGray);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--tabGray);
+    cursor: pointer;
+}
+
+.nav-tabs .nav-link.active{
+    background-color: var(--white);
+    box-shadow: 2px 2px 2px var(--reGray5);
+    color: var(--tabBlue);
+}
+.requestColumn{
+    width: 175px !important;
+    box-shadow: 2px 2px 2px var(--reGray5);
+}
+
+#request-table-tbody tr td{
+    white-space: break-spaces;
+}
+
+#request-table-viewport{
+    min-width: 300px;
+}
+
+#rowCount{
+    width: 100px;
+}
+#logoutCall{
+    text-align: center;
+    font-size: 15px;
+    color: var(--fontDefaultColor);
+    padding-bottom: 20px;
+    display: block;
+    line-height: 1;
+    cursor: pointer;
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>병원 - 소견서 출력</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="context-path" content=""/>
+    <meta name="_csrf_token" content="75822476-dca1-478d-93bb-584001594f01"/>
+    <meta name="_csrf_header_name" content="X-XSRF-TOKEN"/>
+
+
+
+    <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16"/>
+
+    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ext/datatables/datatables.css">
+    <link rel="stylesheet" href="/ext/jquery/css/jquery.datetimepicker.css">
+    <link rel="stylesheet" href="/ext/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="/ext/sweetalert2/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="/css/managers/base.css">
+
+    <link rel="stylesheet" href="/css/hospital/index.css">
+    <link rel="stylesheet" href="/css/ext/common.css">
+    <link rel="stylesheet" href="/css/ext/contents.css">
+
+</head>
+<body>
+<header class="hospital d-flex"></header>
+
+<div id="page_content" class="contentWrap">
+    <main>
+        <nav>
+            <span>소견서 출력</span>
+        </nav>
+
+
+        <form id="search-form">
+
+            <div class="form">
+                <label class="col-1 labelBlue p-0">검색조건</label>
+                <div class="d-flex flex-wrap col-11 p-0">
+                    <input type="text" class="pointer mr-2 col-2" id="urgentType" title="병원명 입력" value="사용자아이디" readonly>
+                    <select id="reportNoteType" name="reportNoteType" class="col-2">
+                        <option value="T">소견서 양식(전체)</option>
+                    </select>
+                    <input type="hidden" id="selectedReportNoteType">
+                    <div class="rangeDate d-flex flex-wrap p-0 justify-content-start col-4 mr-4">
+                        <div class="dateTxt">일시선택</div>
+                        <input type="text" class="dateDate"/>
+                        <button type="button" class="btnCal"></button>
+                    </div>
+                    <input type="text" id="patientID" name="patientID" class="mr-2 col-1 justify-content-center ml-3" placeholder="차트번호" title="차트번호"/>
+                    <input type="text" class="col-2 justify-content-end" id="patientName" name="patientName" title="환자명" placeholder="환자명">
+                </div>
+
+
+                <div class="d-flex flex-nowrap justify-content-center mx-auto col-12">
+                    <button type="button" id="btn-reset" class="reset">조건 초기화</button>
+                    <button type="button" id="btn-search" >검색하기</button>
+                </div>
+            </div>
+
+
+            <div class="dataTbForm">
+                <div class="dataTbWrap d-flex">
+                    <div class="d-flex justify-content-start mr-auto">
+                        <button type="button" class="dataTbBtn" id="btn-report-print">출력하기</button>
+                    </div>
+
+                    <div calss="d-inline-flex flex-wrap justify-content-end ml-auto">
+                        <span class="searchNum d-inline-flex">검색 결과(1500건)</span>
+                        <input type="hidden" id="size" value="10"/>
+                        <div aria-labelledby="RowCount" id="row-count-content" class="d-inline-flex">
+                            <label>
+                                <select id="rowCount" data-page="1">
+                                    <option value="10" selected="selected">10개씩 보기</option>
+                                    <option value="20">20개씩 보기</option>
+                                    <option value="30">30개씩 보기</option>
+                                    <option value="50">50개씩 보기</option>
+                                    <option value="100">100개씩 보기</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="referral-report-table_wrapper" class="dataTables_wrapper no-footer">
+                        <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer" id="referral-report-table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col" width="15" class="sorting_disabled" rowspan="1" colspan="1" data-column-index="0">
+                                    <input type="checkbox" class="dt-all-check" id="dt-all-check" name="referral-report-table-tbody" autocomplete="off">
+                                    <label for="dt-all-check" value=""></label>
+                                </th>
+                                <th scope="col" class="sorting_disabled" data-column-index="1">의뢰상태</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="2">응급여부</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="3">검진여부</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="4">Modality</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="5">차트번호</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="6">촬영일시</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="7">의뢰일시</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="8">촬영유형</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="9">생년월일</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="10">성별</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="11">판독일시</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="12">시리즈수</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="13">이미지수</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="14">판독의</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="15">임상소견</th>
+                                <th scope="col" class="sorting_disabled" data-column-index="16">판독소</th>
+                            </tr>
+                            </thead>
+                            <tbody id="referral-report-table-tbody">
+                            <tr class="odd"><td valign="top" colspan="17" class="dataTables_empty">검색버튼을 눌러 주세요.</td></tr></tbody>
+                        </table>
+                    </div>
+                    <input type="hidden" id="page" value="1">
+                    <div aria-label="Pagination" id="pagination-content" class="d-inline-flex justify-content-center mx-auto">
+                        <nav aria-label="Pagination">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <button class="page-link page-href" tabindex="-1" aria-disabled="true" data-size="10" data-page="0">Prev</button>
+                                </li>
+                                <li class="page-item active">
+                                    <button class="page-link page-href" data-size="10" data-page="1">1</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="2">2</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="3">3</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="4">4</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="5">5</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="6">6</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="7">7</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="8">8</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="9">9</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="10">10</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="2">Next</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </main>
+</div>
+<footer></footer>
+
+
+
+<script src="/ext/js/jquery-3.3.1.min.js"></script>
+<script src="/ext/jquery/js/jquery-ui.min.js"></script>
+<script src="ext/popper/js/popper.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="/ext/datatables/js/datatables.js"></script>
+<script src="/ext/jquery/js/jquery.datetimepicker.js"></script>
+<script src="ext/handlebars/js/handlebars-v4.1.1.js"></script>
+<script src="ext/sweetalert2/js/sweetalert2.all.min.js"></script>
+<script src="ext/font-awesome/js/all.min.js"></script>
+<script src="js/common/common.js"></script>
+<script src="js/common/navbar.js"></script>
+<script src="js/common/date_common.js"></script>
+<script src="webjars/sockjs-client/sockjs.min.js"></script>
+<script src="webjars/stomp-websocket/stomp.min.js"></script>
+<script type="text/javascript">
+    const _ctx = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + $('meta[name=context-path]').attr("content");
+    const token = $('meta[name="_csrf"]').attr('content');
+
+    $('.dropdown').hover(function() {
+        $(this).addClass('show');
+        $(this).find('.dropdown-menu').addClass('show');
+    }, function() {
+        $(this).removeClass('show');
+        $(this).find('.dropdown-menu').removeClass('show');
+    });
+</script>
+
+<!--<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
+
+<script>
+    const webUrl = "http://tr.xray21.com:8082";
+</script>
+
+<script src="/ext/js/moment.js"></script>
+<script src="/ext/jquery/js/jquery.datetimepicker.js"></script>
+<script src="js/common/hospital_search.js"></script>
+<script src="js/common/paginations.js"></script>
+<script src="js/managers/referrals/referrals_table.js"></script>
+<script src="js/managers/referrals/rearrange_table.js"></script>
+<script src="js/managers/referrals/duplicate_study_table.js"></script>
+<script src="js/managers/change/change_status_table.js"></script>
+<script src="js/managers/change/change_useyn_table.js"></script>
+<script src="js/managers/change/change_studyType_table.js"></script>
+<script src="js/managers/change/change_urgentType_table.js"></script>
+<script src="js/managers/change/change_patientInfo.js"></script>
+<script src="js/managers/readingdr.js"></script>
+<script src="js/managers/remotestatus.js"></script>
+<script src="js/managers/useyn.js"></script>
+<script src="js/managers/merge/merge_referrals_table.js"></script>
+<script src="js/managers/referrals/image_req.js"></script>
+<script src="js/managers/referrals/open_images.js"></script>
+<script src="js/managers/referrals/index.js"></script>
+
+<!--header 불러오기-->
+<script src="/js/header.js"></script>
+
+<!--daterangepicker-->
+<link rel="stylesheet" href="/ext/css/daterangepicker.css"/>
+<script src="/ext/js/moment.min.js"></script>
+<script src="/ext/js/daterangepicker.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $(function(){
+            //GNB 선택자 주기
+            $(".report").addClass("current");
+
+
+            //내용 보여주기
+            $(".form").eq(0).addClass("d-flex");
+            $(".dataTbForm").eq(0).addClass("d-block");
+
+
+        });
+
+    });
+</script>
+<script>
+    $('.dateDate').daterangepicker({
+        "locale": {
+            "format": "YYYY-MM-DD",
+            "separator": " ~ ",
+            "applyLabel": "확인",
+            "cancelLabel": "취소",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+        },
+        "startDate": new Date(),
+        "endDate": new Date(),
+        "drops": "auto"
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+
+    $(".dateTxt , .btnCal").on("click",function(){
+        $(".dateDate").trigger;
+    });
+</script>
+
+</body>
+</html>
