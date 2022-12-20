@@ -1,0 +1,29 @@
+#weeklyModalityStudyStat-list-table_wrapper table.table thead th, #monthlyModalityStudyStat-list-form table.table thead th,
+#yearlyModalityStudyStat-list-table_wrapper table.table thead th,
+#yearlyMonthlyModalityStudyStat-list-table_wrapper table.table thead th,
+#tat-list-table_wrapper table.table thead th {
+    border-color: #dee2e6;
+    /*position: relative;*/
+    color: var(--mainColor);
+    background-color: var(--dTbThColor) !important;
+    white-space: pre;
+    /*border-bottom: 1px solid var(--reGray3) !important;*/
+}
+
+#page_content.contentWrap form#search-form > .form, .dataTbWrap {
+    z-index: 300;
+}
+
+table.dataTable.no-footer, .dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: 1px solid lightgray;
+}
+
+#yearlyMonthlyModalityStudyStat_content, #tat-list-table_content {
+    min-width: 1250px;
+    max-width: 1250px;
+    font-size: 12px;
+}
+
+label.single-hospital-search {
+    display: none;
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>원격판독</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="context-path" content="/">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+    <meta content="a2c4b6f3-4c95-4a40-ae1a-0d35404fe870" name="_csrf_token">
+    <meta content="X-CSRF-TOKEN" name="_csrf_header_name">
+
+
+    <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16"/>
+
+    <link rel="stylesheet" href="/ext/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="/ext/sweetalert2/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="/css/managers/base.css">
+
+    <link rel="stylesheet" href="/css/ext/common.css">
+    <link rel="stylesheet" href="/css/ext/contents.css">
+
+
+    <link rel="stylesheet" href="/ext/jquery/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/ext/datatables/datatables.css">
+    <link rel="stylesheet" href="/ext/jquery/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="/ext/jquery/css/jquery.datetimepicker.css">
+    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="/ext/datatables/css/datatables.css">
+    <link rel="stylesheet" href="/ext/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="/ext/fullcalendar/core/main.min.css">
+
+    <link rel="stylesheet" href="/ext/css/pretendard.css" type="text/css">
+    <link rel="stylesheet" href="/ext/css/daterangepicker.css" type="text/css">
+
+
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/manual.css}">
+</head>
+<body>
+<section class="coachmarks">
+<!--header-->
+    <div th:replace="fragments/header::header"></div>
+    <!--  content  -->
+    <div layout:fragment="content_area" class="content"></div>
+</section>
+<footer></footer>
+
+<!--반드시 공용스크립트 먼저 선언: 옮기면 못읽음 에러남-->
+<script th:src="@{/ext/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/ext/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/ext/bootstrap/js/bootstrap-table.min.js}"></script>
+
+<script src="/ext/jquery/js/jquery-ui.min.js"></script>
+<script src="/ext/jquery/js/jquery-cropper.min.js"></script>
+<script src="/ext/jquery/js/jquery.cookie.js"></script>
+<script src="/ext/jquery/js/jquery.dataTables.min.js"></script>
+<script src="/ext/popper/js/popper.min.js"></script>
+<script src="/ext/bootstrap/js/bootstrap.min.js"></script>
+<script src="/ext/datatables/datatables.js"></script>
+<script src="/ext/handlebars/js/handlebars-v4.1.1.js"></script>
+<script src="/ext/sweetalert2/js/sweetalert2.all.min.js"></script>
+<script src="/ext/font-awesome/js/all.min.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/common/navbar.js"></script>
+<script src="/js/common/date_common.js"></script>
+<script src="webjars/sockjs-client/sockjs.min.js"></script>
+<script src="webjars/stomp-websocket/stomp.min.js"></script>
+<script type="text/javascript">
+    const _ctx = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + $('meta[name=context-path]').attr("content");
+    const token = $('meta[name="_csrf"]').attr('content');
+
+    $('.dropdown').hover(function () {
+        $(this).addClass('show');
+        $(this).find('.dropdown-menu').addClass('show');
+    }, function () {
+        $(this).removeClass('show');
+        $(this).find('.dropdown-menu').removeClass('show');
+    });
+</script>
+
+<!--<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
+
+<script>
+    const webUrl = "http://tr.xray21.com:8082";
+</script>
+<script src="/ext/js/moment.js"></script>
+<script src="/ext/jquery/js/jquery.datetimepicker.js"></script>
+<script src="js/common/hospital_search.js"></script>
+<script src="js/common/paginations.js"></script>
+<script src="js/managers/referrals/referrals_table.js"></script>
+<script src="js/managers/referrals/rearrange_table.js"></script>
+<script src="js/managers/referrals/duplicate_study_table.js"></script>
+<script src="js/managers/change/change_status_table.js"></script>
+<script src="js/managers/change/change_useyn_table.js"></script>
+<script src="js/managers/change/change_studyType_table.js"></script>
+<script src="js/managers/change/change_urgentType_table.js"></script>
+<script src="js/managers/change/change_patientInfo.js"></script>
+<script src="js/managers/readingdr.js"></script>
+<script src="js/managers/remotestatus.js"></script>
+<script src="js/managers/useyn.js"></script>
+<script src="js/managers/merge/merge_referrals_table.js"></script>
+<script src="js/managers/referrals/image_req.js"></script>
+<script src="js/managers/referrals/open_images.js"></script>
+<script src="js/managers/referrals/index.js"></script>
+
+<!--daterangepicker-->
+<link rel="stylesheet" href="/css/ext/daterangepicker.css">
+<script src="/ext/js/moment.min.js"></script>
+<script src="/ext/js/daterangepicker.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $(function () {
+            //GNB 선택자 주기
+            $(".reception").addClass("current");
+
+
+            //내용 보여주기
+            $(".form").eq(0).addClass("d-flex");
+            $(".dataTbForm").eq(0).addClass("d-block");
+
+
+        });
+
+    });
+</script>
+<script>
+    $('.dateDate').daterangepicker({
+        "locale": {
+            "format": "YYYY-MM-DD",
+            "separator": " ~ ",
+            "applyLabel": "확인",
+            "cancelLabel": "취소",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+        },
+        "startDate": new Date(),
+        "endDate": new Date(),
+        "drops": "auto"
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+
+    $(".dateTxt , .btnCal").on("click", function () {
+        $(".dateDate").trigger;
+    });
+</script>
+<!--개별 script-->
+<th:block layout:fragment="script_area">
+</th:block>
+</body>
+</html>

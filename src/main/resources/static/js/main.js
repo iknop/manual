@@ -178,7 +178,11 @@ function Coachmark() {
 
     function destroy() {
         removeHighlight(steps[currentStep]);
+        console.log(steps[currentStep])
+
         const mountPoint = document.getElementById("js-coachmark");
+        console.log(mountPoint)
+
         if (mountPoint) mountPoint.remove();
         if (nextBtn) nextBtn.removeEventListener("click", handleNextBtnClick);
         if (skipBtn) skipBtn.removeEventListener("click", handleSkipClick);

@@ -1,108 +1,131 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>원격판독</title>
-    <meta charset="utf-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta name="context-path" content="/">
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-
-    <meta content="a2c4b6f3-4c95-4a40-ae1a-0d35404fe870" name="_csrf_token">
-    <meta content="X-CSRF-TOKEN" name="_csrf_header_name">
-
-
-    <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16"/>
-
-    <link rel="stylesheet" href="/ext/font-awesome/css/all.min.css">
-    <link rel="stylesheet" href="/ext/sweetalert2/css/sweetalert2.min.css">
-    <link rel="stylesheet" href="/css/managers/base.css">
-
-    <link rel="stylesheet" href="/css/hospital/index.css">
-    <link rel="stylesheet" href="/css/ext/common.css">
-    <link rel="stylesheet" href="/css/ext/contents.css">
-
-
-    <link rel="stylesheet" href="/ext/jquery/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="/ext/datatables/datatables.css">
-    <link rel="stylesheet" href="/ext/jquery/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="/ext/jquery/css/jquery.datetimepicker.css">
-    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="/ext/bootstrap/css/bootstrap-table.min.css">
-    <link rel="stylesheet" href="/ext/datatables/css/datatables.css">
-    <link rel="stylesheet" href="/ext/font-awesome/css/all.min.css">
-    <link rel="stylesheet" href="/ext/fullcalendar/core/main.min.css">
-
-    <link rel="stylesheet" href="/ext/css/pretendard.css" type="text/css">
-    <link rel="stylesheet" href="/ext/css/daterangepicker.css" type="text/css">
-
-
-    <link rel="stylesheet" href="/css/hospital/index.css?ver='1.1'">
-
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="Pragma" content="no-cache">
-
-    <link rel="stylesheet" href="/css/hospital/index.css?ver='1.1'">
-    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
-</head>
-<body>
-<section class="coachmarks">
+<div th:fragment="header">
+    <header class="hospital">
+        <ul class="d-inline-flex justify-content-start links"
+            style="margin-bottom: 0 !important; padding-left: 0!important;">
+            <li class="reception">
+                <span onclick="location.href=`/manual/reception.html`;">예정의뢰</span>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+            <li class="referral">
+                <span onclick="location.href=`/manual/referral.html`;">완료의뢰</span>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+            <li class="calculate">
+                <span onclick="location.href=`/auth/statistics/tat.html`;">조회하기</span>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+            <li class="report">
+                <span onclick="location.href=`/auth/referralReport.html`;">소견서 출력</span>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+            <li class="serviceManage">
+                <span onclick="location.href=`/#`;">공지사항</span>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+            <li class="support">
+                <span onclick="window.open(`https://939.co.kr/xray21/`)">고객지원</span>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+        <menu class="justify-content-end d-inline-flex">
+            사용자이름(판독센터명)
+            <span></span>
+            <ul>
+                <li>아이디 | 9186</li>
+                <li><a href="javascript:void(0);">마이페이지</a></li>
+                <li><a href="javascript:void(0);">로그아웃</a></li>
+            </ul>
+        </menu>
+    </header>
     <div>
         <input id="login-id" name="loginId" value="" type="hidden">
         <input id="report-hospital-code" name="reportHospitalCode" value="" type="hidden">
         <input id="send-hospital-code" name="sendHospitalCode" value="" type="hidden">
         <input id="webUrl" name="webUrl" value="https://stg.xray21.com/web" type="hidden">
 
-        <header class="hospital d-flex" data-coachmark-folder-add="1"
+        <header class="manual-hospital" data-coachmark-folder-add="1"
                 data-coachmark-img="/img/coachmarks/reception/예정의뢰-폴더 업로드 확인.png"
                 data-coachmark-text="폴더 안에 있는 영상 파일의 개수를 확인한 후 업로드 버튼을 클릭합니다. ">
             <ul class="d-inline-flex justify-content-start links"
                 style="margin-bottom: 0 !important; padding-left: 0!important;">
-                <li id="nav-reception-explanation" class="reception current column" data-coachmark-nav="0"
+                <li id="nav-reception-explanation" class="reception current column" data-coachmark-reception="0"
                     data-html="true"
                     data-coachmark-text="판독을 의뢰하고자 하는 영상을 선택하여 먼저 예정의뢰에 업로드 합니다.
 선택한 영상이 목록에 추가되면 정보변경, 병합, 삭제, 의뢰전송이 가능합니다.
 판독을 원하는 예정의뢰를 선택하여 전송해주세요.">
-                    <span>예정의뢰</span>
+                    <span onclick="location.href=`/manual/reception`;">예정의뢰</span>
                     <ul>
                         <li></li>
                     </ul>
                 </li>
-                <li class="referral">
-                    <span onclick="location.href=`/auth/referrals.html`;">완료의뢰</span>
+                <li id="nav-referral-explanation" class="referral"
+                    data-coachmark-referral="0"
+                    data-coachmark-text="완료의뢰는 로그인 후 바로 보이는 메뉴화면으로, 예정의뢰에서 성공적으로 전송된 의뢰들의 정보를 확인할 수 있습니다. 판독대기중인 완료의뢰만 응급변경, 취소, 일부 정보변경이 가능합니다.
+(검색조건을 설정하지 않을 경우 의뢰일시가 당일인 완료의뢰만 보입니다.)"
+                >
+                    <span onclick="location.href=`/manual/referrals`;">완료의뢰</span>
                     <ul>
                         <li></li>
                     </ul>
                 </li>
-                <li class="calculate">
-                    <span onclick="location.href=`/auth/statistics/tat.html`;">조회하기</span>
+                <li id="nav-statistics-explanation"
+                    class="calculate"
+                    data-coachmark-statistics="0"
+                    data-coachmark-text="판독완료된 의뢰건수를 응급여부, 기간을 조건으로 검색하여 확인하고, 엑셀파일로 다운받을 수 있습니다. 의뢰를 전송하고판독이 나오기까지 시간소요를 확인할 수 있는 통계 페이지입니다."
+                >
+                    <span onclick="location.href=`/manual/statistics/`;">조회하기</span>
                     <ul>
                         <li></li>
                     </ul>
                 </li>
-                <li class="report">
-                    <span onclick="location.href=`/auth/referralReport.html`;">소견서 출력</span>
+                <li id="nav-report-explanation"
+                    class="report"
+                    data-coachmark-report="0"
+                    data-coachmark-text="판독완료된 의뢰를 선택하여 소견서를 출력할 수 있습니다. 검색조건에 맞는 의뢰를 목록으로 확인하고 1개 이상의 소견서를 출력할 수도 있습니다."
+                >
+                    <span onclick="location.href=`/manual/referralReport`;">소견서 출력</span>
                     <ul>
                         <li></li>
                     </ul>
                 </li>
-                <li class="serviceManage">
-                    <span onclick="location.href=`/#`;">공지사항</span>
+                <li id="nav-service-manage-explanation"
+                    class="serviceManage"
+                    data-coachmark-service-manage="0"
+                    data-coachmark-text="원격판독 서비스에 관한 공지사항을 공유하여 빠르게 확인하고 자료를 다운받을 수 있습니다."
+                >
+                    <span onclick="location.href=`/manual/serviceManage`;">공지사항</span>
                     <ul>
                         <li></li>
                     </ul>
                 </li>
-                <li class="support">
+                <li id="nav-support-explanation"
+                    class="support"
+                    data-coachmark-support="0"
+                    data-coachmark-text="전화상담으로 해결되지 않는 문제가 발생한 경우 원격지원 서비스로 빠르게 문제를 해결해 드립니다."
+                >
                     <span onclick="window.open(`https://939.co.kr/xray21/`)">고객지원</span>
                     <ul>
                         <li></li>
                     </ul>
                 </li>
             </ul>
-            <menu class="justify-content-end d-inline-flex">
+            <menu id="nav-my-page-explanation"
+                  class="justify-content-end d-inline-flex"
+                  data-coachmark-account="0"
+                  data-coachmark-text="가입 시 입력한 개인/병원/병원 담당자 정보를 확인하고 수정할 수 있습니다."
+            >
                 사용자이름(판독센터명)
                 <span></span>
                 <ul>
@@ -114,906 +137,4 @@
         </header>
     </div>
 
-    <!--page content-->
-    <div>
-        <div id="page_content" class="contentWrap">
-            <main class="d-flex flex-wrap align-item-strech">
-                <!-- context area -->
-                <ul id="contextMenu" class="tblpop_area" style="display: none">
-                    <li><a href="#detail" class="open_pop">상세정보확인</a></li>
-                    <li><a href="">판독의뢰</a></li>
-                </ul>
-                <section class="col-6 p-0 searchSection">
-                    <nav>
-                        <span>예정의뢰</span>
-                    </nav>
-                    <input id="mesg-server-url" type="hidden" name="mesg-server-url" value="https://stg.xray21.com/web"
-                           readonly="">
-                    <form id="search-form" class="d-block">
-                        <div class="form d-block d-flex">
-
-                            <input id="study-type-code" type="hidden" name="studyTypeCode" value="" readonly="">
-                            <input id="reading-drcode" type="hidden" name="readingDrCode" value="" readonly="">
-                            <input id="report-include-yn" type="hidden" name="reportIncludeYN" value="Y" readonly="">
-                            <input id="pageIndex" name="pageIndex" value="1" type="hidden" readonly="">
-                            <input id="pageSize" name="pageSize" value="10" type="hidden" readonly="">
-                            <input id="urgent-type" type="hidden" name="urgentType" value="T" readonly="">
-                            <input id="ref-type" type="hidden" name="isRefType" value="T" readonly="">
-
-                            <label for="searchCondition" class="col-1 labelBlue p-0">검색조건</label>
-                            <div class="d-flex flex-wrap col-9 p-0" id="searchCondition" style="height: 85px;">
-                                <div class="row col-12">
-                                    <div class="rangeDate d-flex flex-wrap p-0 justify-content-start col-8 mr-1">
-                                        <!--                <div class="dateTxt">일시선택</div>-->
-                                        <select class="dateTxt" name="dateType" style="z-index: 9996" id="date-type">
-                                            <option value="B" selected="">추가일시</option>
-                                            <option value="A">촬영일시</option>
-                                        </select>
-
-                                        <input type="text" class="dateDate">
-                                        <button type="button" class="btnCal"></button>
-                                        <input type="hidden" class="form-control" id="start-date" name="startDate"
-                                               placeholder="yyyy-MM-dd" value="2022-12-12" style="">
-                                        <input type="hidden" class="form-control" id="end-date" name="endDate"
-                                               placeholder="yyyy-MM-dd" value="2022-12-13" style="">
-                                    </div>
-                                    <!-- 검진/일반/전체 -->
-                                    <select class="col-3" name="hcType" id="hc-type">
-                                        <option value="N">일반(검진여부)</option>
-                                        <option value="Y">검진</option>
-                                    </select>
-
-                                </div>
-                                <div class="row col-11">
-                                    <!-- 부서명 검색 -->
-
-
-                                    <!-- 장비명 검색 -->
-                                    <input class="referralsBtn col mr-3" id="modality" type="text" placeholder="장비명"
-                                           name="originModalityType" value="">
-
-                                    <!-- 검사명 검색 -->
-                                    <input class="referralsBtn col mr-3" id="study-type" type="text" placeholder="검사명"
-                                           name="originStudyType" value="">
-
-                                    <!-- 차트번호 검색 -->
-                                    <input class="referralsBtn col mr-3" id="patient-id" type="text" placeholder="차트번호"
-                                           name="patientId" value="">
-
-                                    <!-- 사용/삭제/전체 Select / Option -->
-                                    <!--                                <select class="col mr-3" name="useYn" id="use-yn">-->
-                                    <!--                                    <option value="Y" selected>사용(사용여부)</option>-->
-                                    <!--                                    <option value="N">삭제</option>-->
-                                    <!--                                    <option value="T">전체</option>-->
-                                    <!--                                </select>-->
-
-                                </div>
-
-                            </div>
-                            <div class="justify-content-center mx-auto col" style="width: 107.175px; height: 85px;">
-                                <button type="button" id="reception-reset-search-btn" class="reset">조건 초기화</button>
-                                <button type="button" id="btn-search">검색하기</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div id="dataTbForm" class="dataTbForm d-block column" data-coachmark-disk-add="1"
-                         data-coachmark-text="선택한 영상이 목록에 의뢰로 추가된 것을 확인할 수 있습니다."
-                         data-coachmark-replace-img="/img/coachmarks/reception/예정의뢰-파일추가 목록.png">
-                        <div class="dataTbWrap d-flex">
-                            <div class="d-flex justify-content-start mr-auto">
-                                <button type="button" id="reception-edit-btn" class="dataTbBtn">정보변경</button>
-                                <button type="button" id="dicom-scp" class="dataTbBtn">DICOM SCP</button>
-                                <button type="button" id="reception-merge-btn" class="dataTbBtn">병합</button>
-                                <button type="button" id="reception-delete-btn" class="dataTbBtn">삭제</button>
-                                <button type="button" id="reception-disk-add-btn" class="dataTbBtn column"
-                                        data-coachmark-disk-add="0"
-                                        data-coachmark-img="/img/coachmarks/reception/예정의뢰-파일추가.png"
-                                        data-coachmark-text="1개 이상의 dicom 영상 파일을 선택하세요.">Disk Add
-                                </button>
-
-                                <input type="file" class="files-add-input" id="disk-add-input" multiple="" hidden="">
-                                <button type="button" id="reception-folder-add-btn" class="dataTbBtn column"
-                                        data-coachmark-folder-add="0"
-                                        data-coachmark-img="/img/coachmarks/reception/예정의뢰-폴더추가.png"
-                                        data-coachmark-text="추가하고자 하는 영상 폴더를 하나 클릭합니다. 알람창에서 폴더 안에 있는 영상 파일의 개수를 확인한 후 업로드 버튼을 클릭합니다."
-                                >Folder Add
-                                </button>
-                                <input type="file" class="files-add-input" id="folder-add-input" webkitdirectory=""
-                                       hidden="">
-                                <span class="btn" id="file-upload-msg"
-                                      style="font-size: 14px;">파일을 Drag&amp;Drop 하세요...</span>
-                                <div class="spinner-border text-info d-none" role="status" id="spinner">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <div calss="d-inline-flex flex-wrap justify-content-end ml-auto">
-
-                                <input id="size" type="hidden" value="10">
-                                <div aria-labelledby="RowCount" class="col-md-1 px-2 my-auto" id="row-count-content">
-                                    <script id="template-row-count" type="text/x-handlebars-template">
-                                        <select class="form-control" id="rowCount" data-page="{{page}}">
-                                            {{#findSelectedValue size}}
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="30">30</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            {{/findSelectedValue}}
-                                        </select>
-                                    </script>
-                                </div>
-
-                            </div>
-
-                            <div class="table-responsive upload-area" id="receptions-table-viewport"
-                                 style="height: 231px;">
-                                <div id="receptions-table_wrapper" class="dataTables_wrapper no-footer">
-                                    <table class="table table-sm table-head table-hover text-center pointer mb-4 dataTable no-footer"
-                                           id="receptions-table" role="grid" style="width: 1004px;">
-                                        <thead class="thead-light">
-                                        <tr role="row">
-                                            <th scope="col" style="width: 25px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="0" aria-label="
-
-
-                                    : activate to sort column ascending">
-                                                <input type="checkbox" class="dt-all-check" id="dt-all-check"
-                                                       autocomplete="off" name="receptions-table-tbody">
-                                                <label for="dt-all-check"></label>
-                                            </th>
-                                            <th scope="col" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table"
-                                                rowspan="1" colspan="1" data-column-index="1"
-                                                aria-label="R.Stat: activate to sort column ascending"
-                                                style="width: 36px;">
-                                                R.Stat
-                                            </th>
-                                            <th scope="col" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table"
-                                                rowspan="1" colspan="1" data-column-index="2"
-                                                aria-label="Status: activate to sort column ascending"
-                                                style="width: 38px;">
-                                                Status
-                                            </th>
-                                            <th scope="col" style="width: 53px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="3"
-                                                aria-label="차트번호: activate to sort column ascending">
-                                                차트번호
-                                            </th>
-                                            <th scope="col" style="width: 40px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="4"
-                                                aria-label="환자명: activate to sort column ascending">
-                                                환자명
-                                            </th>
-                                            <th scope="col" style="width: 27px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="5"
-                                                aria-label="장비: activate to sort column ascending">장비
-                                            </th>
-                                            <th scope="col" style="width: 65px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="6"
-                                                aria-label="원내검사명: activate to sort column ascending">
-                                                원내검사명
-                                            </th>
-                                            <th scope="col" style="width: 53px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="7"
-                                                aria-label="촬영일시: activate to sort column ascending">
-                                                촬영일시
-                                            </th>
-                                            <th scope="col" style="width: 37px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="8"
-                                                aria-label="Series: activate to sort column ascending">Series
-                                            </th>
-                                            <th scope="col" style="width: 39px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="9"
-                                                aria-label="Image: activate to sort column ascending">
-                                                Image
-                                            </th>
-                                            <th scope="col" style="width: 92px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="10"
-                                                aria-label="WorkCompany: activate to sort column ascending">WorkCompany
-                                            </th>
-                                            <th scope="col" style="width: 57px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="11"
-                                                aria-label="임상 소견: activate to sort column ascending">임상 소견
-                                            </th>
-                                            <th scope="col" style="width: 53px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="12"
-                                                aria-label="의뢰일시: activate to sort column ascending">
-                                                의뢰일시
-                                            </th>
-                                            <th scope="col" style="width: 53px;" class="sorting" tabindex="0"
-                                                aria-controls="receptions-table" rowspan="1" colspan="1"
-                                                data-column-index="13"
-                                                aria-label="판독일시: activate to sort column ascending">
-                                                판독일시
-                                            </th>
-                                        </tr>
-                                        </thead>
-
-                                        <!-- tbody 내용물 화면 출력 -->
-                                        <tbody id="receptions-table-tbody">
-                                        <tr class="odd">
-                                            <td valign="top" colspan="14" class="dataTables_empty"
-                                                style="padding: 2px;">조회된
-                                                데이터가 없습니다.
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <input id="page" type="hidden" value="1">
-                                <div aria-label="Pagination" class="mt-1" id="pagination-content">
-                                    <script id="template-pagination" type="text/x-handlebars-template">
-                                        <nav aria-label="Pagination">
-                                            <ul class="pagination justify-content-center">
-                                                <li class="page-item {{#if first}}disabled{{/if}}">
-                                                    <button class="page-link page-href" tabindex="-1"
-                                                            aria-disabled="true"
-                                                            data-size="{{size}}"
-                                                            data-page="{{operations value1=number value2=1
-                                                                                    operator='-'}}">
-                                                        Previous
-                                                    </button>
-                                                </li>
-                                                {{#each (indexArray)}}
-                                                    <li class="page-item {{#if
-                                                            (isEqualsNumber index number)}}active{{/if}}">
-                                                        <button class="page-link page-href" data-size="{{size}}"
-                                                                data-page="{{index}}">{{index}}</button>
-                                                    </li>
-                                                {{/each}}
-                                                <li class="page-item {{#if last}}disabled{{/if}}">
-                                                    <button class="page-link page-href" data-size="{{size}}"
-                                                            data-page="{{operations value1=number value2=1
-                                                                                    operator='+'}}">
-                                                        Next
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </script>
-                                </div>
-
-                                <input type="hidden" id="page" name="currentPageIndex" value="1">
-                                <input type="hidden" id="size" name="pagingSize" value="10">
-                            </div>
-
-                        </div>
-                    </div>
-
-                </section>
-                <!--           전송 버튼 section start/-->
-                <section class="col-2 p-0 mt-3 ml-n2">
-
-                    <!-- 판독의뢰 버튼 content -->
-                    <nav>
-                        <span></span>
-                    </nav>
-                    <div class="card p-4 h-100 m-auto requestColumn border-0">
-                        <div class="row mx-auto text-center">
-                            <label class="col-sm-12 px-0 col-form-label text-center my-auto labelBlue"
-                                   style="font-weight: 800;">응급구분</label>
-                            <div class="row col-sm-12 px-0 d-flex mb-2 mt-1">
-                                <div class="col-6">
-                                    <input checked="" class="radio" data-urgenttype="N" id="urgentType-normal"
-                                           name="urgentType" type="radio">
-                                    <label for="urgentType-normal" id="label-urgentType-normal"
-                                           class="text-nowrap">일반</label><br>
-                                </div>
-                                <div class="col-6">
-                                    <input class="radio" data-urgenttype="Y" id="urgentType-emergency" name="urgentType"
-                                           type="radio">
-                                    <label for="urgentType-emergency" id="label-urgentType-emergency"
-                                           class="text-nowrap">응급</label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 의뢰 버튼 START-->
-                        <div class="row mx-2 border-bottom border-top text-center">
-                            <div class="col-sm-12 px-0 mt-3 mb-1" style="height:60px">
-                                <button class="btn btn-outline-primary btn-block btn-send-request h-100" type="button">
-                                    <span>일반</span>
-                                </button>
-                            </div>
-                            <div class="col-sm-12 px-0 my-1" style="height:60px">
-                                <button class="btn btn-outline-primary btn-block btn-send-request h-100" type="button">
-                                    <span>검진</span>
-                                </button>
-                            </div>
-                            <div class="col-sm-12 px-0 mt-2 mb-3">
-                                <div class="row mx-auto w-100">
-                                    <select class="custom-select text-center p-1 mb-2" id="hcTypeName"
-                                            name="hcTypeName">
-                                        <option selected="" value="C">특수</option>
-                                        <option value="B">배치전</option>
-                                        <option value="D">진폐</option>
-                                        <option value="E">학교</option>
-                                    </select>
-                                </div>
-                                <div class="row mx-auto border-bottom w-100" style="height:60px">
-                                    <button class="btn btn-outline-primary btn-block btn-send-request h-100 "
-                                            type="button">
-                                        <span>특검</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 의뢰 버튼 END-->
-                        <!-- 참조의뢰 버튼 START-->
-                        <div class="row mx-2 border-bottom text-center">
-                            <div class="col-sm-12 px-0 mt-3" style="height:60px">
-                                <button class="btn btn-outline-secondary btn-block btn-send-request isRef h-100"
-                                        type="button">
-                                    <span>참조</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- 참조의뢰 버튼 END-->
-                    </div>
-
-
-                </section>
-                <!--           전송 버튼 section end/-->
-
-                <section class="col-3 p-0 mt-1 ml-n3">
-                    <nav>
-                        <span></span>
-                    </nav>
-                    <div class="col-sm-12 py-2 px-0">
-                        <div class="col-sm-12 pl-1">
-                            <!-- nav tab Start -->
-                            <nav class="nav nav-tabs border-bottom-0">
-                                <!-- 의뢰정보 탭 -->
-                                <a aria-controls="study-read-tab" aria-selected="true"
-                                   class="nav-item nav-link active border-0" data-toggle="tab" href="#study-read-tab"
-                                   id="study-info-nav" role="tab">의뢰정보</a>
-                                <!-- 전송상태 탭 -->
-                                <a aria-controls="study-request-tab" aria-selected="true"
-                                   class="nav-item nav-link border-0"
-                                   data-toggle="tab" href="#study-request-tab" id="study-request-nav"
-                                   role="tab">전송상태</a>
-                            </nav>
-                            <!-- nav tab End -->
-                        </div>
-                        <div class="col-sm-12 pl-1 mt-n3">
-                            <div class="tab-content">
-                                <!-- 의뢰정보 Start -->
-                                <div aria-labelledby="study-read-tab" class="tab-pane fade show active w-100"
-                                     id="study-read-tab" role="tabpanel">
-
-                                    <!-- 의뢰예정목록 환자정보 표시 -->
-                                    <div class="card mb-2 border-0" style="height:auto;">
-                                        <form id="information-form">
-                                            <input id="study-id" name="studyId" type="hidden" value="">
-                                            <div class="card p-2 border-0">
-
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>차트번호</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control"
-                                                               id="study-info-patient-id"
-                                                               name="study-info-patient-id" value="" readonly="">
-                                                    </div>
-                                                </div>
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>이름</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-4 mr-0">
-                                                        <input type="text" class="form-control infoTab-canChangeInput"
-                                                               id="study-info-patient-name"
-                                                               name="study-info-patient-name"
-                                                               value="" readonly="">
-                                                    </div>
-                                                    <div class="col-sm-1 text-center px-0 mx-0">
-                                                        <dt><span>성별</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-4 mx-0 px-4">
-                                                        <select class="form-control infoTab-canChangeInput" disabled=""
-                                                                id="study-info-patient-sex-type">
-                                                            <option value="M">M</option>
-                                                            <option value="F">F</option>
-                                                            <option value="O" selected="">O</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>생년월일</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control infoTab-canChangeInput"
-                                                               id="study-info-patient-birth" maxlength="10"
-                                                               oninput="this.value = this.value.replace(/[^0-9-]/g, '');"
-                                                               name="study-info-patient-birth" value=""
-                                                               placeholder="yyyy-MM-dd" readonly="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card p-2 border-left-0 border-right-0 border-bottom-0">
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>촬영정보</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control infoTab-canChangeInput"
-                                                               id="study-info-study-description" name="description"
-                                                               value=""
-                                                               readonly="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>촬영일시</span>
-                                                        </dt>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control"
-                                                               id="study-info-study-date"
-                                                               name="study-info-study-date" value="" readonly="">
-                                                    </div>
-                                                </div>
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>촬영장비</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-9 ">
-                                                        <input type="text" class="form-control"
-                                                               id="study-info-study-modality" name="modality" value=""
-                                                               readonly="">
-                                                    </div>
-                                                </div>
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>검진단체</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control infoTab-canChangeInput"
-                                                               id="study-info-work-company"
-                                                               name="study-info-work-company"
-                                                               value="" readonly="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card p-2 border-left-0 border-right-0 border-bottom-0">
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <!--                        <dt><span th:text="#{hospital.referrals.reading.card.receptionRequestDate}">목록 추가일시</span></dt>-->
-                                                        <dt class="text-center"><span class="px-0">추가일시</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control"
-                                                               id="study-info-reception-date"
-                                                               name="study-info-reception-date" value="" readonly="">
-                                                    </div>
-                                                </div>
-                                                <div class="row align-items-center my-1">
-                                                    <div class="col-sm-3 text-lg-right pr-0">
-                                                        <dt class="text-center"><span>임상소견</span></dt>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                    <textarea class="form-control infoTab-canChangeInput"
-                                                              id="study-comment" name="studyComment" readonly=""
-                                                              rows="4"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row d-none" id="edit-save-cancel-div">
-                                                <div class="col-sm-6 text-right p-3">
-                                                    <!-- 저장 버튼 및 아이콘 -->
-                                                    <button class="btn btn-secondary w-75" id="reception-edit-save-btn"
-                                                            type="button">
-                                                        <i class="fas fa-check-square fa-sm"></i>
-                                                        <span>저장</span>
-                                                    </button>
-                                                </div>
-                                                <div class="col-sm-6 text-left p-3">
-                                                    <!-- 변경취소 버튼 및 아이콘 -->
-                                                    <button class="btn btn-secondary w-75"
-                                                            id="reception-edit-cancel-btn"
-                                                            type="button">
-                                                        <i class="fas fa-edit fa-sm"></i>
-                                                        <span>변경취소</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                </div>
-                                <!-- 전송상태 Start -->
-                                <div aria-labelledby="study-request-tab" class="tab-pane fade w-100"
-                                     id="study-request-tab"
-                                     role="tabpanel">
-
-                                    <div class="table-responsive ml-0 mr-0" id="request-table-viewport">
-                                        <div id="request-table_wrapper" class="dataTables_wrapper no-footer">
-                                            <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer"
-                                                   id="request-table" role="grid" style="width: 0px;">
-                                                <thead class="thead-light">
-                                                <tr role="row">
-                                                    <th scope="col" class="sorting" tabindex="0"
-                                                        aria-controls="request-table" rowspan="1" colspan="1"
-                                                        data-column-index="0"
-                                                        aria-label="CODE: activate to sort column ascending"
-                                                        style="width: 0px;">CODE
-                                                    </th>
-                                                    <th scope="col" class="sorting" tabindex="0"
-                                                        aria-controls="request-table" rowspan="1" colspan="1"
-                                                        data-column-index="1"
-                                                        aria-label="STAT: activate to sort column ascending"
-                                                        style="width: 0px;">STAT
-                                                    </th>
-                                                    <th scope="col" class="sorting" tabindex="0"
-                                                        aria-controls="request-table" rowspan="1" colspan="1"
-                                                        data-column-index="2"
-                                                        aria-label="ID: activate to sort column ascending"
-                                                        style="width: 0px;">ID
-                                                    </th>
-                                                    <th scope="col" class="sorting" tabindex="0"
-                                                        aria-controls="request-table" rowspan="1" colspan="1"
-                                                        data-column-index="3"
-                                                        aria-label="TYPE: activate to sort column ascending"
-                                                        style="width: 0px;">TYPE
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="request-table-tbody">
-                                                <tr class="odd">
-                                                    <td valign="top" colspan="4" class="dataTables_empty"
-                                                        style="padding: 2px;">조회된 데이터가 없습니다.
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-            </main>
-
-            <div class="modal fade" tabindex="-1" role="dialog" id="sendRequestModal" data-backdrop="static"
-                 aria-labelledby="sendRequestModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title"><span>판독의뢰</span></h3>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12 border pt-2">
-
-                                        <!-- Form Start -->
-                                        <form>
-                                            <div class="form-group row my-2">
-                                                <label for="select-trc" class="col-sm-4 col-form-label">의뢰병원</label>
-                                                <div class="col-sm-8">
-                                                    <select class="custom-select" name="selectTrc" id="select-trc">
-                                                        <option value="21c" selected="">21세기영상의학과의원</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- 응급여부 Radio Button, 응급/일반 -->
-                                            <div class="form-group row align-self-center">
-                                                <label class="col-sm-4 col-form-label">응급여부</label>
-                                                <div class="col-sm-8 text-center align-self-center">
-                                                    <div class="custom-control custom-checkbox">
-
-                                                        <input type="radio" class="radio" name="urgent-type"
-                                                               id="urgent-type-urgent" value="Y">
-                                                        <label for="urgent-type-urgent">응급</label>
-
-                                                        <input type="radio" class="radio" name="urgent-type"
-                                                               id="urgent-type-normal" value="N" checked="">
-                                                        <label for="urgent-type-normal">일반</label>
-
-                                                        <!-- 참조영상 Value = "R" -->
-                                                        <input type="radio" class="radio" name="urgent-type"
-                                                               id="urgent-type-reference" value="R">
-                                                        <label for="urgent-type-reference">참조</label>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- 의뢰구분 Select/Option -->
-                                            <div class="form-group row my-2">
-                                                <label for="hc-type-name" class="col-sm-4 col-form-label">의뢰구분</label>
-                                                <div class="col-sm-8">
-                                                    <select class="custom-select" name="hcTypeName" id="hc-type-name">
-                                                        <option value="" selected="">일반</option>
-                                                        <option value="(검진)">검진</option>
-                                                        <option value="(특검)">특수검진</option>
-                                                        <option value="(배치전)">배치전검진</option>
-                                                        <option value="(진폐)">진폐검진</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- 임상정보 TextArea -->
-                                            <div class="form-group">
-                                                <label for="request-comment">임상정보</label>
-                                                <textarea class="form-control" placeholder="" rows="4"
-                                                          id="request-comment"></textarea>
-                                            </div>
-
-
-                                        </form>
-                                        <!-- form End -->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-send-request"><span>판독의뢰</span>
-                            </button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="modal" tabindex="-1" role="dialog" id="mergeReceptionModal" data-backdrop="static"
-                 aria-labelledby="mergeReceptionModal" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">병합</h3>
-                            <button class="modalClose"></button>
-
-                            <div class="clearfix">
-                                <div class="spinner-border float-right" role="status" id="spinner-merge-reception"
-                                     style="display: none">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <script src="/js/common/loadingbar.js"></script>
-
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div id="merge-reception-table_wrapper" class="dataTables_wrapper no-footer">
-                                        <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer"
-                                               id="merge-reception-table" role="grid">
-                                            <thead class="thead-light">
-                                            <tr role="row">
-                                                <th scope="col" style="width: 60px;padding:10px 10px" class="sorting"
-                                                    tabindex="0" aria-controls="merge-reception-table" rowspan="1"
-                                                    colspan="1" data-column-index="0" aria-label="대표선택
-                  : activate to sort column ascending">대표선택
-                                                </th>
-                                                <th scope="col" style="width: 140px;" class="sorting" tabindex="0"
-                                                    aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                    data-column-index="1"
-                                                    aria-label="차트번호: activate to sort column ascending">차트번호
-                                                </th>
-                                                <th scope="col" style="width: 80px;" class="sorting" tabindex="0"
-                                                    aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                    data-column-index="2"
-                                                    aria-label="장비: activate to sort column ascending">장비
-                                                </th>
-                                                <th scope="col" style="width: 140px;" class="sorting" tabindex="0"
-                                                    aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                    data-column-index="3"
-                                                    aria-label="구분: activate to sort column ascending">구분
-                                                </th>
-                                                <th scope="col" style="width: 160px;" class="sorting" tabindex="0"
-                                                    aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                    data-column-index="4"
-                                                    aria-label="촬영일시: activate to sort column ascending">촬영일시
-                                                </th>
-                                                <th scope="col" style="width: 140px;" class="sorting" tabindex="0"
-                                                    aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                    data-column-index="5"
-                                                    aria-label="촬영부위: activate to sort column ascending">촬영부위
-                                                </th>
-                                                <th scope="col" style="width: 60px;" class="sorting" tabindex="0"
-                                                    aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                    data-column-index="6"
-                                                    aria-label="Series: activate to sort column ascending">Series
-                                                </th>
-                                                <th scope="col" style="width: 60px;" class="sorting" tabindex="0"
-                                                    aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                    data-column-index="7"
-                                                    aria-label="Image: activate to sort column ascending">Image
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="merge-reception-table-tbody">
-                                            <tr class="odd">
-                                                <td valign="top" colspan="8" class="dataTables_empty"
-                                                    style="padding: 2px;">
-                                                    조회된 데이터가 없습니다.
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="col-sm-12 text-sm-right">
-                                <button class="btn btn-primary" id="btn-apply-merge-reception" type="button">병합</button>
-                                <button class="modalClose" data-dismiss="modal" type="button">취소</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div aria-labelledby="pacsSettingInfoModal" aria-modal="true" class="modal fade" data-backdrop="static"
-                 id="pacsSettingInfoModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1>PACS Setting Info</h1>
-                            <button class="modalClose" data-dismiss="modal" type="button"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="d-flex flex-wrap justify-content-center text-center mx-auto col-12 mb-3">
-                                <div class="mb-1" style="font-size: 1.2em; white-space: pre-line">DICOM SCP Information
-                                    is
-                                    as follows.
-                                </div>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-center mr-auto col-12 mr-0">
-                                <div class="d-flex flex-wrap col-12 p-0 px-2 text-center cStore-ips">
-                                    <label class="col-3 labelBlue text-center" for="cStore-ips">IP</label>
-                                    <p class="condition dicomInfoText cstore-ip col-9" id="cStore-ips">192.168.0.1</p>
-                                </div>
-                                <div class="d-flex flex-wrap col-12 p-0 px-2 text-center">
-                                    <label class="col-3 labelBlue text-center" for="cStore-port">PORT</label>
-                                    <p class="condition dicomInfoText col-9" id="cStore-port">6500</p>
-                                </div>
-                                <div class="d-flex flex-wrap col-12 p-0 px-2 text-center">
-                                    <label class="col-3 labelBlue text-center" for="cStore-aeTitle">AE Title</label>
-                                    <p class="condition dicomInfoText col-9" id="cStore-aeTitle">Xray21</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <input id="text-message" readonly="" style="width : 500px; display: none" type="text">
-                            <button class="modalClose" data-dismiss="modal" type="button">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="toast-area" style="position:fixed;bottom:10px;left:10px;display:block;">
-            </div>
-        </div>
-    </div>
-</section>
-<footer></footer>
-
-
-<script src="/ext/js/jquery-3.3.1.min.js"></script>
-<script src="/ext/jquery/js/jquery-ui.min.js"></script>
-<script src="/ext/popper/js/popper.min.js"></script>
-<script src="/ext/bootstrap/js/bootstrap.min.js"></script>
-<script src="/ext/datatables/datatables.js"></script>
-<script src="/ext/handlebars/js/handlebars-v4.1.1.js"></script>
-<script src="/ext/sweetalert2/js/sweetalert2.all.min.js"></script>
-<script src="/ext/font-awesome/js/all.min.js"></script>
-<script src="/js/common/common.js"></script>
-<script src="/js/common/navbar.js"></script>
-<script src="/js/common/date_common.js"></script>
-<script src="webjars/sockjs-client/sockjs.min.js"></script>
-<script src="webjars/stomp-websocket/stomp.min.js"></script>
-<script type="text/javascript">
-    const _ctx = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + $('meta[name=context-path]').attr("content");
-    const token = $('meta[name="_csrf"]').attr('content');
-
-    $('.dropdown').hover(function () {
-        $(this).addClass('show');
-        $(this).find('.dropdown-menu').addClass('show');
-    }, function () {
-        $(this).removeClass('show');
-        $(this).find('.dropdown-menu').removeClass('show');
-    });
-</script>
-
-<!--<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
-
-<script>
-    const webUrl = "http://tr.xray21.com:8082";
-</script>
-<script src="/ext/js/moment.js"></script>
-<script src="/ext/jquery/js/jquery.datetimepicker.js"></script>
-<script src="js/common/hospital_search.js"></script>
-<script src="js/common/paginations.js"></script>
-<script src="js/managers/referrals/referrals_table.js"></script>
-<script src="js/managers/referrals/rearrange_table.js"></script>
-<script src="js/managers/referrals/duplicate_study_table.js"></script>
-<script src="js/managers/change/change_status_table.js"></script>
-<script src="js/managers/change/change_useyn_table.js"></script>
-<script src="js/managers/change/change_studyType_table.js"></script>
-<script src="js/managers/change/change_urgentType_table.js"></script>
-<script src="js/managers/change/change_patientInfo.js"></script>
-<script src="js/managers/readingdr.js"></script>
-<script src="js/managers/remotestatus.js"></script>
-<script src="js/managers/useyn.js"></script>
-<script src="js/managers/merge/merge_referrals_table.js"></script>
-<script src="js/managers/referrals/image_req.js"></script>
-<script src="js/managers/referrals/open_images.js"></script>
-<script src="js/managers/referrals/index.js"></script>
-
-<!--daterangepicker-->
-<link rel="stylesheet" href="/css/ext/daterangepicker.css">
-<script src="/ext/js/moment.min.js"></script>
-<script src="/ext/js/daterangepicker.js"></script>
-
-<script>
-    $(document).ready(function () {
-
-        $(function () {
-            //GNB 선택자 주기
-            $(".reception").addClass("current");
-
-
-            //내용 보여주기
-            $(".form").eq(0).addClass("d-flex");
-            $(".dataTbForm").eq(0).addClass("d-block");
-
-
-        });
-
-    });
-</script>
-<script>
-    $('.dateDate').daterangepicker({
-        "locale": {
-            "format": "YYYY-MM-DD",
-            "separator": " ~ ",
-            "applyLabel": "확인",
-            "cancelLabel": "취소",
-            "fromLabel": "From",
-            "toLabel": "To",
-            "customRangeLabel": "Custom",
-            "weekLabel": "W",
-            "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-        },
-        "startDate": new Date(),
-        "endDate": new Date(),
-        "drops": "auto"
-    }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-    });
-
-    $(".dateTxt , .btnCal").on("click", function () {
-        $(".dateDate").trigger;
-    });
-</script>
-<script src="/js/reception.js"></script>
-</body>
-</html>
+</div>

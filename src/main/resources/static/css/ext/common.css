@@ -1197,7 +1197,7 @@ header.hospital, header.readingDr {
     transition: min-height .3s;
     width: 100%;
     left: 0;
-    top: 0
+    top: 0;
 }
 
 header.hospital > ul {
@@ -1704,7 +1704,7 @@ header.popup button {
 
 #page_content {
     position: relative;
-    top: 70px;
+    top: 140px;
     padding: 25px 0
 }
 

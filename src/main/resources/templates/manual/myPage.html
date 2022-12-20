@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/hospital/statistics.css}">
+</head>
+<div layout:fragment="content_area">
+    <div id="page_content" class="contentWrap" style="height: 1173px !important">
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script src="/js/manual/common/coachmark.js" th:inline="javascript"></script>
+    <script src="/js/manual/common/header.js" th:inline="javascript"></script>
+    <script src="/js/manual/referrals.js" th:inline="javascript"></script>
+</th:blcok>
+</html>
