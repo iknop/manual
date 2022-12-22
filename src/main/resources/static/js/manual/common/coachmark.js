@@ -74,10 +74,10 @@ function Coachmark() {
             let w = this.width;
             // console.log('width: '+ w)
             if (w < 800) {
-                 tooltipBoxSize = "w-25";
-                 alert(tooltipBoxSize)
+                tooltipBoxSize = "w-25";
+                alert(tooltipBoxSize)
             } else {
-                 tooltipBoxSize = "w-50";
+                tooltipBoxSize = "w-50";
             }
 
         }
@@ -86,12 +86,9 @@ function Coachmark() {
 
         // alert(tooltipBoxSize)
         const coachmarkElements = getCoachmarkElements(); // html 생성
-        // console.log(`init() getCoachmarkElements():${coachmarkElements}`)
-
         document.body.insertAdjacentHTML("beforeend", coachmarkElements); //html 삽입
 
         highlighter = document.getElementById("js-coachmark-interface");
-        // console.log("highlighter: " + highlighter)
         tooltip = document.getElementById("js-coachmark-tooltip");
         tooltipTextElement = document.getElementById("js-coachmark-tooltip-text");
         tooltipImgElement = document.getElementById("js-coachmark-tooltip-img");
@@ -105,15 +102,12 @@ function Coachmark() {
         addStyles(".coachmark-tooltip .coachmark-btns", buttons);
         addStyles(".coachmark-tooltip:before", tooltipPseudoStyle);
         addStyles(".coachmark-highlight", highlightedElementStyles);
-        // addStyles(".coachmark-tooltip .coachmark-btns .__btn", btnStyle);
 
-        // console.log('init menu: '+ menu)
         highlightElement(steps[currentStep]);
         skipBtn.addEventListener("click", handleSkipClick); //destroy
     }
 
     function highlightElement(element) {
-        // console.log(element)
         if (!element)
             throw new Error(
                 `To start using Coachmark plugin, please add data-coachmark attribute.`
@@ -155,7 +149,7 @@ function Coachmark() {
             highlighter.style.width = `${width}px`;
             highlighter.style.height = `${height}px`;
             if (tooltipReplaceImg) {
-                console.log(`url('${tooltipReplaceImg}')`)
+                // console.log(`url('${tooltipReplaceImg}')`)
                 highlighter.style.backgroundImage = `url('${tooltipReplaceImg}')`;
                 highlighter.style.zIndex = 9999;
 
@@ -172,6 +166,8 @@ function Coachmark() {
 
         // Add class to the element
         element.classList.add("coachmark-highlight");
+        let highlightClass = $('.coachmark-highlight');
+        console.log('highlightClass: '+JSON.stringify(highlightClass))
 
         // Scroll element's parent container so that it is visible
         setTimeout(() => {
@@ -245,7 +241,7 @@ function Coachmark() {
             <section id="js-coachmark-overlay" class="coachmark-overlay"></section>
             <section id="js-coachmark-interface" class="coachmark-interface" style="background-repeat: no-repeat"></section>
         <!--안내 상자-->
-        <section id="js-coachmark-tooltip" class="coachmark-tooltip m-2 ${tooltipBoxSize}">
+        <section id="js-coachmark-tooltip" class="coachmark-tooltip m-2 w-25 ${tooltipBoxSize}">
             <section id="js-coachmark-tooltip-text" style="font-size:20px;"></section>
             <img id="js-coachmark-tooltip-img">
                 <article class="coachmark-btns">
@@ -296,8 +292,7 @@ function Coachmark() {
 
     // 클릭 시 매뉴얼 진행 순서 : data-coachmark-'menu' = n번째
     function sortArr(arr, menu) {
-        console.log(arr)
-
+        // console.log(arr)
         if (!Array.isArray(arr) || arr.length === 0) return [];
         arr.sort((a, b) => {
 

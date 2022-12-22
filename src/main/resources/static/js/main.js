@@ -135,6 +135,8 @@ function Coachmark() {
 
         // Add class to the element
         element.classList.add("coachmark-highlight");
+        let highlightClass = $('.coachmark-highlight');
+        console.log('highlightClass: '+JSON.stringify(highlightClass))
 
         // Scroll element's parent container so that it is visible
         setTimeout(() => {
