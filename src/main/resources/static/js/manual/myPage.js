@@ -4,7 +4,7 @@ $(function () {
 
     // 개인정보 수정
     const editHospInfo = $('#editHospInfo')
-    if (editHospInfo) editHospInfo.on('mouseover', () => {
+    if (editHospInfo) editHospInfo.on('click', () => {
         Coachmark().init('modi-account')
     })
 

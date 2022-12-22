@@ -96,6 +96,13 @@ header.manual-hospital > ul > li > span {
     text-align: center;
     margin: 0 auto
 }
+header.manual-hospital > ul > li.start > span {
+    background-image: url(../../img/icon-manual-start.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
 
 header.manual-hospital > ul > li.reception > span {
     background-image: url(../../img/icon-gnb-2-01.png);
@@ -122,7 +129,7 @@ header.manual-hospital > ul > li.calculate > span {
 }
 
 header.manual-hospital > ul > li.report > span {
-    background-image: url(../../img/icon-gnb-2-04.png);
+    /*background-image: url(../../img/icon-gnb-2-04.png);*/
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;

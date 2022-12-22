@@ -75,7 +75,7 @@ function Coachmark() {
             // console.log('width: '+ w)
             if (w < 800) {
                 tooltipBoxSize = "w-25";
-                alert(tooltipBoxSize)
+                // alert(tooltipBoxSize)
             } else {
                 tooltipBoxSize = "w-50";
             }
@@ -84,7 +84,6 @@ function Coachmark() {
         let imgSrc = (steps[currentStep]).dataset.coachmarkImg || "";
         tooltipImg.src = imgSrc;
 
-        // alert(tooltipBoxSize)
         const coachmarkElements = getCoachmarkElements(); // html 생성
         document.body.insertAdjacentHTML("beforeend", coachmarkElements); //html 삽입
 

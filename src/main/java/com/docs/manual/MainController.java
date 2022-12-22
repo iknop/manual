@@ -15,6 +15,11 @@ public class MainController {
         return "index";
     }
 
+    // 시작하기
+    @GetMapping("start")
+    public static String start() {
+        return "manual/start";
+    }
     // 예정의뢰
     @GetMapping("/reception")
     public static String navTest() {

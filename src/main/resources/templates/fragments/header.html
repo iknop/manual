@@ -1,4 +1,5 @@
 <div th:fragment="header">
+    <!-- 사이트 헤더 -->
     <header class="hospital">
         <ul class="d-inline-flex justify-content-start links"
             style="margin-bottom: 0 !important; padding-left: 0!important;">
@@ -54,12 +55,20 @@
         <input id="report-hospital-code" name="reportHospitalCode" value="" type="hidden">
         <input id="send-hospital-code" name="sendHospitalCode" value="" type="hidden">
         <input id="webUrl" name="webUrl" value="https://stg.xray21.com/web" type="hidden">
+        <!-- 매뉴얼 헤더 -->
+        <header class="manual-hospital">
 
-        <header class="manual-hospital" data-coachmark-folder-add="1"
+            <ul data-coachmark-folder-add="1"
                 data-coachmark-img="/img/coachmarks/reception/예정의뢰-폴더 업로드 확인.png"
-                data-coachmark-text="폴더 안에 있는 영상 파일의 개수를 확인한 후 업로드 버튼을 클릭합니다. ">
-            <ul class="d-inline-flex justify-content-start links"
+                data-coachmark-text="폴더 안에 있는 영상 파일의 개수를 확인한 후 업로드 버튼을 클릭합니다."
+                class="d-inline-flex justify-content-start links"
                 style="margin-bottom: 0 !important; padding-left: 0!important;">
+                <li class="start">
+                    <span onclick="location.href=`/manual/start`;">시작하기</span>
+                    <ul>
+                        <li></li>
+                    </ul>
+                </li>
                 <li id="nav-reception-explanation" class="reception current column" data-coachmark-reception="0"
                     data-html="true"
                     data-coachmark-text="판독을 의뢰하고자 하는 영상을 선택하여 먼저 예정의뢰에 업로드 합니다.

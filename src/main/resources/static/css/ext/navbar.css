@@ -1,0 +1,16 @@
+header.default span.logo {
+    background-image: url(../../img/pshc_logo.png);
+    background-position: left center;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding-left: 40px;
+    display: inline-flex;
+    justify-content: start;
+    font-size: 18px;
+    line-height: 70px;
+    margin-left: 30px;
+    margin-right: auto;
+    color: var(--white);
+    font-weight: 400;
+}

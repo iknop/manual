@@ -1,53 +1,53 @@
-:root {
-    --primary-color: #ffffff;
-    --secondary-color: #0574ac;
-    /*--font-family: 'Roboto', sans-serif;*/
-}
+/*:root {*/
+/*    --primary-color: #ffffff;*/
+/*    --secondary-color: #0574ac;*/
+/*    !*--font-family: 'Roboto', sans-serif;*!*/
+/*}*/
 
-.coachmarks {
-    max-width: 40em;
-    /*margin: 0 auto;*/
-    box-sizing: border-box;
-}
+/*.coachmarks {*/
+/*    max-width: 40em;*/
+/*    !*margin: 0 auto;*!*/
+/*    box-sizing: border-box;*/
+/*}*/
 
-.content {
-    max-width: 40em;
-    /*padding: 8em 2em;*/
-    /*margin: 0 auto;*/
-}
+/*.content {*/
+/*    max-width: 40em;*/
+/*    !*padding: 8em 2em;*!*/
+/*    !*margin: 0 auto;*!*/
+/*}*/
 
-.content .__text {
-    padding: 1em;
-}
+/*.content .__text {*/
+/*    padding: 1em;*/
+/*}*/
 
-.coachmarks . {
-    /*color: var(--secondary-color);*/
-    /*background-color: var(--primary-color);*/
-}
+/*.coachmarks . {*/
+/*    !*color: var(--secondary-color);*!*/
+/*    !*background-color: var(--primary-color);*!*/
+/*}*/
 
-.coachmarks  {
-    font-size: 24px;
-    font-weight: 700;
-    padding-bottom: 2em;
-    text-align: center;
-}
+/*.coachmarks  {*/
+/*    font-size: 24px;*/
+/*    font-weight: 700;*/
+/*    padding-bottom: 2em;*/
+/*    text-align: center;*/
+/*}*/
 
-.coachmarks {
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
-}
+/*.coachmarks {*/
+/*    color: var(--primary-color);*/
+/*    background-color: var(--secondary-color);*/
+/*}*/
 
-.coachmarks  .column-container {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-}
+/*.coachmarks  .column-container {*/
+/*    display: flex;*/
+/*    align-items: flex-start;*/
+/*    justify-content: space-between;*/
+/*}*/
 
-.coachmarks  .column {
-    max-width: 10em;
-    text-align: center;
-    background-color: var(--secondary-color);;
-}
+/*.coachmarks  .column {*/
+/*    max-width: 10em;*/
+/*    text-align: center;*/
+/*    background-color: var(--secondary-color);;*/
+/*}*/
 
 /*.coachmarks .section-2 .column .img-container {*/
 /*    height: 100px;*/
@@ -99,24 +99,24 @@
 /*    padding-left: 0.5em;*/
 /*}*/
 
-@media (max-width: 720px) {
-    .content {
-        max-width: 40em;
-        padding: 4em 2em;
-        margin: 0 auto;
-    }
+/*@media (max-width: 720px) {*/
+/*    .content {*/
+/*        max-width: 40em;*/
+/*        padding: 4em 2em;*/
+/*        margin: 0 auto;*/
+/*    }*/
 
-    .footer {
-        display: block;
-    }
+    /*.footer {*/
+    /*    display: block;*/
+    /*}*/
 
-    .coachmarks .section-2 .column-container {
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-    }
+    /*.coachmarks .section-2 .column-container {*/
+    /*    align-items: center;*/
+    /*    flex-direction: column;*/
+    /*    justify-content: center;*/
+    /*}*/
 
-    .coachmarks .section-2 .column {
-        padding: 4em 0;
-    }
-}
+    /*.coachmarks .section-2 .column {*/
+    /*    padding: 4em 0;*/
+    /*}*/
+/*}*/
