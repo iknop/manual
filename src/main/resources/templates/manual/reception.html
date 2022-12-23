@@ -99,14 +99,20 @@
                                     data-coachmark-text="하나의 의뢰선택 후 버튼을 클릭해주세요."
                                     data-coachmark-img="/img/coachmarks/reception/예정의뢰-정보변경의뢰 선택.png">정보변경
                             </button>
-                            <button type="button" id="dicom-scp" class="dataTbBtn">DICOM SCP</button>
+                            <button type="button" id="dicom-scp" class="dataTbBtn"
+                                data-coachmark-dicom="0"
+                                    data-coachmark-text="DICOM SEND 설정정보(IP, PORT, AE Title)를 확인할 수 있습니다."
+                            >DICOM SCP</button>
                             <button type="button" id="reception-merge-btn" class="dataTbBtn"
                                     data-coachmark-merge="1"
                                     data-coachmark-img="/img/coachmarks/reception/예정의뢰-병합-대표선택-같은차트번호.png"
                                     data-coachmark-text="2개 이상의 예정의뢰가 병합될 때 하나의 예정의뢰 정보로 통합됩니다. 통합할 대표정보를 하나 선택하고 병합 버튼을 클릭해주세요. (영상의 시리즈와 이미지 수는 병합하는 영상들에 따라 자동으로 업데이트 됩니다)."
                             >병합
                             </button>
-                            <button type="button" id="reception-delete-btn" class="dataTbBtn">삭제</button>
+                            <button type="button" id="reception-delete-btn" class="dataTbBtn"
+                            data-coachmark-delete="0"
+                                    data-coachmark-text="목록에서 예정의뢰를 선택 후 삭제합니다. 삭제 후 다시 복구할 수 없으나, Disk Add나 Folder Add를 통해 다시 추가할 수 있습니다."
+                            >삭제</button>
                             <button type="button" id="reception-disk-add-btn" class="dataTbBtn column"
                                     data-coachmark-disk-add="0"
                                     data-coachmark-img="/img/coachmarks/reception/예정의뢰-파일추가.png"

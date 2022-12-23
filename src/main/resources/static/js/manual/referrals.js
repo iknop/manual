@@ -13,10 +13,15 @@ $(function () {
     if (cancelRequest) cancelRequest.on('click', () => {
         Coachmark().init('cancel-request')
     })
-   //  의뢰변경
+    //  의뢰변경
     const editRequest = $('#referral-edit-btn')
     if (editRequest) editRequest.on('click', () => {
         Coachmark().init('edit-request')
+    })
+//  Excel 다운로드
+    const excel = $('#btn-download')
+    if (excel) excel.on('click', () => {
+        Coachmark().init('excel')
     })
 
 });

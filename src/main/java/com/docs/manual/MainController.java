@@ -16,9 +16,14 @@ public class MainController {
     }
 
     // 시작하기
-    @GetMapping("start")
+    @GetMapping("/start")
     public static String start() {
         return "manual/start";
+    }
+    // 로그인
+    @GetMapping("/login")
+    public static String login() {
+        return "manual/login";
     }
     // 예정의뢰
     @GetMapping("/reception")

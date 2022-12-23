@@ -66,10 +66,7 @@
                         <button type="button" id="btn-search" class="mt-0">검색하기</button>
                         <button class="download mt-0" id="btn-download" type="button"
                                 data-coachmark-search="2"
-                                data-coachmark-text="검색 결과를 엑셀파일로 저장합니다.
-파일명은 지정한 기간으로 자동 설정됩니다.
-예)20221101-20221131_TAT
-"
+                                data-coachmark-text="검색 결과가 기간_병원명(병원숫자코드)_TAT.xlsx로 파일이 다운로드 됩니다."
                         >다운로드
                         </button>
                     </div>
@@ -154,103 +151,6 @@
                                          style="position: relative; overflow: auto; max-height: 50vh; width: 100%;">
                                         <table class="table table-head text-center table-bordered dataTable no-footer dtfc-has-left"
                                                id="tat-list-table" style="width: 100%;">
-                                            <!--                                            <thead class="thead-light" id="tat-thead">-->
-                                            <!--                                            <tr style="height: 0px;">-->
-                                            <!--                                                <th class="align-middle" scope="col" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 88.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">Modality-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th colspan="2" scope="col" rowspan="1"-->
-                                            <!--                                                    style="width: 212.188px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">CT-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th colspan="2" scope="col" rowspan="1"-->
-                                            <!--                                                    style="width: 212.188px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">MR-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th colspan="2" scope="col" rowspan="1"-->
-                                            <!--                                                    style="width: 212.188px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">MG-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th colspan="2" scope="col" rowspan="1"-->
-                                            <!--                                                    style="width: 212.188px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">CR-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th class="align-middle sorting_disabled" rowspan="2" scope="col"-->
-                                            <!--                                                    colspan="1"-->
-                                            <!--                                                    style="width: 86.1562px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">합계-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                            </tr>-->
-                                            <!--                                            <tr style="height: 0px;">-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 88.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">기간-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 내-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 외-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 내-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 외-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 내-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 외-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 내-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                                <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"-->
-                                            <!--                                                    style="width: 87.0938px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">-->
-                                            <!--                                                    <div class="dataTables_sizing"-->
-                                            <!--                                                         style="height: 0px; overflow: hidden;">1시간 외-->
-                                            <!--                                                    </div>-->
-                                            <!--                                                </th>-->
-                                            <!--                                            </tr>-->
-                                            <!--                                            </thead>-->
 
                                             <tbody>
                                             <tr class="odd">

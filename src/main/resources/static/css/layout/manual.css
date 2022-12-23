@@ -154,7 +154,7 @@ header.manual-hospital ul + menu {
     position: relative;
     height: 70px;
     line-height: 70px;
-    margin-right: 60px;
+    /*margin-right: 60px;*/
     font-size: 16px;
     font-weight: 500;
     color: var(--white)

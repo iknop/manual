@@ -25,4 +25,14 @@ $(function () {
     if (requestBtn) requestBtn.on('click', () => {
         Coachmark().init('send-request')
     })
+    // DICOM SCP
+    const dicom = $('#dicom-scp')
+    if (dicom) dicom.on('click', () => {
+        Coachmark().init('dicom')
+    })
+    // 삭제
+    const del = $('#reception-delete-btn')
+    if (del) del.on('click', () => {
+        Coachmark().init('delete')
+    })
 });

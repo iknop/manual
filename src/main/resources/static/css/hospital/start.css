@@ -1,31 +1,30 @@
-.login_wrap {
+.body_wrap {
     width: 100%;
     padding: 0 !important
 }
 
-.login_wrap > section {
-    background-image: url(../../img/bg_login.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+.body_wrap > section {
+    position: absolute;
+    background-color: #c7c7c7;
+    background-size: auto;
+    /*background-repeat: no-repeat;*/
     min-height: calc(100vh - 50px) !important;
     background-position: center top;
-    height: 10vh
 }
 
-.login_wrap > section > header {
+.body_wrap > section > div.content {
     margin: 0 auto 43px auto;
     padding-top: 8%;
     font-size: 41px;
     color: var(--white);
     font-weight: 400;
-    text-align: center
+    text-align: center;
+    padding-bottom: 40px;
 }
 
-.login_wrap > section > header span {
-    font-size: 15px;
-    font-weight: 300;
-    margin-top: 5px;
-    display: block
+.body_wrap > section > div.content > img {
+    max-width: 50%;
+    margin-bottom: 70px;
 }
 
 form#loginForm {
