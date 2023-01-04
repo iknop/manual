@@ -6,7 +6,9 @@
 </head>
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap" style="height: 1173px !important"
-
+         data-coachmark-report-print="1"
+         data-coachmark-text="출력할 소견서들을 확인할 수 있습니다. pdf 파일로 저장도 가능합니다."
+         data-coachmark-replace-img="/img/coachmarks/report/소견서출력-소견서예시.png"
     >
         <div class="intro">아래 페이지는 설명을 위한 예시입니다.</div>
         <main>
@@ -21,6 +23,9 @@
                     <label for="searchCondition" class="col-1 labelBlue p-0"
                     >검색조건</label>
                     <div class="d-flex flex-wrap col-11 p-0" id="searchCondition"
+                         data-coachmark-referral-report="0"
+                         data-coachmark-text="
+출력유형과 일자기준(촬영일자,의뢰일자,판독일자) 그리고 기간을 설정한 후 검색하기 버튼을 클릭합니다. 환자 차트번호와 환자명을 입력하여 검색할 수도 있습니다.  (※ 검색 조건 미지정 시: 응급여부-전체,일자기준-촬영일자, 기간-당일)"
                     >
 
                         <!--            <div sec:authorize="hasAnyRole('ROLE_SM')">-->
@@ -55,6 +60,8 @@
                                class="mr-2 col-1 justify-content-center ml-3" placeholder="차트번호" title="차트번호">
                         <input type="text" class="col-2 justify-content-end" id="patientName" name="patientName"
                                title="환자명" placeholder="환자명"
+                               data-coachmark-referral-report="1"
+                               data-coachmark-text="환자명 입력 시 일부만 입력하여 조회할 수 있습니다(예: 환자명-홍길동, 검색 시 - ‘홍’ 입력)."
                         >
                     </div>
 
@@ -70,6 +77,9 @@
                 <div class="dataTbWrap d-flex">
                     <div class="d-flex justify-content-start mr-auto">
                         <button type="button" class="dataTbBtn" id="btn-report-print"
+                                data-coachmark-report-print="0"
+                                data-coachmark-text=" 의뢰정보를 확인한 후 선택하고 출력하기 버튼을 클릭하세요"
+                                data-coachmark-img="/img/coachmarks/report/소견서출력-의뢰선택.png"
                         >출력하기
                         </button>
                     </div>

@@ -1,38 +1,98 @@
 $(function () {
-    // disk add 버튼 : 파일 추가
-    const diskAddBtn = $('#reception-disk-add-btn')
-    if (diskAddBtn) diskAddBtn.on('click', () => {
-        Coachmark().init('disk-add')
-    })
-
-    // folder add 버튼 : 폴더 추가
-    const folderAddBtn = $('#reception-folder-add-btn')
-    if (folderAddBtn) folderAddBtn.on('click', () => {
-        Coachmark().init('folder-add')
-    })
     // 정보변경 버튼
-    const editInfoBtn = $('#reception-edit-btn')
-    if (editInfoBtn) editInfoBtn.on('click', () => {
-        Coachmark().init('edit-info')
+    $('#reception-edit-btn').on('click', function () {
+        $('#editManualModal').modal('show')
+
+        const descBox = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descBox.length;
+
+        for (let i = 0; i < loop; i++) {
+            let desc = Object.values(descBox)[i];
+            desc.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            // let order = Object.values(descOrder)[i];
+            // order.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            // console.log(text.style.animation)
+        }
     })
     // 병합 버튼
-    const mergeBtn = $('#reception-merge-btn')
-    if (mergeBtn) mergeBtn.on('click', () => {
-        Coachmark().init('merge')
+    $('#reception-merge-btn').on('click', function () {
+        $('#mergeManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
     })
-    // 의뢰 전송 버튼
-    const requestBtn = $('#reception-send-request-area')
-    if (requestBtn) requestBtn.on('click', () => {
-        Coachmark().init('send-request')
+    // 삭제 버튼
+    $('#reception-delete-btn').on('click', function () {
+        $('#deleteManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
     })
-    // DICOM SCP
-    const dicom = $('#dicom-scp')
-    if (dicom) dicom.on('click', () => {
-        Coachmark().init('dicom')
+
+    // Disk Add 버튼
+    $('#reception-disk-add-btn').on('click', function () {
+        $('#diskAddManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
     })
-    // 삭제
-    const del = $('#reception-delete-btn')
-    if (del) del.on('click', () => {
-        Coachmark().init('delete')
+    // Folder Add 버튼
+    $('#reception-folder-add-btn').on('click', function () {
+        $('#folderAddManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
     })
+    // 의뢰전송 버튼
+    $('#reception-send-request-area').on('click', function () {
+        $('#sendRequestManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
+    })
+
 });
+
+

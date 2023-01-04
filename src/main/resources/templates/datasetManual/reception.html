@@ -6,7 +6,7 @@
 </head>
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap">
-        <div class="intro">버튼을 클릭하여 기능 설명을 확인 할 수 있습니다.</div>
+        <div class="intro">아래 페이지는 설명을 위한 예시입니다.</div>
         <main class="d-flex flex-wrap align-item-strech">
 
             <!-- context area -->
@@ -89,27 +89,43 @@
                 </form>
 
                 <div id="dataTbForm" class="dataTbForm d-block"
-                    >
+                     data-coachmark-merge="0"
+                     data-coachmark-text="같은 차트번호의 예정의뢰 2개 이상을 선택한 후 병합버튼을 클릭하세요."
+                     data-coachmark-replace-img="/img/coachmarks/reception/예정의뢰-병합-의뢰선택.png">
                     <div class="dataTbWrap d-flex">
                         <div class="d-flex justify-content-start mr-auto">
-                            <button type="button" id="reception-edit-btn" class="dataTbBtn column">정보변경
+                            <button type="button" id="reception-edit-btn" class="dataTbBtn column"
+                                    data-coachmark-edit-info="0"
+                                    data-coachmark-text="하나의 의뢰선택 후 버튼을 클릭해주세요."
+                                    data-coachmark-img="/img/coachmarks/reception/예정의뢰-정보변경의뢰 선택.png">정보변경
                             </button>
                             <button type="button" id="dicom-scp" class="dataTbBtn"
-
+                                    data-coachmark-dicom="0"
+                                    data-coachmark-text="DICOM SEND 설정정보(IP, PORT, AE Title)를 확인할 수 있습니다."
                             >DICOM SCP
                             </button>
                             <button type="button" id="reception-merge-btn" class="dataTbBtn"
-                                    >병합
+                                    data-coachmark-merge="1"
+                                    data-coachmark-img="/img/coachmarks/reception/예정의뢰-병합-대표선택-같은차트번호.png"
+                                    data-coachmark-text="2개 이상의 예정의뢰가 병합될 때 하나의 예정의뢰 정보로 통합됩니다. 통합할 대표정보를 하나 선택하고 병합 버튼을 클릭해주세요. (영상의 시리즈와 이미지 수는 병합하는 영상들에 따라 자동으로 업데이트 됩니다)."
+                            >병합
                             </button>
                             <button type="button" id="reception-delete-btn" class="dataTbBtn"
-                                                     >삭제
+                                    data-coachmark-delete="0"
+                                    data-coachmark-text="목록에서 예정의뢰를 선택 후 삭제합니다. 삭제 후 다시 복구할 수 없으나, Disk Add나 Folder Add를 통해 다시 추가할 수 있습니다."
+                            >삭제
                             </button>
                             <button type="button" id="reception-disk-add-btn" class="dataTbBtn column"
-                                  >Disk Add
+                                    data-coachmark-disk-add="0"
+                                    data-coachmark-img="/img/coachmarks/reception/예정의뢰-파일추가.png"
+                                    data-coachmark-text="1개 이상의 dicom 영상 파일을 선택하세요. 선택한 영상이 의뢰목록에 추가됩니다.">Disk Add
                             </button>
 
                             <input type="file" class="files-add-input" id="disk-add-input" multiple="" hidden="">
                             <button type="button" id="reception-folder-add-btn" class="dataTbBtn column"
+                                    data-coachmark-folder-add="0"
+                                    data-coachmark-img="/img/coachmarks/reception/예정의뢰-폴더추가.png"
+                                    data-coachmark-text="추가하고자 하는 영상 폴더를 하나 클릭합니다. 알람창에서 폴더 안에 있는 영상 파일의 개수를 확인한 후 업로드 버튼을 클릭합니다."
                             >Folder Add
                             </button>
                             <input type="file" class="files-add-input" id="folder-add-input" webkitdirectory=""
@@ -297,6 +313,9 @@
                 </nav>
                 <div id="reception-send-request-area" class="card p-4 h-100 m-auto requestColumn border-0">
                     <div class="row mx-auto text-center"
+                         data-coachmark-send-request="0"
+                         data-coachmark-text="1. 응급구분을 선택해주세요:  판독 소요 시간에 따라 일반/응급으로 나뉘며 금액이 상이합니다.
+(일반: 24~48시간 (영업일 기준) /응급: 1~2시간 소요)"
                     >
                         <label class="col-sm-12 px-0 col-form-label text-center my-auto labelBlue"
                                style="font-weight: 800;">응급구분</label>
@@ -317,6 +336,8 @@
                     </div>
                     <!-- 의뢰 버튼 START-->
                     <div class="row mx-2 border-bottom border-top text-center"
+                         data-coachmark-send-request="1"
+                         data-coachmark-text="2. 의뢰유형을 선택해주세요: 일반/검진/특검(배치전,진폐,학교)/참조의 의뢰유형이 있습니다."
                     >
                         <div class="col-sm-12 px-0 mt-3 mb-1" style="height:60px">
                             <button class="btn btn-outline-primary btn-block btn-send-request h-100" type="button">
@@ -332,7 +353,8 @@
                             <div class="row mx-auto w-100">
                                 <select class="custom-select text-center p-1 mb-2" id="hcTypeName"
                                         name="hcTypeName"
->
+                                        data-coachmark-send-request="2"
+                                        data-coachmark-text="3. 특검의뢰 전송 시 반드시 특수란을 클릭하여 배치전/진폐/학교 구분을 선택한 후 특검 버튼을 클릭하셔야 합니다. 이를 설정하지 않을 경우 배치전 특검의뢰로 전송됩니다.">
                                     <option selected="" value="C">특수</option>
                                     <option value="B">배치전</option>
                                     <option value="D">진폐</option>
@@ -353,7 +375,8 @@
                         <div class="col-sm-12 px-0 mt-3" style="height:60px">
                             <button class="btn btn-outline-secondary btn-block btn-send-request isRef h-100"
                                     type="button"
->
+                                    data-coachmark-send-request="3"
+                                    data-coachmark-text="4. 참조의뢰는 판독소견이 나오지 않고, 판독 시 도움이 되도록 비교판독용으로 전송하는 의뢰이므로 별도의 판독비용이 발생하지 않습니다.">
                                 <span>참조</span>
                             </button>
                         </div>
@@ -369,7 +392,9 @@
                 <nav>
                     <span></span>
                 </nav>
-                <div class="col-sm-12 py-2 px-0 column" >
+                <div class="col-sm-12 py-2 px-0 column" data-coachmark-edit-info="1"
+                     data-coachmark-text="연녹색으로 바뀌는 항목을 수정하고 저장버튼을 클릭합니다."
+                     data-coachmark-replace-img="/img/coachmarks/reception/예정의뢰-정보변경.png">
                     <div class="col-sm-12 pl-1">
                         <!-- nav tab Start -->
                         <nav class="nav nav-tabs border-bottom-0">
@@ -382,6 +407,9 @@
                                class="nav-item nav-link border-0"
                                data-toggle="tab" href="#study-request-tab" id="study-request-nav"
                                role="tab"
+                               data-coachmark-send-request="4"
+                               data-coachmark-text="5. 의뢰전송상태를 확인할 수 있습니다. 전송 완료 후 완료의뢰에서 확인할 수 있습니다."
+                               data-coachmark-img="/img/coachmarks/reception/예정의뢰-의뢰전송-전송상태.png"
                             >전송상태</a>
                         </nav>
                         <!-- nav tab End -->
@@ -616,21 +644,24 @@
                                 </div>
                                 <div class="col-3 border" style="overflow: auto;">
                                     <div class="row border-bottom manual-desc-warn-title">
-                                        참고사항
+                                        주의사항
                                     </div>
                                     <div class="row border-bottom manual-desc-warn-content">
                                         <!--주의사항 내용-->
                                         - 먼저 <span class="text-emphasis"> Disk Add, Folder Add 혹은 DICOM send를 하여 영상 파일을 목록에 추가 </span>하세요.
                                         <br>
+                                        - 동일한 차트 번호의 의뢰만
+                                        병합이 가능 합니다.
+                                        <br>
                                         - 영상의 <span class="text-emphasis">시리즈와 이미지 수는 병합하는 영상들에 따라 자동으로 업데이트</span> 됩니다
                                     </div>
                                     <div class="row border-bottom d-flex">
                                         <div class="col-2 border-right manual-desc-order">1</div>
-                                        <div class="col manual-desc-text">목록에서 <span class="text-emphasis">동일한 차트번호(동일환자)의뢰 2개 이상</span>을 선택후 <span class="text-emphasis">병합 버튼</span>을 클릭하세요.</div>
+                                        <div class="col manual-desc-text">목록에서 <span class="text-emphasis">동일한 차트번호(동일환자)의뢰 2개 이상</span>을 선택후 병합 버튼을 클릭하세요.</div>
                                     </div>
                                     <div class="row border-bottom d-flex">
                                         <div class="col-2 border-right manual-desc-order">2</div>
-                                        <div class="col manual-desc-text"> 하나의 예정의뢰 정보로 통합됩니다. <span class="text-emphasis">통합할 대표정보를 하나 </span>선택하고 <span class="text-emphasis">병합 버튼</span>을 클릭해주세요. </div>
+                                        <div class="col manual-desc-text"> 하나의 예정의뢰 정보로 통합됩니다. <span class="text-emphasis">통합할 대표정보를 하나 선택하고 병합 버튼을 클릭</span>해주세요. </div>
                                     </div>
                                 </div>
                             </div>

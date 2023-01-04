@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/")
-    public static String index(Model model) {
-        model.addAttribute("data", "Hello Spring!");
-        return "index";
-    }
+//    @GetMapping("/")
+//    public static String index(Model model) {
+//        model.addAttribute("data", "Hello Spring!");
+//        return "index";
+//    }
 
     // 시작하기
     @GetMapping("/start")
@@ -62,5 +62,11 @@ public class MainController {
     @GetMapping("/myPage")
     public static String myPage() {
         return "manual/myPage";
+    }
+
+    // 테스트 - 예정의뢰: 병합하기
+    @GetMapping("/test/reception")
+    public static String receptionT() {
+        return "example/exReception";
     }
 }

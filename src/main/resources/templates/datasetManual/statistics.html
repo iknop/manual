@@ -25,6 +25,9 @@
                 <div class="form d-flex" id="coachmark-search">
                     <label for="searchCondition" class="col-1 labelBlue p-0 ">검색조건</label>
                     <div class="d-flex flex-wrap col-6 p-0 justify-content-start ml-auto"
+                         data-coachmark-search="0"
+                         data-coachmark-text="응급여부(전체,일반,응급 택1)와 기간을 설정한 후 검색하기 버튼을 클릭합니다.
+지정하지 않을 시 응급여부-전체, 기간-당월초~당일 로 보여집니다."
                     >
 
                         <div class="mr-3">
@@ -57,10 +60,14 @@
                         <!--            <button class="reset mt-0" id="btn-reset" type="button">조건 초기화</button>-->
 
                         <button type="button" id="btn-reset-dr" class="reset mt-0"
+                                data-coachmark-search="1"
+                                data-coachmark-text="조건을 초기화하여 결과 확인을 원하는 경우 반드시 조건초기화 버튼 클릭 후, 검색하기 버튼을 눌러주세요"
                         >조건 초기화
                         </button>
                         <button type="button" id="btn-search" class="mt-0">검색하기</button>
                         <button class="download mt-0" id="btn-download" type="button"
+                                data-coachmark-search="2"
+                                data-coachmark-text="검색 결과가 기간_병원명(병원숫자코드)_TAT.xlsx로 파일이 다운로드 됩니다."
                         >다운로드
                         </button>
                     </div>

@@ -52,7 +52,6 @@ header.default a + a::after {
 }
 
 
-
 header.manual-hospital > ul > li.serviceManage > span, header.readingDr > ul > li.serviceManage > span {
     background-image: url(../../img/icon-gnb-05.png);
     background-position: left center;
@@ -64,7 +63,7 @@ header.manual-hospital > ul > li.serviceManage > span, header.readingDr > ul > l
 
 header.manual-hospital {
     position: fixed;
-    z-index: 9997;
+    z-index: 999;
     min-height: 70px;
     min-width: 1440px;
     background-color: #212121;
@@ -96,6 +95,7 @@ header.manual-hospital > ul > li > span {
     text-align: center;
     margin: 0 auto
 }
+
 header.manual-hospital > ul > li.start > span {
     background-image: url(../../img/icon-manual-start.png);
     background-position: left center;
@@ -129,7 +129,7 @@ header.manual-hospital > ul > li.calculate > span {
 }
 
 header.manual-hospital > ul > li.report > span {
-    /*background-image: url(../../img/icon-gnb-2-04.png);*/
+    background-image: url(../../img/icon-gnb-2-04.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -206,7 +206,7 @@ header.manual-hospital ul + menu:hover ul {
 header.manual-hospital ul + menu ul > li:first-child {
     text-align: center;
     font-size: 15px;
-    color:#6c6c6c;
+    color: #6c6c6c;
     padding-bottom: 20px;
     line-height: 1.5;
     font-weight: 500
@@ -224,10 +224,108 @@ header.manual-hospital ul + menu ul > li > a {
 header.manual-hospital ul + menu ul > li:last-child > a {
     padding-bottom: 0
 }
-/** 예시 페이지 안내문 **/
-div.intro{
-    font-size:20px;
+
+.intro {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.manual-to-page-link-btn {
+    text-decoration: none;
+    color: white;
+    background-color: #000f5a;
+    padding: 11px;
+}
+
+
+/*기능 설명 모달 헤더*/
+.descFuncName {
+    font-size: 20px;
+    color: #ffff;
     font-weight: 500;
-    color: #0d0d41;
-    position: relative;
+}
+
+/*이미지 순서 번호*/
+.carousel-desc-step-current {
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #273db0;
+    width: 80px;
+    height: 32px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+}
+
+
+.carousel-desc-step {
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #fff;
+    border: #273db0 solid 0.5px;
+    width: 80px;
+    height: 32px;
+    border-radius: 20px;
+    color: #273db0;
+    text-align: center;
+    transition-property: background-color,color;
+    /*content: '';*/
+    transition-duration: 0.5s;
+}
+
+.carousel-desc-step:hover {
+    background-color: #273db0;
+    color: white;
+}
+
+
+/*참고사항*/
+.manual-desc-warn-title {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+}
+
+.manual-desc-box{
+    opacity: 0;
+}
+/** 이미지 설명란 번호 **/
+.manual-desc-order{
+    background-color: #E14D2A;
+    color: white;
+    height: 35px;
+    width: 35px;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    align-self: center;
+    /*opacity: 0;*/
+}
+
+.desc{
+    font-size: 30px;
+    /*opacity: 0;*/
+    max-width: 285px;
+}
+@keyframes  fade{
+    to{
+        opacity: 1;
+        /*animation-delay: 0.1s;*/
+    }
+ }
+
+/*텍슽 강조*/
+.text-emphasis {
+    color: #FF7F15 ;
+    font-weight: bold ;
+    display: contents ;
+    font-size: inherit ;
+}
+/* 이미지/설명 나눔선 */
+.vr{
+    left: 67%;
+    height: 1000px;
+    position: absolute;
+    border-left: 1px solid rgb(126 126 126 / 28%);
+    opacity: 70%;
 }

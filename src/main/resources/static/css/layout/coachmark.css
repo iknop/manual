@@ -4,7 +4,7 @@
 /*    !*--font-family: 'Roboto', sans-serif;*!*/
 /*}*/
 
-/*.coachmarks {*/
+/*.manual {*/
 /*    max-width: 40em;*/
 /*    !*margin: 0 auto;*!*/
 /*    box-sizing: border-box;*/
@@ -20,62 +20,62 @@
 /*    padding: 1em;*/
 /*}*/
 
-/*.coachmarks . {*/
+/*.manual . {*/
 /*    !*color: var(--secondary-color);*!*/
 /*    !*background-color: var(--primary-color);*!*/
 /*}*/
 
-/*.coachmarks  {*/
+/*.manual  {*/
 /*    font-size: 24px;*/
 /*    font-weight: 700;*/
 /*    padding-bottom: 2em;*/
 /*    text-align: center;*/
 /*}*/
 
-/*.coachmarks {*/
+/*.manual {*/
 /*    color: var(--primary-color);*/
 /*    background-color: var(--secondary-color);*/
 /*}*/
 
-/*.coachmarks  .column-container {*/
+/*.manual  .column-container {*/
 /*    display: flex;*/
 /*    align-items: flex-start;*/
 /*    justify-content: space-between;*/
 /*}*/
 
-/*.coachmarks  .column {*/
+/*.manual  .column {*/
 /*    max-width: 10em;*/
 /*    text-align: center;*/
 /*    background-color: var(--secondary-color);;*/
 /*}*/
 
-/*.coachmarks .section-2 .column .img-container {*/
+/*.manual .section-2 .column .img-container {*/
 /*    height: 100px;*/
 /*}*/
 
-/*.coachmarks .section-2 .column img {*/
+/*.manual .section-2 .column img {*/
 /*    width: 100px;*/
 /*    height: 100px;*/
 /*}*/
 
-/*.coachmarks .section-2 .column .img2 {*/
+/*.manual .section-2 .column .img2 {*/
 /*    width: 80px;*/
 /*    height: 80px;*/
 /*}*/
 
-/*.coachmarks .section-1 .links {*/
+/*.manual .section-1 .links {*/
 /*    display: flex;*/
 /*    width: 40%;*/
 /*    margin: 0 auto;*/
 /*    justify-content: space-around;*/
 /*}*/
 
-/*.coachmarks .section-1 .links a {*/
+/*.manual .section-1 .links a {*/
 /*    color: var(--secondary-color);*/
 /*    text-decoration: none;*/
 /*}*/
 
-/*.coachmarks .section-1 .links a:hover {*/
+/*.manual .section-1 .links a:hover {*/
 /*    cursor: pointer;*/
 /*}*/
 
@@ -110,13 +110,13 @@
     /*    display: block;*/
     /*}*/
 
-    /*.coachmarks .section-2 .column-container {*/
+    /*.manual .section-2 .column-container {*/
     /*    align-items: center;*/
     /*    flex-direction: column;*/
     /*    justify-content: center;*/
     /*}*/
 
-    /*.coachmarks .section-2 .column {*/
+    /*.manual .section-2 .column {*/
     /*    padding: 4em 0;*/
     /*}*/
 /*}*/

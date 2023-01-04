@@ -63,8 +63,7 @@ function Coachmark() {
     // data-coachmark-'menu' : 설명할 각 기능
     function init(menu) {
         const coachmarkSelectors = document.querySelectorAll(`*[data-coachmark-${menu}]`);
-        // Sort the coachmarks according to their data attributes so that user can decide
-        // the elements priority.
+
         const coachmarks = Array.from(coachmarkSelectors) || [];
         steps = sortArr(coachmarks, menu); // 각 기능 클릭 시 매뉴얼 진행 순서
         // console.log(steps)
@@ -84,6 +83,7 @@ function Coachmark() {
         let imgSrc = (steps[currentStep]).dataset.coachmarkImg || "";
         tooltipImg.src = imgSrc;
 
+        // alert(tooltipBoxSize)
         const coachmarkElements = getCoachmarkElements(); // html 생성
         document.body.insertAdjacentHTML("beforeend", coachmarkElements); //html 삽입
 
@@ -112,9 +112,8 @@ function Coachmark() {
                 `To start using Coachmark plugin, please add data-coachmark attribute.`
             );
 
-        const {top, left} = element.getBoundingClientRect();
-        const height = element.offsetHeight,
-            width = element.offsetWidth;
+        const {top, left,width,height} = element.getBoundingClientRect();
+
         const backgroundColor = getBgColor(element);
 
         // let camelText = 'coachmarkText' + toCamelCase(menu); // coachmark-text-menu
@@ -130,15 +129,15 @@ function Coachmark() {
         const tooltipImg = element.dataset.coachmarkImg || "";
         const tooltipReplaceImg = element.dataset.coachmarkReplaceImg || "";
         // console.log('tooltipText,tooltipImg: ' + tooltipText + ',' + tooltipImg);
-        console.log(tooltipReplaceImg);
 
         /**
          * getBoundingClientRect returns the element's position
          * relative to the viewport, not from the body. So it does
          * NOT account for scrollPosition.
          */
-        const yScrollPosition = window.pageYOffset;
-        const xScrollPosition = window.pageXOffset;
+
+        const yScrollPosition = window.scrollY;
+        const xScrollPosition = window.scrollX;
 
         // console.log(`highlighter: ${highlighter}`)
         if (highlighter) {
@@ -165,8 +164,6 @@ function Coachmark() {
 
         // Add class to the element
         element.classList.add("coachmark-highlight");
-        let highlightClass = $('.coachmark-highlight');
-        console.log('highlightClass: '+JSON.stringify(highlightClass))
 
         // Scroll element's parent container so that it is visible
         setTimeout(() => {
@@ -187,6 +184,7 @@ function Coachmark() {
 
     function removeHighlight(element) {
         if (element) {
+            console.log(removeHighlight)
             element.classList.remove("coachmark-highlight");
         }
     }
@@ -205,8 +203,8 @@ function Coachmark() {
         destroy();
     }
 
+
     function handleNextBtnClick() {
-        // console.log('handleNextBtnClick(menu)- menu: '+menu) // menu 전달 oo
         if (currentStep < steps.length - 1) {
             removeHighlight(steps[currentStep]);
             currentStep++;
@@ -215,7 +213,9 @@ function Coachmark() {
     }
 
     function destroy() {
-        console.log(steps[currentStep]) // menu 전달 oo
+
+        // console.log(steps) // menu 전달 oo
+        // console.log(steps[currentStep]) // menu 전달 oo
         removeHighlight(steps[currentStep]);
 
         const mountPoint = document.getElementById("js-coachmark");
@@ -241,11 +241,11 @@ function Coachmark() {
             <section id="js-coachmark-interface" class="coachmark-interface" style="background-repeat: no-repeat"></section>
         <!--안내 상자-->
         <section id="js-coachmark-tooltip" class="coachmark-tooltip m-2 w-25 ${tooltipBoxSize}">
-            <section id="js-coachmark-tooltip-text" style="font-size:20px;"></section>
+            <section id="js-coachmark-tooltip-text" style="font-size:18px; font-weight:500;"></section>
             <img id="js-coachmark-tooltip-img">
                 <article class="coachmark-btns">
                     <button class= "coachmark-skip __btn btn btn-secondary btn-lg">설명 끝내기</button>
-                    <button class="coachmark-next __btn btn btn-primary btn-lg">다음</button>
+                    <button class="coachmark-next __btn btn btn-primary btn-lg">다음으로</button>
                 </article>
         </section>
     </section>
@@ -255,7 +255,7 @@ function Coachmark() {
     function addStyles(selector, styles) {
         if (styles.length) {
             const style = document.createElement("style");
-            style.classList.add(styleClass);
+            style.classList.add('coachmark-styles');
             document.head.appendChild(style);
             const styleSheet = style.sheet;
             styleSheet.insertRule(
@@ -269,6 +269,7 @@ function Coachmark() {
         let backgroundColor = window
             .getComputedStyle(element)
             .getPropertyValue("background-color");
+
         while (
             backgroundColor === "rgba(0, 0, 0, 0)" &&
             element !== document.body
@@ -291,17 +292,17 @@ function Coachmark() {
 
     // 클릭 시 매뉴얼 진행 순서 : data-coachmark-'menu' = n번째
     function sortArr(arr, menu) {
-        // console.log(arr)
+        console.log(arr)
         if (!Array.isArray(arr) || arr.length === 0) return [];
         arr.sort((a, b) => {
 
-            let camel = 'coachmark' + toCamelCase(menu)
+            let camel = 'coachmark' + toCamelCase(menu) //  data-coachmark-xxx camel로 변환
             console.log(a.dataset[camel])
 
-            const aValue = Number.parseInt(a.dataset[camel], 10);
+            const aValue = Number.parseInt(a.dataset[camel], 10); // data-coachmark-camel = n : 10진법
             const bValue = Number.parseInt(b.dataset[camel], 10);
-            console.log(aValue)
-            console.log(bValue)
+            // console.log(aValue)
+            // console.log(bValue)
 
             if (aValue < bValue) {
                 return -1;
@@ -311,11 +312,31 @@ function Coachmark() {
             }
             return 0;
         });
-        return [...arr];
+        return [...arr]; // 정렬된 arr 복사
     }
 
+    function destroyHeader() {
+
+        // console.log(steps) // menu 전달 oo
+        // console.log(steps[currentStep]) // menu 전달 oo
+
+        const mountPoint = document.getElementById("js-coachmark");
+        console.log(mountPoint)
+
+        if (mountPoint) mountPoint.remove();
+        if (nextBtn) nextBtn.removeEventListener("click", handleNextBtnClick);
+        if (skipBtn) skipBtn.removeEventListener("click", handleSkipClick);
+        // Destroy all dynamically inserted styles
+        const allDynamicStyles = document.getElementsByClassName(styleClass);
+        if (allDynamicStyles.length) {
+            Array.from(allDynamicStyles).forEach(dynamicStyle =>
+                dynamicStyle.remove()
+            );
+        }
+    }
     return {
         init: init,
-        destroy: destroy
+        destroy: destroy,
+        destroyHeader: destroyHeader
     };
 }

@@ -108,16 +108,21 @@
                     <div class="dataTbWrap d-flex" style="width: 990px !important; height: 296.750px !important; ">
                         <div class="d-flex justify-content-start mr-auto"
                              style="height: 32px; margin-right: 173.797px;">
-                            <button type="button" id="referral-change-urgent-type-btn" class="dataTbBtn">응급변경
+                            <button type="button" id="referral-change-urgent-type-btn" class="dataTbBtn"
+                                    data-coachmark-change-urgent="0"
+                                    data-coachmark-img="/img/coachmarks/referral/완료의뢰-응급변경 팝업창.png"
+                                    data-coachmark-text="판독대기중인 1개 이상의 의뢰를 선택한 후 응급 혹은 일반 원하는 설정으로 응급변경을 합니다.">응급변경
                             </button>
                             <button type="button" id="referral-requestConfig-cancel-btn" class="dataTbBtn"
-                            >
+                                    data-coachmark-cancel-request="0"
+                                    data-coachmark-img="/img/coachmarks/referral/완료의뢰-의뢰취소-팝업창.png"
+                                    data-coachmark-text="판독대기중인 1개 이상의 완료의뢰를 취소할 수 있습니다. 취소한 뒤 의뢰상태는 원내취소로 변경됩니다. 취소한 의뢰는 다시 복구할 수 없으나, 예정의뢰에서 다시 영상을 추가하여 의뢰를 전송할 수 있습니다. ">
                                 의뢰취소
                             </button>
                             <button type="button" id="referral-edit-btn" class="dataTbBtn">정보변경</button>
-                            <button class="dataTbBtn" id="btn-download" type="button"
-                            >Excel 다운로드
-                            </button>
+                            <button class="dataTbBtn" id="btn-download" type="button" data-coachmark-excel="0"
+                            data-coachmark-text="병원숫자코드_설정기간_의뢰목록.xlsx로 생성되는 엑셀파일을 다운로드 합니다."
+                            >Excel 다운로드</button>
                         </div>
 
                         <div class="d-flex flex-wrap justify-content-end ml-auto"
@@ -229,6 +234,9 @@
 
             </section>
             <section class="col-3 p-0"
+                     data-coachmark-edit-request="0"
+                     data-coachmark-text="판독대기중인 의뢰 1개를 선택 후 정보변경 버튼을 클릭합니다. 변경가능 항목이 에메랄드색으로 변합니다. 저장 버튼을 클릭하여 변경 사항이 저장된 것을 목록에서 확인합니다."
+                     data-coachmark-replace-img="/img/coachmarks/referral/완료의뢰-정보변경.png"
             >
                 <nav>
                     <span>의뢰정보</span>

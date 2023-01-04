@@ -70,7 +70,7 @@ function Coachmark() {
     function init() {
         const coachmarkSelectors = document.querySelectorAll("*[data-coachmark]");
 
-        // Sort the coachmarks according to their data attributes so that user can decide
+        // Sort the manual according to their data attributes so that user can decide
         // the elements priority.
         const coachmarks = Array.from(coachmarkSelectors) || [];
         steps = sortArr(coachmarks);

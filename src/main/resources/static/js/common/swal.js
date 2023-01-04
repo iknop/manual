@@ -185,8 +185,4 @@ function addZIndex(zIndex){
     $('.swal2-container').css('z-index',zIndex);
 }
 //모달 닫기
-$("button.modalClose").on("click", function (e) {
-    e.preventDefault();
-    $(this).parents(".modal").modal('toggle');
-    $('#dt-all-check').prop('checked', false);
-});
+

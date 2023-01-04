@@ -1,12 +1,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <head>
     <link rel="stylesheet" th:href="@{/css/hospital/index.css}">
 </head>
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap">
-        <div class="intro">버튼을 클릭하여 기능 설명을 확인 할 수 있습니다.</div>
+        <div class="d-flex pl-lg-5">
+            <div class="intro">버튼을 클릭하여 기능 설명을 확인 할 수 있습니다. <a class="manual-to-page-link-btn"
+                                                               href="http://127.0.0.1:45002/receptions">예정의뢰 바로가기</a>
+            </div>
+        </div>
         <main class="d-flex flex-wrap align-item-strech">
 
             <!-- context area -->
@@ -89,7 +94,7 @@
                 </form>
 
                 <div id="dataTbForm" class="dataTbForm d-block"
-                    >
+                >
                     <div class="dataTbWrap d-flex">
                         <div class="d-flex justify-content-start mr-auto">
                             <button type="button" id="reception-edit-btn" class="dataTbBtn column">정보변경
@@ -99,13 +104,13 @@
                             >DICOM SCP
                             </button>
                             <button type="button" id="reception-merge-btn" class="dataTbBtn"
-                                    >병합
+                            >병합
                             </button>
                             <button type="button" id="reception-delete-btn" class="dataTbBtn"
-                                                     >삭제
+                            >삭제
                             </button>
                             <button type="button" id="reception-disk-add-btn" class="dataTbBtn column"
-                                  >Disk Add
+                            >Disk Add
                             </button>
 
                             <input type="file" class="files-add-input" id="disk-add-input" multiple="" hidden="">
@@ -332,7 +337,7 @@
                             <div class="row mx-auto w-100">
                                 <select class="custom-select text-center p-1 mb-2" id="hcTypeName"
                                         name="hcTypeName"
->
+                                >
                                     <option selected="" value="C">특수</option>
                                     <option value="B">배치전</option>
                                     <option value="D">진폐</option>
@@ -353,7 +358,7 @@
                         <div class="col-sm-12 px-0 mt-3" style="height:60px">
                             <button class="btn btn-outline-secondary btn-block btn-send-request isRef h-100"
                                     type="button"
->
+                            >
                                 <span>참조</span>
                             </button>
                         </div>
@@ -369,7 +374,7 @@
                 <nav>
                     <span></span>
                 </nav>
-                <div class="col-sm-12 py-2 px-0 column" >
+                <div class="col-sm-12 py-2 px-0 column">
                     <div class="col-sm-12 pl-1">
                         <!-- nav tab Start -->
                         <nav class="nav nav-tabs border-bottom-0">
@@ -592,194 +597,484 @@
             </section>
         </main>
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="sendRequestModal" data-backdrop="static"
-             aria-labelledby="sendRequestModal" aria-hidden="true">
+        <!-- MANUAL: 병합하기  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="mergeManualModal" data-backdrop="static"
+             aria-labelledby="mergeManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title"><span class="descFuncName">병합하기</span></h3>
-                        <!--                        close event-->
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-9 border">
-                                    <div class="row">
-                                        <div class="col"><span class="manual-desc-number">1</span><img
-                                                src="/img/manual/reception/예정의뢰-병합-의뢰선택.png"></div>
+                        <div id="mergeManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#mergeManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#mergeManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col"><span class="manual-desc-number">2</span><img
-                                                src="/img/manual/reception/예정의뢰-병합-대표선택.png"></div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-병합하기-0-의뢰선택-동그라미.png"
+                                                 alt="...">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">의뢰 2개 이상</span> 선택
+                                            </p>
+                                            <!--                                            </div>-->
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">2</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">병합</span> 버튼 클릭
+                                            </p>
+                                            <!--                                            </div>-->
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-3 border" style="overflow: auto;">
-                                    <div class="row border-bottom manual-desc-warn-title">
-                                        참고사항
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step mx-2" data-target="#mergeManualCaptions"
+                                             data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#mergeManualCaptions" data-slide-to="1">step 2
+                                        </div>
                                     </div>
-                                    <div class="row border-bottom manual-desc-warn-content">
-                                        <!--주의사항 내용-->
-                                        - 먼저 <span class="text-emphasis"> Disk Add, Folder Add 혹은 DICOM send를 하여 영상 파일을 목록에 추가 </span>하세요.
-                                        <br>
-                                        - 영상의 <span class="text-emphasis">시리즈와 이미지 수는 병합하는 영상들에 따라 자동으로 업데이트</span> 됩니다
-                                    </div>
-                                    <div class="row border-bottom d-flex">
-                                        <div class="col-2 border-right manual-desc-order">1</div>
-                                        <div class="col manual-desc-text">목록에서 <span class="text-emphasis">동일한 차트번호(동일환자)의뢰 2개 이상</span>을 선택후 <span class="text-emphasis">병합 버튼</span>을 클릭하세요.</div>
-                                    </div>
-                                    <div class="row border-bottom d-flex">
-                                        <div class="col-2 border-right manual-desc-order">2</div>
-                                        <div class="col manual-desc-text"> 하나의 예정의뢰 정보로 통합됩니다. <span class="text-emphasis">통합할 대표정보를 하나 </span>선택하고 <span class="text-emphasis">병합 버튼</span>을 클릭해주세요. </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-병합하기-1-대표의뢰.png">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">대표의뢰</span> 선택
+                                            </p>
+                                            <!--                                            </div>-->
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">2</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">병합</span> 버튼 클릭
+                                            </p>
+                                            <!--                                            </div>-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--                    <div class="modal-footer">-->
-                    <!--                        <button type="button" class="btn btn-primary" id="btn-send-request"><span>판독의뢰</span>-->
-                    <!--                        </button>-->
-                    <!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>-->
-                    <!--                    </div>-->
                 </div>
             </div>
         </div>
-
-
-        <div class="modal" tabindex="-1" role="dialog" id="mergeReceptionModal" data-backdrop="static"
-             aria-labelledby="mergeReceptionModal" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <!-- MANUAL: 정보변경  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="editManualModal" data-backdrop="static"
+             aria-labelledby="mergeManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title column">병합</h3>
+                        <h3 class="modal-title"><span class="descFuncName">정보변경</span></h3>
                         <button class="modalClose"></button>
-
-                        <div class="clearfix">
-                            <div class="spinner-border float-right" role="status" id="spinner-merge-reception"
-                                 style="display: none">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </div>
-                        <script src="/js/common/loadingbar.js"></script>
-
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div id="merge-reception-table_wrapper" class="dataTables_wrapper no-footer">
-                                    <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer"
-                                           id="merge-reception-table" role="grid">
-                                        <thead class="thead-light">
-                                        <tr role="row">
-                                            <th scope="col" style="width: 60px;padding:10px 10px" class="sorting"
-                                                tabindex="0" aria-controls="merge-reception-table" rowspan="1"
-                                                colspan="1" data-column-index="0" aria-label="대표선택
-                  : activate to sort column ascending">대표선택
-                                            </th>
-                                            <th scope="col" style="width: 140px;" class="sorting" tabindex="0"
-                                                aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                data-column-index="1"
-                                                aria-label="차트번호: activate to sort column ascending">차트번호
-                                            </th>
-                                            <th scope="col" style="width: 80px;" class="sorting" tabindex="0"
-                                                aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                data-column-index="2"
-                                                aria-label="장비: activate to sort column ascending">장비
-                                            </th>
-                                            <th scope="col" style="width: 140px;" class="sorting" tabindex="0"
-                                                aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                data-column-index="3"
-                                                aria-label="구분: activate to sort column ascending">구분
-                                            </th>
-                                            <th scope="col" style="width: 160px;" class="sorting" tabindex="0"
-                                                aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                data-column-index="4"
-                                                aria-label="촬영일시: activate to sort column ascending">촬영일시
-                                            </th>
-                                            <th scope="col" style="width: 140px;" class="sorting" tabindex="0"
-                                                aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                data-column-index="5"
-                                                aria-label="촬영부위: activate to sort column ascending">촬영부위
-                                            </th>
-                                            <th scope="col" style="width: 60px;" class="sorting" tabindex="0"
-                                                aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                data-column-index="6"
-                                                aria-label="Series: activate to sort column ascending">Series
-                                            </th>
-                                            <th scope="col" style="width: 60px;" class="sorting" tabindex="0"
-                                                aria-controls="merge-reception-table" rowspan="1" colspan="1"
-                                                data-column-index="7"
-                                                aria-label="Image: activate to sort column ascending">Image
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="merge-reception-table-tbody">
-                                        <tr class="odd">
-                                            <td valign="top" colspan="8" class="dataTables_empty"
-                                                style="padding: 2px;">
-                                                조회된 데이터가 없습니다.
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                        <div id="editManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#editManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#editManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-정보변경-0-의뢰선택.png"
+                                                 alt="...">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                의뢰<span class="text-emphasis">1개</span> 선택
+                                            </p>
+                                            <!--                                            </div>-->
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">2</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">정보변경</span> 버튼 클릭
+                                            </p>
+                                            <!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step mx-2" data-target="#editManualCaptions"
+                                             data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#editManualCaptions" data-slide-to="1">step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-정보변경-1-정보변경.png"
+                                                 class="w-50 mx-auto">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">에메랄드 색으로 변한</span> 항목 수정 가능
+                                            </p>
+                                            <!--                                            </div>-->
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">2</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">저장</span> 버튼 클릭
+                                            </p>
+                                            <!--                                            </div>-->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <div class="col-sm-12 text-sm-right">
-                            <button class="btn btn-primary" id="btn-apply-merge-reception" type="button">병합</button>
-                            <button class="modalClose" data-dismiss="modal" type="button">취소</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-
-
-        <div aria-labelledby="pacsSettingInfoModal" aria-modal="true" class="modal fade" data-backdrop="static"
-             id="pacsSettingInfoModal" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <!-- MANUAL: 삭제  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="deleteManualModal" data-backdrop="static"
+             aria-labelledby="deleteManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1>PACS Setting Info</h1>
-                        <button class="modalClose" data-dismiss="modal" type="button"></button>
+                        <h3 class="modal-title"><span class="descFuncName">삭제하기</span></h3>
+                        <button class="modalClose"></button>
                     </div>
-
                     <div class="modal-body">
-                        <div class="d-flex flex-wrap justify-content-center text-center mx-auto col-12 mb-3">
-                            <div class="mb-1" style="font-size: 1.2em; white-space: pre-line">DICOM SCP Information
-                                is
-                                as follows.
+                        <div id="deleteManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#deleteManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-삭제하기-0-의뢰선택.png"
+                                                 alt="...">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3">
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">의뢰 2개 이상</span> 선택
+                                            </p>
+                                            <div class="manual-desc-order mr-3">2</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">삭제</span> 버튼 클릭
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="d-flex flex-wrap justify-content-center mr-auto col-12 mr-0">
-                            <div class="d-flex flex-wrap col-12 p-0 px-2 text-center cStore-ips">
-                                <label class="col-3 labelBlue text-center" for="cStore-ips">IP</label>
-                                <p class="condition dicomInfoText cstore-ip col-9" id="cStore-ips">192.168.0.1</p>
-                            </div>
-                            <div class="d-flex flex-wrap col-12 p-0 px-2 text-center">
-                                <label class="col-3 labelBlue text-center" for="cStore-port">PORT</label>
-                                <p class="condition dicomInfoText col-9" id="cStore-port">6500</p>
-                            </div>
-                            <div class="d-flex flex-wrap col-12 p-0 px-2 text-center">
-                                <label class="col-3 labelBlue text-center" for="cStore-aeTitle">AE Title</label>
-                                <p class="condition dicomInfoText col-9" id="cStore-aeTitle">Xray21</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <input id="text-message" readonly="" style="width : 500px; display: none" type="text">
-                        <button class="modalClose" data-dismiss="modal" type="button">OK</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="toast-area" style="position:fixed;bottom:10px;left:10px;display:block;">
+        <!-- MANUAL: Disk Add  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="diskAddManualModal" data-backdrop="static"
+             aria-labelledby="diskAddManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"><span class="descFuncName">Disk Add</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="diskAddManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#diskAddManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#diskAddManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-DiskAdd-0-파일선택.png"
+                                                 alt="...">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3">
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">Dicom 파일</span> 선택
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step mx-2" data-target="#diskAddManualCaptions"
+                                             data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#diskAddManualCaptions" data-slide-to="1">step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-DiskAdd-1-추가완료.png"
+                                                 class="w-50 mx-auto">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                Dicom 파일은<span class="text-emphasis"> 목록에서 확인</span> 가능
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- MANUAL: Folder Add  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="folderAddManualModal" data-backdrop="static"
+             aria-labelledby="folderAddManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"><span class="descFuncName">Folder Add</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="folderAddManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#folderAddManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#folderAddManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#folderAddManualCaptions"
+                                             data-slide-to="2"> step 3
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-FolderAdd-0-파일선택.png"
+                                                 alt="...">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3">
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">Dicom 폴더</span> 선택
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#folderAddManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#folderAddManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#folderAddManualCaptions"
+                                             data-slide-to="2"> step 3
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-FolderAdd-1-팝업.png"
+                                                 class=" mx-auto">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">업로드</span> 버튼 클릭
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#folderAddManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#folderAddManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#folderAddManualCaptions"
+                                             data-slide-to="2"> step 3
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-DiskAdd-1-추가완료.png"
+                                                 class="mx-auto">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                Dicom 파일은<span class="text-emphasis"> 목록에서 확인</span> 가능
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MANUAL: 의뢰전송  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="sendRequestManualModal" data-backdrop="static"
+             aria-labelledby="sendRequestManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"><span class="descFuncName">Folder Add</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="sendRequestManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#sendRequestManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#sendRequestManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#sendRequestManualCaptions"
+                                             data-slide-to="2"> step 3
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-의뢰전송-0-의뢰선택.png"
+                                                 alt="...">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3">
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">전송할 의뢰</span> 선택
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#sendRequestManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#sendRequestManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#sendRequestManualCaptions"
+                                             data-slide-to="2"> step 3
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-의뢰전송-1-전송버튼.png"
+                                                 class="w-25 mx-auto">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis">응급구분</span> 선택
+                                            </p>
+                                            <div class="manual-desc-order mr-3">2</div>
+                                            <p class="desc py-2">
+                                                (원내업무에 맞게) <span class="text-emphasis">비교영상 전송 시 </span> 참조 버튼 클릭
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#sendRequestManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#sendRequestManualCaptions"
+                                             data-slide-to="1"> step 2
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#sendRequestManualCaptions"
+                                             data-slide-to="2"> step 3
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area">
+                                        <div class="d-block mx-auto col-7 text-center">
+                                            <img src="/img/manual/reception/예정의뢰-의뢰전송-2-전송상태.png"
+                                                 class="mx-auto">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
+                                            <!--                                            <div class="row p-2">-->
+                                            <div class="manual-desc-order mr-3">1</div>
+                                            <p class="desc py-2">
+                                               전송 완료 시 <span class="text-emphasis">삭제</span>
+
+                                            </p>
+                                            <div class="manual-desc-order mr-3">2</div>
+                                            <p class="desc py-2">
+                                                <span class="text-emphasis"> 완료의뢰에서 확인</span> 가능
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-
 <th:blcok layout:fragment="script_area">
     <script src="/js/manual/reception.js" th:inline="javascript"></script>
 </th:blcok>

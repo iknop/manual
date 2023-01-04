@@ -26,7 +26,8 @@
                 <!-- form START -->
                 <form class="form-signin" id="loginForm" method="post" action="/auth/login">
                     <menu>
-                        <h1 class="current"
+                        <h1 class="current" data-coachmark-login="0"
+                            data-coachmark-text="모든 병원은 아이디 로그인을 사용합니다. 회원가입을 먼저 진행해주세요."
                         >아이디 로그인</h1>
                         <h1 style="cursor: not-allowed;">인증서 로그인</h1>
                     </menu>
@@ -40,7 +41,9 @@
                         <input id="username" name="username" type="hidden"/>
 
                         <label class="alternate" for="loginPwd">비밀번호</label>
-                        <input id="loginPwd" name="loginPwd" placeholder="비밀번호" required type="password"/>
+                        <input id="loginPwd" name="loginPwd" placeholder="비밀번호" required type="password"
+                               data-coachmark-login="2"
+                               data-coachmark-text="홈페이지를 통해 가입하지 않고 21세기 영상의학과를 통해 계정을 생성한 경우, 로그인 아이디와 비밀번호가 같습니다."/>
                         <!--input id="loginPwd" name="loginPwd" placeholder="비밀번호" required type="password" class="req"/-->
                         <p class="invalid-feedback">ID가 없거나 비밀번호가 일치하지 않습니다.</p>
                         <!--해당 조건일 경우(req class를 불러올 경우), 출력(class d-none → d-block)-->
@@ -50,7 +53,9 @@
                         <input class="chk" id="rem_id" type="checkbox"/>
                         <label for="rem_id">아이디 저장</label>
 
-                        <a id="register"
+                        <a id="register" data-coachmark-login="1"
+                           data-coachmark-text="회원가입 성공 시 관리자 승인이 완료된 후 로그인이 가능합니다."
+                           data-coachmark-img="/img/coachmarks/start/시작하기- 로그인 승인대기.png"
                         >회원가입</a>
 
                         <!--<a id="openCertGet" onclick="OpenPopupCertGet();" style="display: none">인증서정보확인</a>-->
@@ -104,6 +109,23 @@
     <!--  script_area in login/login.html START  -->
     <script src="/CC_WSTD_home/unisignweb/js/unisignwebclient.js?v=1" type="text/javascript"></script>
 
+
+    <!--    <script type="text/javascript">-->
+    // $(document).ready(function () {
+    // //로그인 방식 선택하기- 로그인 폼 보이기-
+    // $(function () {
+    // $(".form").eq(0).addClass("d-block");
+    // $("menu > h1").on("click", function () {
+    // $("menu > h1").removeClass("current");
+    // $(this).addClass("current");
+    // let idx = $(".current").index();
+    // $(".form").removeClass("d-block").eq(idx).addClass("d-block");
+    // });
+    // })
+    // });
+    <!--    </script>-->
+    <!--  script_area in login/login.html END  -->
+
     <script src="/js/manual/common/auth_common.js" th:inline="javascript"></script>
     <script src="/js/manual/login/cert_login.js" th:inline="javascript"></script>
     <script src="/js/manual/login/login-common.js" th:inline="javascript"></script>
@@ -112,6 +134,7 @@
     <script>
         window.onload = function () {
             // 로그인화면 자동 d-flex 추가되는 부분 삭제: _display.scss
+            // $('#loginForm block').css('display','block !important')
             $('#loginBlock').removeClass('d-flex')
         }
     </script>

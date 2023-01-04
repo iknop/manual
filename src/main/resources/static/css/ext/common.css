@@ -1491,7 +1491,7 @@ input[type="checkbox"]:checked + label::before {
     position: absolute;
     left: 0;
     top: 0;
-    background: url(../../img/check-on.png) center center no-repeat
+    background: url(../../img/manual-check-onl.png) center center no-repeat
 }
 
 input[type="radio"] {
@@ -1704,7 +1704,7 @@ header.popup button {
 
 #page_content {
     position: relative;
-    top: 140px;
+    top: 70px;
     padding: 25px 0
 }
 
