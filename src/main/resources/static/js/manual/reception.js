@@ -1,5 +1,6 @@
 $(function () {
     // 정보변경 버튼
+    cursor('#reception-edit-btn')
     $('#reception-edit-btn').on('click', function () {
         $('#editManualModal').modal('show')
 
@@ -11,12 +12,11 @@ $(function () {
         for (let i = 0; i < loop; i++) {
             let desc = Object.values(descBox)[i];
             desc.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
-            // let order = Object.values(descOrder)[i];
-            // order.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
-            // console.log(text.style.animation)
         }
+
     })
     // 병합 버튼
+    cursor('#reception-merge-btn')
     $('#reception-merge-btn').on('click', function () {
         $('#mergeManualModal').modal('show')
 
@@ -32,6 +32,7 @@ $(function () {
         }
     })
     // 삭제 버튼
+    cursor('#reception-delete-btn')
     $('#reception-delete-btn').on('click', function () {
         $('#deleteManualModal').modal('show')
 
@@ -48,6 +49,7 @@ $(function () {
     })
 
     // Disk Add 버튼
+    cursor('#reception-disk-add-btn')
     $('#reception-disk-add-btn').on('click', function () {
         $('#diskAddManualModal').modal('show')
 
@@ -63,6 +65,7 @@ $(function () {
         }
     })
     // Folder Add 버튼
+    cursor('#reception-folder-add-btn')
     $('#reception-folder-add-btn').on('click', function () {
         $('#folderAddManualModal').modal('show')
 
@@ -78,6 +81,7 @@ $(function () {
         }
     })
     // 의뢰전송 버튼
+    cursor('#reception-send-request-area')
     $('#reception-send-request-area').on('click', function () {
         $('#sendRequestManualModal').modal('show')
 

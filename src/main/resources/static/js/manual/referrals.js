@@ -3,25 +3,52 @@
 $(function () {
 
     // 응급변경
-    const changeUrgent = $('#referral-change-urgent-type-btn')
-    if (changeUrgent) changeUrgent.on('click', () => {
-        Coachmark().init('change-urgent')
-    })
+    cursor('#referral-change-urgent-type-btn')
+    $('#referral-change-urgent-type-btn').on('click', function () {
+        $('#changeUrgentManualModal').modal('show')
 
-    //  의뢰취소
-    const cancelRequest = $('#referral-requestConfig-cancel-btn')
-    if (cancelRequest) cancelRequest.on('click', () => {
-        Coachmark().init('cancel-request')
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
     })
-    //  의뢰변경
-    const editRequest = $('#referral-edit-btn')
-    if (editRequest) editRequest.on('click', () => {
-        Coachmark().init('edit-request')
+    // 의뢰취소
+    cursor('#referral-requestConfig-cancel-btn')
+    $('#referral-requestConfig-cancel-btn').on('click', function () {
+        $('#cancelRequestManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
     })
-//  Excel 다운로드
-    const excel = $('#btn-download')
-    if (excel) excel.on('click', () => {
-        Coachmark().init('excel')
+    // 정보변경
+    cursor('#referral-edit-btn')
+    $('#referral-edit-btn').on('click', function () {
+        $('#editReferralManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
     })
 
 });

@@ -4,18 +4,46 @@
       layout:decorate="~{layouts/layout}">
 <head>
     <link rel="stylesheet" th:href="@{/css/hospital/index.css}">
+    <style>
+        .dataTbBtn:not(#dicom-scp) {
+            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
+        }
+
+        #reception-send-request-area {
+            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
+        }
+
+        .btn-send-request {
+            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
+        }
+
+    </style>
 </head>
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap">
-        <div class="d-flex pl-lg-5">
-            <div class="intro">버튼을 클릭하여 기능 설명을 확인 할 수 있습니다. <a class="manual-to-page-link-btn"
-                                                               href="http://127.0.0.1:45002/receptions">예정의뢰 바로가기</a>
+        <!--        <div class="d-flex pl-lg-5">-->
+        <!--        </div>-->
+        <main class="  ">
+            <div class="btn-group btn-group-lg pb-5">
+                <a href="/manual/reception" class="manual-to-page-link-btn-group active" aria-current="page">예정의뢰</a>
+                <a href="/manual/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
+                <a href="/manual/statistics" class="manual-to-page-link-btn-group">조회하기</a>
+                <a href="/manual/referralReport" class="manual-to-page-link-btn-group">소견서 출력</a>
+                <a href="/manual/serviceManage" class="manual-to-page-link-btn-group">공지사항</a>
+                <a href="/manual/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
             </div>
-        </div>
+            <div class="intro">영상전송 페이지</div>
+            <div class="intro text-primary pb-3">마우스를 올렸을 때 <img src="/img/manual/cursor/question-mark.png"> 표시가 나타나면 클릭하여 이용설명을 확인 할 수 있습니다. <a class="manual-to-page-link-btn"
+                                                                                 href="https://report.xray21.com/auth/login"
+                                                                                 style="text-decoration: none;">예정의뢰
+                바로가기</a>
+            </div>
+        </main>
         <main class="d-flex flex-wrap align-item-strech">
 
             <!-- context area -->
             <ul id="contextMenu" class="tblpop_area" style="display: none">
+
                 <li><a href="#detail" class="open_pop">상세정보확인</a></li>
                 <li><a href="">판독의뢰</a></li>
             </ul>
@@ -498,7 +526,7 @@
                                         <div class="card p-2 border-left-0 border-right-0 border-bottom-0">
                                             <div class="row align-items-center my-1">
                                                 <div class="col-sm-3 text-lg-right pr-0">
-                                                    <!--                        <dt><span th:text="#{hospital.referrals.reading.card.receptionRequestDate}">목록 추가일시</span></dt>-->
+                                                    <!--                        <dt><span th:text="#{hospital.statistics.reading.card.receptionRequestDate}">목록 추가일시</span></dt>-->
                                                     <dt class="text-center"><span class="px-0">추가일시</span></dt>
                                                 </div>
                                                 <div class="col-sm-9">
@@ -707,7 +735,7 @@
                                             <!--                                            <div class="row p-2">-->
                                             <div class="manual-desc-order mr-3">1</div>
                                             <p class="desc py-2">
-                                                의뢰<span class="text-emphasis">1개</span> 선택
+                                                의뢰<span class="text-emphasis"> 1개</span> 선택
                                             </p>
                                             <!--                                            </div>-->
                                             <!--                                            <div class="row p-2">-->
@@ -845,7 +873,7 @@
                                     <div class="row manual-area">
                                         <div class="d-block mx-auto col-7 text-center">
                                             <img src="/img/manual/reception/예정의뢰-DiskAdd-1-추가완료.png"
-                                                 class="w-50 mx-auto">
+                                                 class="mx-auto">
                                         </div>
                                         <div class="vr"></div>
                                         <div class="mx-auto mt-3 col-3 manual-desc-box">
@@ -952,7 +980,8 @@
                                             <!--                                            <div class="row p-2">-->
                                             <div class="manual-desc-order mr-3">1</div>
                                             <p class="desc py-2">
-                                                Dicom 파일은<span class="text-emphasis"> 목록에서 확인</span> 가능
+                                                Dicom 파일은<span class="text-emphasis">
+                                                <br>목록에서 확인</span> 가능
                                             </p>
                                         </div>
                                     </div>
@@ -969,7 +998,7 @@
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title"><span class="descFuncName">Folder Add</span></h3>
+                        <h3 class="modal-title"><span class="descFuncName">의뢰전송</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
@@ -1028,7 +1057,7 @@
                                             </p>
                                             <div class="manual-desc-order mr-3">2</div>
                                             <p class="desc py-2">
-                                                (원내업무에 맞게) <span class="text-emphasis">비교영상 전송 시 </span> 참조 버튼 클릭
+                                                (원내업무에 맞게)<br><span class="text-emphasis">비교영상 전송 시 </span> 참조 버튼 클릭
                                             </p>
                                         </div>
                                     </div>
@@ -1056,12 +1085,12 @@
                                             <!--                                            <div class="row p-2">-->
                                             <div class="manual-desc-order mr-3">1</div>
                                             <p class="desc py-2">
-                                               전송 완료 시 <span class="text-emphasis">삭제</span>
+                                                전송 완료 시 <span class="text-emphasis">삭제</span>
 
                                             </p>
                                             <div class="manual-desc-order mr-3">2</div>
                                             <p class="desc py-2">
-                                                <span class="text-emphasis"> 완료의뢰에서 확인</span> 가능
+                                                <span class="text-emphasis"> 완료의뢰에서 확인</span> <br> 가능
                                             </p>
                                         </div>
                                     </div>

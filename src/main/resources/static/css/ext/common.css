@@ -1704,7 +1704,7 @@ header.popup button {
 
 #page_content {
     position: relative;
-    top: 70px;
+    /*top: 70px;*/
     padding: 25px 0
 }
 

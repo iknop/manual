@@ -6,6 +6,6 @@
     background-color: var(--dTbThColor) !important;
     vertical-align: middle;
 }
-a{
+a:not(.manual-to-page-link-btn-group, .manual-to-page-link-btn){
     color: #212529 !important;
 }

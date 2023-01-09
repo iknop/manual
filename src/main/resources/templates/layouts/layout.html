@@ -51,7 +51,7 @@
 <body>
 <section class="coachmarks">
 <!--header-->
-    <div th:replace="fragments/header::header"></div>
+<!--    <div th:replace="fragments/header::header"></div>-->
     <!--  content  -->
     <div layout:fragment="content_area" class="content"></div>
 </section>
@@ -163,6 +163,7 @@
     });
 </script>
 <script src="/js/manual/common/header.js" th:inline="javascript"></script>
+<script src="/js/manual/cursor.js" th:inline="javascript"></script>
 
 <!--개별 script-->
 <th:block layout:fragment="script_area">
