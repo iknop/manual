@@ -4,7 +4,11 @@
 <head>
     <link rel="stylesheet" th:href="@{/css/hospital/referrals.css}">
     <style>
-        .dataTbBtn:not(#btn-download) {
+        .dataTbBtn, #open-report-image-req-btn, #btn-save-clipboard-report {
+            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
+        }
+
+        #btn-search {
             cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
         }
     </style>
@@ -12,27 +16,38 @@
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap" style="height: 1173px !important">
 
-        <main  style="width: 1320px !important; margin: 0 auto !important;">
-            <div class="btn-group btn-group-lg pb-5">
-                <a href="/manual/reception" class="manual-to-page-link-btn-group" aria-current="page">예정의뢰</a>
-                <a href="/manual/referrals" class="manual-to-page-link-btn-group active">완료의뢰</a>
-                <a href="/manual/statistics" class="manual-to-page-link-btn-group">조회하기</a>
-                <a href="/manual/referralReport" class="manual-to-page-link-btn-group">소견서 출력</a>
-                <a href="/manual/serviceManage" class="manual-to-page-link-btn-group">공지사항</a>
-                <a href="/manual/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
+        <main style="width: 1320px !important; margin: 0 auto !important;">
+
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div>
+                    <a href="/manual/reception" class="manual-to-page-link-btn-group "
+                       aria-current="page">예정의뢰</a>
+                </div>
+
+                <div>
+                    <a href="/manual/referrals" class="manual-to-page-link-btn-group active">완료의뢰</a>
+                </div>
+                <a class="intro" href="https://report.xray21.com/web/referrals"
+                   style="left: 362px;">전송된 의뢰 확인 페이지</a>
+                <div>
+                    <a href="/manual/statistics" class="manual-to-page-link-btn-group">조회하기</a>
+                </div>
+                <div>
+                    <a href="/manual/referralReport" class="manual-to-page-link-btn-group">소견서 출력</a>
+                </div>
+                <div>
+                    <a href="/manual/serviceManage" class="manual-to-page-link-btn-group">공지사항</a>
+                </div>
+                <div>
+                    <a href="/manual/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
+                </div>
             </div>
-            <div class="intro">전송 처리된 의뢰들을 확인할 수 있는 페이지입니다.</div>
-            <div class="intro text-primary pb-3">마우스를 올렸을 때 <img src="/img/manual/cursor/question-mark.png"> 표시가 나타나면 클릭하여 이용설명을 확인 할 수 있습니다. <a class="manual-to-page-link-btn"
-                                                                                                                                                 href="https://report.xray21.com/auth/login"
-                                                                                                                                                 style="text-decoration: none;">예정의뢰
-                바로가기</a>
-            </div>
+
         </main>
-        <main class="d-flex flex-wrap align-item-strech">
+        <hr>
+        <main class="d-flex flex-wrap align-item-strech pt-4">
             <section class="col-9 p-0" style="width: 990px; height: 1073px;">
-                <nav>
-                    <span>완료의뢰</span>
-                </nav>
+                <div style="padding-bottom: 37.5px;"></div>
                 <form id="search-form" style="width: 990px !important;">
                     <input id="pageIndex" name="pageIndex" value="1" type="hidden"/>
                     <input type="hidden" id="size" name="pageSize" value="10"/>
@@ -43,15 +58,15 @@
                         <label for="searchCondition" class="col-1 labelBlue p-0">검색조건</label>
                         <div class="d-flex flex-wrap col-11 p-0" id="searchCondition"
                              style="width: 836.91px; height: 112px;">
-                            <div class="rangeDate d-flex flex-wrap p-0 justify-content-start col-6 mr-4"
-                                 style="margin-right: 24px !important;">
-                                <select class="dateTxt" name="dateType" style="z-index: 9996; width: 160px;"
-                                        id="date-type">
-                                    <option value="A">촬영일시</option>
-                                    <option value="B" selected>의뢰일시</option>
-                                    <option value="C">판독일시</option>
-                                    <option value="D">판독예정일시</option>
-                                </select>
+                            <div class="rangeDate d-flex flex-wrap p-0 justify-content-start col-6 mr-0">
+                                <input class="dateTxt " name="dateType" style="z-index: 9996"
+                                       id="date-type" value="의뢰일시"
+                                       readonly>
+                                <!--                                    <option value="A">촬영일시</option>-->
+                                <!--                                    <option value="B" selected="">의뢰일시</option>-->
+                                <!--                                    <option value="C">판독일시</option>-->
+                                <!--                                    <option value="D">판독예정일시</option>-->
+                                </input>
 
 
                                 <input type="text" class="dateDate" style="width: 408px;"/>
@@ -64,51 +79,59 @@
 
                             </div>
 
-                            <select id="urgent-type" name="urgentType">
-                                <option value="T" selected>응급구분(전체)</option>
-                                <option value="Y">응급</option>
-                                <option value="N">일반</option>
-                            </select>
+                            <input id="urgent-type" name="dateType" class=" select-readonly"
+                                   value="응급구분(전체)" readonly>
+                            <!--                                <option value="T" selected>응급구분(전체)</option>-->
+                            <!--                                <option value="Y">응급</option>-->
+                            <!--                                <option value="N">일반</option>-->
+                            </input>
 
 
-                            <select id="isRef" name="isRefType">
-                                <option value="T" selected>참조여부(전체)</option>
-                                <option value="N">일반</option>
-                                <option value="Y">참조</option>
-                            </select>
+                            <input id="isRef" name="isRefType" value="참조여부(전체)"
+                                   class="-border select-readonly" readonly>
+                            <!--                                <option value="T" selected>참조여부(전체)</option>-->
+                            <!--                                <option value="N">일반</option>-->
+                            <!--                                <option value="Y">참조</option>-->
+                            </input>
 
-                            <select id="hc-yn" name="hcType">
-                                <option value="T" selected>검진여부(전체)</option>
-                                <option value="N">일반</option>
-                                <!--                <option value="Y">검진</option>-->
-                                <option value="A">검진</option>
-                            </select>
-                            <select class="mb-0" id="use-yn" name="useYn" style="width: 155px;">
-                                <option value="T">사용여부(전체)</option>
-                                <option value="Y" selected>사용여부(사용)</option>
-                                <option value="N">사용여부(삭제)</option>
-                            </select>
+                            <input id="hc-yn" name="hcType" value="검진여부(전체)" class=" select-readonly"
+                                   readonly>
+                            <!--                                <option value="T" selected>검진여부(전체)</option>-->
+                            <!--                                <option value="N">일반</option>-->
+                            <!--                                &lt;!&ndash;                <option value="Y">검진</option>&ndash;&gt;-->
+                            <!--                                <option value="A">검진</option>-->
+                            </input>
+                            <input class="mb-0  select-readonly" value="사용여부(전체)" id="use-yn"
+                                   name="useYn" style="width: 155px;" readonly>
+                            <!--                                <option value="T">사용여부(전체)</option>-->
+                            <!--                                <option value="Y" selected>사용여부(사용)</option>-->
+                            <!--                                <option value="N">사용여부(삭제)</option>-->
+                            </input>
 
-                            <select class="mb-0" id="studyStatusType" name="studyStatusType">
-                                <option value="T">의뢰상태(전체)</option>
-                                <option value="20">판독대기</option>
-                                <option value="31">적용대기</option>
-                                <option value="32">소견적용중</option>
-                                <option value="39">적용실패</option>
-                                <option value="40">적용완료</option>
-                                <option value="91">원내판독</option>
-                                <option value="92">원내취소</option>
-                            </select>
+                            <input class="mb-0  select-readonly" value="의뢰상태(전체)"
+                                   id="studyStatusType" name="studyStatusType" readonly>
+                            <!--                                <option value="T">의뢰상태(전체)</option>-->
+                            <!--                                <option value="20">판독대기</option>-->
+                            <!--                                <option value="31">적용대기</option>-->
+                            <!--                                <option value="32">소견적용중</option>-->
+                            <!--                                <option value="39">적용실패</option>-->
+                            <!--                                <option value="40">적용완료</option>-->
+                            <!--                                <option value="91">원내판독</option>-->
+                            <!--                                <option value="92">원내취소</option>-->
+                            </input>
 
-                            <input class="referralsBtn mr-2 mb-0" id="modality" name="originModalityType"
+                            <input class="referralsBtn mr-2 mb-0 " id="modality"
+                                   name="originModalityType"
                                    placeholder="Modality"
                                    title="Modality"
                                    type="text" value="" style=" margin-right: 8px;"/>
-                            <input class="referralsBtn mr-2 mb-0" id="study-type" name="originStudyType"
+                            <input class="referralsBtn mr-2 mb-0 " id="study-type"
+                                   name="originStudyType"
                                    placeholder="촬영유형"
                                    title="촬영유형"
                                    type="text" value="" style="margin-right: 8px;"/>
-                            <input class="referralsBtn mb-0" id="patient-id" name="patientId" placeholder="차트번호"
+                            <input class="referralsBtn mb-0 " id="patient-id"
+                                   name="patientId" placeholder="차트번호"
                                    title="차트번호"
                                    type="text" value=""/>
                             <input type="hidden" class="form-control" name="patientName" value="">
@@ -117,9 +140,10 @@
                         <div class="d-flex justify-content-center mx-auto"
                              style="height: 60px; margin-left: 312.500px;">
                             <button class="reset" id="referral-reset-search-btn" type="button"
-                                    style="margin-top: 20px;">조건 초기화
+                                    style="margin-top: 20px; color: gray; border-color: gray">조건 초기화
                             </button>
-                            <button id="btn-search" type="button" style="margin-left: 8px; margin-top: 20px;">검색하기
+                            <button id="btn-search" class="manual-click-border" type="button"
+                                    style="margin-left: 8px; margin-top: 20px; background-color: gray">검색하기
                             </button>
                         </div>
                     </div>
@@ -129,21 +153,24 @@
                     <div class="dataTbWrap d-flex" style="width: 990px !important; height: 296.750px !important; ">
                         <div class="d-flex justify-content-start mr-auto"
                              style="height: 32px; margin-right: 173.797px;">
-                            <button type="button" id="referral-change-urgent-type-btn" class="dataTbBtn">응급변경
+                            <button type="button" id="referral-change-urgent-type-btn"
+                                    class="dataTbBtn manual-click-border">응급변경
                             </button>
-                            <button type="button" id="referral-requestConfig-cancel-btn" class="dataTbBtn"
+                            <button type="button" id="referral-requestConfig-cancel-btn"
+                                    class="dataTbBtn manual-click-border"
                             >
                                 의뢰취소
                             </button>
-                            <button type="button" id="referral-edit-btn" class="dataTbBtn">정보변경</button>
-                            <button class="dataTbBtn" id="btn-download" type="button"
+                            <button type="button" id="referral-edit-btn" class="dataTbBtn manual-click-border">정보변경
+                            </button>
+                            <button class="dataTbBtn manual-click-border" id="btn-download" type="button"
                             >Excel 다운로드
                             </button>
                         </div>
 
-                        <div class="d-flex flex-wrap justify-content-end ml-auto"
-                             style="margin-left: 173.812px !important; width: 244.050px !important; height: 32px !important;">
-                            <span class="searchNum d-inline-flex" style="align-self: center">검색 결과(0건)</span>
+                        <div class="d-flex justify-content-end mr-0"
+                             style="width: 412px; height: 32px !important;">
+                            <span class="searchNum d-inline-flex" style="align-self: center">검색 결과(5건)</span>
 
                             <input type="hidden" id="size" value="10"/>
                             <div aria-labelledby="RowCount" id="row-count-content">
@@ -164,7 +191,7 @@
                         </div>
 
                         <div class="table-responsive mb-2" id="referrals-table-viewport"
-                             style="margin-top: 8px; margin-bottom: 8px; width: 918px; height: 117.500px;">
+                             style="margin-top: 8px; margin-bottom: 8px; width: 918px; ">
                             <div id="referrals-table_wrapper" class="dataTables_wrapper no-footer">
                                 <table class="table table-sm table-head table-hover text-center pointer"
                                        id="referrals-table">
@@ -200,30 +227,148 @@
                                     </tr>
                                     </thead>
                                     <tbody id="referrals-table-tbody">
+                                    <tr class="odd" style="color: rgb(220, 53, 69);">
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">적용완료</td>
+                                        <td style="padding: 2px;">일반검진</td>
+                                        <td style="padding: 2px;">CR</td>
+                                        <td style="padding: 2px;">12345</td>
+                                        <td style="padding: 2px;">환자2</td>
+                                        <td style="padding: 2px;">2021-06-08 10:59:23</td>
+                                        <td style="padding: 2px;">2022-12-08 10:47:12</td>
+                                        <td style="padding: 2px;">([검진CR]유방4매(계) )</td>
+                                        <td style="padding: 2px;">1989-04-12</td>
+                                        <td style="padding: 2px;">F</td>
+                                        <td style="padding: 2px;">2023-01-02</td>
+                                        <td style="padding: 2px;"><span>일반</span></td>
+                                        <td style="padding: 2px;">1</td>
+                                        <td style="padding: 2px;">4</td>
+                                        <td style="padding: 2px;">홍길동</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">([검진CR]유방4매(계) )</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+
+
+                                    </tr>
+                                    <tr class="even">
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">판독대기</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">일반</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">CR</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">12345</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">환자2</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">2022-10-18 18:15:19</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">2022-10-18 19:33:02</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">(ABDOMEN ERECT, SUPINE )</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">1989-04-12</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">F</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);"></td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);"><span
+                                                class="urgent">응급</span></td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">2</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">2</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);"></td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);"></td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);"></td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);">참조</td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);"></td>
+                                        <td style="padding: 2px; color: rgb(220, 53, 69);"></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">원내취소</td>
+                                        <td style="padding: 2px;">일반</td>
+                                        <td style="padding: 2px;">CT</td>
+                                        <td style="padding: 2px;">12345</td>
+                                        <td style="padding: 2px;">환자2</td>
+                                        <td style="padding: 2px;">2021-01-21 10:13:50</td>
+                                        <td style="padding: 2px;">2022-12-05 09:47:32</td>
+                                        <td style="padding: 2px;">(Brain CT Enhance)</td>
+                                        <td style="padding: 2px;">1989-04-12</td>
+                                        <td style="padding: 2px;">F</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"><span>일반</span></td>
+                                        <td style="padding: 2px;">1</td>
+                                        <td style="padding: 2px;">1</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">삭제</td>
+                                        <td style="padding: 2px;"></td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">원내취소</td>
+                                        <td style="padding: 2px;">일반</td>
+                                        <td style="padding: 2px;">CT</td>
+                                        <td style="padding: 2px;">12345</td>
+                                        <td style="padding: 2px;">환자2</td>
+                                        <td style="padding: 2px;">2021-01-21 10:13:50</td>
+                                        <td style="padding: 2px;">2022-12-05 09:47:32</td>
+                                        <td style="padding: 2px;">(Brain CT Enhance)</td>
+                                        <td style="padding: 2px;">1989-04-12</td>
+                                        <td style="padding: 2px;">F</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"><span>일반</span></td>
+                                        <td style="padding: 2px;">1</td>
+                                        <td style="padding: 2px;">1</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">원내취소</td>
+                                        <td style="padding: 2px;">일반</td>
+                                        <td style="padding: 2px;">CT</td>
+                                        <td style="padding: 2px;">12345</td>
+                                        <td style="padding: 2px;">환자2</td>
+                                        <td style="padding: 2px;">2021-01-21 10:13:50</td>
+                                        <td style="padding: 2px;">2022-12-05 09:47:32</td>
+                                        <td style="padding: 2px;">(Brain CT Enhance)</td>
+                                        <td style="padding: 2px;">1989-04-12</td>
+                                        <td style="padding: 2px;">F</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"><span>일반</span></td>
+                                        <td style="padding: 2px;">1</td>
+                                        <td style="padding: 2px;">1</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <input type="hidden" id="page" value="1"/>
                         </div>
-                        <div aria-label="Pagination" id="pagination-content"
-                             class="d-inline-flex justify-content-center mx-auto" style="margin-bottom: 20px">
-                            <nav aria-label="Pagination">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <button class="page-link page-href" tabindex="-1" aria-disabled="true"
-                                                data-size="10" data-page="0">Previous
-                                        </button>
-                                    </li>
-                                    <li class="page-item active">
-                                        <button class="page-link page-href" data-size="10" data-page="1">1</button>
-                                    </li>
-                                    <li class="page-item disabled">
-                                        <button class="page-link page-href" data-size="10" data-page="2">Next
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                        <!--                        <div aria-label="Pagination" id="pagination-content"-->
+                        <!--                             class="d-inline-flex justify-content-center mx-auto" style="margin-bottom: 20px">-->
+                        <!--                            <nav aria-label="Pagination">-->
+                        <!--                                <ul class="pagination">-->
+                        <!--                                    <li class="page-item disabled">-->
+                        <!--                                        <button class="page-link page-href" tabindex="-1" aria-disabled="true"-->
+                        <!--                                                data-size="10" data-page="0">Previous-->
+                        <!--                                        </button>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li class="page-item active">-->
+                        <!--                                        <button class="page-link page-href" data-size="10" data-page="1">1</button>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li class="page-item disabled">-->
+                        <!--                                        <button class="page-link page-href" data-size="10" data-page="2">Next-->
+                        <!--                                        </button>-->
+                        <!--                                    </li>-->
+                        <!--                                </ul>-->
+                        <!--                            </nav>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
                 <!--          form class end-->
@@ -261,19 +406,19 @@
                         <label class="col-3 p-0 labelBlue" for="study-info-patient-id">차트번호</label>
                         <input class="col-8 ml-auto mb-2" id="study-info-patient-id" name="study-info-patient-id"
                                readonly
-                               type="text" value=""/>
+                               type="text" value="12345"/>
 
                         <label class="col-3 p-0 labelBlue" for="study-info-patient-name">이름</label>
                         <input class="col-8 ml-auto mb-2 infoTab-canChangeInput" id="study-info-patient-name"
                                name="study-info-patient-name"
-                               readonly type="text" value=""/>
+                               readonly type="text" value="환자2"/>
 
                         <div clas="d-flex flex-wrap">
                             <label class="col-3 p-0 mb-0 labelBlue" for="study-info-patient-birth">생년월일</label>
                             <input class="col-4  infoTab-canChangeInput px-2 " id="study-info-patient-birth"
                                    maxlength="10"
                                    name="study-info-patient-birth"
-                                   oninput="this.value = this.value.replace(/[^0-9-]/g, '');" placeholder="yyyy-MM-dd"
+                                   oninput="this.value = this.value.replace(/[^0-9-]/g, '');" placeholder="1989-04-12"
                                    readonly=""
                                    type="text" value=""/>
 
@@ -283,76 +428,86 @@
                             <select class="col-3 ml-2 mb-0 infoTab-canChangeInput" disabled
                                     id="study-info-patient-sex-type"
                                     name="study-info-patient-sex-type">
-                                <option value="M">M</option>
+                                <option selected value="M">M</option>
                                 <option value="F">F</option>
-                                <option selected value="O">O</option>
+                                <option value="O">O</option>
                             </select>
                         </div>
                         <hr/>
                         <label class="col-3 p-0 mb-2 labelBlue" for="study-info-study-reportConfig-date">판독일시</label>
-                        <input class="col-8 ml-auto mb-2" id="study-info-study-reportConfig-date" readonly type="text"/>
+                        <input class="col-8 ml-auto mb-2" id="study-info-study-reportConfig-date" readonly type="text"
+                               value="2023-01-02"/>
 
                         <label class="col-3 p-0 mb-2 labelBlue" for="study-info-study-reportConfig-id">판독의</label>
-                        <input class="col-8 ml-auto mb-2" id="study-info-study-reportConfig-id" readonly type="text"/>
+                        <input class="col-8 ml-auto mb-2" id="study-info-study-reportConfig-id" readonly type="text"
+                               value="홍길동"/>
 
                         <label class="col-3 p-0 mb-2 labelBlue align-top" for="study-reportConfig-finding">
                             소견내용
-                            <button class="dataTbInBtn blue w-100 text-wrap text-center p-0 col-10"
+                            <button class="dataTbInBtn blue w-100 text-wrap text-center p-0 col-10 manual-click-border"
                                     id="btn-save-clipboard-report"
                                     style="font-size:13px;line-height: 13px;"
                                     type="button">소견복사
                             </button>
-                            <button class="dataTbBtn blue w-100 text-wrap text-center p-0 d-none col-10 ml-0 mt-3"
-                                    id="open-report-image-req-btn" style="font-size:13px;line-height: 13px;"
+                            <button class="dataTbBtn blue w-100 text-wrap text-center p-0  col-10 ml-0 mt-3 manual-click-border"
+                                    id="open-report-image-req-btn"
+                                    style="font-size:13px;line-height: 13px; background-color:gray;"
                                     type="button">병변위치<br>확인
                             </button>
                         </label>
                         <textarea class="col-8 ml-auto mb-2" id="study-reportConfig-finding" name="studyReportFinding"
+                                  placeholder="▶ 유방실질 분포량 : 1. 25% 미만
+
+▶ 판독소견 : 1.이상소견 없음
+
+▷ 판정 : 1.이상소견없음
+
+▶ 권고 : 초음파 요함"
                                   readonly/></textarea>
                         <hr/>
 
                         <label class="col-3 p-0 labelBlue" for="study-info-study-description">촬영유형</label>
                         <input class="col-8 ml-auto mb-2 infoTab-canChangeInput" id="study-info-study-description"
                                name="description"
-                               readonly type="text" value=""/>
+                               readonly type="text" value="([검진CR]유방4매(계) )"/>
 
                         <label class="col-3 p-0 labelBlue" for="study-info-study-date">촬영일시</label>
                         <input class="col-8 ml-auto mb-2" id="study-info-study-date" name="study-info-study-date"
                                readonly
-                               type="text" value=""/>
+                               type="text" value="2021-06-08 10:59:23"/>
 
                         <label class="col-3 p-0 labelBlue" for="study-info-study-modality">촬영장비</label>
                         <input class="col-8 ml-auto mb-2" id="study-info-study-modality" name="modality" readonly
                                type="text"
-                               value=""/>
+                               value="CR"/>
 
                         <label class="col-3 p-0 mb-0 labelBlue" for="study-info-work-company">검진단체</label>
                         <input class="col-8 ml-auto mb-0 infoTab-canChangeInput" id="study-info-work-company"
                                name="study-info-work-company"
-                               readonly type="text" value=""/>
+                               readonly type="text" value="21C"/>
                         <hr/>
 
                         <label class="col-3 p-0 mb-2 labelBlue" for="study-info-reception-date">의뢰일시</label>
                         <input class="col-8 ml-auto mb-2" id="study-info-reception-date"
                                name="study-info-reception-date"
-                               readonly="" type="text" value="">
+                               readonly="" type="text" value="2022-12-08 10:47:12">
 
                         <label class="col-3 p-0 mb-2 labelBlue" for="study-info-urgent">응급구분</label>
                         <select class="col-8 ml-auto mb-2 infoTab-canChangeInput" disabled id="study-info-urgent">
                             <option value="Y">응급</option>
-                            <option value="N">일반</option>
+                            <option selected value="N">일반</option>
                         </select>
 
                         <label class="col-3 p-0 mb-2 labelBlue" for="study-info-reference">참조여부</label>
                         <select class="col-8 ml-auto mb-2 infoTab-canChangeInput" disabled id="study-info-reference">
                             <option value="Y">참조</option>
-                            <option value="N">일반</option>
+                            <option selected value="N">일반</option>
                         </select>
 
                         <label class="col-3 p-0 mb-2 labelBlue" for="study-info-hc-type">검진구분</label>
                         <select class="col-8 ml-auto mb-2 infoTab-canChangeInput" disabled id="study-info-hc-type">
                             <option value="N">일반</option>
-                            <option data-code="A" value="A">일반검진</option>
+                            <option selected data-code="A" value="A">일반검진</option>
                             <option data-code="B" value="B">특수검진</option>
                             <option data-code="C" value="C">배치전검진</option>
                             <option data-code="D" value="D">진폐검진</option>
@@ -360,9 +515,10 @@
                         <hr/>
 
                         <label class="col-3 p-0 mb-2 labelBlue align-top" for="study-comment">임상소견</label>
-                        <!--          <textarea class="col-8 ml-auto mb-2" id="study-reportConfig-finding" name="studyReportFinding"  readonly/></textarea>-->
+                        <!--         <textarea class="col-8 ml-auto mb-2" id="study-reportConfig-finding" name="studyReportFinding"  readonly/></textarea>-->
                         <!--          <textarea name="" id="study-comment" class=" mb-2 infoTab-canChangeInput" rows="3" readonly></textarea>-->
-                        <textarea class="col-8 ml-auto mb-1" id="study-comment" name="" readonly></textarea>
+                        <textarea class="col-8 ml-auto mb-1" id="study-comment" name="" placeholder="([검진CR]유방4매(계) )"
+                                  readonly></textarea>
 
 
                         <div class="d-none" id="referral-edit-btn-area">
@@ -392,7 +548,7 @@
                  aria-labelledby="requestCancelModal" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                             <h3 class="modal-title">의뢰취소</h3>
                             <button class="modalClose"></button>
 
@@ -452,7 +608,7 @@
                  aria-labelledby="changeUrgentModal" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                             <h3 class="modal-title">응급변경</h3>
                             <button class="modalClose"></button>
 
@@ -514,7 +670,7 @@
                  aria-labelledby="changePatientInfoModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                             <h1 class="modal-title">차트정보변경</h1>
                             <button type="button" data-dismiss="modal" class="modalClose"></button>
 
@@ -673,7 +829,7 @@
                  aria-labelledby="openImageModal" aria-hidden="true" style="z-index: 9998">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content" style="max-height: 900px;">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                             <h1>병변위치 확인</h1>
                             <button type="button" data-dismiss="modal" class="modalClose"></button>
                         </div>
@@ -701,51 +857,106 @@
         </main>
 
         <!-- MANUAL 모달-->
+        <!-- MANUAL: 검색  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal" data-backdrop="static"
+             aria-labelledby="searchManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">검색하기</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="searchManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner my-5">
+                                <div class="carousel-item active">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/referral/완료의뢰-검색하기.png"
+                                                 class="">
+                                        </div>
+                                        <div class="vr" style="left: 73%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 17px;">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    검색조건을 <span class="text-emphasis">선택</span>
+                                                    <br>혹은 <span class="text-emphasis">일부입력</span> 해주세요
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">검색하기</span> 클릭
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">3</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    검색조건에 맞는 <br> <span class="text-emphasis">의뢰정보</span> 조회
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--MANUAL: 응급변경 -->
         <div class="modal fade" tabindex="-1" role="dialog" id="changeUrgentManualModal" data-backdrop="static"
              aria-labelledby="changeUrgentManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">응급변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
                         <div id="changeUrgentManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner">
+                            <div class="carousel-inner mb-5">
                                 <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center mb-5">
+                                    <div class="d-flex justify-content-center p-4 my-2">
                                         <div class="carousel-desc-step-current mx-2"
                                              data-target="#changeUrgentManualCaptions" data-slide-to="0">step 1
                                         </div>
                                         <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions"
-                                             data-slide-to="1"> step 2
+                                             data-slide-to="1">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
                                             <img src="/img/manual/referral/완료의뢰-응급변경-0-의뢰선택.png"
-                                                 alt="...">
+                                                 class="">
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3">
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">판독대기상태의</span> 의뢰 선택
-                                            </p>
+                                        <div class="vr" style="left: 60%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="0">-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="1">-->
+                                            <!--                                                </div>-->
                                             <!--                                            </div>-->
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">응급변경</span> 버튼 클릭
-                                            </p>
-                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">판독대기상태의</span> 의뢰 선택
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">응급변경</span> 버튼 클릭
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <div class="d-flex justify-content-center mb-5">
+                                    <div class="d-flex justify-content-center p-4 my-2">
                                         <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions"
                                              data-slide-to="0">step 1
                                         </div>
@@ -753,25 +964,31 @@
                                              data-target="#changeUrgentManualCaptions" data-slide-to="1">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center py-5">
                                             <img src="/img/manual/referral/완료의뢰-응급변경-1-응급변경.png"
                                                  class="mx-auto">
                                         </div>
                                         <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">변경할 상태</span> 선택
-                                            </p>
+                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="0">-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="1">-->
+                                            <!--                                                </div>-->
                                             <!--                                            </div>-->
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">응급변경</span> 버튼 클릭
-                                            </p>
-                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">변경할 상태</span> 선택
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">응급변경</span> 버튼 클릭
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -786,46 +1003,52 @@
              aria-labelledby="cancelRequestManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">의뢰취소</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
                         <div id="cancelManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner">
+                            <div class="carousel-inner mb-5">
                                 <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center mb-5">
+                                    <div class="d-flex justify-content-center p-4 my-2">
                                         <div class="carousel-desc-step-current mx-2"
                                              data-target="#cancelManualCaptions" data-slide-to="0">step 1
                                         </div>
                                         <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions"
-                                             data-slide-to="1"> step 2
+                                             data-slide-to="1">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
                                             <img src="/img/manual/referral/완료의뢰-의뢰취소-0.png"
                                                  alt="...">
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3">
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">판독대기상태의</span> 의뢰 선택
-                                            </p>
+                                        <div class="vr" style="left: 60%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box pt-5" style="margin-right: 95px;">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#cancelManualCaptions" data-slide-to="0">step 1-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions" data-slide-to="1">step 2-->
+                                            <!--                                                </div>-->
                                             <!--                                            </div>-->
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">의뢰취소</span> 버튼 클릭
-                                            </p>
-                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">판독대기상태의</span> 의뢰 선택
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">의뢰취소</span> 버튼 클릭
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <div class="d-flex justify-content-center mb-5">
+                                    <div class="d-flex justify-content-center p-4 my-2">
                                         <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions"
                                              data-slide-to="0">step 1
                                         </div>
@@ -833,25 +1056,25 @@
                                              data-target="#cancelManualCaptions" data-slide-to="1">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
-                                            <img src="/img/manual/referral/완료의뢰-의뢰취소-1-의뢰취소-2장.png"
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/referral/완료의뢰-의뢰취소-1.png"
                                                  class="mx-auto">
                                         </div>
                                         <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">취소할 의뢰정보</span> 확인
-                                            </p>
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">의뢰취소</span> 버튼 클릭
-                                            </p>
-                                            <div class="manual-desc-order mr-3">3</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">원내취소</span>로 상태 전환
-                                            </p>
+                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions" data-slide-to="0">-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#cancelManualCaptions" data-slide-to="1">-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">의뢰취소</span> 클릭
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -866,46 +1089,52 @@
              aria-labelledby="editReferralManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">정보변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
                         <div id="editReferralManualCaption" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner">
+                            <div class="carousel-inner mb-5">
                                 <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center mb-5">
+                                    <div class="d-flex justify-content-center p-4 my-2">
                                         <div class="carousel-desc-step-current mx-2"
                                              data-target="#editReferralManualCaption" data-slide-to="0">step 1
                                         </div>
                                         <div class="carousel-desc-step mx-2" data-target="#editReferralManualCaption"
-                                             data-slide-to="1"> step 2
+                                             data-slide-to="1">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
                                             <img src="/img/manual/referral/완료의뢰-정보변경-0-의뢰선택.png"
-                                                 alt="...">
+                                                 class="w-50">
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3">
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">판독대기상태의 의뢰 1개</span> 선택
-                                            </p>
+                                        <div class="vr" style="left: 62%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box pt-5" style="margin-right: 95px;">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#editReferralManualCaption" data-slide-to="0">-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#editReferralManualCaption" data-slide-to="1">-->
+                                            <!--                                                </div>-->
                                             <!--                                            </div>-->
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">정보변경</span> 버튼 클릭
-                                            </p>
-                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    <span class="text-emphasis">판독대기상태의 의뢰 1개</span> <br>선택
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">정보변경</span> 버튼 클릭
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <div class="d-flex justify-content-center mb-5">
+                                    <div class="d-flex justify-content-center p-4 my-2">
                                         <div class="carousel-desc-step mx-2" data-target="#editReferralManualCaption"
                                              data-slide-to="0">step 1
                                         </div>
@@ -913,25 +1142,32 @@
                                              data-target="#editReferralManualCaption" data-slide-to="1">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
                                             <img src="/img/manual/referral/완료의뢰-정보변경-1-정보변경.png"
-                                                 class="mx-auto w-25">
+                                                 class="mx-auto" style="height: 584px;">
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">에메랄드 배경 항목</span> <br>수정
-                                            </p>
+                                        <div class="vr" style="left: 59%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 94px;">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#editReferralManualCaption" data-slide-to="0">-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#editReferralManualCaption" data-slide-to="1">-->
+                                            <!--                                                </div>-->
                                             <!--                                            </div>-->
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">저장</span> 버튼 클릭
-                                            </p>
-                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <div style="width: 50px;height: 29px; background: transparent;border: var(--redOrange) solid 2.5px;display: block;float: left;margin-right: 9px;"></div>
+                                                    항목 수정 가능
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">저장</span> 버튼 클릭
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -941,6 +1177,126 @@
                 </div>
             </div>
         </div>
+        <!--MANUAL: Excel 다운로드 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="excelDwnManualModal" data-backdrop="static"
+             aria-labelledby="excelDwnManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">Excel 다운로드</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="excelManualCaption" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner my-5">
+                                <div class="carousel-item active">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/referral/완료의뢰-excel.png"
+                                                 class="w-50">
+                                        </div>
+                                        <div class="vr" style="left: 66%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 78px;">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    <span class="text-emphasis">병원코드_검색설정날짜.xlsx</span>로 다운로드
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--MANUAL: 소견복사 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="saveReportManualModal" data-backdrop="static"
+             aria-labelledby="saveReportManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">소견복사</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="saveReportManualCaption" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner my-5">
+                                <div class="carousel-item active">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/referral/완료의뢰-소견복사.png"
+                                                 class="w-50">
+                                        </div>
+                                        <div class="vr" style="left: 61%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 94px;">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    <span class="text-emphasis">소견복사</span> 클릭, <span
+                                                        class="text-emphasis">ctrl+v </span>하여
+                                                    사용
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--MANUAL: 병변위치 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="reportImgManualModal" data-backdrop="static"
+             aria-labelledby="editReferralManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">병변위치 확인</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="reportImgManualCaption" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner my-5">
+                                <div class="carousel-item active">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/referral/완료의뢰-병변위치-1.png"
+                                                 class="mx-auto w-75">
+                                        </div>
+                                        <div class="vr" style="left: 63%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 71px;">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#reportImgManualCaption" data-slide-to="0">-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#reportImgManualCaption" data-slide-to="1">-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">병변위치 영상</span> 확인
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">설명</span> 확인
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <th:blcok layout:fragment="script_area">

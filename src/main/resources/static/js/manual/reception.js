@@ -1,4 +1,21 @@
 $(function () {
+    // 검색조건
+    cursor('#btn-search')
+    $('#btn-search').on('click', function () {
+        $('#searchManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
+    })
+
     // 정보변경 버튼
     cursor('#reception-edit-btn')
     $('#reception-edit-btn').on('click', function () {
@@ -96,6 +113,24 @@ $(function () {
             console.log(text.style.animation)
         }
     })
+
+    // 일시 버튼
+    cursor('#date-type')
+    $('#date-type').on('click', function () {
+        $('#termSetManualModal').modal('show')
+
+        const descText = $('.manual-desc-box');
+        let timer = 100;
+
+        let loop = descText.length;
+
+        for (let i = 0; i < loop; i++) {
+            let text = Object.values(descText)[i];
+            text.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
+            console.log(text.style.animation)
+        }
+    })
+
 
 });
 

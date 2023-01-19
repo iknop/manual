@@ -1698,6 +1698,7 @@ header.popup button {
 }
 
 #page_content {
+    height: 100%;
     position: relative;
     top: 70px;
     padding: 25px 0

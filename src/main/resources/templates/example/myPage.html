@@ -4,40 +4,48 @@
 <head>
     <link rel="stylesheet" th:href="@{/css/hospital/myPage.css}">
     <style>
-        #search-form, .dataTbBtn {
+        .dataTbBtn {
             cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
         }
     </style>
 </head>
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap" style="height: 1300px !important">
-        <!--        <div class="intro">아래 페이지는 설명을 위한 예시입니다.</div>-->
         <main id="editHospInfo">
-            <div class="btn-group btn-group-lg pb-5">
-                <a href="/manual/reception" class="manual-to-page-link-btn-group" aria-current="page">예정의뢰</a>
-                <a href="/manual/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
-                <a href="/manual/statistics" class="manual-to-page-link-btn-group">조회하기</a>
-                <a href="/manual/referralReport" class="manual-to-page-link-btn-group">소견서 출력</a>
-                <a href="/manual/serviceManage" class="manual-to-page-link-btn-group">공지사항</a>
-                <a href="/manual/myPage" class="manual-to-page-link-btn-group active">마이페이지</a>
+
+
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div>
+                    <a href="/manual/reception" class="manual-to-page-link-btn-group "
+                       aria-current="page">예정의뢰</a>
+                </div>
+                <div>
+                    <a href="/manual/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
+                </div>
+                <div>
+                    <a href="/manual/statistics" class="manual-to-page-link-btn-group ">조회하기</a>
+                </div>
+                <div>
+                    <a href="/manual/referralReport" class="manual-to-page-link-btn-group ">소견서 출력</a>
+                </div>
+
+                <div>
+                    <a href="/manual/serviceManage" class="manual-to-page-link-btn-group ">공지사항</a>
+                </div>
+                <div>
+                    <a href="/manual/myPage" class="manual-to-page-link-btn-group active">마이페이지</a>
+                </div>
+                <a class="intro" href="https://report.xray21.com/web/myPage"
+                   style="left: 912px; color: var(--redOrange) !important;">계정 정보확인 및 수정 페이지</a>
             </div>
-            <div class="intro">로그인 계정 및 소속병원 정보확인 및 수정 가능</div>
-            <div class="intro text-primary pb-3">마우스를 올렸을 때 <img src="/img/manual/cursor/question-mark.png"> 표시가 나타나면 클릭하여 이용설명을 확인 할 수 있습니다. <a class="manual-to-page-link-btn"
-                                                                                                                                                 href="https://report.xray21.com/auth/login"
-                                                                                                                                                 style="text-decoration: none;">예정의뢰
-                바로가기</a>
-            </div>
-            <nav>
-                <span>마이페이지</span>
-            </nav>
-            <input id="mesg-server-url" type="hidden" name="mesg-server-url" value="https://stg.xray21.com/web"
-                   readonly="">
-            <form id="search-form">
+
+            <hr>
+            <form id="search-form" class="pt-4">
                 <div class="form d-flex">
                     <div class="d-flex justify-content-start mr-auto">
                     </div>
                     <div calss="d-inline-flex flex-wrap justify-content-end ml-auto row">
-                        <button id="" class="dataTbBtn mb-2" data-dismiss="modal"
+                        <button id="" class="dataTbBtn mb-2 manual-click-border" data-dismiss="modal"
                                 data-toggle="modal" type="button">개인정보수정
                         </button>
                     </div>
@@ -107,7 +115,7 @@
                     <div class="d-flex justify-content-start mr-auto">
                     </div>
                     <div calss="d-inline-flex flex-wrap justify-content-end ml-auto row">
-                        <button class="dataTbBtn mb-2" data-dismiss="modal"
+                        <button class="dataTbBtn mb-2 manual-click-border" data-dismiss="modal"
                                 data-toggle="modal" type="button" id="editHospitalInfo">병원정보수정
                         </button>
                     </div>
@@ -213,7 +221,7 @@
                  aria-labelledby="editHospitalInfoModal" aria-hidden="true" style="z-index: 9999">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                             <h4 class="modal-title text-nowrap" id="modal-title-edit">병원 정보 수정</h4>
                         </div>
                         <div class="modal-body" id="content-hospitalInfo-edit">
@@ -516,7 +524,7 @@
             <div class="modal fade" tabindex="-1" role="dialog" id="editHospitalManagerInfoModal" style="z-index: 9999">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                             <h1 class="modal-title text-nowrap" id="modal-title-managerInfo-edit">내정보 수정</h1>
                             <button type="button" data-dismiss="modal" class="modalClose"></button>
                         </div>
@@ -727,7 +735,7 @@
             <div class="modal fade" tabindex="-1" role="dialog" id="editOtherManager" style="z-index: 9999">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header m-0">
                             <h4 class="modal-title text-nowrap" id="modal-title-otherManagerInfo-edit">관리자 정보 수정</h4>
                             <button class="modalClose"></button>
                         </div>
@@ -850,39 +858,39 @@
              aria-labelledby="myPageManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">마이페이지</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
                         <div id="myPageManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner">
+                            <div class="carousel-inner mb-5">
                                 <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center mb-5">
-                                        <div class="carousel-desc-step-current mx-2"
-                                             data-target="#myPageManualCaptions" data-slide-to="0">step 1
-                                        </div>
-                                    </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center pt-5">
+                                    <div class="row manual-area my-auto">
+                                        <div class="d-block mx-auto col-8 text-center">
                                             <img src="/img/manual/myPage/마이페이지-수정버튼.png"
-                                                 alt="..." class="pt-5">
+                                                 alt="...">
                                         </div>
                                         <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3">
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                클릭 시 <span class="text-emphasis">로그인 계정<br>정보 수정</span>
-                                            </p>
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                클릭 시 <span class="text-emphasis">병원정보 수정</span>
-                                            </p>
-                                            <p class="desc py-2" style="font-size: 16px;">
-                                                병원담당자 추가 및 변경불가 항목 수정:
-                                                <br>02-521-4621
-                                                (평일 9:00-18:00, 토 9:00- 13:00)
-                                            </p>
+                                        <div class="mr-0 my-auto mt-3 col-3 manual-desc-box pl-5">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    클릭 시 <span class="text-emphasis">로그인 계정<br>정보 수정</span>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    클릭 시 <span class="text-emphasis">병원정보 수정</span>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    클릭 시 <span class="text-emphasis">병원담당자 <br>정보 수정</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -892,7 +900,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <th:blcok layout:fragment="script_area">

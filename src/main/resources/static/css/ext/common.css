@@ -18,7 +18,10 @@ body, h1, h2, h3, h4, h5, h6, select, input, textarea, button {
 
 html, body {
     height: 100%;
-    min-height: 100%
+    min-height: 100%;
+    width: 100%;
+    /*overflow:hidden;*/
+    margin: 0;
 }
 
 body {
@@ -220,7 +223,8 @@ caption {
 .clearfix:after {
     display: block;
     content: '';
-    clear: both
+    clear: both;
+    width: 100%;
 }
 
 .reqrd {
@@ -1491,7 +1495,7 @@ input[type="checkbox"]:checked + label::before {
     position: absolute;
     left: 0;
     top: 0;
-    background: url(../../img/manual-check-onl.png) center center no-repeat
+    background: url(../../img/check-on.png) center center no-repeat
 }
 
 input[type="radio"] {
@@ -1581,7 +1585,7 @@ header.popup button {
 .modal-header {
     width: 100%;
     height: 56px;
-    background-color: var(--popupHeader);
+    background-color: #a9a9a9;
     border-bottom: 0 !important;
     padding: 0 36px !important;
     margin-bottom: 36px
@@ -1704,8 +1708,8 @@ header.popup button {
 
 #page_content {
     position: relative;
-    /*top: 70px;*/
-    padding: 25px 0
+    padding: 25px 0;
+    width: 100%;
 }
 
 #page_content.contentWrap > main {
@@ -1718,7 +1722,7 @@ header.popup button {
     color: var(--fontDefaultColor);
     font-weight: 500;
     margin-bottom: 15px;
-    text-align: lefts
+    text-align: left
 }
 
 #page_content.contentWrap > main nav > span {

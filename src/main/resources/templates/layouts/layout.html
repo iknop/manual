@@ -44,18 +44,22 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Pragma" content="no-cache">
 
-    <link rel="stylesheet" th:href="@{/css/layout/coachmark.css}">
+    <!--    <link rel="stylesheet" th:href="@{/css/layout/coachmark.css}">-->
     <link rel="stylesheet" th:href="@{/css/layout/header.css}">
     <link rel="stylesheet" th:href="@{/css/layout/manual.css}">
+    <style>
+        .content {
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-<section class="coachmarks">
-<!--header-->
-<!--    <div th:replace="fragments/header::header"></div>-->
-    <!--  content  -->
-    <div layout:fragment="content_area" class="content"></div>
-</section>
-<footer></footer>
+
+<!--&lt;!&ndash;header&ndash;&gt;-->
+<!--<div th:replace="fragments/header::header"></div>-->
+<!--  content  -->
+<div layout:fragment="content_area" class="content"></div>
+
 
 <!--반드시 공용스크립트 먼저 선언: 옮기면 못읽음 에러남-->
 <script th:src="@{/ext/js/jquery-3.3.1.min.js}"></script>
@@ -162,7 +166,7 @@
         $(".dateDate").trigger;
     });
 </script>
-<script src="/js/manual/common/header.js" th:inline="javascript"></script>
+<!--<script src="/js/manual/common/header.js" th:inline="javascript"></script>-->
 <script src="/js/manual/cursor.js" th:inline="javascript"></script>
 
 <!--개별 script-->

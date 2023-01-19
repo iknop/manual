@@ -4,7 +4,7 @@ $(function () {
 
     // 공지사항
     // cursor('#noticeManualArea')
-    $('#noticeManualArea').on('click', function () {
+    $('.btn-download').on('click', function () {
         $('#noticeManualModal').modal('show')
 
         const descBox = $('.manual-desc-box');

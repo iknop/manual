@@ -24,7 +24,7 @@ public class MainController {
     // 테스트 - 예정의뢰: 병합하기
     @GetMapping("/reception")
     public static String navTest() {
-        return "example/exReception";
+        return "example/reception";
     }
 
     // 완료의뢰

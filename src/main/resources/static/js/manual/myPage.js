@@ -3,8 +3,8 @@
 $(function () {
 
     // 개인정보 수정
-    cursor('#search-form')
-    $('#search-form').on('click', function () {
+    cursor('.dataTbBtn')
+    $('.dataTbBtn').on('click', function () {
         $('#myPageManualModal').modal('show')
 
         const descBox = $('.manual-desc-box');

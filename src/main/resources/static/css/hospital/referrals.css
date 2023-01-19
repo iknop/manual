@@ -5,7 +5,7 @@
 
 #study-reportConfig-finding{
     overflow-y: scroll;
-    min-height: 265px;
+    min-height: 146px;
 }
 
 #study-reportConfig-finding::-webkit-scrollbar-thumb, #study-comment::-webkit-scrollbar-thumb{

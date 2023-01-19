@@ -4,11 +4,7 @@
 <head>
     <link rel="stylesheet" th:href="@{/css/hospital/notice.css}">
     <style>
-        a:not(.manual-to-page-link-btn, .manual-to-page-link-btn-group) {
-            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
-        }
-
-        #notice-list-dr-table_wrapper, .dataTbInBtn {
+        .dataTbInBtn.blue.btn-download {
             cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
         }
     </style>
@@ -16,34 +12,39 @@
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap" style="height: 1173px !important">
 
+
         <main>
-            <div class="btn-group btn-group-lg pb-5">
-                <a href="/manual/reception" class="manual-to-page-link-btn-group" aria-current="page">예정의뢰</a>
-                <a href="/manual/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
-                <a href="/manual/statistics" class="manual-to-page-link-btn-group">조회하기</a>
-                <a href="/manual/referralReport" class="manual-to-page-link-btn-group">소견서 출력</a>
-                <a href="/manual/serviceManage" class="manual-to-page-link-btn-group active">공지사항</a>
-                <a href="/manual/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div>
+                    <a href="/manual/reception" class="manual-to-page-link-btn-group "
+                       aria-current="page">예정의뢰</a>
+                </div>
+                <div >
+                    <a href="/manual/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
+                </div>
+                <div>
+                    <a href="/manual/statistics" class="manual-to-page-link-btn-group ">조회하기</a>
+                </div>
+                <div>
+                    <a href="/manual/referralReport" class="manual-to-page-link-btn-group ">소견서 출력</a>
+                </div>
+
+                <div>
+                    <a href="/manual/serviceManage" class="manual-to-page-link-btn-group active">공지사항</a>
+                </div>
+                <a class="intro" href="https://report.xray21.com/web/notice"
+                   style="left: 790px; color: var(--redOrange) !important;">공지사항 확인 페이지</a>
+                <div>
+                    <a href="/manual/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
+                </div>
             </div>
-            <div class="intro">21세기 영상의학과의 원격판독 관련 공지사항 확인 가능</div>
-            <div class="intro text-primary pb-3">마우스를 올렸을 때 <img src="/img/manual/cursor/question-mark.png"> 표시가 나타나면
-                클릭하여 이용설명을 확인 할 수 있습니다. <a class="manual-to-page-link-btn"
-                                           href="https://report.xray21.com/auth/login"
-                                           style="text-decoration: none;">예정의뢰
-                    바로가기</a>
-            </div>
-            <nav>
-                서비스 관리
-                <span>공지사항</span>
-            </nav>
-            <input id="mesg-server-url" type="hidden" name="mesg-server-url" value="https://stg.xray21.com/web"
-                   readonly="">
-            <form id="search-form">
-                <!--공지사항-->
+
+            <hr>
+            <!--공지사항-->
 
             </form>
             <!--공지사항-->
-            <div class="dataTbForm d-block">
+            <div class="dataTbForm d-block pt-4">
                 <div class="dataTbWrap d-flex" id="noticeManualArea" style="height: 70vh; align-content: flex-start">
 
                     <div class="d-inline-flex flex-wrap justify-content-end align-items-center ml-auto">
@@ -66,8 +67,7 @@
 
                     <div id="notice-list-dr-table_wrapper" class="dataTables_wrapper no-footer">
                         <table class="table t text-center text-nowrap dataTable no-footer dtfc-has-left"
-                               id="notice-list-dr-table"
-                        >
+                               id="notice-list-dr-table">
                             <thead class="thead-light">
                             <tr>
                                 <th class="sorting_disabled href-show pointer textEllipsis dtfc-fixed-left" scope="col"
@@ -89,7 +89,7 @@
                                         href="#">사용자 매뉴얼 다운</a></td>
                                 <td style="vertical-align: middle;">2022-11-24</td>
                                 <td class=" pointer" style="vertical-align: middle;">
-                                    <button type="button" class="dataTbInBtn blue btn-download" data-ntcid="22"
+                                    <button type="button" class="dataTbInBtn blue btn-download manual-click-border" data-ntcid="22"
                                     >다운로드
                                     </button>
                                 </td>
@@ -97,7 +97,7 @@
                             <tr class="even">
                                 <td class="pointer textEllipsis dtfc-fixed-left"
                                     style="vertical-align: middle; left: 0px; position: sticky;"><a
-                                        href="#">공지사항 테스트</a></td>
+                                        href="#">공지사항</a></td>
                                 <td style="vertical-align: middle;">2022-11-21</td>
                                 <td class=" pointer" style="vertical-align: middle;"></td>
                             </tr>
@@ -107,23 +107,21 @@
                                         href="#">판독의 공지사항 첨부파일 수정</a></td>
                                 <td style="vertical-align: middle;">2022-10-19</td>
                                 <td class=" pointer" style="vertical-align: middle;">
-                                    <button type="button" class="dataTbInBtn blue btn-download" data-ntcid="7">다운로드
+                                    <button type="button" class="dataTbInBtn blue btn-download manual-click-border" data-ntcid="7">다운로드
                                     </button>
                                 </td>
                             </tr>
                             <tr class="even">
                                 <td class="pointer textEllipsis dtfc-fixed-left"
-                                    style="vertical-align: middle; left: 0px; position: sticky;"><a
-                                        href="#">등록 테스트/수정</a></td>
+                                    style="vertical-align: middle; left: 0px; position: sticky; "><a
+                                        href="#">공지사항 등록</a></td>
                                 <td style="vertical-align: middle;">2022-10-19</td>
                                 <td class=" pointer" style="vertical-align: middle;"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-
                     <input type="hidden" id="page" value="1">
-
                 </div>
             </div>
         </main>
@@ -132,34 +130,32 @@
              aria-labelledby="noticeManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title"><span class="descFuncName">소견서 출력</span></h3>
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">공지사항</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
                         <div id="noticeManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner">
+                            <div class="carousel-inner my-5">
                                 <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center mb-5">
-                                        <div class="carousel-desc-step-current mx-2"
-                                             data-target="#noticeManualCaptions" data-slide-to="0">step 1
-                                        </div>
-                                    </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center pt-5">
-                                            <img src="/img/manual/serviceManage/공지사항.png"
-                                                 alt="..." class="pt-5">
+                                    <div class="row manual-area my-auto">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/serviceManage/공지사항.png">
                                         </div>
                                         <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3">
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                클릭 시 <span class="text-emphasis">공지사항 확인</span>
-                                            </p>
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">첨부파일</span> 자동 다운
-                                            </p>
+                                        <div class="mr-0 my-auto mt-3 col-3 manual-desc-box pl-5">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    클릭 시 <span class="text-emphasis">공지사항 확인</span>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">첨부파일</span> 자동 다운
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

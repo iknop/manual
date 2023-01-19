@@ -224,68 +224,104 @@ header.manual-hospital ul + menu ul > li > a {
 header.manual-hospital ul + menu ul > li:last-child > a {
     padding-bottom: 0
 }
+#page_content{
+    height: 100%;
+}
+.pageHead{
+    position: relative;
+}
 
 .intro {
-    font-size: 20px;
-    font-weight: 700;
+    position: absolute;
+    top: 35px;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    float: left;
+    margin-top: 0.5rem !important;
+    color: gray;
+    /*padding: 10px 0 10px 0;*/
 }
+
 
 .manual-to-page-link-btn {
     text-decoration: none;
     color: white !important;
-    border: #000f5a solid 0.5px;
-    background-color: #000f5a;
-    padding: 10px;
+    background-color: var(--redOrange);
+    padding: 6px;
     border-radius: 3px;
+    margin: 10px 0;
 }
 
 .manual-to-page-link-btn:hover {
     color: white;
-    background-color: #2D31FA;
-    border: #2D31FA solid 0.5px;
+    background-color: var(--redOrange);
     transition: 0.8s;
 }
 
 .manual-to-page-link-btn-group {
     text-decoration: none !important;
-    color: white;
-    background-color: #000f5a;
+    color: #838181;
+    /*background-color: var(--redOrange);*/
     margin-right: 10px;
     padding: 10px 25px;
-    border-radius: 25px;
-    font-size: 20px;
+    /*border-radius: 25px;*/
+    font-size: 21px;
     font-weight: 600;
     /*transition: 0.8s;*/
 }
 
 .manual-to-page-link-btn-group:hover {
-    color: white;
-    background-color: #2D31FA;
+    color: var(--redOrange);
+    /*background-color: var(--redOrange);*/
     transition: 0.8s;
 }
 
 .manual-to-page-link-btn-group.active {
-    color: white;
-    background-color: #2D31FA;
+    color: var(--redOrange);
+    /*background-color: var(--redOrange);*/
+    text-decoration: underline !important;
+    text-underline-position: under;
 }
+
+.manual-click-border{
+    border: var(--redOrange) solid 2.5px !important;
+}
+.select-readonly{
+    width: 155px;
+    height: 32px;
+    background-color: var(--reGray6);
+    color: #4d5256;
+    margin-right: 7px;
+    padding: 11px;
+    background-image: url(../../img/arrow-00.png);
+    background-position: calc(100% - 12px) center;
+    background-repeat: no-repeat;
+}
+
 
 .modal {
     z-index: 9999;
 }
 
+
+
+
 /*기능 설명 모달 헤더*/
 .descFuncName {
-    font-size: 20px;
-    color: #ffff;
-    font-weight: 500;
+    font-size: 25px;
+    color: #fff;
+    font-weight: 700;
 }
 
-/*이미지 순서 번호*/
+
+/* 모달 창 순서 : step N */
 .carousel-desc-step-current {
     font-size: 20px;
     font-weight: 400;
-    background-color: #273db0;
+    background-color: var(--gray);
     width: 80px;
+    /*width: 32px;*/
     height: 32px;
     border-radius: 20px;
     color: white;
@@ -295,22 +331,24 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 
 .carousel-desc-step {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 600;
     background-color: #fff;
-    border: #273db0 solid 0.5px;
+    border: var(--gray) solid 0.5px;
     width: 80px;
+    /*width: 32px;*/
     height: 32px;
     border-radius: 20px;
-    color: #273db0;
+    color: var(--gray);
     text-align: center;
-    transition-property: background-color, color;
+    transition-property: background-color, color,font-weight;
     /*content: '';*/
     transition-duration: 0.5s;
 }
 
 .carousel-desc-step:hover {
-    background-color: #273db0;
+    background-color: var(--gray);
     color: white;
+    font-weight: 600;
 }
 
 
@@ -323,26 +361,36 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 
 .manual-desc-box {
     opacity: 0;
+    animation: fade 0.3s;
 }
 
 /** 이미지 설명란 번호 **/
 .manual-desc-order {
-    background-color: #E14D2A;
-    color: white;
-    height: 35px;
-    width: 35px;
-    font-size: 20px;
-    border-radius: 50%;
+    /*background-color: var(--redOrange);*/
+    color: var(--gray);
+    /*height: 35px;*/
+    /*width: 35px;*/
+    font-size: 25px;
+    /*border-radius: 50%;*/
     text-align: center;
-    align-self: center;
+    align-self: baseline;
+    font-weight: 700;
     /*opacity: 0;*/
 }
 
 .desc {
-    font-size: 30px;
+    font-size: 18px;
     /*opacity: 0;*/
     max-width: 285px;
+    line-height: 196%;
 }
+.desc-long {
+    font-size: 18px;
+    /*opacity: 0;*/
+    max-width: 285px;
+    padding-top: 3px;
+}
+
 
 @keyframes fade {
     to {
@@ -353,7 +401,7 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 
 /*텍슽 강조*/
 .text-emphasis {
-    color: #FF7F15;
+    color: var(--redOrange);
     font-weight: bold;
     display: contents;
     font-size: inherit;
@@ -361,47 +409,17 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 
 /* 이미지/설명 나눔선 */
 .vr {
-    left: 67%;
+    left: 76%;
     height: 1000px;
     position: absolute;
     border-left: 1px solid rgb(126 126 126 / 28%);
     opacity: 70%;
 }
 
-
-/*매뉴얼 영역 커서*/
-/*#reception-send-request-area {*/
-/*    cursor: help !important;*/
-/*}*/
-
-/*#statistics-manual-button {*/
-/*    cursor: help !important;*/
-
-/*}*/
-
-/*#referral-report-search-form {*/
-/*    cursor: help !important;*/
-
-/*}*/
-
-/*#btn-report-print {*/
-/*    cursor: help !important;*/
-
-/*}*/
-
-/*#btn-report-print {*/
-/*    cursor: help !important;*/
-
-/*}*/
-
-/*#editHospitalManagerInfoModal {*/
-/*    cursor: help !important;*/
-/*}*/
-
-/*#editAccountInfo {*/
-/*    cursor: help !important;*/
-/*}*/
-
-/*#editHospitalInfo {*/
-/*    cursor: help !important;*/
-/*}*/
+:root {
+    --redOrange: #F24405;
+    --brightOrange: #f89400;
+    --brickOrange: #8C2703;
+    --gray: #a9a9a9;;
+    --black: #0D0D0D;
+}

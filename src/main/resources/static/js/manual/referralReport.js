@@ -2,10 +2,11 @@
 
 $(function () {
 
-    // 소견서 출력
-    cursor('#search-form')
-    $('#search-form').on('click', function () {
-        $('#reportPrintManualModal').modal('show')
+
+    // 검색하기
+    cursor('#btn-search')
+    $('#btn-search').on('click', function () {
+        $('#searchManualModal').modal('show')
 
         const descBox = $('.manual-desc-box');
         let timer = 100;
@@ -17,10 +18,10 @@ $(function () {
             desc.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
         }
     })
-    // 소견서 출력
+    // 출력하기
     cursor('#btn-report-print')
     $('#btn-report-print').on('click', function () {
-        $('#reportPrintManualModal').modal('show')
+        $('#printManualModal').modal('show')
 
         const descBox = $('.manual-desc-box');
         let timer = 100;
@@ -32,6 +33,5 @@ $(function () {
             desc.style.animation = `fade 1000ms ${(timer += 100)}ms forwards`;
         }
     })
-
 
 });

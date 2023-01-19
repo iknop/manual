@@ -4,19 +4,7 @@
 <head>
     <link rel="stylesheet" th:href="@{/css/hospital/referralReport.css}">
     <style>
-        #search-form, #reportNoteType, #printDateType, #patientID, #patientName {
-            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
-        }
-
-        .dataTbBtn {
-            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
-        }
-
-        .form-control {
-            cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
-        }
-
-        button {
+        #btn-search, #btn-report-print {
             cursor: url("/img/manual/cursor/question-mark.png"), auto !important;
         }
     </style>
@@ -24,26 +12,36 @@
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap" style="height: 1173px !important">
         <main>
-            <div class="btn-group btn-group-lg pb-5">
-                <a href="/manual/reception" class="manual-to-page-link-btn-group" aria-current="page">예정의뢰</a>
-                <a href="/manual/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
-                <a href="/manual/statistics" class="manual-to-page-link-btn-group">조회하기</a>
-                <a href="/manual/referralReport" class="manual-to-page-link-btn-group active">소견서 출력</a>
-                <a href="/manual/serviceManage" class="manual-to-page-link-btn-group">공지사항</a>
-                <a href="/manual/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
+
+
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div>
+                    <a href="/manual/reception" class="manual-to-page-link-btn-group "
+                       aria-current="page">예정의뢰</a>
+                </div>
+
+                <div>
+                    <a href="/manual/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
+                </div>
+                <div>
+                    <a href="/manual/statistics" class="manual-to-page-link-btn-group ">조회하기</a>
+                </div>
+                <div>
+                    <a href="/manual/referralReport" class="manual-to-page-link-btn-group active">소견서 출력</a>
+                </div>
+                <a class="intro" href="https://report.xray21.com/web/referralReport"
+                   style="left: 621px;">판독완료된 소견서 출력 페이지</a>
+                <div>
+                    <a href="/manual/serviceManage" class="manual-to-page-link-btn-group">공지사항</a>
+                </div>
+                <div>
+                    <a href="/manual/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
+                </div>
             </div>
-            <div class="intro">판독완료된 의뢰를 선택하여 소견서를 출력할 수 있습니다.
-            </div>
-            <div class="intro text-primary pb-3">마우스를 올렸을 때 <img src="/img/manual/cursor/question-mark.png"> 표시가 나타나면 클릭하여 이용설명을 확인 할 수 있습니다. <a class="manual-to-page-link-btn"
-                                                                                                                                                 href="https://report.xray21.com/auth/login"
-                                                                                                                                                 style="text-decoration: none;">예정의뢰
-                바로가기</a>
-            </div>
+
         </main>
-        <main>
-            <nav>
-                <span>소견서 출력</span>
-            </nav>
+        <hr>
+        <main class="pt-4">
             <input id="mesg-server-url" type="hidden" name="mesg-server-url" value="https://stg.xray21.com/web"
                    readonly="">
 
@@ -57,22 +55,18 @@
                                value="홍백병원(0259)" type="text">
                         <!--            </div>-->
 
-                        <select class="col-2" id="reportNoteType" name="reportNoteType">
-                            <option value="T">전체 (소견서양식)</option>
-                            <option value="A">일반</option>
-                        </select>
+                        <input class="col-2  select-readonly" id="reportNoteType" name="reportNoteType"
+                               value="전체 (소견서양식)" readonly="">
+
+                        <!--                        <select class="col-2 " id="reportNoteType" name="reportNoteType">-->
+                        <!--                            <option value="T">전체 (소견서양식)</option>-->
+                        <!--                            <option value="A">일반</option>-->
+                        <!--                        </select>-->
 
                         <input type="hidden" id="selectedReportNoteType">
                         <div class="rangeDate d-flex flex-wrap p-0 justify-content-start col-4 mr-4">
-                            <select id="printDateType" name="printDateType" class="dateTxt">
-
-                                <option value="A">촬영일자</option>
-
-                                <option value="B">의뢰일자</option>
-
-                                <option value="C">판독일자</option>
-
-                            </select>
+                            <input id="printDateType" name="printDateType" class="dateTxt "
+                                   value="촬영일자" readonly>
                             <input type="text" class="dateDate">
                             <button type="button" class="btnCal"></button>
 
@@ -81,8 +75,10 @@
                         </div>
 
                         <input type="text" id="patientID" name="patientID"
-                               class="mr-2 col-1 justify-content-center ml-3" placeholder="차트번호" title="차트번호">
-                        <input type="text" class="col-2 justify-content-end" id="patientName" name="patientName"
+                               class="mr-2 col-1 justify-content-center ml-3 " placeholder="차트번호"
+                               title="차트번호">
+                        <input type="text" class="col-2 justify-content-end " id="patientName"
+                               name="patientName"
                                title="환자명" placeholder="환자명"
                         >
                     </div>
@@ -90,7 +86,9 @@
                     <div class="d-flex flex-nowrap justify-content-center mx-auto col-12">
 
                         <button type="button" id="btn-reset-dr" class="reset">조건 초기화</button>
-                        <button type="button" id="btn-search">검색하기</button>
+                        <button type="button" id="btn-search" class="manual-click-border"
+                                style="background-color: gray">검색하기
+                        </button>
                     </div>
                 </div>
             </form>
@@ -98,7 +96,7 @@
             <div class="dataTbForm d-block">
                 <div class="dataTbWrap d-flex">
                     <div class="d-flex justify-content-start mr-auto">
-                        <button type="button" class="dataTbBtn" id="btn-report-print"
+                        <button type="button" class="dataTbBtn manual-click-border" id="btn-report-print"
                         >출력하기
                         </button>
                     </div>
@@ -182,7 +180,49 @@
                                 </thead>
                                 <tbody id="referral-reportConfig-table-tbody">
                                 <tr class="odd">
-                                    <td valign="top" colspan="12" class="dataTables_empty">조회된 데이터가 없습니다.</td>
+                                    <td><input type="checkbox" class="custom-checkbox chk-all" name="check_study"
+                                               id="1326" value=""></td>
+                                    <td>N</td>
+                                    <td>12345</td>
+                                    <td>환자1</td>
+                                    <td>19890412</td>
+                                    <td>33</td>
+                                    <td>F</td>
+                                    <td></td>
+                                    <td>2022-11-03 08:41:48.0</td>
+                                    <td>2022-11-30 10:33:09.033</td>
+                                    <td>2022-11-30 17:01:39.387</td>
+                                    <td>Y</td>
+                                </tr>
+                                <tr class="even">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all" name="check_study"
+                                               id="1327" value=""></td>
+                                    <td>N</td>
+                                    <td>12345</td>
+                                    <td>환자1</td>
+                                    <td>19890412</td>
+                                    <td>33</td>
+                                    <td>F</td>
+                                    <td></td>
+                                    <td>2022-11-03 08:41:48.0</td>
+                                    <td>2022-11-30 10:33:49.483</td>
+                                    <td>2022-11-30 17:41:55.087</td>
+                                    <td>Y</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all" name="check_study"
+                                               id="1329" value=""></td>
+                                    <td>N</td>
+                                    <td>12345</td>
+                                    <td>환자1</td>
+                                    <td>19890412</td>
+                                    <td>33</td>
+                                    <td>F</td>
+                                    <td></td>
+                                    <td>2022-11-03 08:41:48.0</td>
+                                    <td>2022-11-30 10:36:19.69</td>
+                                    <td>2022-12-06 16:53:09.767</td>
+                                    <td>Y</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -220,119 +260,47 @@
             </div>
         </main>
 
-        <!-- MANUAL: 소견서 출력 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="reportPrintManualModal" data-backdrop="static"
-             aria-labelledby="reportPrintManualModal" aria-hidden="true">
+        <!-- MANUAL: 검색조건 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal" data-backdrop="static"
+             aria-labelledby="searchManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title"><span class="descFuncName">소견서 출력</span></h3>
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">검색하기</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="printManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner">
+                        <div id="searchManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner my-5">
                                 <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center mb-5">
-                                        <div class="carousel-desc-step-current mx-2"
-                                             data-target="#printManualCaptions" data-slide-to="0">step 1
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto my-auto col-8 text-center">
+                                            <img src="/img/manual/referralReport/소격서출력-검색.png"
+                                                 alt="...">
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="1"> step 2
-                                        </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="2"> step 3
-                                        </div>
-                                    </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center pt-5">
-                                            <img src="/img/manual/referralReport/소격서출력-0.png"
-                                                 alt="..." class="pt-5">
-                                        </div>
-                                        <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3">
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">소견서 양식</span> 선택
-                                            </p>
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">일정 구분 및 기간</span> <br>선택
-                                            </p>
-                                            <div class="manual-desc-order mr-3">3</div>
-                                            <p class="desc py-2">
-                                                필요 시 <span class="text-emphasis">특정환자 정보 </span>입력
-                                                <br> 환자 정보 미입력 시 전체 조회
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center mb-5">
-                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="0">step 1
-                                        </div>
-                                        <div class="carousel-desc-step-current mx-2"
-                                             data-target="#printManualCaptions" data-slide-to="1">step 2
-                                        </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="2"> step 3
-                                        </div>
-                                    </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
-                                            <img src="/img/manual/referralReport/소견서출력-1.png"
-                                                 class="mx-auto">
-                                        </div>
-                                        <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">출력할 의뢰 </span> 선택
-                                            </p>
-                                            <!--                                            </div>-->
-                                            <!--                                            <div class="row p-2">-->
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">출력하기</span> 버튼 클릭
-                                            </p>
-                                            <!--                                            </div>-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center mb-5">
-                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="0">step 1
-                                        </div>
-                                        <div class="carousel-desc-step mx-2"
-                                             data-target="#printManualCaptions" data-slide-to="1">step 2
-                                        </div>
-                                        <div class="carousel-desc-step-current mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="2"> step 3
-                                        </div>
-                                    </div>
-                                    <div class="row manual-area">
-                                        <div class="d-block mx-auto col-7 text-center">
-                                            <img src="/img/manual/referralReport/소견서출력-2.png"
-                                                 class=" mx-auto">
-                                        </div>
-                                        <div class="vr"></div>
-                                        <div class="mx-auto mt-3 col-3 manual-desc-box">
-                                            <div class="manual-desc-order mr-3">1</div>
-                                            <p class="desc py-2">
-                                                선택한 <span class="text-emphasis">소견서 양식</span>
-                                                <br>으로 소견 내용 확인
-                                            </p>
-                                            <div class="manual-desc-order mr-3">2</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">출력 옵션</span> 선택
-                                            </p>
-                                            <div class="manual-desc-order mr-3">3</div>
-                                            <p class="desc py-2">
-                                                <span class="text-emphasis">pdf저장 </span>가능
-                                            </p>
+                                        <div class="vr" style="left: 72%;"></div>
+                                        <div class="mx-auto my-auto mt-3 col-3 manual-desc-box ">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    <span class="text-emphasis">소견서양식</span>:
+                                                    일반·일반건강검진·유방건강검진·위암건강검진·진폐흉부판독<br>
+                                                    <span class="text-emphasis">일자기준</span>: 촬영일자·의뢰일자·판독일자<br> <span
+                                                        class="text-emphasis">차트번호·환자명</span>: 일부입력 가능<br>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">검색하기</span> 클릭
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">3</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    검색조건에 맞는 <br> <span class="text-emphasis">의뢰정보</span> 조회
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -342,6 +310,113 @@
                 </div>
             </div>
         </div>
+        <!-- MANUAL: 출력하기 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="printManualModal" data-backdrop="static"
+             aria-labelledby="printManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">출력하기</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="printManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner my-5">
+                                <div class="carousel-item active">
+                                    <div class="d-flex justify-content-center p-4 my-2">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#patientManualCaptions" data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
+                                             data-slide-to="1">step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/referralReport/소격서출력-출력하기-0.png"
+                                                 class="w-50">
+                                        </div>
+                                        <div class="vr" style="left: 60%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#printManualCaptions" data-slide-to="0">step 1-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#printManualCaptions" data-slide-to="1">step 2-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">출력할 의뢰</span> 선택
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">출력하기</span> 버튼 클릭
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="d-flex justify-content-center p-4 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
+                                             data-slide-to="0">step 1
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2" data-target="#printManualCaptions"
+                                             data-slide-to="1">step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img src="/img/manual/referralReport/소견서출력-2.png"
+                                                 class="w-75 mx-auto">
+                                        </div>
+                                        <div class="vr" style="left: 62%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
+                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
+                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#printManualCaptions" data-slide-to="0">step 1-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#printManualCaptions" data-slide-to="1">step 2-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </div>-->
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">양식 예시</span> 화면
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    묶음출력: <span class="text-emphasis">묶음 출력 양식</span><br> 으로 출력 설정
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">3</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    낱장출력: <span class="text-emphasis">낱장 출력 양식</span><br>으로 출력 설정
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">4</div>
+                                                <div class="desc-long m-0 col-10 pt-2">
+                                                    <span class="text-emphasis">PDF 파일 저장</span> 혹은 <span
+                                                        class="text-emphasis">인쇄</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 <th:blcok layout:fragment="script_area">
