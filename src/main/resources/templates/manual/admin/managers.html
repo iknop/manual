@@ -1,0 +1,1164 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/managers.css}">
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content">
+        <main style="width: 1320px;">
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div id="pageTitle">
+                    <a class="manual-to-page-link-btn-group active "
+                       aria-current="page">의뢰목록</a>
+                </div>
+                <a class="intro" id="siteUrl" style="left: 608px;">의뢰확인 페이지</a>
+            </div>
+
+
+        </main>
+        <main>
+            <form id="search-form">
+                <menu>
+                    <h1 onclick="location.href=_ctx + 'emergencies'">응급의뢰</h1>
+                    <h1 class="current" onclick="location.href=_ctx + 'managers'">일반의뢰</h1>
+                </menu>
+                <div class="form d-flex">
+                    <input id="reportConfig-hospital-code" name="reportHospitalCode" type="hidden" value="0101">
+                    <input id="sendHospitalCode" name="sendHospitalCode" type="hidden" value="0000">
+                    <input id="page" name="currentPageIndex" value="1" type="hidden">
+                    <input id="size" name="pagingSize" value="10" type="hidden">
+
+                    <label class="col-1 labelBlue p-0" for="hospiSelect">병원선택</label>
+                    <div class="hospiSelect d-flex flex-wrap col-11 p-0">
+                        <button class="defaultBtn" data-toggle="modal" type="button">추가
+                        </button>
+                        <button class="reBtn" type="button">초기화</button>
+                        <button class="moreView p-0 justify-content-end" id="moreView" style="display: none"
+                                type="button">더보기
+                        </button>
+                        <button class="moreView moreViewHide p-0 justify-content-end" id="moreViewHide"
+                                style="display: none" type="button">접기
+                        </button>
+                    </div>
+
+                    <label class="col-1 labelBlue p-0" for="searchCondition">검색조건</label>
+                    <div class="searchCondition d-flex flex-wrap col-11 p-0">
+                        <input class="selectboxInput" value="전체(응급)" id="urgent-type" name="urgentType" readonly>
+                        <input class="selectboxInput" value="참조여부(전체)" id="isRef" name="isRefYN" readonly>
+                        <input class="selectboxInput" value="재판독여부(전체)" id="re-reading" name="reportModifyYN" readonly>
+                        <input class="selectboxInput" value="사용여부(사용)" id="use-yn" name="useYN" readonly>
+                        <input class="selectboxInput" value="촬영유형(전체)" id="study-type-code" name="studyTypeCode"
+                               readonly>
+                        <input class="selectboxInput" value="배정의(전체)" id="design-doctor" name="readingDrCode" readonly>
+                        <input class="selectboxInput" value="소견제외" id="reportConfig-include-yn" name="reportIncludeYN"
+                               readonly>
+                        <div class="rangeDate d-flex">
+                            <input class="selectDate" id="date-type" value="의뢰일자" name="dateType" style="z-index: 9995"
+                                   readonly>
+                            <input class="dateDate" id="dateDate" style="z-index: 9994" type="text"
+                                   value="2023-01-01 ~ 2023-01-01">
+                            <button class="btnCal" style="z-index: 9993" type="button"></button>
+                        </div>
+
+                        <input class="searchForm searchInput grayFont" id="study-type" name="originStudyType"
+                               placeholder="검사명"
+                               type="text" readonly>
+
+                        <input class="searchForm searchInput grayFont" id="patient-id" name="patientId"
+                               placeholder="차트번호"
+                               type="text" readonly>
+
+                        <input class="searchForm searchInput grayFont" id="patient-name" name="patientName"
+                               placeholder="환자명"
+                               type="text" readonly>
+                    </div>
+
+                    <div class="d-flex justify-content-center mx-auto">
+                        <button class="reset" id="btn-reset" type="button" style="color: gray; border-color: gray;">조건 초기화
+                        </button>
+                        <button id="btn-search" type="button" style="background-color: #808080;"
+                                class="manual-click-border">검색하기
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="dataTbForm d-block">
+                <div class="dataTbWrap d-flex">
+                    <div class="d-flex justify-content-start mr-auto">
+                        <button class="dataTbBtn manual-click-border" id="referral-duplicate-btn" type="button">중복정리</button>
+                        <button class="dataTbBtn manual-click-border" id="referral-rearrange-btn" type="button">배정의변경</button>
+                        <button class="dataTbBtn manual-click-border" id="referral-change-status-btn" type="button">의뢰상태변경</button>
+                        <button class="dataTbBtn manual-click-border" id="referral-change-study-type-btn" type="button">촬영유형변경</button>
+                        <button class="dataTbBtn manual-click-border" id="referral-change-urgent-type-btn" type="button">응급구분변경</button>
+                        <button class="dataTbBtn manual-click-border" id="referral-change-useyn-btn" type="button">사용여부변경</button>
+                        <button class="dataTbBtn manual-click-border" id="referral-change-patient-id-btn" type="button">차트정보변경</button>
+                        <button class="dataTbBtn manual-click-border" id="open-report-image-req-btn" type="button">병변위치 확인</button>
+                        <button class="dataTbBtn manual-click-border" id="merge-referrals-btn" type="button">병합</button>
+                        <button class="dataTbBtn manual-click-border" id="referrals-download-btn" type="button">Excel 다운로드</button>
+                    </div>
+
+                    <div class="d-inline-flex flex-wrap justify-content-end ml-auto">
+                        <span class="searchNum d-inline-flex" style="padding-top: 0.4rem;
+    padding-right: 0.6rem;">검색 결과(10)건</span>
+                        <input class="selectDate" value="10" readonly>
+                    </div>
+
+                    <div class="table-responsive" id="referrals-table-viewport">
+                        <div id="referrals-table_wrapper" class="dataTables_wrapper no-footer">
+                            <table class="table table-sm table-head table-hover text-center pointer no-footer"
+                                   id="referrals-table" style="width: 2496px;">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="0" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table" aria-label="
+
+
+                : activate to sort column ascending" style="width: 25px;">
+                                        <input autocomplete="off" class="dt-all-check" id="dt-all-check"
+                                               name="referrals-table-tbody" type="checkbox">
+                                        <label for="dt-all-check"></label>
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="1" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="응급구분: activate to sort column ascending" style="width: 45px;">응급구분
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="2" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="병원코드: activate to sort column ascending" style="width: 45px;">병원코드
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="3" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="병원명: activate to sort column ascending" style="width: 34px;">병원명
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="4" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="의뢰상태: activate to sort column ascending" style="width: 45px;">의뢰상태
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="5" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="병변: activate to sort column ascending" style="width: 23px;">병변
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="6" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="차트번호: activate to sort column ascending" style="width: 45px;">차트번호
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="7" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="환자명: activate to sort column ascending" style="width: 34px;">환자명
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="8" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="재판독여부: activate to sort column ascending" style="width: 57px;">재판독여부
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="9" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="촬영유형: activate to sort column ascending" style="width: 45px;">촬영유형
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="10" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="원내촬영유형: activate to sort column ascending" style="width: 68px;">
+                                        원내촬영유형
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="11" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="촬영일시: activate to sort column ascending" style="width: 45px;">촬영일시
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="12" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="의뢰일시: activate to sort column ascending" style="width: 45px;">의뢰일시
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="13" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="판독일시: activate to sort column ascending" style="width: 45px;">판독일시
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="14" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="판독보장일시: activate to sort column ascending" style="width: 68px;">
+                                        판독보장일시
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="15" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="판독반영일시: activate to sort column ascending" style="width: 68px;">
+                                        판독반영일시
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="16" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="자동배정의: activate to sort column ascending" style="width: 57px;">자동배정의
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="17" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="강제배정의: activate to sort column ascending" style="width: 57px;">강제배정의
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="18" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="중복여부: activate to sort column ascending" style="width: 45px;">중복여부
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="19" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="Modality: activate to sort column ascending" style="width: 54px;">
+                                        Modality
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="20" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="임상소견: activate to sort column ascending" style="width: 45px;">임상소견
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="21" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="촬영부위: activate to sort column ascending" style="width: 45px;">촬영부위
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="22" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="판독부위: activate to sort column ascending" style="width: 45px;">판독부위
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="23" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="참조여부: activate to sort column ascending" style="width: 45px;">참조여부
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="24" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="환자나이: activate to sort column ascending" style="width: 45px;">환자나이
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="25" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="환자성별: activate to sort column ascending" style="width: 45px;">환자성별
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="26" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="사용여부: activate to sort column ascending" style="width: 45px;">사용여부
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="27" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="판독의: activate to sort column ascending" style="width: 34px;">판독의
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="28" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="시리즈수: activate to sort column ascending" style="width: 45px;">시리즈수
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="29" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="이미지수: activate to sort column ascending" style="width: 45px;">이미지수
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="30" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="AccessionNo: activate to sort column ascending"
+                                        style="width: 81px;">AccessionNo
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="31" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="CVR: activate to sort column ascending" style="width: 27px;">CVR
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="32" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="소견서출력여부: activate to sort column ascending" style="width: 79px;">
+                                        소견서출력여부
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="33" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="대표판독의: activate to sort column ascending" style="width: 57px;">대표판독의
+                                    </th>
+                                    <th class="sorting_disabled sorting" colspan="1" data-column-index="34" rowspan="1"
+                                        scope="col" tabindex="0" aria-controls="referrals-table"
+                                        aria-label="소견: activate to sort column ascending" style="width: 23px;">소견
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="referrals-table-tbody">
+                                <!--CVR-->
+                                <tr class="odd">
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        <input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               name="check_study" value="746"><label for="dt-check"></label></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        응급
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        0221
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        가병원
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        적용완료
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        12345
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        이지아
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        CR
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        (흉부(채용검진)1매(계) )
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        2022-01-11 09:26:58
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        2022-10-17 17:31:07
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        2022-10-26 10:36:05
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        2022-10-17 18:35:14
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        2022-10-26 10:36:05
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        홍서연
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        CR
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        <span style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        Thorax
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        Lung
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        35
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        여자
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        홍서연
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        20222022011109040926013
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        긴급
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        미출력
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;">
+                                        윤여동
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(246, 148, 70); padding: 2px;"></td>
+                                </tr>
+                                <!--응급-->
+                                <tr class="even">
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        <input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               name="check_study" value="735"><label for="dt-check"></label></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        응급
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        0221
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        가병원
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        판독대기
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        13579
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        손명오
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        CR
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        (Abdomen Supine)
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        2022-09-22 12:12:51
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        2022-10-15 13:09:42
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        2022-10-17 09:59:59
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        고순도
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        CR
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        <span style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        Abdomen
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        Digestive
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        32
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        남자
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        2
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        2
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;">
+                                        365768
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(240, 125, 136); padding: 2px;"></td>
+                                </tr>
+                                <!--판독중-->
+                                <tr class="odd">
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        <input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               name="check_study" value="752"><label for="dt-check"></label></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        일반
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        0221
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        가병원
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        판독중
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        246810
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        최헤정
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        MG-HC
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        (MAMMO(__) )
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        2022-01-15 09:46:18
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        2022-10-17 17:54:33
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        2022-10-18 17:54:33
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        홍서연
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        MG
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        <span style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        Thorax
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        Breast
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        32
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        여자
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        4
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        00096292601001
+                                    </td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(0, 0, 0) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                </tr>
+                                <!--중복 + 판독중 -->
+                                <tr class="even">
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        <input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               name="check_study" value="1051"><label class="checked" for="dt-check"></label></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        일반
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        0261
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        라병원
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"
+                                        class="sorting_1">판독중
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        08080
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        문지영
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        MG
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        ([검진CR]유방4매(계) )
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        2019-11-15 09:38:16
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        2022-11-22 16:02:56
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        2022-11-23 16:02:56
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        홍서연
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        MG
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        <span style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        Thorax
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        Breast
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        62
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        여자
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;">
+                                        1906480027548014
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; background-color: rgb(167, 230, 255); padding: 2px;"></td>
+                                </tr>
+                                <!--원내취소-->
+                                <tr class="odd">
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        <input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               name="check_study" value="1023"><label for="dt-check"></label></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        일반
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        0257
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        바병원
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        원내취소
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        123123
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        전재준
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        CT
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        (CT Reading Outside Films(Brain) )
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        2019-07-13 20:25:57
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        2022-11-16 16:26:21
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        2022-11-17 16:26:21
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        민연준
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        CT
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        <span style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        Head
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        Brain
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        218
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        남자
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        0214235322
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                </tr>
+                                <!--원내판독-->
+                                <tr class="even">
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        <input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               name="check_study" value="1361"><label for="dt-check"></label></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        일반
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        0204
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        차병원
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        원내판독
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        321654
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        하도영
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        CR-HC
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        (Abdomen Erect )
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        2022-10-09 23:55:48
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        2023-01-16 18:09:49
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        2023-01-17 18:09:49
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        민연준
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        CR
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        <span style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        Abdomen
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        Digestive
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        57
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        남자
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        1
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;">
+                                        2228100604
+                                    </td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"
+                                        class="sorting_1"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(207, 28, 45) !important; background-color: rgb(196, 233, 255); padding: 2px;"></td>
+                                </tr>
+                                <!--재판독-->
+                                <tr class="odd">
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        <input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               name="check_study" value="1006"><label for="dt-check"></label></td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        일반
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        0250
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        다병원
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        적용완료
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        1348
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        이사라
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        재판독
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        MG-HC
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        ([검진CR]유방4매(계) )
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        2019-11-15 09:38:16
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        2022-11-10 15:06:04
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        2022-12-20 10:38:40
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        2022-11-11 15:06:04
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        2022-12-20 10:38:40
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        N
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        MG
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        <span style="width:80px;text-overflow:ellipsis;overflow:hidden;"> 유방 검진</span>
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        Thorax
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        Breast
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        참조
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        62
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        여자
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        Y
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        홍서연
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        2
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        3
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        1906480027548014
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;"></td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        미출력
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;">
+                                        윤여동
+                                    </td>
+                                    <td style="color: rgb(46, 111, 230) !important; background-color: rgb(255, 255, 255); padding: 2px;"></td>
+                                </tr>
+                                <!--중복-->
+                                <tr class="selected">
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"><input type="checkbox"
+                                                                                                         class="custom-checkbox chk-all dt-check"
+                                                                                                         name="check_study"
+                                                                                                         value="751"><label
+                                            for="dt-check"></label></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">일반</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">0221</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">가병원</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">판독대기</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">N</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">987654</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">강보미</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">MG-HC</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">(MAMMO 10%(__) )</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">2022-01-15 08:15:29
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">2022-10-17 17:51:43
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">2022-10-18 17:51:43
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">홍서연</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Y</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">MG</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"><span
+                                            style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Thorax</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Breast</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">30</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">여자</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Y</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">3</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">3</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">00096285701001</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"><input type="checkbox"
+                                                                                                         class="custom-checkbox chk-all dt-check"
+                                                                                                         name="check_study"
+                                                                                                         value="751"><label
+                                            for="dt-check"></label></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">일반</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">0221</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">가병원</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">판독대기</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">N</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">987654</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">강보미</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">MG-HC</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">(MAMMO 10%(__) )</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">2022-01-15 08:15:29
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">2022-10-17 17:51:43
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">2022-10-18 17:51:43
+                                    </td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">홍서연</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Y</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">MG</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"><span
+                                            style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Thorax</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Breast</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">30</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">여자</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">Y</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">3</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">3</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;">00096285701001</td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                    <td style="color: rgb(96, 37, 220) !important; padding: 2px;"></td>
+                                </tr>
+
+                                <!--일반-->
+                                <tr class="even">
+                                    <td style="padding: 2px;"><input type="checkbox"
+                                                                     class="custom-checkbox chk-all dt-check"
+                                                                     name="check_study" value="764"><label
+                                            for="dt-check"></label></td>
+                                    <td style="padding: 2px;">일반</td>
+                                    <td style="padding: 2px;">0204</td>
+                                    <td style="padding: 2px;">나병원</td>
+                                    <td style="padding: 2px;">적용완료</td>
+                                    <td style="padding: 2px;">Y</td>
+                                    <td style="padding: 2px;">0248</td>
+                                    <td style="padding: 2px;">문동은</td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;">CT</td>
+                                    <td style="padding: 2px;">([OUT] Brain CT(Non Contrast))</td>
+                                    <td style="padding: 2px;">2021-08-05 17:39:19</td>
+                                    <td style="padding: 2px;">2022-10-19 16:56:45</td>
+                                    <td style="padding: 2px;">2022-10-24 10:22:40</td>
+                                    <td style="padding: 2px;">2022-10-20 16:56:45</td>
+                                    <td style="padding: 2px;">2022-10-24 10:22:40</td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;">주여정</td>
+                                    <td style="padding: 2px;">N</td>
+                                    <td style="padding: 2px;">CT</td>
+                                    <td style="padding: 2px;"><span
+                                            style="width:80px;text-overflow:ellipsis;overflow:hidden;"></span></td>
+                                    <td style="padding: 2px;">Head</td>
+                                    <td style="padding: 2px;">Skull</td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;">0</td>
+                                    <td style="padding: 2px;">여자</td>
+                                    <td style="padding: 2px;">Y</td>
+                                    <td style="padding: 2px;">주여정</td>
+                                    <td style="padding: 2px;">1</td>
+                                    <td style="padding: 2px;">3</td>
+                                    <td style="padding: 2px;">05646802302</td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--                        </div>-->
+                    </div>
+
+
+                    <input type="hidden" id="page" value="1">
+                    <div aria-label="Pagination" id="pagination-content"
+                         class="d-inline-flex justify-content-center mx-auto" style="margin-bottom: 20px">
+                        <nav aria-label="Pagination">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <button class="page-link page-href" tabindex="-1" aria-disabled="true"
+                                            data-size="10" data-page="0">Previous
+                                    </button>
+                                </li>
+                                <li class="page-item active">
+                                    <button class="page-link page-href" data-size="10" data-page="1">1</button>
+                                </li>
+                                <li class="page-item ">
+                                    <button class="page-link page-href" data-size="10" data-page="2">Next</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+                <!--참조영상-->
+                <div class="dataTbWrap d-flex">
+                    <h3>참조영상</h3>
+
+                    <div class="table-responsive" id="reference-table-viewport">
+                        <div class="dataTables_wrapper no-footer" id="reference-table_wrapper">
+
+                            <div id="reference-table_wrapper" class="dataTables_wrapper no-footer">
+                                <table class="table table-sm table-head table-hover text-center pointer no-footer"
+                                       id="reference-table" style="margin-left: 0px; width: 1252px; min-width: 100%;">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="0" style="width: 63px;">PatientsID
+                                        </th>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="1" style="width: 139px;">Name
+                                        </th>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="2" style="width: 50px;">Age
+                                        </th>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="3" style="width: 54px;">Modality
+                                        </th>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="4" style="width: 166px;">촬영유형
+                                        </th>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="5" style="width: 166px;">임상소견
+                                        </th>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="6" style="width: 220px;">StudyDate
+                                        </th>
+                                        <th class="sorting_disabled" colspan="1" rowspan="1" scope="col"
+                                            data-column-index="7" style="width: 202px;">SaveDate
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="reference-table-tbody">
+                                    <tr class="odd">
+                                        <td style="padding: 2px;">987654</td>
+                                        <td style="padding: 2px;">강보미</td>
+                                        <td style="padding: 2px;">30</td>
+                                        <td style="padding: 2px;">MG</td>
+                                        <td style="padding: 2px;">(MAMMO 10%(__) )</td>
+                                        <td style="padding: 2px;">왼쪽 유방 절제</td>
+                                        <td style="padding: 2px;">2022-01-15 08:15:29</td>
+                                        <td style="padding: 2px;">2022-01-15 18:33:52</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td style="padding: 2px;">987654</td>
+                                        <td style="padding: 2px;">강보미</td>
+                                        <td style="padding: 2px;">30</td>
+                                        <td style="padding: 2px;">MG</td>
+                                        <td style="padding: 2px;">(MAMMO 10%(__) )</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">2022-02-20 08:15:29</td>
+                                        <td style="padding: 2px;">2022-02-20 17:51:42</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td style="padding: 2px;">987654</td>
+                                        <td style="padding: 2px;">강보미</td>
+                                        <td style="padding: 2px;">30</td>
+                                        <td style="padding: 2px;">MG</td>
+                                        <td style="padding: 2px;">(MAMMO 10%(__) )</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">2022-03-18 08:15:29</td>
+                                        <td style="padding: 2px;">2022-03-18 17:51:43</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td style="padding: 2px;">987654</td>
+                                        <td style="padding: 2px;">강보미</td>
+                                        <td style="padding: 2px;">30</td>
+                                        <td style="padding: 2px;">MG</td>
+                                        <td style="padding: 2px;">(MAMMO 10%(__) )</td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;">2022-04-21 08:15:29</td>
+                                        <td style="padding: 2px;">2022-04-21 18:54:03</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/managers`);
+    </script>
+</th:blcok>
+</html>

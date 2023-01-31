@@ -1,0 +1,15 @@
+#notarrange-table thead th, #reference-table-viewport table thead th { vertical-align: middle; }
+.table-responsive table td, .modal-body table td, .dataTables_wrapper table td { color: var(--fontDefaultColor) !important; }
+#btn-notarrange-reload, #btn-arrange-reload, #btn-delay-reload, #btn-cvr-reload { font-size: 14px; width: 90px !important; }
+#arrange-table_wrapper { overflow: hidden auto; height: 400px; }
+#arrange-table thead th, #delay-table thead th, #rearrange-table thead th, #cvr-table thead th, #reject-table thead th, #importance-table thead th { height: 32px; position: relative; color: var(--mainColor); vertical-align: middle; padding: 0.75rem !important; }
+table.dataTable.no-footer { border-bottom: 1px solid rgb(222, 226, 230); }
+tr.selected td { background-color: rgb(166, 180, 205) !important; }
+#notarrange-table tbody tr { cursor: pointer; }
+.delayWrap { width: 1248px; min-height: 100px; position: relative; top: -2px; z-index: 9996; background-color: var(--white); flex-wrap: wrap; margin-bottom: 16px; }
+.delayDiv { overflow: hidden auto; height: 670px; }
+#delay-table-tbody tr td { vertical-align: middle; }
+#select-rearrange-reading-dr-list { width: 155px; height: 32px; border: 1px solid var(--reGray3); background-color: var(--reGray6); background-image: url("../../../img/arrow-00.png"); background-position: calc(100% - 8px) center; background-repeat: no-repeat; border-radius: 4px; font-size: 13px; font-weight: 400; color: var(--fontDefaultColor); padding-left: 12px; margin-right: 8px; outline: none; margin-bottom: 8px; appearance: none; }
+#rearrange-table-tbody tr { line-height: 23px; }
+#applyCvrRequestModal .form-group .form-control { font-size: 0.85rem; }
+#reject-table tbody tr td { white-space: break-spaces; }

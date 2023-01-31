@@ -1,0 +1,255 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/hospital/statistics.css}">
+</head>
+<div layout:fragment="content_area">
+    <div id="page_content" class="contentWrap" style="height: 1173px !important">
+        <main>
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div>
+                    <a href="/manual/user/reception" class="manual-to-page-link-btn-group "
+                       aria-current="page">예정의뢰</a>
+                </div>
+
+                <div>
+                    <a href="/manual/user/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
+                </div>
+                <div>
+                    <a href="/manual/user/statistics" class="manual-to-page-link-btn-group active">조회하기</a>
+                </div>
+                <a class="intro" id="siteUrl"
+                   style="left: 516px;">통계 확인 페이지</a>
+                <div>
+                    <a href="/manual/user/referralReport" class="manual-to-page-link-btn-group">소견서 출력</a>
+                </div>
+                <div>
+                    <a href="/manual/user/serviceManage" class="manual-to-page-link-btn-group">공지사항</a>
+                </div>
+                <div>
+                    <a href="/manual/user/myPage" class="manual-to-page-link-btn-group">마이페이지</a>
+                </div>
+            </div>
+            <hr>
+
+            <form id="search-form" class="pt-4" style="height: 313px; width: 1320px !important; padding-right: 0;">
+
+                <!--        <menu class="statistics" sec:authorize="hasAnyRole('ROLE_SM')">-->
+                <!--          <h1 class="current" onclick="location.href=_ctx + 'statistics/tat'">TAT 조회</h1>-->
+                <!--        </menu>-->
+
+                <div class="form d-flex">
+                    <label for="searchCondition" class="col-1 labelBlue p-0 ">검색조건</label>
+                    <div class="d-flex flex-wrap col-6 p-0 justify-content-start ml-auto"
+                    >
+
+                        <div class="mr-3">
+                            <input class="form-control form-control-sm text-center pointer" id="hospitalName"
+                                   readonly="" data-sendhospitalcode="0259" value="병원명(0123)" type="text"
+                                   placeholder="검색할 병원을 선택(전체병원)">
+                            <input type="hidden" id="authCheck" value="SM" data-sendhospitalcode="0123">
+                        </div>
+                        <input class="condition column statistics-btn select-readonly" id="urgentType"
+                               name="urgentType" value="전체" readonly>
+<!--                        <select class="condition column statistics-btn manual-click-border" id="urgentType"-->
+<!--                                name="urgentType">-->
+<!--                            <option value="T">전체</option>-->
+
+<!--                            <option value="N">일반</option>-->
+
+<!--                            <option value="Y">응급</option>-->
+
+<!--                        </select>-->
+
+                        <div class="rangeDate d-flex mr-auto justify-content-start col-4">
+                            <div class="dateTxt d-none">조회 일자</div>
+                            <input type="hidden" class="form-control" id="start-date" readonly="" name="startDate"
+                                   value="2022-12-01">
+                            <input type="hidden" class="form-control" id="end-date" readonly="" name="endDate"
+                                   value="2022-12-20">
+                            <input type="text" class="dateDate sm">
+                            <button type="button" class="btnCal sm"></button>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap justify-content-end ml-auto col-5 p-0">
+                        <!--            <button class="reset mt-0" id="btn-reset" type="button">조건 초기화</button>-->
+
+                        <button type="button" id="btn-reset-dr" class="reset mt-0"  style="color: gray; border-color: gray"
+                        >조건 초기화
+                        </button>
+                        <button type="button" id="btn-search" class="mt-0" style="background-color: gray;  border-color: gray;">검색하기</button>
+                        <button class="download mt-0 manual-click-border" id="btn-download" type="button"
+                        >다운로드
+                        </button>
+                    </div>
+                </div>
+
+                <!--TAT 조회 내용-->
+                <div class="dataTbForm d-block">
+                    <div class="dataTbWrap d-flex">
+                        <div id="tat-list-table_content">
+                            <div id="tat-list-table_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="dt-buttons">
+                                    <button class="dt-button buttons-excel buttons-html5 d-none" tabindex="0"
+                                            aria-controls="tat-list-table" type="button"><span>Excel Download</span>
+                                    </button>
+                                </div>
+                                <div id="tat-list-table_processing" class="dataTables_processing"
+                                     style="display: none;">Processing...
+                                </div>
+                                <div class="dataTables_scroll dtfc-has-left" style="position: relative;">
+                                    <div class="dataTables_scrollHead"
+                                         style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+                                        <div class="dataTables_scrollHeadInner"
+                                             style="box-sizing: content-box; width: 1252px; padding-right: 0px;">
+                                            <table class="table table-head text-center table-bordered dataTable no-footer"
+                                                   style="margin-left: 0px; width: 1252px;">
+                                                <thead class="thead-light" id="tat-thead">
+                                                <tr class="">
+                                                    <th class="align-middle " scope="col" rowspan="1" colspan="1"
+                                                        style="width: 88.0938px;">Modality
+                                                    </th>
+                                                    <th class="align-middle " colspan="2" scope="col" rowspan="1"
+                                                        style="width: 212.188px;">CT
+                                                    </th>
+                                                    <th class="align-middle " colspan="2" scope="col" rowspan="1"
+                                                        style="width: 212.188px;">MR
+                                                    </th>
+                                                    <th class="align-middle " colspan="2" scope="col" rowspan="1"
+                                                        style="width: 212.188px;">MG
+                                                    </th>
+                                                    <th class="align-middle " colspan="2" scope="col" rowspan="1"
+                                                        style="width: 212.188px;">CR
+                                                    </th>
+                                                    <th class="align-middle sorting_disabled " rowspan="2"
+                                                        scope="col" colspan="1" style="width: 86.1562px;">합계
+                                                    </th>
+                                                </tr>
+                                                <tr class="">
+                                                    <th scope="col" class="sorting_disabled dtfc-fixed-left "
+                                                        rowspan="1" colspan="1"
+                                                        style="width: 88.0938px; left: 0px; position: sticky;">기간
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 내
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 외
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 내
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 외
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 내
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 외
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 내
+                                                    </th>
+                                                    <th scope="col" class="sorting_disabled " rowspan="1" colspan="1"
+                                                        style="width: 87.0938px;">1시간 외
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="dataTables_scrollBody"
+                                         style="position: relative; overflow: auto; max-height: 50vh; width: 100%;">
+                                        <table class="table table-head text-center table-bordered no-footer dtfc-has-left dataTable"
+                                               id="tat-list-table" style="width: 100%;">
+                                            <tbody>
+                                            <tr class="odd">
+                                                <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                                    2022-11
+                                                </td>
+                                                <td>3</td>
+                                                <td>4</td>
+                                                <td>0</td>
+                                                <td>1</td>
+                                                <td>0</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>11</td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                                    2022-12
+                                                </td>
+                                                <td>3</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>3</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="dtfc-right-top-blocker"
+                                         style="background-color: rgb(255, 255, 255); bottom: 0px; display: block; position: absolute; width: 1px; right: 0px; top: 0px; height: 41px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+
+        <!-- MANUAL: 다운로드  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="excelDownManualModal" data-backdrop="static"
+             aria-labelledby="excelDownManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">다운로드</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="excelDownManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner my-5">
+                                <div class="carousel-item active">
+                                    <div class="row manual-area ">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img th:src="@{/web/css/img/manual/statistics/조회하기-다운로드.png}">
+                                        </div>
+                                        <div class="vr" style="left: 60%;"></div>
+                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">설정한 기간_병원명(병원코드)_TAT.xlsx</span> 로 다운로드
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/js/manual/statistics.js}"></script>
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href',`${webContext}/statistics`);
+    </script>
+</th:blcok>
+</html>

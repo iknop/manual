@@ -1,0 +1,19 @@
+.dataTbBtn:not(#dicom-scp) {
+    cursor: url('../img/manual/cursor/question-mark.png'), auto !important;
+}
+
+#reception-send-request-area {
+    cursor: url('../img/manual/cursor/question-mark.png'), auto !important;
+}
+
+#btn-search {
+    cursor: url('../img/manual/cursor/question-mark.png'), auto !important;
+}
+
+.btn-send-request {
+    cursor: url('../img/manual/cursor/question-mark.png'), auto !important;
+}
+
+.form-control {
+    font-size: 12.5px !important;
+}

@@ -1,0 +1,271 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/hospital/myPage.css}">
+</head>
+<div layout:fragment="content_area">
+    <div id="page_content" class="contentWrap" style="height: 1300px !important">
+        <main id="editHospInfo">
+
+
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div>
+                    <a href="/manual/user/reception" class="manual-to-page-link-btn-group "
+                       aria-current="page">예정의뢰</a>
+                </div>
+                <div>
+                    <a href="/manual/user/referrals" class="manual-to-page-link-btn-group">완료의뢰</a>
+                </div>
+                <div>
+                    <a href="/manual/user/statistics" class="manual-to-page-link-btn-group ">조회하기</a>
+                </div>
+                <div>
+                    <a href="/manual/user/referralReport" class="manual-to-page-link-btn-group ">소견서 출력</a>
+                </div>
+
+                <div>
+                    <a href="/manual/user/serviceManage" class="manual-to-page-link-btn-group ">공지사항</a>
+                </div>
+                <div>
+                    <a href="/manual/user/myPage" class="manual-to-page-link-btn-group active">마이페이지</a>
+                </div>
+                <a class="intro" id="siteUrl"
+                   style="left: 912px; color: var(--redOrange) !important;">계정 정보확인 및 수정 페이지</a>
+            </div>
+
+            <hr>
+            <form id="search-form" class="pt-4">
+                <div class="form d-flex">
+                    <div class="d-flex justify-content-start mr-auto">
+                    </div>
+                    <div calss="d-inline-flex flex-wrap justify-content-end ml-auto row">
+                        <button id="" class="dataTbBtn mb-2 manual-click-border" data-dismiss="modal"
+                                data-toggle="modal" type="button">개인정보수정
+                        </button>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-2 text-center d-inline-flex align-items-center justify-content-center border-top">
+                            <label class="col-form-label-lg text-center labelBlue py-0 labelHead"
+                                   style="font-size: 16px">개인정보</label>
+                        </div>
+                        <div class="col-10 row justify-content-between border-top">
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0" for="userLoginId"
+                                       style="margin-top: 0.5vh;">로그인ID</label>
+                                <input class="col-sm-6 form-control text-center" id="userLoginId" readonly=""
+                                       style="margin-top: 0.5vh;" title="" type="text" name="loginId" value="로그인 아이디">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0" for="userName"
+                                       style="margin-top: 0.5vh;">이름</label>
+                                <input class="col-sm-6 form-control text-center" id="userName" readonly=""
+                                       style="margin-top: 0.5vh;" title="" type="text" name="userName" value="가입자 이름">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0" for="userTitle"
+                                       style="margin-top: 0.5vh;">직함</label>
+                                <input class="col-sm-6 form-control text-center" id="userTitle" readonly=""
+                                       style="margin-top: 0.5vh;" title="" type="text" name="userTitle" value="직함">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0" for="userTelNo"
+                                       style="margin-top: 0.5vh;">전화번호</label>
+                                <input class="col-sm-6 form-control text-center" id="userTelNo" readonly=""
+                                       style="margin-top: 0.5vh;" title="" type="text" name="userTelNo"
+                                       value="02-1234-1234">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="userEmailAddress" style="margin-top: 0.5vh;">이메일주소</label>
+                                <input class="col-sm-6 form-control text-center" id="userEmailAddress" readonly=""
+                                       style="margin-top: 0.5vh;" title="" type="text" name="userEmailAddress"
+                                       value="이메일 주소">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="billingSendYN" style="margin-top: 0.5vh;">세금계산서담당</label>
+
+                                <input class="col-sm-6 form-control text-center" id="billingSendYN" readonly=""
+                                       style="margin-top: 0.5vh;" value="-" title="" type="text">
+
+
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="billingSendYN" style="margin-top: 0.5vh;">청구담당</label>
+
+
+                                <input class="col-sm-6 form-control text-center" id="accountYN" readonly=""
+                                       style="margin-top: 0.5vh;" title="" type="text" name="accountYNDesc" value="담당">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="dataTbWrap d-flex mb-4 form">
+                    <div class="d-flex justify-content-start mr-auto">
+                    </div>
+                    <div calss="d-inline-flex flex-wrap justify-content-end ml-auto row">
+                        <button class="dataTbBtn mb-2 manual-click-border" data-dismiss="modal"
+                                data-toggle="modal" type="button" id="editHospitalInfo">병원정보수정
+                        </button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2 text-center d-inline-flex align-items-center justify-content-center border-top">
+                            <label class="col-form-label-lg text-center labelBlue py-0 labelHead"
+                                   style="font-size: 16px">병원정보</label>
+                        </div>
+                        <div class="col-10 row justify-content-between border-top">
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="hospital-name" style="margin-top: 0.5vh;">병원명</label>
+                                <input class="col-sm-6 form-control text-center" id="hospital-name" readonly=""
+                                       style="margin-top: 0.5vh;" title="" type="text" name="hospitalName" value="병원명">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0" for="reqDrName">대표원장</label>
+                                <input class="col-sm-6 form-control text-center" id="reqDrName" readonly="" type="text"
+                                       name="reqDrName" value="대표원장">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="hospitalBizNo">사업자번호</label>
+                                <input class="col-sm-6 form-control text-center" id="hospitalBizNo" readonly=""
+                                       type="text" name="hospitalBizNo" value="사업자번호">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0" for="postCode">우편번호</label>
+                                <input class="col-sm-6 form-control text-center" id="postCode" readonly="" type="text"
+                                       name="postCode" value="우편번호">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="hospitalAddress">주소</label>
+                                <input class="col-sm-6 form-control text-center" id="hospitalAddress" readonly=""
+                                       type="text" name="hospitalAddress"
+                                       value="주소">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="hospitalTelNo">대표전화번호</label>
+                                <input class="col-sm-6 form-control text-center" id="hospitalTelNo" readonly=""
+                                       type="text" name="hospitalTelNo" value="000-0000-0000">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0"
+                                       for="hospitalFaxNo">대표팩스번호</label>
+                                <input class="col-sm-6 form-control text-center" id="hospitalFaxNo" readonly=""
+                                       type="text" name="hospitalFaxNo" value="000-0000-0000">
+                            </div>
+                            <div class="col-12 row border-bottom py-2 px-0 mx-0">
+                                <label class="col-sm-6 col-form-label-lg text-md-center labelBlue p-0" for="areaName">지역구분</label>
+                                <input class="col-sm-6 form-control text-center" id="areaName" readonly="" type="text"
+                                       data-area-type="I" name="areaName" value="경기">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--            </div>-->
+
+                </div>
+
+                <div class="dataTbWrap d-flex">
+                    <h3>병원담당자</h3>
+
+                    <div id="hospital-manager-table_wrapper" class="dataTables_wrapper no-footer">
+                        <table class="table table-bordered dataTable no-footer dtfc-has-left"
+                               id="hospital-manager-table">
+                            <thead class="thead-light">
+                            <tr class="text-center">
+                                <th class="sorting_disabled dtfc-fixed-left" rowspan="1" colspan="1"
+                                    style="width: 170px; left: 0px; position: sticky;">직함
+                                </th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170px;">이름</th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170px;">연락처</th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170px;">이메일</th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 170px;">비고</th>
+                                <th class="sorting_disabled other-manager-edit pointer" rowspan="1" colspan="1"
+                                    style="width: 170px;">수정
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center" id="hospital-manager-table-tbody">
+                            <tr class="odd">
+                                <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">원장</td>
+                                <td>원장명</td>
+                                <td>02-1234-1234</td>
+                                <td>이메일 주소</td>
+                                <td>청구</td>
+                                <td class=" other-manager-edit pointer"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </form>
+        </main>
+        <!-- MANUAL: 마이페이지 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="myPageManualModal" data-backdrop="static"
+             aria-labelledby="myPageManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">정보수정</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myPageManualCaptions" class="carousel" data-bs-ride="false">
+                            <div class="carousel-inner mb-5">
+                                <div class="carousel-item active">
+                                    <div class="row manual-area my-auto">
+                                        <div class="d-block mx-auto col-8 text-center">
+                                            <img th:src="@{/web/css/img/manual/myPage/마이페이지-수정버튼.png}">
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="mr-0 my-auto mt-3 col-3 manual-desc-box pl-5">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    클릭 시 <span class="text-emphasis">로그인 계정<br>정보 수정</span>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    클릭 시 <span class="text-emphasis">병원정보 수정</span>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">3</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    클릭 시 <span class="text-emphasis">병원담당자 <br>정보 수정</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/js/manual/common/header.js}"></script>
+    <script th:src="@{/js/manual/myPage.js}"></script>
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/myPage`);
+    </script>
+</th:blcok>
+</html>

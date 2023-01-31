@@ -1,10 +1,7 @@
-/** maual화면 coachmark **/
-
 $(function () {
 
 
     // 검색하기
-    cursor('#btn-search')
     $('#btn-search').on('click', function () {
         $('#searchManualModal').modal('show')
 
@@ -19,7 +16,6 @@ $(function () {
         }
     })
     // 출력하기
-    cursor('#btn-report-print')
     $('#btn-report-print').on('click', function () {
         $('#printManualModal').modal('show')
 

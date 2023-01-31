@@ -3,7 +3,6 @@
 $(function () {
 
     // 검색
-    cursor('#btn-search')
     $('#btn-search').on('click', function () {
         $('#searchManualModal').modal('show')
 
@@ -19,7 +18,6 @@ $(function () {
         }
     })
     // 응급변경
-    cursor('#referral-change-urgent-type-btn')
     $('#referral-change-urgent-type-btn').on('click', function () {
         $('#changeUrgentManualModal').modal('show')
 
@@ -35,7 +33,6 @@ $(function () {
         }
     })
     // 의뢰취소
-    cursor('#referral-requestConfig-cancel-btn')
     $('#referral-requestConfig-cancel-btn').on('click', function () {
         $('#cancelRequestManualModal').modal('show')
 
@@ -51,7 +48,6 @@ $(function () {
         }
     })
     // 정보변경
-    cursor('#referral-edit-btn')
     $('#referral-edit-btn').on('click', function () {
         $('#editReferralManualModal').modal('show')
 
@@ -67,7 +63,6 @@ $(function () {
         }
     })
     // Excel 다운로드
-    cursor('#btn-download')
     $('#btn-download').on('click', function () {
         $('#excelDwnManualModal').modal('show')
 
@@ -83,7 +78,6 @@ $(function () {
         }
     })
     // 소견복사
-    cursor('#btn-save-clipboard-report')
     $('#btn-save-clipboard-report').on('click', function () {
         $('#saveReportManualModal').modal('show')
 
@@ -99,7 +93,6 @@ $(function () {
         }
     })
     // 병변ㅟㅊ
-    cursor('#open-report-image-req-btn')
     $('#open-report-image-req-btn').on('click', function () {
         $('#reportImgManualModal').modal('show')
 

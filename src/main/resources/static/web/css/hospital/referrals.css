@@ -1,0 +1,72 @@
+#study-comment{
+    overflow-y: scroll;
+    min-height: 70px;
+}
+
+#study-reportConfig-finding{
+    overflow-y: scroll;
+    min-height: 146px;
+}
+
+#study-reportConfig-finding::-webkit-scrollbar-thumb, #study-comment::-webkit-scrollbar-thumb{
+    background-color: #FFFFFF;
+}
+
+tr.selected td {
+    background-color: #a6b4cd !important;
+}
+
+#requestConfig-cancel-table thead th, #change-urgent-type-table thead th{
+    height: 32px;
+    position: relative;
+    color: var(--mainColor);
+    padding: 0.75rem !important;
+    vertical-align: middle;
+    background-color: var(--dTbThColor) !important;
+}
+
+table.dataTable.no-footer{
+    border-bottom: 1px solid lightgray;
+}
+
+
+#select-change-urgent-type {
+    width: 155px;
+    height: 32px;
+    border: 1px solid var(--reGray3);
+    background-color: var(--reGray6);
+    background-image: url(../../../img/arrow-00.png);
+    background-position: calc(100% - 8px) center;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--fontDefaultColor);
+    padding-left: 12px;
+    margin-right: 8px;
+    outline: none;
+    margin-bottom: 8px;
+    appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -webkit-appearance: none;
+}
+
+#change-urgent-type-table tbody tr td, #requestConfig-cancel-table tbody tr td{
+    white-space: break-spaces;
+}
+
+#requestCancelModal, #changeUrgentModal{
+    z-index: 9999;
+}
+
+.dropdown-item-text{
+    font-size: 14px;
+}
+.dataTbBtn, #open-report-image-req-btn, #btn-save-clipboard-report {
+    cursor: url("../img/manual/cursor/question-mark.png"), auto !important;
+}
+
+#btn-search {
+    cursor: url("../img/manual/cursor/question-mark.png"), auto !important;
+}

@@ -1,0 +1,4 @@
+.changeStatus-width-sm {
+    text-overflow:ellipsis;
+    overflow:hidden;
+}

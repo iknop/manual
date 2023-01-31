@@ -53,7 +53,7 @@ header.default a + a::after {
 
 
 header.manual-hospital > ul > li.serviceManage > span, header.readingDr > ul > li.serviceManage > span {
-    background-image: url(../../img/icon-gnb-05.png);
+    background-image: url(../../web/css/img/icon-gnb-05.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -97,7 +97,7 @@ header.manual-hospital > ul > li > span {
 }
 
 header.manual-hospital > ul > li.start > span {
-    background-image: url(../../img/icon-manual-start.png);
+    background-image: url(../../web/css/img/icon-manual-start.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -105,7 +105,7 @@ header.manual-hospital > ul > li.start > span {
 }
 
 header.manual-hospital > ul > li.reception > span {
-    background-image: url(../../img/icon-gnb-2-01.png);
+    background-image: url(../../web/css/img/icon-gnb-2-01.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -113,7 +113,7 @@ header.manual-hospital > ul > li.reception > span {
 }
 
 header.manual-hospital > ul > li.referral > span {
-    background-image: url(../../img/icon-gnb-2-02.png);
+    background-image: url(../../web/css/img/icon-gnb-2-02.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -121,7 +121,7 @@ header.manual-hospital > ul > li.referral > span {
 }
 
 header.manual-hospital > ul > li.calculate > span {
-    background-image: url(../../img/icon-gnb-2-03.png);
+    background-image: url(../../web/css/img/icon-gnb-2-03.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -129,7 +129,7 @@ header.manual-hospital > ul > li.calculate > span {
 }
 
 header.manual-hospital > ul > li.report > span {
-    background-image: url(../../img/icon-gnb-2-04.png);
+    background-image: url(../../web/css/img/icon-gnb-2-04.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -137,7 +137,7 @@ header.manual-hospital > ul > li.report > span {
 }
 
 header.manual-hospital > ul > li.support > span {
-    background-image: url(../../img/icon-gnb-06.png);
+    background-image: url(../../web/css/img/icon-gnb-06.png);
     background-position: left center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -163,7 +163,7 @@ header.manual-hospital ul + menu {
 header.manual-hospital ul + menu span {
     justify-content: end;
     display: flex;
-    background-image: url(../../img/icon-user.png);
+    background-image: url(../../web/css/img/icon-user.png);
     background-position: center center;
     background-repeat: no-repeat;
     width: 32px;
@@ -278,7 +278,7 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 }
 
 .manual-to-page-link-btn-group.active {
-    color: var(--redOrange);
+    color: var(--redOrange) !important;
     /*background-color: var(--redOrange);*/
     text-decoration: underline !important;
     text-underline-position: under;
@@ -294,7 +294,7 @@ header.manual-hospital ul + menu ul > li:last-child > a {
     color: #4d5256;
     margin-right: 7px;
     padding: 11px;
-    background-image: url(../../img/arrow-00.png);
+    background-image: url(../../web/css/img/arrow-00.png);
     background-position: calc(100% - 12px) center;
     background-repeat: no-repeat;
 }

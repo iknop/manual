@@ -1,9 +1,10 @@
-$(function () {
+$(function(){
     // 검색조건
-    cursor('#btn-search')
+    // cursor('#btn-search')
     $('#btn-search').on('click', function () {
+        console.log('click ')
         $('#searchManualModal').modal('show')
-
+        console.log('click ')
         const descText = $('.manual-desc-box');
         let timer = 100;
 
@@ -17,7 +18,7 @@ $(function () {
     })
 
     // 정보변경 버튼
-    cursor('#reception-edit-btn')
+    // cursor('#reception-edit-btn')
     $('#reception-edit-btn').on('click', function () {
         $('#editManualModal').modal('show')
 
@@ -33,7 +34,7 @@ $(function () {
 
     })
     // 병합 버튼
-    cursor('#reception-merge-btn')
+    // cursor('#reception-merge-btn')
     $('#reception-merge-btn').on('click', function () {
         $('#mergeManualModal').modal('show')
 
@@ -49,7 +50,7 @@ $(function () {
         }
     })
     // 삭제 버튼
-    cursor('#reception-delete-btn')
+    // cursor('#reception-delete-btn')
     $('#reception-delete-btn').on('click', function () {
         $('#deleteManualModal').modal('show')
 
@@ -66,7 +67,7 @@ $(function () {
     })
 
     // Disk Add 버튼
-    cursor('#reception-disk-add-btn')
+    // cursor('#reception-disk-add-btn')
     $('#reception-disk-add-btn').on('click', function () {
         $('#diskAddManualModal').modal('show')
 
@@ -82,7 +83,7 @@ $(function () {
         }
     })
     // Folder Add 버튼
-    cursor('#reception-folder-add-btn')
+    // cursor('#reception-folder-add-btn')
     $('#reception-folder-add-btn').on('click', function () {
         $('#folderAddManualModal').modal('show')
 
@@ -98,7 +99,7 @@ $(function () {
         }
     })
     // 의뢰전송 버튼
-    cursor('#reception-send-request-area')
+    // cursor('#reception-send-request-area')
     $('#reception-send-request-area').on('click', function () {
         $('#sendRequestManualModal').modal('show')
 
@@ -115,7 +116,7 @@ $(function () {
     })
 
     // 일시 버튼
-    cursor('#date-type')
+    // cursor('#date-type')
     $('#date-type').on('click', function () {
         $('#termSetManualModal').modal('show')
 

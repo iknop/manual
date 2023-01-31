@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="context-path" content="/web/"/>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+
+    <meta content="df69026e-ac6e-4162-bb56-fa3f0e75af1e" name="_csrf_token"/>
+    <meta content="X-XSRF-TOKEN" name="_csrf_header_name"/>
+
+    <link rel="stylesheet" th:href="@{/web/ext/jquery/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/jquery/css/jquery.dataTables.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/jquery/css/jquery.datetimepicker.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap-grid.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap-reboot.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/datatables/datatables.css}">
+
+    <link rel="stylesheet" th:href="@{/web/ext/font-awesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/fullcalendar/core/main.min.css}">
+<!--    <link rel="stylesheet" th:href="@{/web/css/ext/common.css}">-->
+    <link rel="stylesheet" th:href="@{/web/css/ext/user/common.css}">
+    <link rel="stylesheet" th:href="@{/web/css/ext/admin/contents.css}">
+
+    <link rel="stylesheet" th:href="@{/web/css/ext/pretendard.css}">
+    <link rel="stylesheet" th:href="@{/web/css/ext/daterangepicker.css}">
+    <link rel="stylesheet" th:href="@{/web/css/managers/dataTable.css}">
+
+    <link rel="icon" type="image/png" th:href="@{/web/img/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{/web/img/favicon-16x16.png}" sizes="16x16">
+    <link rel="stylesheet" th:href="@{/css/layout/manual.css}">
+
+
+
+    <style>
+        /*.content {*/
+        /*    height: 100%;*/
+        /*}*/
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content_area" class="content"></div>
+
+
+<!--반드시 공용스크립트 먼저 선언: 옮기면 못읽음 에러남-->
+<script th:src="@{/web/ext/jquery/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery-ui.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery-cropper.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery.cookie.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery.dataTables.min.js}"></script>
+
+<script th:src="@{/web/ext/jquery/js/jquery.datetimepicker.full.min.js}"></script>
+<script th:src="@{/web/ext/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/web/ext/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/web/ext/bootstrap/js/bootstrap-table.min.js}"></script>
+<script th:src="@{/web/ext/datatables/datatables.js}"></script>
+
+<script th:src="@{/web/ext/cookie/cookie.js}"></script>
+<script th:src="@{/web/ext/daterangepicker/daterangepicker.js}"></script>
+<script th:src="@{/web/js/common/common.js}"></script>
+<script th:src="@{/web/js/common/date_common.js}"></script>
+
+<script referrerpolicy="origin"
+        src="https://cdn.tiny.cloud/1/w9sz9csqqpa90672qqflhd6j19nsyap1vup1rw0q548t7bns/tinymce/5/tinymce.min.js"></script>
+
+<script th:src="@{/web/js/common/auth_common.js}"></script>
+<script th:src="@{/web/js/common/toast_generator.js}"></script>
+<script th:src="@{/web/js/common/swal.js}"></script>
+<script th:src="@{/web/ext/handlebars/js/handlebars-v4.1.1.js}"></script>
+<script type="text/javascript">
+    let status_ctx = "/admin/status"
+</script>
+<script type="text/javascript">
+    const authUrl = "https://stg.xray21.com/auth"
+    const webUrl = "https://stg.xray21.com/web"
+</script>
+
+<!--개별 script-->
+<th:block layout:fragment="script_area">
+</th:block>
+</body>
+</html>
