@@ -29,5 +29,5 @@ label.single-hospital-search {
 }
 
 #btn-download {
-    cursor: url("../img/manual/cursor/question-mark.png"), auto !important;
+    cursor: url("../../img/manual/question-mark.png"), auto !important;
 }

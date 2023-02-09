@@ -13,39 +13,35 @@
     <meta content="a2c4b6f3-4c95-4a40-ae1a-0d35404fe870" name="_csrf_token">
     <meta content="X-CSRF-TOKEN" name="_csrf_header_name">
 
-    <link rel="icon" type="image/png" th:href="@{/web/css/img/favicon-32x32.png}" sizes="32x32">
-    <link rel="icon" type="image/png" th:href="@{/web/css/img/favicon-16x16.png}" sizes="16x16">
+    <link rel="icon" type="image/png" th:href="@{/web/img/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{/web/img/favicon-16x16.png}" sizes="16x16">
 
-    <link rel="stylesheet" th:href="@{/ext/font-awesome/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/ext/sweetalert2/css/sweetalert2.min.css}">
-    <link rel="stylesheet" th:href="@{/css/managers/base.css}">
+    <link rel="stylesheet" th:href="@{/web/css/layout/base.css}">
 
-    <link rel="stylesheet" th:href="@{/web/css/ext/user/common.css}">
-    <link rel="stylesheet" th:href="@{/web/css/ext/user/contents.css}">
+    <link rel="stylesheet" th:href="@{/web/css/manual/user/common.css}">
+    <link rel="stylesheet" th:href="@{/web/css/manual/user/contents.css}">
 
-    <link rel="stylesheet" th:href="@{/ext/jquery/css/jquery-ui.min.css}">
-    <link rel="stylesheet" th:href="@{/ext/datatables/datatables.css}">
-    <link rel="stylesheet" th:href="@{/ext/jquery/css/jquery.dataTables.min.css}">
-    <link rel="stylesheet" th:href="@{/ext/jquery/css/jquery.datetimepicker.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/jquery/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/jquery/css/jquery.dataTables.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/jquery/css/jquery.datetimepicker.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap.min.css}">
 
-    <link rel="stylesheet" th:href="@{/ext/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/ext/bootstrap/css/bootstrap-grid.css}">
-    <link rel="stylesheet" th:href="@{/ext/bootstrap/css/bootstrap-reboot.min.css}">
-    <link rel="stylesheet" th:href="@{/ext/bootstrap/css/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap-grid.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap-reboot.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/bootstrap/css/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/datatables/datatables.css}">
 
-    <link rel="stylesheet" th:href="@{/ext/datatables/css/datatables.css}">
-    <link rel="stylesheet" th:href="@{/ext/font-awesome/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/ext/fullcalendar/core/main.min.css}">
-
+    <link rel="stylesheet" th:href="@{/web/ext/font-awesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/web/ext/fullcalendar/core/main.min.css}">
     <link rel="stylesheet" th:href="@{/web/css/ext/pretendard.css}">
     <link rel="stylesheet" th:href="@{/web/css/ext/daterangepicker.css}">
-<!--    <link rel="stylesheet" th:href="@{/css/ext/daterangepicker.css}">-->
+    <link rel="stylesheet" th:href="@{/web/css/managers/dataTable.css}">
+
+    <link rel="stylesheet" th:href="@{/web/css/layout/manual.css}">
 
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Pragma" content="no-cache">
 
-    <link rel="stylesheet" th:href="@{/css/layout/header.css}">
-    <link rel="stylesheet" th:href="@{/css/layout/manual.css}">
 
     <style>
         .content {
@@ -55,48 +51,44 @@
 </head>
 <body>
 
-<!--&lt;!&ndash;header&ndash;&gt;-->
-<!--<div th:replace="fragments/header::header"></div>-->
+
 <!--  content  -->
 <div layout:fragment="content_area" class="content"></div>
 
 
 <!--반드시 공용스크립트 먼저 선언: 옮기면 못읽음 에러남-->
-<script th:src="@{/ext/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery-ui.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery-cropper.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery.cookie.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery.dataTables.min.js}"></script>
 
-<script th:src="@{/ext/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/ext/bootstrap/js/bootstrap-table.min.js}"></script>
+<script th:src="@{/web/ext/jquery/js/jquery.datetimepicker.full.min.js}"></script>
+<script th:src="@{/web/ext/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/web/ext/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/web/ext/bootstrap/js/bootstrap-table.min.js}"></script>
+<script th:src="@{/web/ext/datatables/datatables.js}"></script>
 
-<script th:src="@{/ext/jquery/js/jquery-ui.min.js}"></script>
-<script th:src="@{/ext/jquery/js/jquery-cropper.min.js}"></script>
-<script th:src="@{/ext/jquery/js/jquery.cookie.js}"></script>
-<script th:src="@{/ext/jquery/js/jquery.dataTables.min.js}"></script>
-<script th:src="@{/ext/popper/js/popper.min.js}"></script>
-<script th:src="@{/ext/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/ext/datatables/datatables.js}"></script>
-<script th:src="@{/ext/handlebars/js/handlebars-v4.1.1.js}"></script>
+<script th:src="@{/web/ext/cookie/cookie.js}"></script>
+<script th:src="@{/web/ext/daterangepicker/daterangepicker.js}"></script>
+<script th:src="@{/web/js/common/common.js}"></script>
+<script th:src="@{/web/js/common/date_common.js}"></script>
 
-<script th:src="@{/ext/sweetalert2/js/sweetalert2.all.min.js}"></script>
-<script th:src="@{/ext/font-awesome/js/all.min.js}"></script>
-<script th:src="@{/js/common/common.js}"></script>
-<script th:src="@{/js/common/navbar.js}"></script>
+<script referrerpolicy="origin"
+        src="https://cdn.tiny.cloud/1/w9sz9csqqpa90672qqflhd6j19nsyap1vup1rw0q548t7bns/tinymce/5/tinymce.min.js"></script>
 
-<script th:src="@{/js/common/date_common.js}"></script>
-<script th:src="@{webjars/sockjs-client/sockjs.min.js}"></script>
-<script th:src="@{webjars/stomp-websocket/stomp.min.js}"></script>
+<script th:src="@{/web/js/common/auth_common.js}"></script>
+<script th:src="@{/web/js/common/toast_generator.js}"></script>
+<script th:src="@{/web/js/common/swal.js}"></script>
+<script th:src="@{/web/ext/handlebars/js/handlebars-v4.1.1.js}"></script>
 
 
 <script>
     const webUrl = "http://tr.xray21.com:8082";
 </script>
 
-<script th:src="@{/ext/js/moment.js}"></script>
-<script th:src="@{/ext/jquery/js/jquery.datetimepicker.js}"></script>
-<script th:src="@{js/common/hospital_search.js}"></script>
-<script th:src="@{js/common/paginations.js}"></script>
-
-<script th:src="@{/ext/js/moment.min.js}"></script>
-<script th:src="@{/ext/js/daterangepicker.js}"></script>
+<script th:src="@{/web/js/moment.min.js}"></script>
+<script th:src="@{/web/js/daterangepicker.js}"></script>
 
 <script>
     $(document).ready(function () {

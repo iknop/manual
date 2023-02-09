@@ -3,7 +3,7 @@
     height: 32px;
     border: 1px solid var(--reGray3);
     background-color: var(--reGray6);
-    background-image: url(../img/arrow-00.png);
+    background-image: url(../../img/arrow-00.png);
     background-position: calc(100% - 8px) center;
     background-repeat: no-repeat;
     border-radius: 4px;
@@ -34,7 +34,7 @@
     /*position: absolute;*/
     z-index: 9994;
     left: 0px;
-    background-image: url("../img/arrow-00.png");
+    background-image: url("../../img/arrow-00.png");
     background-position: calc(100% - 12px) center;
     background-repeat: no-repeat;
     appearance: none;
@@ -45,5 +45,5 @@
 }
 
 .checked {
-    background: url(../) center left no-repeat;
+    background: url(../../img/check-on.png) center left no-repeat !important;
 }

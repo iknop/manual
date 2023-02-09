@@ -7,8 +7,6 @@
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap" style="height: 1300px !important">
         <main id="editHospInfo">
-
-
             <div class="d-flex justify-content-center pb-5 pageHead">
                 <div>
                     <a href="/manual/user/reception" class="manual-to-page-link-btn-group "
@@ -33,7 +31,6 @@
                 <a class="intro" id="siteUrl"
                    style="left: 912px; color: var(--redOrange) !important;">계정 정보확인 및 수정 페이지</a>
             </div>
-
             <hr>
             <form id="search-form" class="pt-4">
                 <div class="form d-flex">
@@ -103,9 +100,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="dataTbWrap d-flex mb-4 form">
                     <div class="d-flex justify-content-start mr-auto">
                     </div>
@@ -169,14 +164,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--            </div>-->
-
                 </div>
-
                 <div class="dataTbWrap d-flex">
                     <h3>병원담당자</h3>
-
                     <div id="hospital-manager-table_wrapper" class="dataTables_wrapper no-footer">
                         <table class="table table-bordered dataTable no-footer dtfc-has-left"
                                id="hospital-manager-table">
@@ -206,30 +196,65 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-
             </form>
         </main>
         <!-- MANUAL: 마이페이지 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="myPageManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="myPageManualModal"
              aria-labelledby="myPageManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">정보수정</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="myPageManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area my-auto">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/myPage/마이페이지-수정버튼.png}">
+                        <div>
+                            <div class="mb-4">
+                                <div class="active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="padding-left: 1rem">
+                                            <img th:src="@{/web/img/manual/user/myPage/마이페이지-수정버튼.png}">
+                                            <div class="number-on-img" style="
+    left: 56rem;
+    top: 0.6rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 56rem;
+    top: 23.1rem;
+">2
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 53rem;
+    top: 49.9rem;
+">3
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 56.7rem;
+    top: 1.5rem;
+    width: 4.3rem;
+    height: 1.6rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 56.7rem;
+    top: 24.1rem;
+    width: 4.3rem;
+    height: 1.6rem;
+"></div>
+
+                                            <div class="border-on-img" style="
+    left: 53.9rem;
+    top: 50.6rem;
+    width: 4.8rem;
+    height: 1.6rem;
+"></div>
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 manual-desc-box pl-5">
+                                        <div class="vr" style="
+    left: 76%;
+    height: 54rem;
+"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10">
@@ -260,8 +285,7 @@
     </div>
 </div>
 <th:blcok layout:fragment="script_area">
-    <script th:src="@{/js/manual/common/header.js}"></script>
-    <script th:src="@{/js/manual/myPage.js}"></script>
+    <script th:src="@{/web/js/manualModal/user/myPage.js}"></script>
     <script type="text/javascript">
         const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
         const siteUrl = $('#siteUrl');

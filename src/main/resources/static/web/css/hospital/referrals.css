@@ -64,9 +64,9 @@ table.dataTable.no-footer{
     font-size: 14px;
 }
 .dataTbBtn, #open-report-image-req-btn, #btn-save-clipboard-report {
-    cursor: url("../img/manual/cursor/question-mark.png"), auto !important;
+    cursor: url("../../img/manual/question-mark.png"), auto !important;
 }
 
 #btn-search {
-    cursor: url("../img/manual/cursor/question-mark.png"), auto !important;
+    cursor: url("../../img/manual/question-mark.png"), auto !important;
 }

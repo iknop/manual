@@ -9878,7 +9878,7 @@
 		"bVisible": null,
 	
 		/**
-		 * Store for manual type assignment using the `column.type` option. This
+		 * Store for manualModal type assignment using the `column.type` option. This
 		 * is held in store so we can manipulate the column's `sType` property.
 		 *  @type string
 		 *  @default null

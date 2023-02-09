@@ -1,0 +1,455 @@
+header.default {
+    width: 100%;
+    min-width: 1440px;
+    height: 70px;
+    background-color: #212121;
+    position: fixed;
+    z-index: 9997;
+    left: 0;
+    top: 0;
+    display: flex
+}
+
+header.default h1 {
+    display: inline-flex;
+    justify-content: start;
+    font-size: 22px;
+    line-height: 70px;
+    margin-left: 60px;
+    margin-right: auto;
+    color: var(--white);
+    font-weight: 400
+}
+
+header.default a {
+    display: inline-flex;
+    justify-content: end;
+    margin-right: 60px;
+    font-size: 13px;
+    line-height: 70px;
+    color: var(--white);
+    padding: 0 12px;
+    font-weight: 400;
+    font-family: "Pretendard";
+    order: 2
+}
+
+header.default a + a {
+    position: relative;
+    margin-right: 0;
+    order: 1
+}
+
+header.default a + a::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 28px;
+    right: 0;
+    width: 1px;
+    height: 14px;
+    background-color: var(--white)
+}
+
+
+header.manual-hospital > ul > li.serviceManage > span, header.readingDr > ul > li.serviceManage > span {
+    background-image: url(../../img/icon-gnb-05.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
+
+
+header.manual-hospital {
+    position: fixed;
+    z-index: 999;
+    min-height: 70px;
+    min-width: 1440px;
+    background-color: #212121;
+    transition: min-height .3s;
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin-top: 70px;
+}
+
+header.manual-hospital > ul {
+    margin-right: auto
+}
+
+header.manual-hospital > ul > li {
+    display: block;
+    width: 188px;
+    cursor: pointer;
+    text-align: center;
+    opacity: .7
+}
+
+header.manual-hospital > ul > li > span {
+    min-height: 70px;
+    line-height: 70px;
+    color: var(--white);
+    font-size: 18px !important;
+    font-weight: 500;
+    text-align: center;
+    margin: 0 auto
+}
+
+header.manual-hospital > ul > li.start > span {
+    background-image: url(../../img/icon-manual-start.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
+
+header.manual-hospital > ul > li.reception > span {
+    background-image: url(../../img/icon-gnb-2-01.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
+
+header.manual-hospital > ul > li.referral > span {
+    background-image: url(../../img/icon-gnb-2-02.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
+
+header.manual-hospital > ul > li.calculate > span {
+    background-image: url(../../img/icon-gnb-2-03.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
+
+header.manual-hospital > ul > li.report > span {
+    background-image: url(../../img/icon-gnb-2-04.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
+
+header.manual-hospital > ul > li.support > span {
+    background-image: url(../../img/icon-gnb-06.png);
+    background-position: left center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    padding-left: 28px
+}
+
+header.manual-hospital > ul > li:hover, header.manual-hospital > ul > li.current {
+    color: var(--white);
+    background-color: #6c6c6c;
+    opacity: 1 !important
+}
+
+header.manual-hospital ul + menu {
+    position: relative;
+    height: 70px;
+    line-height: 70px;
+    /*margin-right: 60px;*/
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white)
+}
+
+header.manual-hospital ul + menu span {
+    justify-content: end;
+    display: flex;
+    background-image: url(../../img/icon-user.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    margin-top: 19px;
+    margin-left: 8px
+}
+
+header.manual-hospital ul + menu ul {
+    display: none;
+    min-width: 160px;
+    position: absolute;
+    right: 0;
+    top: 65px;
+    min-height: 142px !important;
+    border-radius: 4px;
+    background-color: var(--white);
+    box-shadow: 0 0 1px var(--reGray2);
+    z-index: 9999;
+    padding: 25px 35px
+}
+
+header.manual-hospital ul + menu ul::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 9998;
+    right: 20px;
+    top: -6px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--white);
+    border-top: 0
+}
+
+header.manual-hospital ul + menu:hover ul {
+    display: block
+}
+
+header.manual-hospital ul + menu ul > li:first-child {
+    text-align: center;
+    font-size: 15px;
+    color: #6c6c6c;
+    padding-bottom: 20px;
+    line-height: 1.5;
+    font-weight: 500
+}
+
+header.manual-hospital ul + menu ul > li > a {
+    text-align: center;
+    font-size: 15px;
+    color: var(--fontDefaultColor);
+    padding-bottom: 20px;
+    display: block;
+    line-height: 1
+}
+
+header.manual-hospital ul + menu ul > li:last-child > a {
+    padding-bottom: 0
+}
+
+#page_content {
+    height: 100%;
+}
+
+.pageHead {
+    position: relative;
+}
+
+.intro {
+    position: absolute;
+    top: 35px;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    float: left;
+    margin-top: 0.5rem !important;
+    color: gray;
+    /*padding: 10px 0 10px 0;*/
+}
+
+
+.manual-to-page-link-btn {
+    text-decoration: none;
+    color: white !important;
+    background-color: var(--redOrange);
+    padding: 6px;
+    border-radius: 3px;
+    margin: 10px 0;
+}
+
+.manual-to-page-link-btn:hover {
+    color: white;
+    background-color: var(--redOrange);
+    transition: 0.8s;
+}
+
+.manual-to-page-link-btn-group {
+    text-decoration: none !important;
+    color: #838181;
+    margin-right: 10px;
+    padding: 10px 25px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.manual-to-page-link-btn-group:hover {
+    color: var(--redOrange);
+    /*background-color: var(--redOrange);*/
+    transition: 0.8s;
+}
+
+.manual-to-page-link-btn-group.active {
+    color: var(--redOrange) !important;
+    /*background-color: var(--redOrange);*/
+    text-decoration: underline !important;
+    text-underline-position: under;
+}
+
+.manual-click-border {
+    border: var(--redOrange) solid 2.5px !important;
+}
+
+.select-readonly {
+    width: 155px;
+    height: 32px;
+    background-color: var(--reGray6);
+    color: #4d5256;
+    margin-right: 7px;
+    padding: 11px;
+    background-image: url(../../img/arrow-00.png);
+    background-position: calc(100% - 12px) center;
+    background-repeat: no-repeat;
+}
+
+
+.modal {
+    z-index: 9999;
+}
+
+
+/* modal-content 옆에 적기, width 개별 주기*/
+.modal-size-fix{
+    position: fixed;
+}
+
+
+/*기능 설명 모달 헤더*/
+.descFuncName {
+    font-size: 25px;
+    color: #fff;
+    font-weight: 700;
+}
+
+
+/* 모달 창 순서 : step N */
+.carousel-desc-step-current {
+    font-size: 20px;
+    font-weight: 400;
+    background-color: var(--gray);
+    width: 80px;
+    /*width: 32px;*/
+    height: 32px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+}
+
+
+.carousel-desc-step {
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #fff;
+    border: var(--gray) solid 0.5px;
+    width: 80px;
+    /*width: 32px;*/
+    height: 32px;
+    border-radius: 20px;
+    color: var(--gray);
+    text-align: center;
+    transition-property: background-color, color, font-weight;
+    /*content: '';*/
+    transition-duration: 0.5s;
+}
+
+.carousel-desc-step:hover {
+    background-color: var(--gray);
+    color: white;
+    font-weight: 600;
+}
+
+
+/*이미지 넘버링*/
+.number-on-img {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--redOrange);
+    color: white;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    z-index: 99;
+}
+/*이미지 보더*/
+.border-on-img{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: var(--redOrange) 3px solid;
+}
+/*참고사항*/
+.manual-desc-warn-title {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+}
+
+.manual-desc-box {
+    opacity: 0;
+    animation: fade 0.3s;
+}
+
+/** 이미지 설명란 번호 **/
+.manual-desc-order {
+    /*background-color: var(--redOrange);*/
+    color: var(--gray);
+    /*height: 35px;*/
+    /*width: 35px;*/
+    font-size: 25px;
+    /*border-radius: 50%;*/
+    text-align: center;
+    align-self: baseline;
+    font-weight: 700;
+    /*opacity: 0;*/
+}
+
+.desc {
+    font-size: 18px;
+    /*opacity: 0;*/
+    max-width: 285px;
+    line-height: 196%;
+}
+
+.desc-long {
+    font-size: 18px;
+    /*opacity: 0;*/
+    max-width: 285px;
+    padding-top: 3px;
+}
+
+
+@keyframes fade {
+    to {
+        opacity: 1;
+        /*animation-delay: 0.1s;*/
+    }
+}
+
+/*텍슽 강조*/
+.text-emphasis {
+    color: var(--redOrange);
+    font-weight: bold;
+    display: contents;
+    font-size: inherit;
+}
+
+ul{
+    margin: 0;
+}
+
+ul>li{
+    font-size: 16px;
+}
+/* 이미지/설명 나눔선 */
+.vr {
+    left: 76%;
+    height: 1000px;
+    position: absolute;
+    border-left: 1px solid rgb(126 126 126 / 28%);
+    opacity: 70%;
+}
+
+:root {
+    --redOrange: #F24405;
+    --brightOrange: #f89400;
+    --brickOrange: #8C2703;
+    --gray: #a9a9a9;;
+    --black: #0D0D0D;
+}

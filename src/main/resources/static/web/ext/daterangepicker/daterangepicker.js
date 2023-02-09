@@ -1302,7 +1302,7 @@
             // * if the time picker is enabled, apply the hour/minute/second from the select boxes to the clicked date
             // * if autoapply is enabled, and an end date was chosen, apply the selection
             // * if single date picker mode, and time picker isn't enabled, apply the selection immediately
-            // * if one of the inputs above the calendars was focused, cancel that manual input
+            // * if one of the inputs above the calendars was focused, cancel that manualModal input
             //
 
             if (this.endDate || date.isBefore(this.startDate, 'day')) { //picking start

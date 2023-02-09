@@ -80,7 +80,9 @@
 
                     <div class="d-flex flex-nowrap justify-content-center mx-auto col-12">
 
-                        <button type="button" id="btn-reset-dr" class="reset" style="color: #808080; border-color: #808080;">조건 초기화</button>
+                        <button type="button" id="btn-reset-dr" class="reset"
+                                style="color: #808080; border-color: #808080;">조건 초기화
+                        </button>
                         <button type="button" id="btn-search" class="manual-click-border"
                                 style="background-color: gray">검색하기
                         </button>
@@ -105,24 +107,6 @@
                             </div>
                         </div>
                         <script src="/web/js/common/loadingbar.js"></script>
-
-
-                        <input type="hidden" id="size" value="10">
-                        <div aria-labelledby="RowCount" id="row-count-content">
-                            <script id="template-row-count" type="text/x-handlebars-template">
-                                <label>
-                                    <select class="form-control" id="rowCount" data-page="{{page}}">
-                                        {{#findSelectedValue size}}
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="30">30</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        {{/findSelectedValue}}
-                                    </select>
-                                </label>
-                            </script>
-                        </div>
 
                     </div>
 
@@ -175,8 +159,9 @@
                                 </thead>
                                 <tbody id="referral-reportConfig-table-tbody">
                                 <tr class="odd">
-                                    <td><input type="checkbox" class="custom-checkbox chk-all" name="check_study"
-                                               id="1326" value=""></td>
+                                    <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                     name="check_study" value="referral_1445"><label
+                                            for="referral_1445"></label></td>
                                     <td>N</td>
                                     <td>12345</td>
                                     <td>환자1</td>
@@ -190,8 +175,9 @@
                                     <td>Y</td>
                                 </tr>
                                 <tr class="even">
-                                    <td><input type="checkbox" class="custom-checkbox chk-all" name="check_study"
-                                               id="1327" value=""></td>
+                                    <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                     name="check_study" value="referral_1445"><label
+                                            for="referral_1445"></label></td>
                                     <td>N</td>
                                     <td>12345</td>
                                     <td>환자1</td>
@@ -205,8 +191,10 @@
                                     <td>Y</td>
                                 </tr>
                                 <tr class="odd">
-                                    <td><input type="checkbox" class="custom-checkbox chk-all" name="check_study"
-                                               id="1329" value=""></td>
+                                    <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                     name="check_study" value="referral_1445"><label
+                                            for="referral_1445"></label></td>
+
                                     <td>N</td>
                                     <td>12345</td>
                                     <td>환자1</td>
@@ -223,63 +211,84 @@
                             </table>
                         </div>
                     </div>
-
-                    <input type="hidden" id="page" value="1">
-                    <div aria-label="Pagination" id="pagination-content"
-                         class="d-inline-flex justify-content-center mx-auto" style="margin-bottom: 20px">
-                        <script id="template-pagination" type="text/x-handlebars-template">
-                            <nav aria-label="Pagination">
-                                <ul class="pagination">
-                                    <li class="page-item {{#if first}}disabled{{/if}}">
-                                        <button class="page-link page-href" tabindex="-1" aria-disabled="true"
-                                                data-size="{{size}}"
-                                                data-page="{{operations value1=number value2=1 operator='-'}}">Previous
-                                        </button>
-                                    </li>
-                                    {{#each (indexArray)}}
-                                        <li class="page-item {{#if (isEqualsNumber index number)}}active{{/if}}">
-                                            <button class="page-link page-href" data-size="{{size}}"
-                                                    data-page="{{index}}">{{index}}</button>
-                                        </li>
-                                    {{/each}}
-                                    <li class="page-item {{#if last}}disabled{{/if}}">
-                                        <button class="page-link page-href" data-size="{{size}}"
-                                                data-page="{{operations value1=number value2=1 operator='+'}}">Next
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </script>
-                    </div>
                 </div>
             </div>
         </main>
 
         <!-- MANUAL: 검색조건 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal"
              aria-labelledby="searchManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">검색하기</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="searchManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto my-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referralReport/소격서출력-검색.png}">
+                        <div>
+                            <div class=" my-3">
+                                <div class=" active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block my-auto text-center" style="padding-left: 2rem;">
+                                            <img th:src="@{/web/img/manual/user/referralReport/소격서출력-검색.png}">
+                                            <div class="number-on-img" style="
+    left: 18.9rem;
+    top: 8.6rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 35.9rem;
+    top: 11.7rem;
+">2
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 3.6rem;
+    top: 22.5rem;
+">3
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 19.6rem;
+    top: 9rem;
+    width: 47.2rem;
+    height: 2.4rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 4.6rem;
+    top: 23.2rem;
+    width: 63.3rem;
+    height: 5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 36.4rem;
+    top: 12.4rem;
+    width: 7.2rem;
+    height: 2.2rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 72%;"></div>
-                                        <div class="mx-auto my-auto mt-3 col-3 manual-desc-box ">
+                                        <div class="vr" style="left: 76.5%;height: 31rem;"></div>
+                                        <div class=" my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10">
                                                     <span class="text-emphasis">소견서양식</span> 선택<br>
-                                                    일반/일반건강검진/<br>유방건강검진/<br>위암건강검진/<br>진폐흉부판독<br>
-                                                    <span class="text-emphasis">일자기준</span> 선택<br> 촬영일자/의뢰일자/<br>판독일자<br> <span class="text-emphasis">차트번호/환자명</span> 입력
+                                                    <ul>
+                                                        <li>일반</li>
+                                                        <li>일반건강검진</li>
+                                                        <li>유방건강검진</li>
+                                                        <li>위암건강검진</li>
+                                                        <li>진폐흉부판독</li>
+                                                    </ul>
+
+                                                    <span class="text-emphasis">일자기준</span> 선택<br>
+                                                    <ul>
+                                                        <li>촬영일자</li>
+                                                        <li>의뢰일자</li>
+                                                        <li>판독일자</li>
+                                                        <li>위암건강검진</li>
+                                                        <li>진폐흉부판독</li>
+                                                    </ul>
+                                                    <span class="text-emphasis">차트번호/환자명</span>
+                                                    입력
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -304,32 +313,57 @@
             </div>
         </div>
         <!-- MANUAL: 출력하기 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="printManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="printManualModal"
              aria-labelledby="printManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">출력하기</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="printManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class="mb-3">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#patientManualCaptions" data-slide-to="0">step 1
+                                             data-target="#printManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#printManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referralReport/소격서출력-출력하기-0.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="
+    padding-left: 1rem;
+">
+                                            <img th:src="@{/web/img/manual/user/referralReport/소격서출력-출력하기-0.png}">
+                                            <div class="number-on-img" style="
+    left: 4rem;
+    top: 13.6rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 4rem;
+    top: 5.2rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 4.4rem;
+    top: 14.3rem;
+    width: 3.6rem;
+    height: 9.4rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 4.3rem;
+    top: 5.8rem;
+    width: 5.4rem;
+    height: 2.6rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 60%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
+                                        <div class="vr" style="left: 50%;height: 19rem;"></div>
+                                        <div class="my-auto manual-desc-box">
 
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
@@ -346,21 +380,86 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="printManualModal2"
+             aria-labelledby="printManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">출력하기</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="mb-3">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#printManualModal" data-toggle="modal" data-dismiss="modal">
+                                            step 1
                                         </div>
-                                        <div class="carousel-desc-step-current mx-2" data-target="#printManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step-current mx-2" data-target="#printManualModal2"
+                                             data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referralReport/소견서출력-2.png}" class="w-50 mx-auto">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="
+    padding-left: 1.5rem;
+">
+                                            <img th:src="@{/web/img/manual/user/referralReport/소견서출력-2.png}">
+                                            <div class="number-on-img" style="
+    left: 6.3rem;
+    top: 7.6rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 37.3rem;
+    top: 8.3rem;
+">2
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 37.3rem;
+    top: 15.3rem;
+">3
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 37.4rem;
+    top: 24.9rem;
+">4
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 6.6rem;
+    top: 8.1rem;
+    width: 30.4rem;
+    height: 42rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 37.9rem;
+    top: 8.6rem;
+    width: 10.4rem;
+    height: 6.7rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 37.9rem;
+    top: 15.5rem;
+    width: 10.4rem;
+    height: 8.2rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 37.9rem;
+    top: 26rem;
+    width: 8rem;
+    height: 3.6rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 62%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
+                                        <div class="vr" style="left: 68%;height: 46rem;"></div>
+                                        <div class="my-auto manual-desc-box" >
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -398,11 +497,11 @@
     </div>
 </div>
 <th:blcok layout:fragment="script_area">
-    <script th:src="@{/js/manual/referralReport.js}"></script>
+    <script th:src="@{/web/js/manualModal/user/referralReport.js}"></script>
     <script type="text/javascript">
         const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
         const siteUrl = $('#siteUrl');
-        siteUrl.attr('href',`${webContext}/referralReport`);
+        siteUrl.attr('href', `${webContext}/referralReport`);
     </script>
 </th:blcok>
 </html>

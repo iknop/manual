@@ -19,5 +19,9 @@
   "homepage": "https://github.com/iknop/manual#readme",
   "dependencies": {
     "sass": "^1.57.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-config-google": "^0.14.0"
   }
 }

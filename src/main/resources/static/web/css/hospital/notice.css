@@ -1,11 +1,16 @@
-#notice-list-admin-table thead th, #notice-list-dr-table thead th{
+#notice-list-admin-table thead th, #notice-list-dr-table thead th {
     height: 32px;
     position: relative;
     color: var(--mainColor);
-    padding: 0.75rem!important;
+    padding: 0.75rem !important;
     background-color: var(--dTbThColor) !important;
     vertical-align: middle;
 }
-a:not(.manual-to-page-link-btn-group, .manual-to-page-link-btn){
+
+a:not(.manual-to-page-link-btn-group, .manual-to-page-link-btn) {
     color: #212529 !important;
+}
+
+.dataTbInBtn {
+    cursor: url("../../img/manual/question-mark.png"), auto !important;
 }

@@ -52,15 +52,15 @@
                         </div>
                         <input class="condition column statistics-btn select-readonly" id="urgentType"
                                name="urgentType" value="전체" readonly>
-<!--                        <select class="condition column statistics-btn manual-click-border" id="urgentType"-->
-<!--                                name="urgentType">-->
-<!--                            <option value="T">전체</option>-->
+                        <!--                        <select class="condition column statistics-btn manualModal-click-border" id="urgentType"-->
+                        <!--                                name="urgentType">-->
+                        <!--                            <option value="T">전체</option>-->
 
-<!--                            <option value="N">일반</option>-->
+                        <!--                            <option value="N">일반</option>-->
 
-<!--                            <option value="Y">응급</option>-->
+                        <!--                            <option value="Y">응급</option>-->
 
-<!--                        </select>-->
+                        <!--                        </select>-->
 
                         <div class="rangeDate d-flex mr-auto justify-content-start col-4">
                             <div class="dateTxt d-none">조회 일자</div>
@@ -76,10 +76,13 @@
                     <div class="d-flex flex-wrap justify-content-end ml-auto col-5 p-0">
                         <!--            <button class="reset mt-0" id="btn-reset" type="button">조건 초기화</button>-->
 
-                        <button type="button" id="btn-reset-dr" class="reset mt-0"  style="color: gray; border-color: gray"
+                        <button type="button" id="btn-reset-dr" class="reset mt-0"
+                                style="color: gray; border-color: gray"
                         >조건 초기화
                         </button>
-                        <button type="button" id="btn-search" class="mt-0" style="background-color: gray;  border-color: gray;">검색하기</button>
+                        <button type="button" id="btn-search" class="mt-0"
+                                style="background-color: gray;  border-color: gray;">검색하기
+                        </button>
                         <button class="download mt-0 manual-click-border" id="btn-download" type="button"
                         >다운로드
                         </button>
@@ -208,24 +211,35 @@
         </main>
 
         <!-- MANUAL: 다운로드  -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="excelDownManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="excelDownManualModal"
              aria-labelledby="excelDownManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix" >
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">다운로드</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="excelDownManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/statistics/조회하기-다운로드.png}">
+                        <div>
+                            <div class=" my-4">
+                                <div class=" active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="position: relative">
+                                            <img th:src="@{/web/img/manual/user/statistics/조회하기-다운로드.png}">
+                                            <div class="number-on-img" style="
+    left: 1.5rem;
+    top: -0.2rem;
+">1
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 16.2rem;
+    height: 4.3rem;
+    left: 2.3rem;
+    top: 0.3rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 60%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
+                                        <div class="vr" style="left:55%; height: 8rem;"></div>
+                                        <div class="my-auto manual-desc-box" >
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -245,11 +259,11 @@
     </div>
 </div>
 <th:blcok layout:fragment="script_area">
-    <script th:src="@{/js/manual/statistics.js}"></script>
+    <script th:src="@{/web/js/manualModal/user/statistics.js}"></script>
     <script type="text/javascript">
         const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
         const siteUrl = $('#siteUrl');
-        siteUrl.attr('href',`${webContext}/statistics`);
+        siteUrl.attr('href', `${webContext}/statistics`);
     </script>
 </th:blcok>
 </html>

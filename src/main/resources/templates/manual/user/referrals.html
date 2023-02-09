@@ -219,7 +219,9 @@
                                     </thead>
                                     <tbody id="referrals-table-tbody">
                                     <tr class="odd" style="color: rgb(220, 53, 69);">
-                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                         name="check_study" value="referral_1445"><label
+                                                for="referral_1445"></label></td>
                                         <td style="padding: 2px;">적용완료</td>
                                         <td style="padding: 2px;">일반검진</td>
                                         <td style="padding: 2px;">CR</td>
@@ -244,7 +246,9 @@
 
                                     </tr>
                                     <tr class="even">
-                                        <td style="padding: 2px; color: rgb(220, 53, 69);">
+                                        <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                         name="check_study" value="referral_1445"><label
+                                                for="referral_1445"></label></td>
                                         <td style="padding: 2px; color: rgb(220, 53, 69);">판독대기</td>
                                         <td style="padding: 2px; color: rgb(220, 53, 69);">일반</td>
                                         <td style="padding: 2px; color: rgb(220, 53, 69);">CR</td>
@@ -268,7 +272,9 @@
                                         <td style="padding: 2px; color: rgb(220, 53, 69);"></td>
                                     </tr>
                                     <tr class="odd">
-                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                         name="check_study" value="referral_1445"><label
+                                                for="referral_1445"></label></td>
                                         <td style="padding: 2px;">원내취소</td>
                                         <td style="padding: 2px;">일반</td>
                                         <td style="padding: 2px;">CT</td>
@@ -291,7 +297,9 @@
                                         <td style="padding: 2px;"></td>
                                     </tr>
                                     <tr class="even">
-                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                         name="check_study" value="referral_1445"><label
+                                                for="referral_1445"></label></td>
                                         <td style="padding: 2px;">원내취소</td>
                                         <td style="padding: 2px;">일반</td>
                                         <td style="padding: 2px;">CT</td>
@@ -314,7 +322,9 @@
                                         <td style="padding: 2px;"></td>
                                     </tr>
                                     <tr class="odd">
-                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"><input type="checkbox" class="custom-checkbox chk-all"
+                                                                         name="check_study" value="referral_1445"><label
+                                                for="referral_1445"></label></td>
                                         <td style="padding: 2px;">원내취소</td>
                                         <td style="padding: 2px;">일반</td>
                                         <td style="padding: 2px;">CT</td>
@@ -341,25 +351,6 @@
                             </div>
                             <input type="hidden" id="page" value="1"/>
                         </div>
-                        <!--                        <div aria-label="Pagination" id="pagination-content"-->
-                        <!--                             class="d-inline-flex justify-content-center mx-auto" style="margin-bottom: 20px">-->
-                        <!--                            <nav aria-label="Pagination">-->
-                        <!--                                <ul class="pagination">-->
-                        <!--                                    <li class="page-item disabled">-->
-                        <!--                                        <button class="page-link page-href" tabindex="-1" aria-disabled="true"-->
-                        <!--                                                data-size="10" data-page="0">Previous-->
-                        <!--                                        </button>-->
-                        <!--                                    </li>-->
-                        <!--                                    <li class="page-item active">-->
-                        <!--                                        <button class="page-link page-href" data-size="10" data-page="1">1</button>-->
-                        <!--                                    </li>-->
-                        <!--                                    <li class="page-item disabled">-->
-                        <!--                                        <button class="page-link page-href" data-size="10" data-page="2">Next-->
-                        <!--                                        </button>-->
-                        <!--                                    </li>-->
-                        <!--                                </ul>-->
-                        <!--                            </nav>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
                 <!--          form class end-->
@@ -385,8 +376,7 @@
                 <!--        ContextMenu End -->
 
             </section>
-            <section class="col-3 p-0"
-            >
+            <section class="col-3 p-0">
                 <nav>
                     <span>의뢰정보</span>
                 </nav>
@@ -523,349 +513,75 @@
                 </form>
             </section>
 
-            <!DOCTYPE html>
-            <html lang="en"
-                  xmlns="http://www.w3.org/1999/xhtml">
-
-            <div class="modal" tabindex="-1" role="dialog" id="requestCancelModal" data-backdrop="static"
-                 aria-labelledby="requestCancelModal" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header m-0">
-                            <h3 class="modal-title">의뢰취소</h3>
-                            <button class="modalClose"></button>
-
-                            <div class="clearfix">
-                                <div class="spinner-border float-right" role="status" id="spinner-requestConfig-cancel"
-                                     style="display: none">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <script src="/web/js/common/loadingbar.js"></script>
-
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <table class="table table-sm table-head table-hover text-center pointer"
-                                           id="requestConfig-cancel-table">
-                                        <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" style="width: 30px;">응급구분</th>
-                                            <th scope="col" style="width: 30px;">의뢰상태</th>
-                                            <th scope="col" style="width: 80px;">PatientsID</th>
-                                            <th scope="col" style="width: 50px;">촬영장비</th>
-                                            <th scope="col" style="width: 200px;">원내촬영유형</th>
-                                            <th scope="col" style="width: 60px;">촬영일시</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="requestConfig-cancel-table-tbody"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row justify-content-md-center mt-3 mb-3">
-                                <div class="col-1 mt-1 text-right">
-                                    의뢰상태
-                                </div>
-                                <div class="col-3">
-                                    <select class="custom-select" name="status" id="select-change-status">
-                                        <option value="92">의뢰취소</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-apply-change-status">의뢰취소</button>
-                            <button type="button" class="modalClose" data-dismiss="modal">취소</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            </html>
-            <!DOCTYPE html>
-            <html lang="en"
-                  xmlns="http://www.w3.org/1999/xhtml">
-
-            <div class="modal" tabindex="-1" role="dialog" id="changeUrgentModal" data-backdrop="static"
-                 aria-labelledby="changeUrgentModal" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header m-0">
-                            <h3 class="modal-title">응급변경</h3>
-                            <button class="modalClose"></button>
-
-                            <div class="clearfix">
-                                <div class="spinner-border float-right" role="status" id="spinner-change-urgent"
-                                     style="display: none">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <script src="/web/js/common/loadingbar.js"></script>
-
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <table class="table table-sm table-head table-hover text-center pointer"
-                                           id="change-urgent-type-table">
-                                        <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" style="width: 30px;">응급구분</th>
-                                            <th scope="col" style="width: 30px;">의뢰상태</th>
-                                            <th scope="col" style="width: 80px;">PatientsID</th>
-                                            <th scope="col" style="width: 50px;">촬영장비</th>
-                                            <th scope="col" style="width: 200px;">원내촬영유형</th>
-                                            <th scope="col" style="width: 60px;">촬영일시</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="change-urgent-type-table-tbody"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row justify-content-md-center mt-3 mb-3">
-                                <div class="col-1 mt-1 text-right">
-                                    응급여부
-                                </div>
-                                <div class="col-3">
-                                    <select class="custom-select" name="urgentType" id="select-change-urgent-type">
-                                        <option value="Y">응급</option>
-                                        <option value="N">일반</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-apply-change-urgent-type">응급변경
-                            </button>
-                            <button type="button" class="modalClose" data-dismiss="modal">취소</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            </html>
-            <!DOCTYPE html>
-            <html lang="en"
-                  xmlns="http://www.w3.org/1999/xhtml">
-
-            <div class="modal fade" tabindex="-1" role="dialog" id="changePatientInfoModal" data-backdrop="static"
-                 aria-labelledby="changePatientInfoModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header m-0">
-                            <h1 class="modal-title">차트정보변경</h1>
-                            <button type="button" data-dismiss="modal" class="modalClose"></button>
-
-                            <div class="clearfix">
-                                <div class="spinner-border float-right" role="status" id="spinner-change-patientInfo"
-                                     style="display: none">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                            <script src="/web/js/common/loadingbar.js"></script>
-
-                        </div>
-
-                        <div class="modal-body">
-                            <form id="form-patientInfo">
-                                <script id="template-patientInfo" type="text/x-handlebars-template">
-                                    <div class="row justify-content-center">
-                                        <div class="col-sm-6">
-                                            <input type="hidden" name="studyId" value="{{studyId}}"/>
-                                            <input type="hidden" name="sendHospitalCode" value="{{sendHospitalCode}}"/>
-                                            <input type="hidden" name="beforePatientId" value="{{patientId}}"/>
-                                            <input type="hidden" id="allChangeYN" name="allChangeYN" value="N"/>
-                                            <div class="form-group row my-2">
-                                                <label for="change-sendHospitalCode"
-                                                       class="col-sm-4 col-form-label text-md-center">병원</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control text-center"
-                                                           id="sendHospital-name-code"
-                                                           value="{{sendHospitalKrAlias}}({{sendHospitalCode}})"
-                                                           readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <label for="change-patientId"
-                                                       class="col-sm-4 col-form-label text-md-center">차트번호</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control text-center"
-                                                           value="{{patientId}}" maxlength="100" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <label for="change-patientName"
-                                                       class="col-sm-4 col-form-label text-md-center">환자명</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control text-center"
-                                                           value="{{patientName}}" maxlength="32" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <label for="change-patientBirthDate"
-                                                       class="col-sm-4 col-form-label text-md-center">환자생년월일</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control text-center"
-                                                           value="{{patientBirthDate}}" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <label for="change-patientSexType"
-                                                       class="col-sm-4 col-form-label text-md-center">환자성별</label>
-                                                <div class="col-sm-8">
-                                                    <select class="custom-select text-center" id="change-patientSexType"
-                                                            name="patientSexType" disabled>
-                                                        {{#findSelectedValue patientSexType}}
-
-                                                            <option value="F">여자</option>
-
-                                                            <option value="M">남자</option>
-
-                                                            <option value="O">그외</option>
-
-                                                        {{/findSelectedValue}}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-1 my-auto mr-3">
-                                            <i class="fas fa-long-arrow-alt-right fa-4x"></i>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group row my-2">
-                                                <div class="col-sm-12">
-                                                    <input type="text" class="form-control text-center"
-                                                           id="change-sendHospitalCode" name="sendHospitalName"
-                                                           value="{{sendHospitalKrAlias}}({{sendHospitalCode}})"
-                                                           readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <div class="col-sm-12">
-                                                    <input type="text" class="form-control text-center"
-                                                           id="change-patientId" name="afterPatientId"
-                                                           value="{{patientId}}" maxlength="100">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <div class="col-sm-12">
-                                                    <input type="text" class="form-control text-center"
-                                                           id="change-patientName" name="patientName"
-                                                           value="{{patientName}}" maxlength="32">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <div class="col-sm-12">
-                                                    <input type="text" class="form-control text-center"
-                                                           id="change-patientBirthDate" name="patientBirthDate"
-                                                           value="{{patientBirthDate}}"
-                                                           maxlength="10"
-                                                           oninput="this.value = this.value.replace(/[^0-9-]/g, '').replace(/(\..*)\./g, '');">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row my-2">
-                                                <div class="col-sm-12">
-                                                    <select class="custom-select text-center" id="change-patientSexType"
-                                                            name="patientSexType">
-                                                        {{#findSelectedValue patientSexType}}
-
-                                                            <option value="F">여자</option>
-
-                                                            <option value="M">남자</option>
-
-                                                            <option value="O">그외</option>
-
-                                                        {{/findSelectedValue}}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </script>
-                            </form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="chk-allChangeYN"
-                                                   value="N" required>
-                                            <label class="form-check-label text-danger mt-3" for="chk-allChangeYN">
-                                                해당 차트의 모든 의뢰의 차트정보를 변경합니다
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer mt-n2">
-                            <button type="button" class="btn btn-primary" id="btn-change-patientInfo">변경</button>
-                            <button type="button" class="modalClose" data-dismiss="modal">취소</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            </html>
-
-            <div class="modal fade" tabindex="-1" role="dialog" id="openImageModal" data-backdrop="static"
-                 aria-labelledby="openImageModal" aria-hidden="true" style="z-index: 9998">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content" style="max-height: 900px;">
-                        <div class="modal-header m-0">
-                            <h1>병변위치 확인</h1>
-                            <button type="button" data-dismiss="modal" class="modalClose"></button>
-                        </div>
-                        <div class="modal-body col-auto">
-
-                            <div class="imagesGroup" style="background-color : #DDDDDD ; text-align : center">
-                                <img src="#" id="showImage" class=""
-                                     style="width:550px ; height:550px ; display:block ; margin:auto">
-                                <textarea id="showComment" class="mt-2" readonly rows="3"
-                                          style="height: 100px; width:99%; padding: 5px; font-size: 15px"></textarea>
-                            </div>
-                            <input class="prev" type="button" value="<">
-                            <input class="next" type="button" value=">">
-
-                        </div>
-                        <div class="imageDescription col-md-12">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary modalCloseBlue" data-dismiss="modal">닫기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </main>
 
         <!-- MANUAL 모달-->
         <!-- MANUAL: 검색  -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal" data-backdrop="static"
-             aria-labelledby="searchManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal"
+             aria-labelledby="searchManualModal" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">검색하기</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
                         <div id="searchManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
+                            <div class="carousel-inner my-3">
                                 <div class="carousel-item active">
                                     <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-검색하기.png}">
+                                        <div class="d-block mx-auto col-8 text-center" style="position: relative;">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-검색하기.png}" style="
+    left: 56px;
+" class="pt-2">
+                                            <div class="number-on-img" style="
+    left: 4rem;
+    top: 0rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 25rem;
+    top: 7.6rem;
+">2
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 0.7rem;
+    top: 17.8rem;
+">3
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 43.5rem;
+    height: 6.9rem;
+    left: 4.9rem;
+    top: 0.8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 7.5rem;
+    height: 2.3rem;
+    left: 25.7rem;
+    top: 8.1rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 48.5rem;
+    height: 6.7rem;
+    left: 1.4rem;
+    top: 18.9rem;
+"></div>
                                         </div>
                                         <div class="vr" style="left: 73%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 17px;">
+                                        <div class="my-auto mt-3 col-3 manual-desc-box"
+                                             style="margin-right: 17px;">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10">
-                                                    <span class="text-emphasis">일시기준</span> 선택<br>(촬영일시/의뢰일시/<br>판독일시/판독예정일시)
-                                                    <br>
+                                                    <span class="text-emphasis">일시기준</span> 선택<br>
+                                                    <ul>
+                                                        <li>촬영일시</li>
+                                                        <li>의뢰일시</li>
+                                                        <li>판독일시</li>
+                                                        <li>판독예정일시</li>
+                                                    </ul>
                                                     및 <span class="text-emphasis">검색어 일부입력</span>
-
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -889,48 +605,67 @@
                 </div>
             </div>
         </div>
-
         <!--MANUAL: 응급변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="changeUrgentManualModal" data-backdrop="static"
-             aria-labelledby="changeUrgentManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="changeUrgentManualModal"
+             aria-labelledby="changeUrgentManualModal" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">응급변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="changeUrgentManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class="mb-3">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#changeUrgentManualCaptions" data-slide-to="0">step 1
+                                             data-target="#changeUrgentManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-응급변경-0-의뢰선택.png}">
+                                    <div class="row manual-area " style="
+    justify-content: space-evenly;
+">
+                                        <div class="d-block text-center" style="position: relative;">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-응급변경-0-의뢰선택.png}"
+                                                 style="left: 56px;">
+                                            <div class="number-on-img" style="
+    left: -0.2rem;
+    top: 7.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: -0.3rem;
+    top: 0rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 9rem;
+    height: 5rem;
+    left: 0.7rem;
+    top: 8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 5rem;
+    height: 2.4rem;
+    left: 0.7rem;
+    top: 0.8rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 60%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 95px;">
-                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
-                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="0">-->
-                                            <!--                                                </div>-->
-                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="1">-->
-                                            <!--                                                </div>-->
-                                            <!--                                            </div>-->
+                                        <div class="vr" style="left: 45%;height: 19rem;"></div>
+                                        <div class="my-auto mt-3 manual-desc-box">
                                             <div class="row p-2">
-                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="manual-desc-order col-1 ml-2">1</div>
                                                 <div class="desc m-0 col-10">
-                                                    <span class="text-emphasis">판독대기상태의</span> 의뢰 선택
+                                                    <span class="text-emphasis">판독대기상태의</span> 의뢰<br> 선택
                                                 </div>
                                             </div>
                                             <div class="row p-2">
-                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="manual-desc-order col-1 ml-2">2</div>
                                                 <div class="desc m-0 col-10">
                                                     <span class="text-emphasis">응급변경</span> 버튼 클릭
                                                 </div>
@@ -938,27 +673,66 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="changeUrgentManualModal2"
+             aria-labelledby="changeUrgentManualModal" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">응급변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-2">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualModal"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#changeUrgentManualCaptions" data-slide-to="1">step 2
+                                             data-target="#changeUrgentManualModal2" data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center py-5">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-응급변경-1-응급변경.png}" class="mx-auto">
+                                    <div class="row manual-area justify-content-center">
+                                        <div class="d-block col-8 text-center py-5">
+
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-응급변경-1-응급변경.png}"
+                                                 style="left: 56px;">
+                                            <div class="number-on-img" style="
+    left: 25rem;
+    top: 8.8rem;
+">1
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 8.4rem;
+    height: 3.8rem;
+    left: 25.8rem;
+    top: 9.6rem;
+"></div>
+                                            <div class="number-on-img" style="
+    left: 41.5rem;
+    top: 13.4rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 7.5rem;
+    height: 2.3rem;
+    left: 42.2rem;
+    top: 14rem;
+"></div>
                                         </div>
-                                        <div class="vr"></div>
+                                        <div class="vr" style="
+    left: 73%;
+    height: 250px;
+"></div>
                                         <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
-                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
-                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="0">-->
-                                            <!--                                                </div>-->
-                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#changeUrgentManualCaptions" data-slide-to="1">-->
-                                            <!--                                                </div>-->
-                                            <!--                                            </div>-->
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -981,39 +755,59 @@
             </div>
         </div>
         <!--MANUAL: 의뢰취소 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="cancelRequestManualModal" data-backdrop="static"
-             aria-labelledby="cancelRequestManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="cancelRequestManualModal1"
+             aria-labelledby="cancelRequestManualModal1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">의뢰취소</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="cancelManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div id="cancelManualCaptions">
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#cancelManualCaptions" data-slide-to="0">step 1
+                                             data-target="#cancelRequestManualModal1">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-toggle="modal" data-dismiss="modal"
+                                             data-target="#cancelRequestManualModal2">
+                                            step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-의뢰취소-0.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="position: relative;">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-의뢰취소-0.png}"
+                                                 style="
+    padding-left: 2rem;
+">
+                                            <div class="number-on-img" style="
+    left: 1.3rem;
+    top: 6.8rem;
+">1
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 5.2rem;
+    height: 2.6rem;
+    left: 8rem;
+    top: 0.2rem;
+"></div>
+                                            <div class="number-on-img" style="
+    left: 7.6rem;
+    top: -0.6em;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 3.5rem;
+    height: 4.7rem;
+    left: 2.2rem;
+    top: 7.7rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 60%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box pt-5"
-                                             style="margin-right: 95px;">
-                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
-                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#cancelManualCaptions" data-slide-to="0">step 1-->
-                                            <!--                                                </div>-->
-                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions" data-slide-to="1">step 2-->
-                                            <!--                                                </div>-->
-                                            <!--                                            </div>-->
+                                        <div class="vr" style="left: 56%; height: 13rem;"></div>
+                                        <div class="my-auto mt-3 manual-desc-box pt-5">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1029,27 +823,56 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions"
-                                             data-slide-to="0">step 1
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="cancelRequestManualModal2"
+             aria-labelledby="cancelRequestManualModal2" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">의뢰취소</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-2">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#cancelRequestManualModal1"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#cancelManualCaptions" data-slide-to="1">step 2
+                                             data-target="#cancelRequestManualModal2">
+                                            step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-의뢰취소-1.png}" class="mx-auto">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="position: relative;">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-의뢰취소-1.png}"
+                                                 style="
+    padding-left: 2rem;
+">
+
+                                            <div class="number-on-img" style="
+    left: 42.5rem;
+    top: 10.3rem;
+">1
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 7.6rem;
+    height: 2.2rem;
+    left: 43.4rem;
+    top: 11.2rem;
+"></div>
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
-                                            <!--                                            <div class="d-flex justify-content-start my-5">-->
-                                            <!--                                                <div class="carousel-desc-step mx-2" data-target="#cancelManualCaptions" data-slide-to="0">-->
-                                            <!--                                                </div>-->
-                                            <!--                                                <div class="carousel-desc-step-current mx-2" data-target="#cancelManualCaptions" data-slide-to="1">-->
-                                            <!--                                                </div>-->
-                                            <!--                                            </div>-->
+                                        <div class="vr" style="left: 77%;height: 14rem;"></div>
+                                        <div class="my-auto mt-3 manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1066,33 +889,59 @@
             </div>
         </div>
         <!--MANUAL: 정보변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="editReferralManualModal" data-backdrop="static"
-             aria-labelledby="editReferralManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="editReferralManualModal1"
+             aria-labelledby="editReferralManualModal1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">정보변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="editReferralManualCaption" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class=" mb-3">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#editReferralManualCaption" data-slide-to="0">step 1
+                                             data-target="#editReferralManualModal1" data-toggle="modal">step
+                                            1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#editReferralManualCaption"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#editReferralManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-정보변경-0-의뢰선택.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="position: relative;">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-정보변경-0-의뢰선택.png}" style="
+    margin-left: 1rem;
+">
+                                            <div class="number-on-img" style="
+    left: 0.5rem;
+    top: 6.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 12.1rem;
+    top: -0.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 3.5rem;
+    height: 5.2rem;
+    left: 1.5rem;
+    top: 7.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 5.2rem;
+    height: 2.6rem;
+    left: 13rem;
+    top: 0.1rem;
+"></div>
+
                                         </div>
-                                        <div class="vr" style="left: 62%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box pt-5"
-                                             style="margin-right: 95px;">
+                                        <div class="vr" style="left: 55%;height: 13rem;"></div>
+                                        <div class="my-auto manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10">
@@ -1108,26 +957,89 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#editReferralManualCaption"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="editReferralManualModal2"
+             aria-labelledby="editReferralManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">정보변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-2">
+                                <div>
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#editReferralManualModal1"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#editReferralManualCaption" data-slide-to="1">step 2
+                                             data-target="#editReferralManualModal2" data-toggle="modal">step
+                                            2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-정보변경-1-정보변경.png}" class="mx-auto"
-                                                 style="height: 584px;">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img src="/manual/web/img/manual/user/referral/완료의뢰-정보변경-1-정보변경.png" style="
+    margin-left: 2rem;
+">
+                                            <div class="number-on-img" style="
+    left: 6.8rem;
+    top: 8.4rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 12.5rem;
+    top: 51.7rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 12.7rem;
+    height: 4.6rem;
+    left: 8.9rem;
+    top: 8.4rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 12.7rem;
+    height: 2.6rem;
+    left: 8.9rem;
+    top: 25.8rem;
+"></div>
+
+                                            <div class="border-on-img" style="
+    width: 12.7rem;
+    height: 2.6rem;
+    left: 8.9rem;
+    top: 32.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 12.7rem;
+    height: 7.6rem;
+    left: 8.9rem;
+    top: 38rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 7.9rem;
+    height: 2.4rem;
+    left: 13.5rem;
+    top: 52.3rem;
+"></div>
+
                                         </div>
-                                        <div class="vr" style="left: 59%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 94px;">
+
+                                        <div class="vr" style="left: 53%;height: 50rem;"></div>
+                                        <div class="my-auto mt-3 manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
-                                                    <div style="width: 50px;height: 29px; background: transparent;border: var(--redOrange) solid 2.5px;display: block;float: left;margin-right: 9px;"></div>
+                                                    <span style="width: 50px;height: 19px;background: transparent;border: var(--redOrange) solid 2.5px;display: block;float: left;margin-right: 4px;margin-top: 0.6rem;"></span>
                                                     항목 수정 가능
                                                 </div>
                                             </div>
@@ -1147,28 +1059,42 @@
             </div>
         </div>
         <!--MANUAL: Excel 다운로드 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="excelDwnManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="excelDwnManualModal"
              aria-labelledby="excelDwnManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">Excel 다운로드</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="excelManualCaption" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-excel.png}">
+                        <div>
+                            <div class=" my-4">
+                                <div class=" active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center"
+                                             style="position: relative;padding-top: 1rem;">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-excel.png}">
+                                            <div class="number-on-img" style="
+    left: 4.5rem;
+    top: 0.8rem;
+">1
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 22.4rem;
+    height: 3.8rem;
+    left: 5.4rem;
+    top: 1.3rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 66%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 78px;">
+                                        <div class="vr" style="left: 52%;     height: 8rem;
+"></div>
+                                        <div class="my-auto manual-desc-box mr-3">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
-                                                <div class="desc-long m-0 col-10" style="font-size: 17px;">
-                                                    <span class="text-emphasis">병원코드_검색설정날짜_의뢰목록.xlsx</span>로 다운로드
+                                                <div class="desc-long m-0 col-10 pr-0" style="font-size: 17px;">
+                                                    <span class="text-emphasis">병원코드_검색설정날짜_의뢰목록.xlsx</span>로
+                                                    다운로드
                                                 </div>
                                             </div>
                                         </div>
@@ -1181,25 +1107,40 @@
             </div>
         </div>
         <!--MANUAL: 소견복사 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="saveReportManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="saveReportManualModal"
              aria-labelledby="saveReportManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">소견복사</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="saveReportManualCaption" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-소견복사.png}">
+                        <div>
+                            <div class=" my-4">
+                                <div class=" active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="
+    padding-left: 2rem;
+">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-소견복사.png}">
+                                            <div class="number-on-img" style="
+    left: 4.8rem;
+    top: 5.9rem;
+">1
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 4.1rem;
+    height: 2.8rem;
+    left: 5.2rem;
+    top: 6.6rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 61%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 94px;">
-                                            <div class="row p-2">
+                                        <div class="vr" style="left: 51%;height: 20rem;"></div>
+                                        <div class="my-auto manual-desc-box">
+                                            <div class="row p-2" style="
+    width: 100%;
+">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10">
                                                     <span class="text-emphasis">소견복사</span> 클릭, <span
@@ -1217,24 +1158,46 @@
             </div>
         </div>
         <!--MANUAL: 병변위치 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="reportImgManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="reportImgManualModal"
              aria-labelledby="editReferralManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">병변위치 확인</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="reportImgManualCaption" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/referral/완료의뢰-병변위치-1.png}" class="mx-auto">
+                        <div>
+                            <div class=" my-4">
+                                <div class="active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="position: relative;">
+                                            <img th:src="@{/web/img/manual/user/referral/완료의뢰-병변위치-1.png}">
+                                            <div class="number-on-img" style="
+    left: 7.8rem;
+    top: -0.2rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 4.2rem;
+    top: 21rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    width: 21.5rem;
+    height: 21.9rem;
+    left: 8.4rem;
+    top: 0.3rem;
+"></div>
+                                            <div class="border-on-img" style="
+    width: 28.2rem;
+    height: 4.2rem;
+    left: 5rem;
+    top: 22.1rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 63%;"></div>
-                                        <div class="my-auto mt-3 col-3 manual-desc-box" style="margin-right: 71px;">
+                                        <div class="vr" style="left: 61%;height: 30rem;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1256,11 +1219,12 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+
+
 <th:blcok layout:fragment="script_area">
-    <script th:src="@{/js/manual/referrals.js}"></script>
+    <script th:src="@{/web/js/manualModal/user/referrals.js}"></script>
     <script type="text/javascript">
         const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
         const siteUrl = $('#siteUrl');

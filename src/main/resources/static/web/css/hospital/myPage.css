@@ -31,5 +31,5 @@ table.dataTable.no-footer {
     border-bottom: 0px;
 }
 .dataTbBtn {
-    cursor: url("../img/manual/cursor/question-mark.png"), auto !important;
-}
+     cursor: url("../../img/manual/question-mark.png"), auto !important;
+ }

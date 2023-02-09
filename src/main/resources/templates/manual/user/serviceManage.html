@@ -3,11 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
 <head>
     <link rel="stylesheet" th:href="@{/web/css/hospital/notice.css}">
-    <style>
-        .dataTbInBtn.blue.btn-download {
-            cursor: url("/web/css/img/manual/cursor/question-mark.png"), auto !important;
-        }
-    </style>
 </head>
 <div layout:fragment="content_area">
     <div id="page_content" class="contentWrap" style="height: 1173px !important">
@@ -128,24 +123,52 @@
             </div>
         </main>
         <!-- MANUAL: 공지사항 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="noticeManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="noticeManualModal"
              aria-labelledby="noticeManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix" >
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">공지사항</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="noticeManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area my-auto">
-                                        <div class="d-block mx-auto col-8 text-center">
-                                            <img th:src="@{/web/css/img/manual/serviceManage/공지사항.png}">
+                        <div>
+                            <div class="my-4">
+                                <div class="active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="padding-left: 1rem">
+                                            <img th:src="@{/web/img/manual/user/serviceManage/공지사항.png}">
+                                            <div class="number-on-img" style="
+    left: 2rem;
+    top: 4.1rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 49rem;
+    top: 5.1rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 2.7rem;
+    top: 4.9rem;
+    width: 14.6rem;
+    height: 5.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 51.3rem;
+    top: 5rem;
+    width: 3.4rem;
+    height: 1.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 51.3rem;
+    top: 7.6rem;
+    width: 3.4rem;
+    height: 1.5rem;
+"></div>
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 manual-desc-box pl-5">
+                                        <div class="vr" style="left: 75%; height: 8rem;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -170,11 +193,11 @@
     </div>
 </div>
 <th:blcok layout:fragment="script_area">
-    <script th:src="@{/js/manual/serviceManage.js}"></script>
+    <script th:src="@{/web/js/manualModal/user/serviceManage.js}"></script>
     <script type="text/javascript">
         const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
         const siteUrl = $('#siteUrl');
-        siteUrl.attr('href',`${webContext}/notice`);
+        siteUrl.attr('href', `${webContext}/notice`);
     </script>
 </th:blcok>
 </html>

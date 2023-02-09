@@ -35,5 +35,5 @@ table.dataTable.no-footer {
 }
 
 #btn-search, #btn-report-print {
-    cursor: url("../img/manual/cursor/question-mark.png"), auto !important;
+    cursor: url("../../img/manual/question-mark.png"), auto !important;
 }

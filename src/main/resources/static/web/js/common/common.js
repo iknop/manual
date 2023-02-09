@@ -1,25 +1,6 @@
 $(".form").eq(0).addClass("d-flex");
 $(".dataTbForm").eq(0).addClass("d-block");
-// $("menu > h1").on("click", function (e) {
-//     e.preventDefault();
-//     $("menu > h1").removeClass("current");
-//     $(this).addClass("current");
-//     let idx = $(this).index();
-//     console.log(idx);
-//     $(".form").removeClass("d-flex").eq(idx).addClass("d-flex");
-//     $(".dataTbForm").removeClass("d-block").eq(idx).addClass("d-block");
-//     // let pageTitle = "관리자 - 의뢰목록 > " + $("menu > .current").text();
-// });
 
-function onKeyUpSearchFilter(objectName) {
-    const inputValue = $('#' + objectName + '-search-name').val().toLowerCase();
-    $('#' + objectName + '-tbody tr').filter(function () {
-        const spanElement = $(this).find('span');
-        $(this).toggle(spanElement.text().toLowerCase().indexOf(inputValue) > -1);
-    });
-
-    $('.resultNum').text('조회된 결과 (' + $('#' + objectName + '-tbody').find('tr:visible').length + '건)')
-}
 
 /* Create Form Data Serialize with Json Structure */
 $.fn.serializeObject = function () {
@@ -51,178 +32,50 @@ $.fn.serializeObject = function () {
     return resultJson;
 }
 
-const allCheck = function (id, inputName) {
-    $('#' + id).on('click', function () {
-        const checked = this.checked;
-        $('input[name="' + inputName + '"]').prop('checked', checked);
-    });
-}
+// manual modal 설명 fade 효과 
+function fadeInPopupText() {
+    const descText = $('.manual-desc-box');
 
-function allCheck2(id,inputName){
-    const checked = this.checked;
-    $('input[name="' + inputName + '"]').prop('checked', checked);
-}
+    let loop = descText.length;
 
-const getContextmenuPosition = function (e, contextMenu, parentOffset) {
-    // console.log("contextMenu :"+ contextMenu);
-    const windowsWidth = $(document).width();
-    const windowsHeight = $(document).height();
-    // console.log("windowsWidth :"+ windowsWidth);
-    // console.log("windowsHeight :"+ windowsHeight);
-    // console.log("parentOffset.left :"+ parentOffset.left);
-    // console.log("parentOffset.top :"+ parentOffset.top);
-    // const positionX = e.pageX - parentOffset.left;
-    // const positionX = e.clientX;
-    // let positionY = e.clientY;
-    // positionY = e.pageY - parentOffset.top;
-    const positionX = e.pageX;
-    let positionY = e.pageY;
-    // console.log("positionX :"+ positionX);
-    // console.log("positionY :"+ positionY);
-    const menuWidth = contextMenu.width(); // 159
-    const menuHeight = contextMenu.height(); //322
-    // console.log("menuWidth :"+ menuWidth);
-    // console.log("menuHeight :"+ menuHeight);
-
-    let resultPosition = {}
-    console.dir(parentOffset);
-    const bottomMargin = 70; // 관리자_의뢰목록이면 70, 관리자_응급목록 페이지면 45, 병원_의뢰완료목록 페이지면 ?
-
-    // console.log("(positionX + menuWidth) : "+ (positionX + menuWidth));
-    // console.log("(positionY + menuHeight) : "+ (positionY + menuHeight));
-
-    if (windowsWidth <= (positionX + menuWidth) && windowsHeight <= (positionY + menuHeight)) {
-        // console.log("1");
-        //Case : right-bottom
-        resultPosition.left = positionX - menuWidth + 'px';
-        resultPosition.top = positionY - menuHeight - bottomMargin + 'px';
-    } else if (windowsWidth <= (positionX + menuWidth) ) {
-        // console.log("2");
-        //Case : right
-        resultPosition.left = positionX - menuWidth+ 'px';
-        resultPosition.top = positionY - bottomMargin + 'px';
-    } else if (windowsHeight <= (positionY + menuHeight)) {
-        // console.log("3");
-        // Case : bottom
-        resultPosition.left = positionX + 'px';
-        resultPosition.top = positionY - menuHeight - bottomMargin + 'px';
-    } else {
-        // console.log("4");
-        //Case : default
-        resultPosition.left = positionX + 'px';
-        resultPosition.top = positionY - bottomMargin  + 'px';
+    for (let i = 0; i < loop; i++) {
+        let text = Object.values(descText)[i];
+        text.style.animation = `fade 1000ms 400ms forwards`;
+        // console.log(text.style.animation)
     }
-    return resultPosition;
+
 }
 
-const isEmpty = function (list) {
-    return list.length === 0;
+// img 넓이 modal width
+const small = 500;
+const smallWide = 600;
+const medium = 700;
+const mediumWide = 800;
+const large = 900;
+const largeWide = 1000;
+const Xlarge = 1100;
+const XlargeWide = 1200;
+
+// modalWidthByImg(small)
+
+function modalWidthByImg(imageType) {
+    $('.modal-size-fix').width(`${imageType}`);
 }
 
-const onClickClear = function (elementId) {
-    document.getElementById(elementId).value = '';
-}
-
-const onClickClearSelectBox = function(elementId) {
-    document.getElementById(elementId).selectedIndex = 0;
-}
-
-const ajaxPrintErrorLog = function (jqXhr, textStatus, errorMessage) {
-    console.log({
-        statusCode: jqXhr.status,
-        message: jqXhr.responseJSON,
-        error: errorMessage
-    });
-}
-
-const truncateString = function(str, length) {
-    if(str !== null && str !== undefined) {
-        return str.length <= length ? str : str.slice(0, length).concat('...');
-    } else {
-        return str;
-    }
-}
-
-const onClickCheckboxTrigger = function(element) {
-    element.prop('checked') ? element.prop('checked', false) : element.prop('checked', true);
-}
-
-const createContextMenu = function(contextMenu, targetTable, callback) {
-    contextMenu.on('mouseleave', function() {
-        contextMenu.hide();
-    });
-    $(document).on('contextmenu', targetTable + ' tbody tr', function(e) {
-        e.preventDefault();
-        const position = getContextmenuPosition(e, contextMenu, $(targetTable + ' tbody').offset());
-
-        contextMenu.css({
-            left: position.left,
-            top: position.top
-        }).show();
-
-        callback(this);
-        return false;
-    }).on('click', function() {
-        contextMenu.hide();
-    });
-}
-
-const isChecked = function(element) {
-    return element.prop('checked') ? 'Y' : 'N';
-}
-
-const showTextLength = function(element, countElement, limit) {
-   element.on('keyup', function() {
-        let content = element.val();
-
-        if (content.length === 0  || content === '' ) {
-            countElement.text(`0 / ${limit}`);
-        } else {
-            countElement.text(`${content.length} / ${limit}`);
-        }
-        // 글자수 제한
-        if (content.length > limit) {
-            element.val(element.val().substring(0, limit));
-            swal.fire('',`글자수는 ${limit}자 이하로 입력해주세요.`, 'warning');
-        }
+// step 버튼 클릭 시 모달 사이즈 설정
+function setManualModalStepBtn(modalId, imageType) {
+    let step = $(`div[data-target="#${modalId}"]`)
+    step.on('click', function () {
+        modalWidthByImg(imageType)
     })
 }
 
-function checkLaunchFinished() {
-    console.log(sessionStorage.getItem('finishYN'));
-    if(sessionStorage.getItem('finishYN') == 'Y'){
-        receptionShow();
-    }
+// modal 이미지 조정
+function resizeModalImg(modalId, imgSize) {
+    $(`#${modalId}`).find('img')[0].style.width = `${imgSize}`
 }
 
-function receptionShow(){
-    $('.reception-menu').removeClass('d-none');
-    $('#application-ready').css("display", "none");
-    $('#nav-reception').css("display", "block");
-    $.removeCookie("terminalIdCheck", {path: '/'});
-    $('#link-reception a').removeClass('disabled');
-}
-
-// function createLaunchFinishCheckSession(){
-//     if(window.sessionStorage.getItem('finishYN') == null){
-//         sessionStorage.setItem('finishYN','N');
-//     }
-// }
-
-// function setLaunchFinishCheckSession(){
-//     sessionStorage.setItem('finishYN','Y');
-// }
-
-function finLaunchStatusCheck(status){
-    $.ajax({
-        url:_ctx + 'comm/finLaunchStatus/'+status,
-        type: "GET"
-    }).done(function (response){
-        console.log(response);
-        if(response === 'true'){
-            receptionShow();
-        }
-    }).fail(function (xhr,error,status){
-        console.log(xhr,error,status);
-    });
+// modal 설명란 사이즈 조정
+function resizeModalDescArea(modalId, imgSize) {
+    $(`#${modalId}`).find('.manual-desc-box ').css('width', `${imgSize}`)
 }
