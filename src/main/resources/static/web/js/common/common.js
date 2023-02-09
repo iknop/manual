@@ -41,7 +41,6 @@ function fadeInPopupText() {
     for (let i = 0; i < loop; i++) {
         let text = Object.values(descText)[i];
         text.style.animation = `fade 1000ms 400ms forwards`;
-        // console.log(text.style.animation)
     }
 
 }
@@ -57,7 +56,6 @@ const Xlarge = 1100;
 const XlargeWide = 1200;
 
 // modalWidthByImg(small)
-
 function modalWidthByImg(imageType) {
     $('.modal-size-fix').width(`${imageType}`);
 }
