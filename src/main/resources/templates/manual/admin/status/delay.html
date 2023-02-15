@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/managers.css}">
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content" style="min-height: 100vh">
+        <input id="reportConfig-hospital-code" name="reportHospitalCode" readonly="" value="0101" type="hidden">
+        <main style="width: 1320px;">
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div id="pageTitle">
+                    <a class="manual-to-page-link-btn-group active "
+                       aria-current="page">의뢰현황</a>
+                </div>
+                <a class="intro" id="siteUrl" style="left: 608px;">의뢰현황 페이지</a>
+            </div>
+        </main>
+        <main>
+            <nav>
+                원격판독 &gt;
+                <span>의뢰 현황</span>
+            </nav>
+
+            <form id="search-form">
+                <menu>
+                    <h1 onclick="location.href= '/manual/admin/status/notArrange'">미배정 의뢰</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/cvr'">CVR 현황</h1>
+                    <h1 class="current">판독지연 현황</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/reject'">판독불가 의뢰</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/importance'">주요병원 의뢰</h1>
+                </menu>
+
+                <div class="form d-flex">
+                    <div class="d-inline-flex flex-wrap justify-content-end ml-auto col-12">
+
+<!--                        <div class="clearfix">-->
+<!--                            <div class="spinner-border float-right" role="status" id="spinner-delay" style="display: none;">-->
+<!--                                <span class="sr-only">Loading...</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <script src="/web/js/common/loadingbar.js"></script>-->
+
+                        <button class="dataTbBtn blue ml-1" id="btn-delay-reload" type="button">조회</button>
+                    </div>
+                    <div class="table-responsive mt-3" id="delay-table-viewport">
+                        <table class="table table-sm table-head table-hover text-center dataTable pointer mb-1" id="delay-table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col" style="width: 80px;">판독의</th>
+                                <th scope="col" style="width: 80px;">병원</th>
+                                <th scope="col" style="width: 140px;">의뢰수</th>
+                            </tr>
+                            </thead>
+                            <tbody id="delay-table-tbody">
+                            <tr>
+                                <td style="align-content: center" rowspan="1">
+                                    <a href="#" onclick="openForRad('-')">미배정</a>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="openForHospital('0204')">테병1TEST(0204)</a>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="openForAll('-','0204')">16</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="align-content: center" rowspan="1">
+                                    <a href="#" onclick="openForRad('vksehrdml0407')">김현준</a>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="openForHospital('0204')">테병1TEST(0204)</a>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="openForAll('vksehrdml0407','0204')">3</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/web/js/manualModal/admin/managers.js}"></script>
+
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/managers`);
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+    </script>
+</th:blcok>
+</html>

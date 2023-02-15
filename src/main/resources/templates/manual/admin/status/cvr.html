@@ -1,0 +1,160 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/managers.css}">
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content" style="min-height: 100vh">
+        <!-- TODO 스토리보드_study 16,17 참고해서 수정 : 권한설정, -->
+        <main>
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div id="pageTitle">
+                    <a class="manual-to-page-link-btn-group active "
+                       aria-current="page">의뢰현황</a>
+                </div>
+                <a class="intro" id="siteUrl" style="left: 608px;">의뢰현황 페이지</a>
+            </div>
+        </main>
+        <main>
+            <nav>
+                원격판독 &gt;
+                <span>의뢰현황</span>
+            </nav>
+
+            <form id="search-form">
+                <menu>
+                    <h1 onclick="location.href= '/manual/admin/status/notArrange'">미배정 의뢰</h1>
+                    <h1 class="current">CVR 현황</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/delay'">판독지연 현황</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/reject'">판독불가 의뢰</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/importance'">주요병원 의뢰</h1>
+                </menu>
+
+                <div class="form d-flex">
+                    <input id="send-hospital-code" name="sendHospitalCode" readonly="" value="9002" type="hidden">
+                    <input id="reportConfig-hospital-code" name="reportHospitalCode" readonly="" value="0101" type="hidden">
+                    <div class="d-inline-flex flex-wrap justify-content-end ml-auto col-12">
+
+                        <div class="clearfix">
+                            <div class="spinner-border float-right" role="status" id="spinner-cvr" style="display: none;">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <script src="/web/js/common/loadingbar.js"></script>
+
+                        <button class="dataTbBtn blue ml-1" id="btn-cvr-reload" type="button">조회</button>
+                    </div>
+
+                    <div class="table-responsive mt-3" id="cvr-table-viewport">
+                        <div class="dataTables_wrapper no-footer" id="cvr-table_wrapper">
+                            <div id="cvr-table_wrapper" class="dataTables_wrapper no-footer"><table class="table text-center pointer dataTable no-footer" id="cvr-table">
+                                <thead class="thead-light">
+                                <tr><th scope="col" style="width: 150px;" class="sorting_disabled" rowspan="1" colspan="1">KR</th><th scope="col" style="width: 100px;" class="sorting_disabled" rowspan="1" colspan="1">PatientsID</th><th scope="col" style="width: 100px;" class="sorting_disabled" rowspan="1" colspan="1">Name</th><th scope="col" style="width: 100px;" class="sorting_disabled" rowspan="1" colspan="1">Urgent</th><th scope="col" style="width: 100px;" class="sorting_disabled" rowspan="1" colspan="1">StudyDate</th><th scope="col" style="width: 80px;" class="sorting_disabled" rowspan="1" colspan="1">Modal</th><th scope="col" style="width: 200px;" class="sorting_disabled" rowspan="1" colspan="1">OrigType</th><th scope="col" style="width: 200px;" class="sorting_disabled" rowspan="1" colspan="1">Recommendation</th></tr>
+                                </thead>
+                                <tbody id="cvr-table-tbody">
+                                <tr class="odd" style="padding: 2px;"><td valign="top" colspan="8" class="dataTables_empty">조회된 CVR 건이 없습니다.</td></tr></tbody>
+                            </table></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="applyCvrRequestModal" data-backdrop="static" aria-labelledby="applyCvrRequestModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title">CVR 확인</h1>
+                            <button type="button" data-dismiss="modal" class="modalClose"></button>
+
+                            <div class="clearfix">
+                                <div class="spinner-border float-right" role="status" id="spinner-apply-cvr" style="display: none">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <script src="/web/js/common/loadingbar.js"></script>
+
+                        </div>
+                        <div class="modal-body justify-content-md-center">
+                            <input type="hidden" name="studyId" id="study-id" value="">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-hospital-name">병원명</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control text-center" id="cvr-hospital-name" readonly="" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-patient-id">차트번호</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control text-center" id="cvr-patient-id" readonly="" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-patient-name">환자명</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control text-center" id="cvr-patient-name" readonly="" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-urgent">응급구분</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control text-center" id="cvr-urgent" readonly="" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-study-date">촬영일시</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control text-center" id="cvr-study-date" readonly="" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-modality">Modality</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control text-center" id="cvr-modality" readonly="" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-origin-study-type">원내촬영유형</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control text-center" id="cvr-origin-study-type" readonly="" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center" for="cvr-reportConfig-finding">소견</label>
+                                <div class="col-sm-8">
+                                    <textarea class="w-100 reportConfig-textarea" disabled="" id="cvr-reportConfig-finding" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <label class="col-sm-4 col-form-label text-center font-weight-bold" for="cvr-apply-cvr">CVR 확인</label>
+                                <div class="col-sm-8 text-center my-auto">
+                                    <input type="checkbox" id="cvr-apply-cvr" readonly="">
+                                    <label for="cvr-apply-cvr" style="margin-left: 46%;"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-primary w-25" id="btn-save-clipboard" type="button" style="background-color: #007bff; border:0px;">내용복사</button>
+                            <button type="button" class="btn btn-primary w-25" id="btn-apply-cvr">저장</button>
+                            <button type="button" class="modalClose w-25" data-dismiss="modal">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/web/js/manualModal/admin/managers.js}"></script>
+
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/managers`);
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+    </script>
+</th:blcok>
+</html>

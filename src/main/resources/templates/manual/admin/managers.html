@@ -18,10 +18,16 @@
 
         </main>
         <main>
+            <nav>
+                원격판독 &gt;
+                <span>의뢰목록</span>
+            </nav>
             <form id="search-form">
                 <menu>
-                    <h1 onclick="location.href=_ctx + 'emergencies'">응급의뢰</h1>
-                    <h1 class="current" onclick="location.href=_ctx + 'managers'">일반의뢰</h1>
+                    <h1 onclick="location.href='/manual/admin/emergencies'">응급의뢰</h1>
+                    <!--                    <a onclick="location.href=_ctx + 'emergencies'">응급의뢰</a>-->
+                    <h1 class="current">일반의뢰</h1>
+                    <!--                    <a onclick="location.href=_ctx + 'managers'">일반의뢰</a>-->
                 </menu>
                 <div class="form d-flex">
                     <input id="reportConfig-hospital-code" name="reportHospitalCode" type="hidden" value="0101">
@@ -31,9 +37,10 @@
 
                     <label class="col-1 labelBlue p-0" for="hospiSelect">병원선택</label>
                     <div class="hospiSelect d-flex flex-wrap col-11 p-0">
-                        <button class="defaultBtn" data-toggle="modal" type="button">추가
+                        <button id="select-hosp" class="defaultBtn manual-click-border" data-toggle="modal"
+                                type="button">추가
                         </button>
-                        <button class="reBtn" type="button">초기화</button>
+                        <button id="reset-hosp" class="reBtn manual-click-border" type="button">초기화</button>
                         <button class="moreView p-0 justify-content-end" id="moreView" style="display: none"
                                 type="button">더보기
                         </button>
@@ -87,6 +94,7 @@
 
             <div class="dataTbForm d-block">
                 <div class="dataTbWrap d-flex">
+                    <span class="my-auto ml-1 py-1 text-danger"> *목록에서 의뢰를 선택 후 우클릭하여 의뢰상세보기 페이지 이동과 영상확인 및 일반의뢰 버튼 메뉴를 선택할 수 있습니다</span>
                     <div class="d-flex justify-content-start mr-auto">
                         <button class="dataTbBtn manual-click-border" id="referral-duplicate-btn" type="button">중복정리
                         </button>
@@ -1055,44 +1063,72 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!--                        </div>-->
                     </div>
 
 
                     <input type="hidden" id="page" value="1">
-                    <div aria-label="Pagination" id="pagination-content" class="d-inline-flex"
-                         style="margin-bottom: 20px;width: 100%;">
-                        <button class="dataTbBtn" id="table-desc-btn" type="button" style="background-color: var(--redOrange);
-    color: #fff;">의뢰목록색상
-                        </button>
-                        <button class="dataTbBtn" id="right-click-btn" type="button" style="background-color: var(--redOrange);
-    color: #fff;">우클릭메뉴
-                        </button>
-                        <nav aria-label="Pagination" style="margin-left: 373px;">
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <button class="page-link page-href" tabindex="-1" aria-disabled="true"
-                                            data-size="10" data-page="0">Previous
-                                    </button>
-                                </li>
-                                <li class="page-item active">
-                                    <button class="page-link page-href" data-size="10" data-page="1">1</button>
-                                </li>
-                                <li class="page-item ">
-                                    <button class="page-link page-href" data-size="10" data-page="2">Next</button>
-                                </li>
-                            </ul>
-                        </nav>
+<!--                    <div aria-label="Pagination" id="pagination-content" class="d-inline-flex"-->
+<!--                         style="margin-bottom: 20px;width: 100%;">-->
+<!--                        &lt;!&ndash;                        <button class="dataTbBtn manual-click-border" id="table-desc-btn" type="button">의뢰목록색상&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        </button>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <button class="dataTbBtn manual-click-border" id="right-click-btn" type="button">우클릭메뉴&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        </button>&ndash;&gt;-->
+<!--                        <nav aria-label="Pagination" style="margin: auto;">-->
+<!--                            <ul class="pagination">-->
+<!--                                <li class="page-item disabled">-->
+<!--                                    <button class="page-link page-href" tabindex="-1" aria-disabled="true"-->
+<!--                                            data-size="10" data-page="0">Previous-->
+<!--                                    </button>-->
+<!--                                </li>-->
+<!--                                <li class="page-item active">-->
+<!--                                    <button class="page-link page-href" data-size="10" data-page="1">1</button>-->
+<!--                                </li>-->
+<!--                                <li class="page-item ">-->
+<!--                                    <button class="page-link page-href" data-size="10" data-page="2">Next</button>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </nav>-->
+<!--                    </div>-->
+                    <div class="d-flex justify-content-around mt-3" style="
+    background-color: var(--oddBg);
+    padding: 1rem;
+    border-radius: 1rem;
+">
+                        <div class="mr-2">
+                            <div class="">
+                                <span class="" style="
+    background-color: rgb(246, 148, 70);
+">주황배경</span>: CVR<br>
+                                <span class="" style="
+    background-color: rgb(240, 125, 136);
+">빨간배경</span>: 응급여부(응급)<br>
+                                <span class="" style="
+    background-color: rgb(167, 230, 255);
+">짙은하늘배경</span>: 의뢰상태(판독중)<br>
+                                <span class="" style="
+    color: rgb(207, 28, 45) !important;
+    background-color: rgb(196, 233, 255);
+">옅은하늘배경+빨간글씨</span>: 의뢰상태(원내취소,원내판독)<br>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="">
+                                <span class="" style="
+    color: rgb(96, 37, 220) !important;
+">보라글씨</span>: 중복여부(Y)<br>
+                                <span class="" style="
+    color: rgb(46, 111, 230) !important;
+">파란글씨</span>: 재판독여부(재판독)<br>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--참조영상-->
                 <div class="dataTbWrap d-flex">
-                    <h3>참조영상</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" data-toggle="tooltip" data-placement="right"
-                         data-title="목록에서 선택한 의뢰의 모든 과거 영상을 조회합니다." width="16" height="16" fill="currentColor"
-                         class="bi bi-question-circle-fill text-danger" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"></path>
-                    </svg>
+                    <h3 class="m-0">참조영상</h3>
+                    <span class="my-auto ml-2 text-danger"> *목록에서 선택한 의뢰의 모든 과거 영상 조회</span>
                     <div class="table-responsive" id="reference-table-viewport">
                         <div class="dataTables_wrapper no-footer" id="reference-table_wrapper">
 
@@ -1176,25 +1212,219 @@
                 </div>
             </div>
         </main>
+        <!-- MANUAL: 병원선택 -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="selectHospManualModal"
+             aria-labelledby="selectHospManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">병원선택</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" my-3">
+                                <div class=" active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병원선택-0.png}">
+                                            <div class="number-on-img" style="
+    left: 2.5rem;
+    top: 0.5rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 2.5rem;
+    top: 8.5rem;
+">2
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 3.5rem;
+    top: 18rem;
+">3
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 3.3rem;
+    top: 1.5rem;
+    width: 14.4rem;
+    height: 1.4rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 3.2rem;
+    top: 8.8rem;
+    width: 2.4rem;
+    height: 2rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 4.1rem;
+    top: 18.5rem;
+    width: 6.2rem;
+    height: 1.9rem;
+"></div>
+                                        </div>
+                                        <div class="vr" style="left: 54%;height: 90%;"></div>
+                                        <div class="my-auto manual-desc-box">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">병원명 일부</span> 검색 가능
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">병원</span> 선택
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">3</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">선택</span> 버튼 클릭
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--병원초기화-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="resetHospManualModal"
+             aria-labelledby="resetHospManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">병원초기화</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병원초기화.png}">
+                                            <div class="number-on-img" style="
+    left: 3.7rem;
+    top: 8.1rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 32.7rem;
+    top: 20.1rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 33.4rem;
+    top: 20.5rem;
+    width: 5.3rem;
+    height: 1.6rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 4.rem;
+    top: 9rem;
+    width: 34.1rem;
+    height: 1.4rem;
+"></div>
+                                        </div>
+                                        <div class="vr" style="left: 67%;height: 64%;"></div>
+                                        <div class=" my-auto manual-desc-box">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    <span class="text-emphasis">초기화 버튼 클릭 시</span> 선택 병원 모두 제거
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">X버튼 클릭 시</span> 개별 병원 제거
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- MANUAL: 검색하기 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal" data-backdrop="static"
-             aria-labelledby="searchManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+        <div class="modal fade" tabindex="-1" role="dialog" id="searchManualModal" aria-labelledby="searchManualModal"
+             aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">검색하기</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="searchManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner my-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area my-auto">
-                                        <div class="d-block mx-auto col-8 text-center">
+                        <div>
+                            <div class=" my-4">
+                                <div class=" active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center ">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-검색하기-0.png}">
+                                            <div class="number-on-img" style="
+    left: 8rem;
+    top: 1.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 8rem;
+    top: 3.8rem;
+">2
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 46.8rem;
+    top: 3.8rem;
+">3
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 29.2rem;
+    top: 7.9rem;
+">4
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 8.5rem;
+    top: 2.1rem;
+    width: 3.8rem;
+    height: 2rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 8.5rem;
+    top: 4.1rem;
+    width: 39.1rem;
+    height: 1.9rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 47.7rem;
+    top: 4.1rem;
+    width: 6.4rem;
+    height: 1.9rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 29.5rem;
+    top: 8.2rem;
+    width: 5.8rem;
+    height: 1.9rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 4.8rem;
+    top: 16.4rem;
+    width: 49.5rem;
+    height: 6.4rem;
+"></div>
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 manual-desc-box pl-5">
+                                        <div class="vr" style="
+    height: 22rem;
+    left: 76%;
+"></div>
+                                        <div class=" my-auto manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10">
@@ -1236,32 +1466,55 @@
             </div>
         </div>
         <!-- MANUAL: 중복정리 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="duplicateManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="duplicateManualModal"
              aria-labelledby="duplicateManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">중복정리</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="duplicateManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#duplicateManualCaptions" data-slide-to="0">step 1
+                                             data-target="#duplicateManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#duplicateManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#duplicateManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-중복정리-0.png}">
+                                            <div class="number-on-img" style="
+    left: 3.5rem;
+    top: 8.5rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 3.5rem;
+    top: 3.5rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 4.2rem;
+    top: 4.1rem;
+    width: 3.4rem;
+    height: 1.7rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 4.2rem;
+    top: 8.9rem;
+    width: 31.7rem;
+    height: 2.9rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 63%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box">
+                                        <div class="vr" style="left: 63%;height: 8rem;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1277,21 +1530,63 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#duplicateManualCaptions"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="duplicateManualModal2"
+             aria-labelledby="duplicateManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">중복정리</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#duplicateManualModal" data-toggle="modal"
+                                             data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#duplicateManualCaptions" data-slide-to="1">step 2
+                                             data-target="#duplicateManualModal2"
+                                             data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center py-5">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-중복정리-1.png}">
+                                            <div class="number-on-img" style="
+    left: 3.7rem;
+    top: 8.1rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 32.7rem;
+    top: 20.1rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 33.4rem;
+    top: 20.5rem;
+    width: 5.3rem;
+    height: 1.6rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 4.rem;
+    top: 9rem;
+    width: 34.1rem;
+    height: 1.4rem;
+"></div>
                                         </div>
-                                        <div class="vr"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                        <div class="vr" style="left: 67%; height: 76%;"></div>
+                                        <div class=" my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10">
@@ -1314,32 +1609,56 @@
             </div>
         </div>
         <!-- MANUAL: 배정의변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="rearrangeManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="rearrangeManualModal"
              aria-labelledby="rearrangeManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">배정의변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="rearrangeManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#rearrangeManualCaptions" data-slide-to="0">step 1
+                                             data-target="#rearrangeManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#rearrangeManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#rearrangeManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경-0.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경...사용여부변경.png}">
+                                            <div class="number-on-img" style="
+    left: 2.7rem;
+    top: 9.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 7.5rem;
+    top: 3.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 3.2rem;
+    top: 10.3rem;
+    width: 2.8rem;
+    height: 3.8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 7.8rem;
+    top: 4.4rem;
+    width: 4.9rem;
+    height: 2rem;
+"></div>
+
                                         </div>
-                                        <div class="vr" style="left: 66%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
+                                        <div class="vr" style="left: 70%; height: 66%;"></div>
+                                        <div class="my-auto manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1355,69 +1674,68 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#rearrangeManualCaptions"
-                                             data-slide-to="0">step 1
-                                        </div>
-                                        <div class="carousel-desc-step-current mx-2"
-                                             data-target="#rearrangeManualCaptions" data-slide-to="1">step 2
-                                        </div>
-                                    </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center py-5">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경-1.png}">
-                                        </div>
-                                        <div class="vr"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
-                                            <div class="row p-2">
-                                                <div class="manual-desc-order col-1">1</div>
-                                                <div class="desc m-0 col-10">
-                                                    <span class="text-emphasis">판독의</span> 선택
-                                                </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="manual-desc-order col-1">2</div>
-                                                <div class="desc m-0 col-10">
-                                                    <span class="text-emphasis">배정변경</span> 버튼 클릭
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- MANUAL: 의뢰상태변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="statusManualModal" data-backdrop="static"
-             aria-labelledby="statusManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="rearrangeManualModal2"
+             aria-labelledby="rearrangeManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
-                        <h3 class="modal-title"><span class="descFuncName">의뢰상태변경</span></h3>
+                        <h3 class="modal-title"><span class="descFuncName">배정의변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="statusManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step-current mx-2"
-                                             data-target="#statusManualCaptions" data-slide-to="0">step 1
+                        <div>
+                            <div class="mb-4">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#rearrangeManualModal" data-toggle="modal"
+                                             data-dismiss="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#statusManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#rearrangeManualModal2"
+                                             data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-의뢰상태변경-0.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center" style="
+    width: 67%;
+">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경-1.png}">
+                                            <div class="number-on-img" style="
+    left: 20.5rem;
+    top: 9.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 17rem;
+    top: 12.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 21.2rem;
+    top: 10.3rem;
+    width: 7.9rem;
+    height: 1.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 17.6rem;
+    top: 13.5rem;
+    width: 5.6rem;
+    height: 1.8rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 66%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
+                                        <div class="vr" style="
+    left: 73%;
+    height: 70%;
+"></div>
+                                        <div class="my-auto manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1433,31 +1751,144 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#statusManualCaptions"
-                                             data-slide-to="0">step 1
-                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MANUAL: 의뢰상태변경 -->
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="statusManualModal"
+             aria-labelledby="statusManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">의뢰상태변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#statusManualCaptions" data-slide-to="1">step 2
+                                             data-target="#statusManualModal" data-toggle="modal">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#statusManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center ">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-의뢰상태변경-1.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경...사용여부변경.png}">
+                                            <div class="number-on-img" style="
+    left: 3rem;
+    top: 9.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 13rem;
+    top: 3.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 3.7rem;
+    top: 10.3rem;
+    width: 2.8rem;
+    height: 3.8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 13.8rem;
+    top: 4.4rem;
+    width: 5.5rem;
+    height: 2rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="height: 300px;"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                        <div class="vr" style="left: 72%;height: 66%;"></div>
+                                        <div class="my-auto manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
-                                                    <span class="text-emphasis">의뢰상태</span> 선택
+                                                    <span class="text-emphasis">변경할 의뢰</span> 선택
                                                 </div>
                                             </div>
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">2</div>
-                                                <div class="desc-long m-0 col-10">
-                                                    <span class="text-emphasis">의뢰상태변경</span> 버튼 <br>클릭
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">의뢰상태변경</span> 버튼 클릭
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="statusManualModal2"
+             aria-labelledby="statusManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">의뢰상태변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div>
+                                        <div class="d-flex justify-content-center p-2 my-2">
+                                            <div class="carousel-desc-step mx-2" data-target="#statusManualModal"
+                                                 data-toggle="modal" data-dismiss="modal">step 1
+                                            </div>
+                                            <div class="carousel-desc-step-current mx-2"
+                                                 data-target="#statusManualModal" data-toggle="modal">step 2
+                                            </div>
+                                        </div>
+                                        <div class="row manual-area justify-content-around">
+                                            <div class="d-block text-center ">
+                                                <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-의뢰상태변경-1.png}">
+                                                <div class="number-on-img" style="
+    left: 22.7rem;
+    top: 9.7rem;
+">1
+                                                </div>
+                                                <div class="number-on-img" style="
+    left: 17.9rem;
+    top: 13.3rem;
+">2
+                                                </div>
+                                                <div class="border-on-img" style="
+    left: 23.2rem;
+    top: 10.6rem;
+    width: 6.7rem;
+    height: 1.5rem;
+"></div>
+                                                <div class="border-on-img" style="
+    left: 18.6rem;
+    top: 14rem;
+    width: 5.8rem;
+    height: 1.8rem;
+"></div>
+                                            </div>
+                                            <div class="vr" style="height: 70%;left: 77%;"></div>
+                                            <div class="my-auto manual-desc-box">
+                                                <div class="row p-2">
+                                                    <div class="manual-desc-order col-1">1</div>
+                                                    <div class="desc m-0 col-10">
+                                                        <span class="text-emphasis">의뢰상태</span> 선택
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="manual-desc-order col-1">2</div>
+                                                    <div class="desc-long m-0 col-10">
+                                                        <span class="text-emphasis">의뢰상태변경</span> 버튼 <br>클릭
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1470,32 +1901,55 @@
             </div>
         </div>
         <!-- MANUAL: 촬영유형변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="studyTypeManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="studyTypeManualModal"
              aria-labelledby="studyTypeManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-around" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">촬영유형변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="studyTypeManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#studyTypeManualCaptions" data-slide-to="0">step 1
+                                             data-target="#studyTypeManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#studyTypeManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#studyTypeManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-촬영유형변경-0.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경...사용여부변경.png}">
+                                            <div class="number-on-img" style="
+    left: 2rem;
+    top: 9.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 12.4rem;
+    top: 3.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 2.9rem;
+    top: 10.3rem;
+    width: 2.8rem;
+    height: 3.8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 12.9rem;
+    top: 4.4rem;
+    width: 5.7rem;
+    height: 2rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 66%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
+                                        <div class="vr" style="left: 69%;height: 67%;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1511,21 +1965,62 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#studyTypeManualCaptions"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="studyTypeManualModal2"
+             aria-labelledby="studyTypeManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-around" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">촬영유형변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div>
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#studyTypeManualModal"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#studyTypeManualCaptions" data-slide-to="1">step 2
+                                             data-target="#studyTypeManualModal2" data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center ">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-촬영유형변경-1.png}">
+                                            <div class="number-on-img" style="
+    left: 25rem;
+    top: 10rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 19.9rem;
+    top: 13.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 25.6rem;
+    top: 10.6rem;
+    width: 7rem;
+    height: 1.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 20.6rem;
+    top: 14.3rem;
+    width: 6.3rem;
+    height: 1.9rem;
+"></div>
+
                                         </div>
-                                        <div class="vr" style="height: 300px;"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                        <div class="vr" style="height: 70%;left: 77%;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1548,32 +2043,55 @@
             </div>
         </div>
         <!-- MANUAL: 응급구분변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="urgentTypeManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="urgentTypeManualModal"
              aria-labelledby="urgentTypeManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">응급구분변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="urgentTypeManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class=" mb-5">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#urgentTypeManualCaptions" data-slide-to="0">step 1
+                                             data-target="#urgentTypeManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#urgentTypeManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#urgentTypeManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-응급구분변경-0.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경...사용여부변경.png}">
+                                            <div class="number-on-img" style="
+    left: 3rem;
+    top: 9.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 13rem;
+    top: 3.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 3.7rem;
+    top: 10.3rem;
+    width: 2.8rem;
+    height: 3.8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 13.7rem;
+    top: 4.4rem;
+    width: 5.7rem;
+    height: 2rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 66%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
+                                        <div class="vr" style="left: 66%;height: 70%;left: 72%;"></div>
+                                        <div class="my-auto manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1589,21 +2107,61 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="urgentTypeManualModal2"
+             aria-labelledby="urgentTypeManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">응급구분변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-5">
+                                <div class=" active">
                                     <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#urgentTypeManualCaptions"
-                                             data-slide-to="0">step 1
+                                        <div class="carousel-desc-step mx-2" data-target="#urgentTypeManualModal"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#urgentTypeManualCaptions" data-slide-to="1">step 2
+                                             data-target="#urgentTypeManualModal2">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center ">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center ">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-응급구분변경-1.png}">
+                                            <div class="number-on-img" style="
+    left: 25rem;
+    top: 12.3rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 19.9rem;
+    top: 16rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 26rem;
+    top: 12.9rem;
+    width: 7rem;
+    height: 1.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 20.6rem;
+    top: 16.6rem;
+    width: 6.5rem;
+    height: 1.9rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="height: 300px;"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                        <div class="vr" style="height: 67%;left: 78%;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1626,32 +2184,55 @@
             </div>
         </div>
         <!-- MANUAL: 사용여부변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="useynManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="useynManualModal"
              aria-labelledby="useynManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">사용여부변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="useynManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#useynManualCaptions" data-slide-to="0">step 1
+                                             data-target="#useynManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#useynManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#useynManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-사용여부변경-0.png}">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-배정의변경...사용여부변경.png}">
+                                            <div class="number-on-img" style="
+    left: 2.3rem;
+    top: 9.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 12.5rem;
+    top: 3.8rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 2.9rem;
+    top: 10.3rem;
+    width: 2.8rem;
+    height: 3.8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 13rem;
+    top: 4.4rem;
+    width: 5.7rem;
+    height: 2rem;
+"></div>
                                         </div>
                                         <div class="vr" style="left: 66%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1667,21 +2248,60 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#useynManualCaptions"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" role="dialog" id="useynManualModal2"
+             aria-labelledby="useynManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">사용여부변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div>
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#useynManualModal"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#useynManualCaptions" data-slide-to="1">step 2
+                                             data-target="#useynManualModal2" data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center ">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-사용여부변경-1.png}">
+                                            <div class="number-on-img" style="
+    left: 25rem;
+    top: 10.3rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 19.6rem;
+    top: 14.6rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 25.6rem;
+    top: 11.2rem;
+    width: 7.5rem;
+    height: 1.5rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 20.2rem;
+    top: 15rem;
+    width: 6.8rem;
+    height: 2rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="height: 300px;"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                        <div class="vr" style="height: 75%;left: 77%;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1704,32 +2324,56 @@
             </div>
         </div>
         <!-- MANUAL: 차트정보변경 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="patientInfoManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="patientInfoManualModal"
              aria-labelledby="patientInfoManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">차트정보변경</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="patientManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class="mb-5">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#patientManualCaptions" data-slide-to="0">step 1
+                                             data-target="#patientInfoManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#patientManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#patientInfoManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-차트정보변경-0.png}">
+                                            <div class="number-on-img" style="
+    left: 3.3rem;
+    top: 8.8rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 34.4rem;
+    top: 3.4rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 3.8rem;
+    top: 9.6rem;
+    width: 2.8rem;
+    height: 5.1rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 34.7rem;
+    top: 4.1rem;
+    width: 5.2rem;
+    height: 1.9rem;
+"></div>
+
                                         </div>
-                                        <div class="vr" style="left: 66%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
+                                        <div class="vr" style="left: 69%;height: 70%;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1745,38 +2389,93 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#patientManualCaptions"
-                                             data-slide-to="0">step 1
-                                        </div>
-                                        <div class="carousel-desc-step-current mx-2"
-                                             data-target="#patientManualCaptions" data-slide-to="1">step 2
-                                        </div>
-                                    </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center ">
-                                            <img src="/manual/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-차트정보변경-1.png">
-                                        </div>
-                                        <div class="vr" style="height: 300px; left: 62%;"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3  manual-desc-box"
-                                             style="animation: 1000ms ease 800ms 1 normal forwards running fade;">
-                                            <div class="row p-2">
-                                                <div class="manual-desc-order col-1">1</div>
-                                                <div class="desc m-0 col-10">
-                                                    <span class="text-emphasis">차트정보</span> 수정
-                                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="patientInfoManualModal2"
+             aria-labelledby="patientInfoManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">차트정보변경</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="mb-4">
+                                <div class="active">
+                                    <div>
+                                        <div class="d-flex justify-content-center p-2 my-2">
+                                            <div class="carousel-desc-step mx-2"
+                                                 data-target="#patientInfoManualModal"
+                                                 data-toggle="modal" data-dismiss="modal">step 1
                                             </div>
-                                            <div class="row p-2">
-                                                <div class="manual-desc-order col-1">2</div>
-                                                <div class="desc-long m-0 col-10">
-                                                    선택 시 <span class="text-emphasis">해당 차트<br>번호 정보 모두 변경</span>
-                                                </div>
+                                            <div class="carousel-desc-step-current mx-2"
+                                                 data-target="#patientInfoManualModal2" data-toggle="modal">step 2
                                             </div>
-                                            <div class="row p-2">
-                                                <div class="manual-desc-order col-1">3</div>
-                                                <div class="desc m-0 col-10">
-                                                    <span class="text-emphasis">변경</span> 버튼 클릭
+                                        </div>
+                                        <div class="row manual-area justify-content-around">
+                                            <div class="d-block text-center ">
+                                                <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-차트정보변경-1.png}">
+                                                <div class="number-on-img" style="
+    left: 23.8rem;
+    top: 6.2rem;
+">1
+                                                </div>
+                                                <div class="number-on-img" style="
+    left: 3.4rem;
+    top: 14.4rem;
+">2
+                                                </div>
+                                                <div class="number-on-img" style="
+    left: 21.8rem;
+    top: 16.8rem;
+">3
+                                                </div>
+                                                <div class="border-on-img" style="
+    left: 24.2rem;
+    top: 6.8rem;
+    width: 10.4rem;
+    height: 8.1rem;
+"></div>
+                                                <div class="border-on-img" style="
+    left: 3.7rem;
+    top: 15.1rem;
+    width: 13.2rem;
+    height: 1.9rem;
+"></div>
+                                                <div class="border-on-img" style="
+    left: 22.3rem;
+    top: 17.3rem;
+    width: 6.2rem;
+    height: 1.9rem;
+"></div>
+
+                                            </div>
+                                            <div class="vr" style="height: 71%;left: 68%;"></div>
+                                            <div class="my-auto manual-desc-box"
+                                                 style="animation: 1000ms ease 800ms 1 normal forwards running fade;">
+                                                <div class="row p-2">
+                                                    <div class="manual-desc-order col-1">1</div>
+                                                    <div class="desc m-0 col-10">
+                                                        <span class="text-emphasis">차트정보</span> 수정
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="manual-desc-order col-1">2</div>
+                                                    <div class="desc-long m-0 col-10">
+                                                        선택 시 <span class="text-emphasis">해당 차트<br>번호 정보 모두 변경</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="manual-desc-order col-1">3</div>
+                                                    <div class="desc m-0 col-10">
+                                                        <span class="text-emphasis">변경</span> 버튼 클릭
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1789,39 +2488,64 @@
             </div>
         </div>
         <!-- MANUAL: 병변위치 확인 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="reportImageManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="reportImageManualModal"
              aria-labelledby="reportImageManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">병변위치 확인</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="reportImageManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#reportImageManualCaptions" data-slide-to="0">step 1
+                                             data-target="#reportImageManualModal" data-toggle="modal"
+                                             data-dismiss="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#reportImageManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#reportImageManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병변위치확인-0.png}">
+                                            <div class="number-on-img" style="
+    left: 2.5rem;
+    top: 8.5rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 35.7rem;
+    top: 3.4rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 3.4rem;
+    top: 9rem;
+    width: 2.4rem;
+    height: 4.8rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 36rem;
+    top: 4.1rem;
+    width: 5rem;
+    height: 1.9rem;
+"></div>
+
                                         </div>
-                                        <div class="vr" style="left: 70%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
-                                            <div class="row p-2 pl-5">
+                                        <div class="vr" style="left: 70%;height: 69%;"></div>
+                                        <div class="my-auto manual-desc-box ">
+                                            <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
                                                     <span class="text-emphasis">의뢰</span> 선택
                                                 </div>
                                             </div>
-                                            <div class="row p-2 pl-5">
+                                            <div class="row p-2">
                                                 <div class="manual-desc-order col-1">2</div>
                                                 <div class="desc m-0 col-10">
                                                     <span class="text-emphasis">병변위치 확인</span> 버튼 클릭
@@ -1830,23 +2554,61 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#reportImageManualCaptions"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="reportImageManualModal2"
+             aria-labelledby="reportImageManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">병변위치 확인</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div>
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#reportImageManualModal"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#reportImageManualCaptions" data-slide-to="1">step 2
+                                             data-target="#reportImageManualModal2" data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area" style="height: 599px;">
-                                        <div class="d-block mx-auto col-8 text-center ">
-                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병변위치확인-1.png}"
-                                                 style="height: 83%;">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center my-auto">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병변위치확인-1.png}">
+                                            <div class="number-on-img" style="
+    left: 7.5rem;
+    top: 4.5rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 4.7rem;
+    top: 20.4rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 8.2rem;
+    top: 5rem;
+    width: 16rem;
+    height: 16rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 5.7rem;
+    top: 21.1rem;
+    width: 21rem;
+    height: 2.9rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="height: 600px; left: 68%;"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 manual-desc-box mr-5"
-                                             style="margin-top: 225px !important;">
+                                        <div class="vr" style="height: 82%;left: 61%;"></div>
+                                        <div class="my-auto manual-desc-box ">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1869,40 +2631,63 @@
             </div>
         </div>
         <!-- MANUAL: 병합 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="mergeInfoManualModal" data-backdrop="static"
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="mergeInfoManualModal"
              aria-labelledby="mergeInfoManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">병합</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="mergeManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="d-flex justify-content-center p-4 my-2">
+                        <div>
+                            <div class="mb-5">
+                                <div class="active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#mergeManualCaptions" data-slide-to="0">step 1
+                                             data-target="#mergeInfoManualModal" data-toggle="modal">step 1
                                         </div>
-                                        <div class="carousel-desc-step mx-2" data-target="#mergeManualCaptions"
-                                             data-slide-to="1">step 2
+                                        <div class="carousel-desc-step mx-2" data-target="#mergeInfoManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block col-8 text-center ">
-                                            <img src="/manual/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병합-0.png">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병합-0.png}">
+                                            <div class="number-on-img" style="
+    left: 1.5rem;
+    top: 8.3rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 38.5rem;
+    top: 3.4rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 2.4rem;
+    top: 8.8rem;
+    width: 2.3rem;
+    height: 3rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 39rem;
+    top: 4.1rem;
+    width: 2.3rem;
+    height: 1.7rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 71%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5"
+                                        <div class="vr" style="left: 76%;height: 72%;"></div>
+                                        <div class="my-auto manual-desc-box"
                                              style="animation: 1000ms ease 800ms 1 normal forwards running fade;">
-                                            <div class="row p-2 pl-5">
+                                            <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
                                                     <span class="text-emphasis">병합할 의뢰</span> 선택
                                                 </div>
                                             </div>
-                                            <div class="row p-2 pl-5">
+                                            <div class="row p-2 ">
                                                 <div class="manual-desc-order col-1">2</div>
                                                 <div class="desc m-0 col-10">
                                                     <span class="text-emphasis">병합</span> 버튼 클릭
@@ -1911,21 +2696,62 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center p-4 my-2">
-                                        <div class="carousel-desc-step mx-2" data-target="#mergeManualCaptions"
-                                             data-slide-to="0">step 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="mergeInfoManualModal2"
+             aria-labelledby="mergeInfoManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">병합</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="mb-5">
+                                <div>
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2" data-target="#mergeInfoManualModal"
+                                             data-toggle="modal" data-dismiss="modal">step 1
                                         </div>
                                         <div class="carousel-desc-step-current mx-2"
-                                             data-target="#mergeManualCaptions" data-slide-to="1">step 2
+                                             data-target="#mergeInfoManualModal2" data-toggle="modal">step 2
                                         </div>
                                     </div>
-                                    <div class="row manual-area ">
-                                        <div class="d-block mx-auto col-8 text-center ">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병합-1.png}">
+                                            <div class="number-on-img" style="
+    left: 2.5rem;
+    top: 6rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 35.8rem;
+    top: 13rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 3.4rem;
+    top: 6.8rem;
+    width: 1.4rem;
+    height: 1.4rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 36.3rem;
+    top: 13.6rem;
+    width: 6.3rem;
+    height: 1.7rem;
+"></div>
+
                                         </div>
-                                        <div class="vr" style="height: 300px;"></div>
-                                        <div class="mr-0 my-auto mt-3 col-3 pl-5 manual-desc-box">
+                                        <div class="vr" style="height: 70%;left: 75%;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1997,26 +2823,25 @@
         <!--            </div>-->
         <!--        </div>-->
         <!-- MANUAL: 의뢰목록색상 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="tableDescManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="tableDescManualModal"
              aria-labelledby="tableDescManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-around" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">의뢰목록색상</span></h3>
                         <button class="modalClose"></button>
                     </div>
-                    <div class="modal-body">
-                        <div id="tableDescManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area mt-5">
-                                        <div class="d-block col-8 text-center">
+                    <div class="modal-body my-3">
+                        <div>
+                            <div class=" mb-3">
+                                <div class="active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-색상설명-설명.png}">
                                         </div>
-                                        <div class="vr" style="left: 68%;"></div>
-                                        <div class="my-auto mt-3 col-4 manual-desc-box pl-5">
+                                        <div class="vr" style="left: 72%;height: 101%;"></div>
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
-                                                <!--                                                <div class="manual-desc-order col-1">1</div>-->
                                                 <div class="desc m-0 col-10">
                                                     <span class="text-emphasis">주황배경: </span> CVR<br>
                                                     <span class="text-emphasis">빨간배경: </span> 응급여부(응급)<br>
@@ -2026,7 +2851,6 @@
                                             </div>
                                             <hr style="width: 18rem;">
                                             <div class="row p-2 pt-3">
-                                                <!--                                                <div class="manual-desc-order col-1">2</div>-->
                                                 <div class="desc m-0 col-10">
                                                     <span class="text-emphasis">보라글씨: </span> 중복여부(Y)<br>
                                                     <span class="text-emphasis">파란글씨: </span> 재판독여부(재판독)<br>
@@ -2043,25 +2867,47 @@
             </div>
         </div>
         <!-- MANUAL: 우클릭메뉴 -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="rightClickManualModal" data-backdrop="static"
+        <div class="modal fade" tabindex="-1" role="dialog" id="rightClickManualModal"
              aria-labelledby="rightClickManualModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
                         <h3 class="modal-title"><span class="descFuncName">우클릭메뉴</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="clickManualCaptions" class="carousel" data-bs-ride="false">
-                            <div class="carousel-inner mb-5">
-                                <div class="carousel-item active">
-                                    <div class="row manual-area my-5">
-                                        <div class="d-block col-7 text-center">
-                                            <img src="/manual/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-우클릭메뉴.png"
+                        <div>
+                            <div class="my-3">
+                                <div class="active">
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center my-auto">
+                                            <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-우클릭메뉴.png}"
                                                  style="width: 75%;">
+                                            <div class="number-on-img" style="
+    left: 4.8rem;
+    top: 1.3rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 18rem;
+    top: 2rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 5.6rem;
+    top: 1.8rem;
+    width: 2.3rem;
+    height: 1.7rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 18.6rem;
+    top: 2.2rem;
+    width: 11.7rem;
+    height: 20.7rem;
+"></div>
                                         </div>
-                                        <div class="vr" style="left: 58%;"></div>
-                                        <div class="my-auto mt-3 col-5 manual-desc-box pl-5"
+                                        <div class="vr" style="left: 59%;height: 91%;"></div>
+                                        <div class="my-auto manual-desc-box "
                                              style="animation: 1000ms ease 800ms 1 normal forwards running fade;">
                                             <div class="row p-2 ">
                                                 <div class="manual-desc-order col-1">1</div>
@@ -2071,11 +2917,29 @@
                                             </div>
                                             <div class="row p-2 ">
                                                 <div class="manual-desc-order col-1">2</div>
-                                                <div class="desc-long m-0 pl-3 " style="width: 100%;">
+                                                <div class="desc-long m-0 col-11">
                                                     <span class="text-emphasis">마우스 우클릭</span> :<br>
-                                                    More Info(일반정보,차트정보,의뢰정보 수정 가능,판독정보 확인)/<br>Change
-                                                    Radiologist(배정의변경)/<br>의뢰상태변경/<br>촬영유형변경/<br>응급유형변경/<br>사용여부변경/<br>차트정보변경/<br>병합/<br>Check
-                                                    Image(뷰어 실행 영상 확인)/<br>병변위치확인
+                                                    <ul>
+                                                        <li> More Info(일반정보,차트정보,의뢰정보 수정 가능,판독정보 확인)</li>
+                                                        <li>Change Radiologist(배정의변경)
+                                                        </li>
+                                                        <li> 의뢰상태변경
+                                                        </li>
+                                                        <li> 촬영유형변경
+                                                        </li>
+                                                        <li> 응급유형변경
+                                                        </li>
+                                                        <li> 사용여부변경
+                                                        </li>
+                                                        <li> 차트정보변경
+                                                        </li>
+                                                        <li> 병합
+                                                        </li>
+                                                        <li> Check Image(뷰어 실행 영상 확인)
+                                                        </li>
+                                                        <li> 병변위치확인
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>

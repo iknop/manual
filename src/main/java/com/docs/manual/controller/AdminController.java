@@ -13,5 +13,34 @@ public class AdminController {
     public static String managers(){
         return "manual/admin/managers";
     }
-
+    // 원격판독 > 의뢰목록 > 응급의뢰
+    @GetMapping("/emergencies")
+    public static String emergencies(){
+        return "manual/admin/emergencies";
+    }
+    // 원격판독 > 의뢰현황 > 미배정의뢰
+    @GetMapping("/status/notArrange")
+    public static String notArrange(){
+        return "manual/admin/status/notArrange";
+    }
+    // 원격판독 > 의뢰현황 > CVR 현황
+    @GetMapping("/status/cvr")
+    public static String cvr(){
+        return "manual/admin/status/cvr";
+    }
+    // 원격판독 > 의뢰현황 > 판독지연
+    @GetMapping("/status/delay")
+    public static String delay(){
+        return "manual/admin/status/delay";
+    }
+    // 원격판독 > 의뢰현황 > 판독불가
+    @GetMapping("/status/reject")
+    public static String reject(){
+        return "manual/admin/status/reject";
+    }
+    // 원격판독 > 의뢰현황 > 주요병원의뢰
+    @GetMapping("/status/importance")
+    public static String importance(){
+        return "manual/admin/status/importance";
+    }
 }

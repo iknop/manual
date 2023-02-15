@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/userLayout}">
 <head>
     <link rel="stylesheet" th:href="@{/web/css/hospital/referrals.css}">
 </head>
@@ -576,12 +576,12 @@
                                                 <div class="desc-long m-0 col-10">
                                                     <span class="text-emphasis">일시기준</span> 선택<br>
                                                     <ul>
-                                                        <li>촬영일시</li>
-                                                        <li>의뢰일시</li>
-                                                        <li>판독일시</li>
-                                                        <li>판독예정일시</li>
+                                                        <li> - 촬영일시</li>
+                                                        <li> - 의뢰일시</li>
+                                                        <li> - 판독일시</li>
+                                                        <li> - 판독예정일시</li>
                                                     </ul>
-                                                    및 <span class="text-emphasis">검색어 일부입력</span>
+                                                    <span class="text-emphasis">검색어 일부입력</span>
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -657,7 +657,7 @@
 "></div>
                                         </div>
                                         <div class="vr" style="left: 45%;height: 19rem;"></div>
-                                        <div class="my-auto mt-3 manual-desc-box">
+                                        <div class="my-auto manual-desc-box">
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1 ml-2">1</div>
                                                 <div class="desc m-0 col-10">
@@ -1028,7 +1028,7 @@
                                             <div class="border-on-img" style="
     width: 7.9rem;
     height: 2.4rem;
-    left: 13.5rem;
+    left: 13.4rem;
     top: 52.3rem;
 "></div>
 
@@ -1093,7 +1093,7 @@
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">1</div>
                                                 <div class="desc-long m-0 col-10 pr-0" style="font-size: 17px;">
-                                                    <span class="text-emphasis">병원코드_검색설정날짜_의뢰목록.xlsx</span>로
+                                                    <span class="text-emphasis">병원코드_검색설정기간_의뢰목록.xlsx</span>로
                                                     다운로드
                                                 </div>
                                             </div>

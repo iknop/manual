@@ -1,0 +1,757 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/managers.css}">
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content">
+        <main>
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div id="pageTitle">
+                    <a class="manual-to-page-link-btn-group active "
+                       aria-current="page">의뢰목록</a>
+                </div>
+                <a class="intro" id="siteUrl" style="left: 608px;">의뢰확인 페이지</a>
+            </div>
+        </main>
+        <main>
+            <nav>
+                원격판독 &gt;
+                <span>의뢰목록</span>
+            </nav>
+            <form id="search-form">
+                <menu>
+                    <h1 class="current">응급의뢰</h1>
+                    <h1 onclick="location.href='/manual/admin/managers'">일반의뢰</h1>
+                </menu>
+                <div class="form d-flex">
+                    <div class="d-flex justify-content-between w-100">
+                        <span class="my-auto mr-3 text-danger"> *목록에서 의뢰를 선택 후 우클릭하여 의뢰상세보기 페이지 이동과 영상확인 및 일반의뢰 버튼 메뉴를 선택할 수 있습니다</span>
+                        <div>
+                            <span class="my-auto mr-3" id="refresh-countdown">03:52</span>
+                            <button class="reset mt-0 referral-emergency-refresh-btn manual-click-border" type="button">
+                                Refresh
+                            </button>
+                            <button class="dataTbInBtn mt-0 manual-click-border" id="referral-emergency-duplicate-btn"
+                                    type="button">중복제거
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="emergency-table-viewport" style="height: 300px">
+                        <!--                        <div id="referrals-table_wrapper" class="dataTables_wrapper no-footer">-->
+                        <div id="emergency-table_wrapper" class="dataTables_wrapper no-footer">
+                            <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer"
+                                   id="emergency-table" style="border-collapse: collapse;">
+                                <thead class="thead-light manual-click-border" id="referral-table-column">
+                                <tr>
+                                    <th scope="col" style="width: 5px; height: inherit;" class="sorting" tabindex="0"
+                                        aria-controls="emergency-table" rowspan="1" colspan="1" aria-label="
+
+
+                : activate to sort column ascending">
+                                        <input autocomplete="off" class="dt-all-check" id="dt-all-check"
+                                               name="emergency-table-tbody" type="checkbox">
+                                        <label for="dt-all-check"></label>
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="중복: activate to sort column ascending"
+                                        style="width: 5px; height: inherit;">중복
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="병원명: activate to sort column ascending"
+                                        style="width: 100px; height: inherit;">병원명
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="의뢰상태: activate to sort column ascending"
+                                        style="width: 20px; height: inherit;">의뢰상태
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="환자명: activate to sort column ascending"
+                                        style="width: 20px; height: inherit;">환자명
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="원내촬영정보: activate to sort column ascending"
+                                        style="width: 130px; height: inherit;">원내촬영정보
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="촬영유형코드: activate to sort column ascending"
+                                        style="width: 20px; height: inherit;">촬영유형코드
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="촬영일시: activate to sort column ascending"
+                                        style="width: 130px; height: inherit;">촬영일시
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="의뢰일시: activate to sort column ascending"
+                                        style="width: 130px; height: inherit;">의뢰일시
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="판독예정일시: activate to sort column ascending"
+                                        style="width: 130px; height: inherit;">판독예정일시
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="자동배정: activate to sort column ascending"
+                                        style="width: 100px; height: inherit;">자동배정
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="직접배정: activate to sort column ascending"
+                                        style="width: 100px; height: inherit;">직접배정
+                                    </th>
+                                    <th class="changeStatus-width-sm sorting" tabindex="0"
+                                        aria-controls="emergency-table" rowspan="1" colspan="1"
+                                        aria-label="임상소견: activate to sort column ascending"
+                                        style="width: 100px; height: inherit;">임상소견
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="시리즈: activate to sort column ascending"
+                                        style="width: 20px; height: inherit;">시리즈
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="emergency-table" rowspan="1"
+                                        colspan="1" aria-label="영상수: activate to sort column ascending"
+                                        style="width: 20px; height: inherit;">영상수
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="emergency-table-tbody">
+                                <tr class="selected">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all dt-check"
+                                               value="1393"><label class="checked"></label></td>
+                                    <td>Y</td>
+                                    <td>테스트병원(0204)</td>
+                                    <td>판독대기</td>
+                                    <td>윤아라</td>
+                                    <td>(MRI: Brain (CE) + Diffusion )</td>
+                                    <td>MR</td>
+                                    <td>2022-09-23 10:31:40</td>
+                                    <td>2023-02-09 15:58:31</td>
+                                    <td>2023-02-09 16:36:16</td>
+                                    <td></td>
+                                    <td>김현준</td>
+                                    <td class=" changeStatus-width-sm"></td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+
+
+                                <tr class="even">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1393"><label></label></td>
+                                    <td>Y</td>
+                                    <td>테스트병원(0204)</td>
+                                    <td>판독대기</td>
+                                    <td>윤아라</td>
+                                    <td>(MRI: Brain (CE) + Diffusion )</td>
+                                    <td>MR</td>
+                                    <td>2022-09-23 10:31:40</td>
+                                    <td>2023-02-09 15:58:31</td>
+                                    <td>2023-02-09 16:36:16</td>
+                                    <td></td>
+                                    <td>김현준</td>
+                                    <td class=" changeStatus-width-sm"></td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1401"><label></label></td>
+                                    <td>N</td>
+                                    <td>테스트병원(0204)</td>
+                                    <td>판독불가</td>
+                                    <td>이주현</td>
+                                    <td>([검진CR]유방4매(계) )</td>
+                                    <td>MG-HC</td>
+                                    <td>2019-11-15 09:38:16</td>
+                                    <td>2023-02-10 09:15:14</td>
+                                    <td>2023-02-10 16:58:39</td>
+                                    <td>홍길동</td>
+                                    <td></td>
+                                    <td class=" changeStatus-width-sm">정기검진</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+
+                                <tr class="even">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1400"><label></label></td>
+                                    <td>N</td>
+                                    <td>테스트병원(0204)</td>
+                                    <td>판독중</td>
+                                    <td>김석호</td>
+                                    <td>(Abdomen Supine)</td>
+                                    <td>CR-AE</td>
+                                    <td>2019-11-15 09:38:16</td>
+                                    <td>2023-02-10 09:15:08</td>
+                                    <td>2023-02-10 16:58:39</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class=" changeStatus-width-sm"></td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                </tr>
+
+                                <tr class="odd">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1405"><label></label></td>
+                                    <td>N</td>
+                                    <td>테스트병원2(0205)</td>
+                                    <td>예비판독</td>
+                                    <td>정동호</td>
+                                    <td>(CHEST PA)</td>
+                                    <td>CR-HC</td>
+                                    <td>2022-05-18 08:11:57</td>
+                                    <td>2023-02-10 15:05:39</td>
+                                    <td>2023-02-10 16:58:39</td>
+                                    <td></td>
+                                    <td>홍서연
+                                    </td>
+                                    <td class=" changeStatus-width-sm"></td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr class="even">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1406"><label></label></td>
+                                    <td>N</td>
+                                    <td>테스트병원2(0205)</td>
+                                    <td>적용실패</td>
+                                    <td>JUNG JUNGGYU</td>
+                                    <td>(Chest PA)</td>
+                                    <td>CR-HC</td>
+                                    <td>2022-09-14 15:49:39</td>
+                                    <td>2023-02-10 15:05:44</td>
+                                    <td>2023-02-10 16:58:39</td>
+                                    <td></td>
+                                    <td>민연준</td>
+                                    <td class=" changeStatus-width-sm"></td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1404"><label></label></td>
+                                    <td>N</td>
+                                    <td>테스트병원2(0205)</td>
+                                    <td>판독대기</td>
+                                    <td>신지은</td>
+                                    <td>(Chest Erect PA)</td>
+                                    <td>CR-HC</td>
+                                    <td>2022-09-24 09:08:49</td>
+                                    <td>2023-02-10 15:05:29</td>
+                                    <td>2023-02-10 16:58:39</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class=" changeStatus-width-sm"></td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr class="even">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1407"><label></label></td>
+                                    <td>N</td>
+                                    <td> 테스트병원(0204)</td>
+                                    <td>판독대기</td>
+                                    <td>SOHN GYEBUN</td>
+                                    <td>(Abdomen CT(Enhanced))</td>
+                                    <td>CT</td>
+                                    <td>2022-08-14 08:42:21</td>
+                                    <td>2023-02-10 15:05:44</td>
+                                    <td>2023-02-10 16:58:39</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class=" changeStatus-width-sm"></td>
+                                    <td>3</td>
+                                    <td>6</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td><input type="checkbox" class="custom-checkbox chk-all"
+                                               value="1398"><label></label></td>
+                                    <td>N</td>
+                                    <td> 테스트병원(0204)</td>
+                                    <td>판독대기</td>
+                                    <td>홍길동</td>
+                                    <td>(Brain)</td>
+                                    <td>CT</td>
+                                    <td>2014-09-10 10:35:00</td>
+                                    <td>2023-02-10 02:58:32</td>
+                                    <td>2023-02-10 16:58:39</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class=" changeStatus-width-sm">교통사고</td>
+                                    <td>2</td>
+                                    <td>9</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div aria-label="Pagination" id="pagination-content" class="d-inline-flex"
+                         style="margin-bottom: 20px;width: 100%;">
+                    </div>
+                </div>
+            </form>
+            <div class="dataTbForm d-flex d-block">
+                <div class="dataTbWrap d-flex col-8 pr-3">
+                    <h3 style="margin: 0">참조영상</h3>
+                    <span class=" ml-2 text-danger"> *목록에서 선택한 의뢰의 모든 과거 영상 조회</span>
+                    <div class="table-responsive" id="reference-table-viewport">
+                        <div class="dataTables_wrapper no-footer" id="reference-table_wrapper" style="height: 240px">
+                            <div id="reference-table_wrapper" class="dataTables_wrapper no-footer ">
+                                <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer"
+                                       id="reference-table" style="margin-left: 0px; min-width:100%;">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="height: inherit; width: 20px;" class="sorting"
+                                            tabindex="0" aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="PatientsID: activate to sort column ascending">PatientsID
+                                        </th>
+                                        <th scope="col" style="height: inherit; width: 20px;" class="sorting"
+                                            tabindex="0" aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="Name: activate to sort column ascending">Name
+                                        </th>
+                                        <th scope="col" style="height: inherit; width: 20px;" class="sorting"
+                                            tabindex="0" aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="Age: activate to sort column ascending">Age
+                                        </th>
+                                        <th scope="col" style="height: inherit; width: 20px;" class="sorting"
+                                            tabindex="0" aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="Modality: activate to sort column ascending">Modality
+                                        </th>
+                                        <th scope="col" style="height: inherit; width: 70px;" class="sorting"
+                                            tabindex="0" aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="촬영유형: activate to sort column ascending">촬영유형
+                                        </th>
+                                        <th scope="col" style="height: inherit; width: 70px;"
+                                            class="changeStatus-width-sm sorting" tabindex="0"
+                                            aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="임상소견: activate to sort column ascending">임상소견
+                                        </th>
+                                        <th scope="col" style="height: inherit; width: 70px;" class="sorting"
+                                            tabindex="0" aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="StudyDate: activate to sort column ascending">StudyDate
+                                        </th>
+                                        <th scope="col" style="height: inherit; width: 70px;" class="sorting"
+                                            tabindex="0" aria-controls="reference-table" rowspan="1" colspan="1"
+                                            aria-label="SaveDate: activate to sort column ascending">SaveDate
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="reference-table-tbody">
+                                    <tr class="odd">
+                                        <td>08217</td>
+                                        <td>윤아라</td>
+                                        <td>31</td>
+                                        <td>MR</td>
+                                        <td>(MRI: Brain (CE) + Diffusion )</td>
+                                        <td class=" changeStatus-width-sm"></td>
+                                        <td>2022-09-23 10:31:40</td>
+                                        <td>2022-09-27 18:32:08</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>08217</td>
+                                        <td>윤아라</td>
+                                        <td>31</td>
+                                        <td>MR</td>
+                                        <td>(MRI: Brain (CE) + Diffusion )</td>
+                                        <td class=" changeStatus-width-sm"></td>
+                                        <td>2022-09-23 10:31:40</td>
+                                        <td>2022-10-05 09:11:01</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>08217</td>
+                                        <td>윤아라</td>
+                                        <td>31</td>
+                                        <td>MR</td>
+                                        <td>(MRI: Brain (CE) + Diffusion )</td>
+                                        <td class=" changeStatus-width-sm"></td>
+                                        <td>2021-09-30 10:31:40</td>
+                                        <td>2021-09-31 18:14:13</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>08217</td>
+                                        <td>윤아라</td>
+                                        <td>31</td>
+                                        <td>MR</td>
+                                        <td>(MRI: Brain (CE) + Diffusion )</td>
+                                        <td class=" changeStatus-width-sm"></td>
+                                        <td>2021-03-12 10:31:40</td>
+                                        <td>2021-03-12 18:17:05</td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dataTbWrap d-flex col-4 pl-3 ">
+                    <h3 style="margin: 0">판독현황</h3>
+                    <span class=" ml-2 text-danger"> *판독의 별 배정의뢰 판독 상태와 휴무 여부</span>
+                    <div class="table-responsive" id="status-table-viewport">
+                        <div class="dataTables_wrapper no-footer" id="status-table_wrapper" style="height: 240px">
+                            <div id="status-table_wrapper" class="dataTables_wrapper no-footer">
+                                <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer"
+                                       id="status-table" style="margin-left: 0px; width: auto;min-width:100%;">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th style="height: inherit; width: 10px;" class="sorting" tabindex="0"
+                                            aria-controls="status-table" rowspan="1" colspan="1"
+                                            aria-label="판독의: activate to sort column ascending">판독의
+                                        </th>
+                                        <th style="height: inherit; width: 10px;" class="sorting" tabindex="0"
+                                            aria-controls="status-table" rowspan="1" colspan="1"
+                                            aria-label="판독대기: activate to sort column ascending">판독대기
+                                        </th>
+                                        <th style="height: inherit; width: 10px;" class="sorting" tabindex="0"
+                                            aria-controls="status-table" rowspan="1" colspan="1"
+                                            aria-label="판독중: activate to sort column ascending">판독중
+                                        </th>
+                                        <th style="height: inherit; width: 10px;" class="sorting" tabindex="0"
+                                            aria-controls="status-table" rowspan="1" colspan="1"
+                                            aria-label="OFF여부: activate to sort column ascending">OFF여부
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="status-table-tbody">
+                                    <tr class="odd">
+                                        <td>김주하</td>
+                                        <td>6</td>
+                                        <td>1</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>김상해</td>
+                                        <td>6</td>
+                                        <td>0</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>김연우</td>
+                                        <td>2</td>
+                                        <td>0</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>김현준</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>김현준</td>
+                                        <td>10</td>
+                                        <td>2</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>라이언킴</td>
+                                        <td>4</td>
+                                        <td>0</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>민연준</td>
+                                        <td>22</td>
+                                        <td>12</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>박환오</td>
+                                        <td>2</td>
+                                        <td>0</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>최학</td>
+                                        <td>0</td>
+                                        <td>3</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>김판독</td>
+                                        <td>0</td>
+                                        <td>2</td>
+                                        <td>N</td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- context area / 마우스 오른쪽 클릭시 나오는 메뉴-->
+                <ul class="dropdown-menu" id="contextMenu" style="z-index: 9999">
+                    <li class="dropdown-item" id="open-detail">
+                        <a class="dropdown-item-text" href="#">상세보기</a>
+                    </li>
+                    <li class="dropdown-item" id="study-change-radiologist">
+                        <a class="dropdown-item-text" href="#">배정의변경</a>
+                    </li>
+                    <li class="dropdown-item" id="study-change-status">
+                        <a class="dropdown-item-text" href="#">의뢰상태변경</a>
+                    </li>
+                    <li class="dropdown-item" id="study-change-studyType">
+                        <a class="dropdown-item-text" href="#">촬영유형변경</a>
+                    </li>
+                    <li class="dropdown-item" id="study-change-urgentType">
+                        <a class="dropdown-item-text" href="#">응급유형변경</a>
+                    </li>
+                    <li class="dropdown-item" id="study-change-useYN">
+                        <a class="dropdown-item-text" href="#">사용여부변경</a>
+                    </li>
+                    <li class="dropdown-item" id="study-change-patientInfo">
+                        <a class="dropdown-item-text" href="#">차트번호수정</a>
+                    </li>
+                    <li class="dropdown-item" id="study-open-images">
+                        <a class="dropdown-item-text" href="#">영상확인</a>
+                    </li>
+                </ul>
+            </div>
+        </main>
+        <!--MANUAL 시작-->
+        <div class="modal fade" index="-1" role="dialog" id="tableColumnManualModal"
+             aria-labelledby="tableColumnManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-around" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">의뢰목록 칼럼명 설명</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body my-3">
+                        <div>
+                            <div class=" mb-3">
+                                <div class="active">
+                                    <div class="my-auto manual-desc-box">
+                                        <div class="columnDesc m-0 ">
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">중복(Y/N): </span><span class="redOrangeFont">의뢰가 나누어져 전송되거나 동일 의뢰가 2번 이상 전송</span>된
+                                                의뢰.
+                                                중복의뢰는 판독이 불가하므로 <span id="columnToDuplicate" class="redOrangeFont" data-toggle="modal"
+                                                                      data-target="#duplicateManualModal" data-dismiss="modal">중복제거 필요.<svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-box-arrow-up-right"
+                                                    viewBox="0 0 32 32">
+  <path fill-rule="evenodd"
+        d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"></path>
+  <path fill-rule="evenodd"
+        d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path>
+</svg></span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">의뢰상태: </span> <span class="redOrangeFont">의뢰의 진행단계.</span>
+                                                크게 전송, 판독, 적용과 오류 및 취소 상태가 있으며, 병원에서 보내는 과정을 전송, 판독의가 판독을 입력하는 과정을 판독,
+                                                판독이 의뢰에 저장되는 과정을 적용으로 나눌 수 있음. <span class="redOrangeFont">응급의뢰 탭에서는 판독중, 판독대기, 판독불가, 예비판독, 적용실패의 의뢰만</span>
+                                                조회됨. 일반의뢰 페이지에서는 모든 의뢰상태 조회가능.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+
+                                                <span class="descTitle">원내촬영정보: </span> <span class="redOrangeFont">촬영한 신체부위.</span>병원에
+                                                따라 촬영기법을 함께 표기하기도함.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">촬영유형코드: </span><span class="redOrangeFont">영상 촬영기법 혹은 촬영장비.</span>
+                                                CR의 경우 X-RAY영상으로, 촬영장비와 촬영기법로 모두 표현이 가능하나 CR이라는 장비를 통하여 MG(유방 촬영)라는 기법으로
+                                                촬영을 하는 경우도 있다. 이런 경우 촬영기법을 표기.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">의뢰일시: </span><span class="redOrangeFont">병원에서 의뢰를 전송완료한 시간</span>을
+                                                기준으로 함.(2023년 2월 기준)<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">판독예정일시: </span><span class="redOrangeFont">판독이 이뤄져야 하는 마감시간.</span>
+                                                병원, 촬영유형 코드에 따라 상이함.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">자동배정: </span><span class="redOrangeFont">촬영유형과 촬영부위</span>를
+                                                기준으로 그 분야를 <span class="redOrangeFont">전공하는 판독의</span>를 자동배정으로 지정. 사업팀에서
+                                                배정.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">직접배정: </span>자동배정으로 바로 판독을 낼 수 없는 판독의들이 <span
+                                                    class="redOrangeFont">판독 가능한 때 임의로 지정</span>하거나, <span
+                                                    class="redOrangeFont">자동배정의</span>가 휴무 등 개인사정으로 <span
+                                                    class="redOrangeFont">바로 판독이 불가능한 경우</span> 지정.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">임상소견: </span><span class="redOrangeFont">의뢰병원에서 판독에 참고가 될 사항</span>을
+                                                기입.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">시리즈: </span>영상 파일 내에서 <span
+                                                    class="redOrangeFont">비슷한 영상끼리 묶은 단위.</span> 100개의 영상에서 비슷한 영상 20개씩
+                                                묶어 5개의 시리즈가 생기는 형태.<br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MANUAL: 중복제거 -->
+        <!--step1-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="duplicateManualModal"
+             aria-labelledby="duplicateManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">중복정리</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#duplicateManualModal" data-toggle="modal">step 1
+                                        </div>
+                                        <div class="carousel-desc-step mx-2" data-target="#duplicateManualModal2"
+                                             data-toggle="modal" data-dismiss="modal">step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/emergencies/원격판독-응급의뢰-중복정리-0.png}">
+                                            <div class="number-on-img" style="
+    left: 2.5rem;
+    top: 9.2rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 35.8rem;
+    top: 23rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 2.9rem;
+    top: 10.3rem;
+    width: 1rem;
+    height: 1.1rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 36.4rem;
+    top: 23.6rem;
+    width: 6.2rem;
+    height: 1.9rem;
+"></div>
+                                        </div>
+                                        <div class="vr" style="left: 74%;height: 21rem;"></div>
+                                        <div class="my-auto manual-desc-box">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc m-0 col-10">
+                                                    각 차트번호 <span class="text-emphasis">유지할 항목</span> 선택
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">중복정리</span> 버튼 클릭
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--step2-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="duplicateManualModal2"
+             aria-labelledby="duplicateManualModal2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl justify-content-center" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">중복정리</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class=" mb-3">
+                                <div class=" active">
+                                    <div class="d-flex justify-content-center p-2 my-2">
+                                        <div class="carousel-desc-step mx-2"
+                                             data-target="#duplicateManualModal" data-toggle="modal"
+                                             data-dismiss="modal">step 1
+                                        </div>
+                                        <div class="carousel-desc-step-current mx-2"
+                                             data-target="#duplicateManualModal2"
+                                             data-toggle="modal">step 2
+                                        </div>
+                                    </div>
+                                    <div class="row manual-area justify-content-around">
+                                        <div class="d-block text-center">
+                                            <img th:src="@{/web/img/manual/admin/emergencies/원격판독-응급의뢰-중복정리-1.png}">
+                                            <div class="number-on-img" style="
+    left: 38.7rem;
+    top: 5.3rem;
+">1
+                                            </div>
+                                            <div class="number-on-img" style="
+    left: 4.2rem;
+    top: 8.9rem;
+">2
+                                            </div>
+                                            <div class="border-on-img" style="
+    left: 39.1rem;
+    top: 6rem;
+    width: 5.3rem;
+    height: 1.6rem;
+"></div>
+                                            <div class="border-on-img" style="
+    left: 5rem;
+    top: 9.6rem;
+    width: 1.5rem;
+    height: 9.4rem;
+"></div>
+                                        </div>
+                                        <div class="vr" style="left: 76%;height: 76%;"></div>
+                                        <div class=" my-auto manual-desc-box">
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">1</div>
+                                                <div class="desc-long m-0 col-10">
+                                                    <span class="text-emphasis">Refresh 버튼</span> 클릭
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="manual-desc-order col-1">2</div>
+                                                <div class="desc m-0 col-10">
+                                                    <span class="text-emphasis">중복의뢰</span> 제거
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/web/js/manualModal/admin/emergencies.js}"></script>
+    <script th:src="@{/web/js/manualModal/admin/index.js}"></script>
+
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/managers`);
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+    </script>
+</th:blcok>
+</html>

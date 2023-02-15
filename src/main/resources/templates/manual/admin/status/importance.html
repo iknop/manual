@@ -1,0 +1,217 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/managers.css}">
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content" style="min-height: 100vh">
+        <input id="reportConfig-hospital-code" name="reportHospitalCode" readonly="" value="0101" type="hidden">
+        <main style="width: 1320px;">
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div id="pageTitle">
+                    <a class="manual-to-page-link-btn-group active "
+                       aria-current="page">의뢰현황</a>
+                </div>
+                <a class="intro" id="siteUrl" style="left: 608px;">의뢰현황 페이지</a>
+            </div>
+        </main>
+        <main>
+            <nav>
+                원격판독 &gt;
+                <span>의뢰 현황</span>
+            </nav>
+
+            <form id="search-form">
+                <menu>
+                    <h1 onclick="location.href= '/manual/admin/status/notArrange'">미배정 의뢰</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/cvr'">CVR 현황</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/delay'">판독지연 현황</h1>
+                    <h1 onclick="location.href= '/manual/admin/status/reject'">판독불가 의뢰</h1>
+                    <h1 class="current">주요병원 의뢰</h1>
+                </menu>
+                <div class="form d-flex">
+                    <div class="d-inline-flex flex-wrap justify-content-end ml-auto col-12">
+                        <div class="col-1">
+
+                            <div class="clearfix">
+                                <div class="spinner-border float-right" role="status" id="spinner-importance"
+                                     style="display: none;">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <script src="/web/js/common/loadingbar.js"></script>
+
+                        </div>
+
+                        <input type="hidden" id="size" value="10">
+                        <div aria-labelledby="RowCount" id="row-count-content">
+                            <label>
+                                <select class="form-control" id="rowCount" data-page="1">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <button class="dataTbBtn blue ml-1" id="btn-reject-reload" type="button">
+                            <span>Refresh</span>
+                        </button>
+                    </div>
+                    <div class="table-responsive" id="importance-table-viewport">
+                        <div class="dataTables_wrapper no-footer" id="importance-table_wrapper">
+                            <input id="reportConfig-hospital-code" name="reportHospitalCode" readonly="" value="0101"
+                                   type="hidden">
+                            <div id="importance-table_wrapper" class="dataTables_wrapper no-footer">
+                                <table class="table text-center pointer dataTable no-footer" id="importance-table">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 137.431px;" class="sorting_disabled" rowspan="1"
+                                            colspan="1">code
+                                        </th>
+                                        <th scope="col" style="width: 137.431px;" class="sorting_disabled" rowspan="1"
+                                            colspan="1">KR
+                                        </th>
+                                        <th scope="col" style="width: 137.431px;" class="sorting_disabled" rowspan="1"
+                                            colspan="1">판독대기
+                                        </th>
+                                        <th scope="col" style="width: 230.573px;" class="sorting_disabled" rowspan="1"
+                                            colspan="1">적용대기
+                                        </th>
+                                        <th scope="col" style="width: 230.573px;" class="sorting_disabled" rowspan="1"
+                                            colspan="1">의뢰건수
+                                        </th>
+                                        <th scope="col" style="width: 230.625px;" class="sorting_disabled" rowspan="1"
+                                            colspan="1">마지막의뢰일시
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="importance-table-tbody">
+                                    <tr class="odd" style="padding: 2px;">
+                                        <td>0237</td>
+                                        <td>(0237)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1900-01-01 00:00:00</td>
+                                    </tr>
+                                    <tr class="even" style="padding: 2px;">
+                                        <td>0232</td>
+                                        <td>(0232)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1900-01-01 00:00:00</td>
+                                    </tr>
+                                    <tr class="odd" style="padding: 2px;">
+                                        <td>0251</td>
+                                        <td>가나(0251)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1900-01-01 00:00:00</td>
+                                    </tr>
+                                    <tr class="even" style="padding: 2px;">
+                                        <td>0253</td>
+                                        <td>강남대로(0253)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2022-11-16 11:23:06</td>
+                                    </tr>
+                                    <tr class="odd" style="padding: 2px;">
+                                        <td>0242</td>
+                                        <td>경희한방(0242)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1900-01-01 00:00:00</td>
+                                    </tr>
+                                    <tr class="even" style="padding: 2px;">
+                                        <td>0238</td>
+                                        <td>공차성형(0238)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1900-01-01 00:00:00</td>
+                                    </tr>
+                                    <tr class="odd" style="padding: 2px;">
+                                        <td>0224</td>
+                                        <td>구로(0224)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2022-10-24 14:53:11</td>
+                                    </tr>
+                                    <tr class="even" style="padding: 2px;">
+                                        <td>0264</td>
+                                        <td>네이버(0264)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2022-11-23 13:47:38</td>
+                                    </tr>
+                                    <tr class="odd" style="padding: 2px;">
+                                        <td>0248</td>
+                                        <td>뉴병(0248)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1900-01-01 00:00:00</td>
+                                    </tr>
+                                    <tr class="even" style="padding: 2px;">
+                                        <td>0255</td>
+                                        <td>봄겨울(0255)</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1900-01-01 00:00:00</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="page" value="1">
+                    <div aria-label="Pagination" id="pagination-content"
+                         class="d-inline-flex justify-content-center mx-auto" style="margin-bottom: 20px">
+                        <nav aria-label="Pagination">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <button class="page-link page-href" tabindex="-1" aria-disabled="true"
+                                            data-size="10" data-page="0" type="button">Previous
+                                    </button>
+                                </li>
+                                <li class="page-item active">
+                                    <button class="page-link page-href" data-size="10" data-page="1" type="button">1
+                                    </button>
+                                </li>
+                                <li class="page-item disabled">
+                                    <button class="page-link page-href" data-size="100" data-page="2" type="button">Next</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/web/js/manualModal/admin/managers.js}"></script>
+
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/managers`);
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+    </script>
+</th:blcok>
+</html>

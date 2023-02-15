@@ -358,8 +358,8 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 
 /*이미지 넘버링*/
 .number-on-img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 19.5px;
+    height: 19.5px;
     background-color: var(--redOrange);
     color: white;
     position: absolute;
@@ -432,6 +432,7 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 
 ul{
     margin: 0;
+    padding-left: 1rem;
 }
 
 ul>li{
@@ -451,5 +452,6 @@ ul>li{
     --brightOrange: #f89400;
     --brickOrange: #8C2703;
     --gray: #a9a9a9;;
+    --darkGray: #585858;
     --black: #0D0D0D;
 }

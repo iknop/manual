@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/userLayout}">
 <head>
     <link rel="stylesheet" th:href="@{/web/css/hospital/index.css}">
     <link rel="stylesheet" media="screen" th:href="@{/web/css/hospital/reception.css}">
@@ -39,11 +39,11 @@
         </main>
         <hr>
         <main class="d-flex flex-wrap align-item-strech pt-4" style="width: 1550px;">
-            <ul id="contextMenu" class="tblpop_area" style="display: none">
+            <!--            <ul id="contextMenu" class="tblpop_area" style="display: none">-->
 
-                <li><a href="#detail" class="open_pop">상세정보확인</a></li>
-                <li><a href="">판독의뢰</a></li>
-            </ul>
+            <!--                <li><a href="#detail" class="open_pop">상세정보확인</a></li>-->
+            <!--                <li><a href="">판독의뢰</a></li>-->
+            <!--            </ul>-->
             <section class="col-6 p-0 searchSection">
                 <input id="mesg-server-url" type="hidden" name="mesg-server-url" value="https://stg.xray21.com/web"
                        readonly="">
@@ -669,11 +669,37 @@
                                             </thead>
                                             <tbody id="request-table-tbody">
                                             <tr class="odd">
-                                                <td valign="top" colspan="4" class="dataTables_empty"
-                                                    style="padding: 2px;">조회된 데이터가 없습니다.
-                                                </td>
+                                                <td style="padding: 2px;"><input type="checkbox"
+                                                                                 class="custom-checkbox chk-all"
+                                                                                 value="CR_20230209155807451"></td>
+                                                <td style="padding: 2px;">압축중(300)</td>
+                                                <td style="padding: 2px;">Abdomen Erect</td>
+                                                <td style="padding: 2px;">1183146</td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td style="padding: 2px;"><input type="checkbox"
+                                                                                 class="custom-checkbox chk-all"
+                                                                                 value="DR_20230209155807506"></td>
+                                                <td style="padding: 2px;">준비중(0)</td>
+                                                <td style="padding: 2px;">흉부[직접]1매CHEST PA</td>
+                                                <td style="padding: 2px;">201400262</td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td style="padding: 2px;"><input type="checkbox"
+                                                                                 class="custom-checkbox chk-all"
+                                                                                 value="MR_20230209155807468"></td>
+                                                <td style="padding: 2px;">준비중(0)</td>
+                                                <td style="padding: 2px;">MRI: Brain (CE) + Diffusion</td>
+                                                <td style="padding: 2px;">00366734</td>
                                             </tr>
                                             </tbody>
+                                            <!--                                            <tbody id="request-table-tbody">-->
+                                            <!--                                            <tr class="odd">-->
+                                            <!--                                                <td valign="top" colspan="4" class="dataTables_empty"-->
+                                            <!--                                                    style="padding: 2px;">조회된 데이터가 없습니다.-->
+                                            <!--                                                </td>-->
+                                            <!--                                            </tr>-->
+                                            <!--                                            </tbody>-->
                                         </table>
                                     </div>
                                 </div>
@@ -1598,38 +1624,38 @@
                                         <div class="d-block text-center" style="padding-left: 1rem;">
                                             <img th:src="@{/web/img/manual/user/reception/예정의뢰-의뢰전송-2-전송상태.png}">
                                             <img th:src="@{/web/img/manual/right-arrow.png}"
-                                                 style="position: absolute;transform: rotate(90deg);left:11.5rem;top: 13.5rem;">
+                                                 style="position: absolute;transform: rotate(90deg);left: 12.5rem;top: 14.8rem;">
                                             <div class="number-on-img" style="
-    left: 9rem;
+    left: 9.2rem;
     top: 5rem;
 ">1
                                             </div>
                                             <div class="number-on-img" style="
     left: 5.1rem;
-    top: 21rem;
+    top: 21.8rem;
 ">2
                                             </div>
                                             <div class="number-on-img" style="
     left: 27rem;
-    top: 13.5rem;
+    top: 15rem;
 ">3
                                             </div>
                                             <div class="border-on-img" style="
-    left: 9.7rem;
+    left: 9.9rem;
     top: 5.8rem;
     width: 4.7rem;
     height: 2rem;
 "></div>
                                             <div class="border-on-img" style="
     left: 5.8rem;
-    top: 21.5rem;
+    top: 22.5rem;
     width: 16rem;
     height: 2.4rem;
 "></div>
                                             <div class="border-on-img" style="
-    left: 28rem;
-    top: 14rem;
-    width: 20.8rem;
+    left: 27.3rem;
+    top: 15.9rem;
+    width: 21.5rem;
     height: 3.4rem;
 "></div>
                                         </div>
@@ -1650,7 +1676,7 @@
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">3</div>
                                                 <div class="desc-long m-0 col-10">
-                                                    <span class="text-emphasis">완료의뢰로</span> 이동
+                                                    <span class="text-emphasis">완료의뢰</span>로 이동
                                                 </div>
                                             </div>
                                         </div>

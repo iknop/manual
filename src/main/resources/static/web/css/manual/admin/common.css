@@ -1959,7 +1959,8 @@ table.dataTable tbody th, table.dataTable tbody td {
     border-bottom: 0;
     padding: 12px !important;
     position: relative;
-    white-space: nowrap
+    white-space: nowrap;
+    color:var(--mainColor);
 }
 
 .modal-body table thead th, #modalityRule-list-table thead th {
@@ -2086,3 +2087,4 @@ hr {
     line-height: 0;
     margin: 12px auto
 }
+

@@ -72,8 +72,13 @@ function setManualModalStepBtn(modalId, imageType) {
 function resizeModalImg(modalId, imgSize) {
     $(`#${modalId}`).find('img')[0].style.width = `${imgSize}`
 }
+// modal 이미지 width 조정해도 계속 공백 생겨서 설명란이 아래로 내려갈 시
+function resizeModalImgDiv(modalId, imgDivSize) {
+    $(`#${modalId}`).find('.text-center').css('width',`${imgDivSize}`)
+}
 
 // modal 설명란 사이즈 조정
-function resizeModalDescArea(modalId, imgSize) {
-    $(`#${modalId}`).find('.manual-desc-box ').css('width', `${imgSize}`)
+function resizeModalDescArea(modalId, descSize) {
+    $(`#${modalId}`).find('.manual-desc-box ').css('width', `${descSize}`)
 }
+
