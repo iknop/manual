@@ -1,5 +1,17 @@
 $(function () {
 
+    // 의뢰목록 테이블 칼럼 설명
+    $('#referrals-table-columns').on('click', function () {
+        $('#tableColumnsManualModal').modal('show')
+        fadeInPopupText()
+        modalWidthByImg(smallWide)
+    })
+    // 의뢰목록 테이블 칼럼 > 중복제거
+    $('#columnToDuplicate').on('click', function () {
+        fadeInPopupText()
+        duplicateManualModal()
+    })
+
     // 병원선택
     $('#select-hosp').on('click', function () {
         $('#selectHospManualModal').modal('show')
@@ -25,15 +37,18 @@ $(function () {
         resizeModalDescArea('searchManualModal','22%')
     })
     // 중복정리
-    $('#referral-duplicate-btn').on('click', function () {
-        $('#duplicateManualModal').modal('show')
-        fadeInPopupText()
+    function duplicateManualModal(){
         modalWidthByImg(largeWide)
         resizeModalDescArea('duplicateManualModal','28%')
         resizeModalDescArea('duplicateManualModal2','20%')
         setManualModalStepBtn('duplicateManualModal2',largeWide)
         resizeModalImgDiv('duplicateManualModal','53%')
         resizeModalImgDiv('duplicateManualModal2','57%')
+    }
+    $('#referral-duplicate-btn').on('click', function () {
+        $('#duplicateManualModal').modal('show')
+        fadeInPopupText()
+        duplicateManualModal()
 
     })
     // 배정의변경

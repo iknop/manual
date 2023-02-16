@@ -44,25 +44,4 @@
     color: #4d5256 !important;
 }
 
-.checked {
-    background: url(../../img/check-on.png) center left no-repeat !important;
-}
 
-/* 응급의뢰 의뢰목록 칼럼 */
-th.sorting{
-    color: var(--mainColor) !important;
-}
-/* 의뢰목록 칼럼설명란 */
-.columnDesc{
-    font-size: 16px;
-    line-height: 196%;
-}
-.descTitle{
-    color: var(--darkGray);
-    font-weight: 700;
-}
-
-.redOrangeFont{
-    color: var(--redOrange);
-    font-weight: 600;
-}

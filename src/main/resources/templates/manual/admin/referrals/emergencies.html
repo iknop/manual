@@ -2,7 +2,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
 <head>
-    <link rel="stylesheet" th:href="@{/web/css/managers/managers.css}">
+    <link rel="stylesheet" th:href="@{/web/css/managers/emergencies.css}">
 </head>
 <div layout:fragment="content_area">
     <div class="contentWrap" id="page_content">
@@ -27,10 +27,14 @@
                 </menu>
                 <div class="form d-flex">
                     <div class="d-flex justify-content-between w-100">
-                        <span class="my-auto mr-3 text-danger"> *목록에서 의뢰를 선택 후 우클릭하여 의뢰상세보기 페이지 이동과 영상확인 및 일반의뢰 버튼 메뉴를 선택할 수 있습니다</span>
+                        <span class="my-auto mr-3 text-danger"> *목록에서 의뢰를 선택 후 우클릭하여 <span class="pageLink" style="font-weight: 700" onclick="location.href='/manual/admin/managers/moreInfo'">의뢰상세보기 페이지<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"></path>
+  <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path>
+</svg></span> 이동과 영상확인 및 일반의뢰 버튼 메뉴를 선택할 수 있습니다</span>
                         <div>
                             <span class="my-auto mr-3" id="refresh-countdown">03:52</span>
-                            <button class="reset mt-0 referral-emergency-refresh-btn manual-click-border" type="button">
+                            <button id="reset-btn" class="reset mt-0 referral-emergency-refresh-btn manual-click-border"
+                                    type="button">
                                 Refresh
                             </button>
                             <button class="dataTbInBtn mt-0 manual-click-border" id="referral-emergency-duplicate-btn"
@@ -39,7 +43,6 @@
                         </div>
                     </div>
                     <div class="table-responsive" id="emergency-table-viewport" style="height: 300px">
-                        <!--                        <div id="referrals-table_wrapper" class="dataTables_wrapper no-footer">-->
                         <div id="emergency-table_wrapper" class="dataTables_wrapper no-footer">
                             <table class="table table-sm table-head table-hover text-center pointer dataTable no-footer"
                                    id="emergency-table" style="border-collapse: collapse;">
@@ -514,12 +517,13 @@
             </div>
         </main>
         <!--MANUAL 시작-->
+        <!--의뢰목록 칼럼명 설명-->
         <div class="modal fade" index="-1" role="dialog" id="tableColumnManualModal"
              aria-labelledby="tableColumnManualModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl justify-content-around" role="document">
                 <div class="modal-content modal-size-fix">
                     <div class="modal-header m-0">
-                        <h3 class="modal-title"><span class="descFuncName">의뢰목록 칼럼명 설명</span></h3>
+                        <h3 class="modal-title"><span class="descFuncName">의뢰목록 칼럼 설명</span></h3>
                         <button class="modalClose"></button>
                     </div>
                     <div class="modal-body my-3">
@@ -531,8 +535,10 @@
                                             <div class="d-block py-1">
                                                 <span class="descTitle">중복(Y/N): </span><span class="redOrangeFont">의뢰가 나누어져 전송되거나 동일 의뢰가 2번 이상 전송</span>된
                                                 의뢰.
-                                                중복의뢰는 판독이 불가하므로 <span id="columnToDuplicate" class="redOrangeFont" data-toggle="modal"
-                                                                      data-target="#duplicateManualModal" data-dismiss="modal">중복제거 필요.<svg
+                                                중복의뢰는 판독이 불가하므로 <span id="columnToDuplicate" class="redOrangeFont"
+                                                                      data-toggle="modal"
+                                                                      data-target="#duplicateManualModal"
+                                                                      data-dismiss="modal">중복제거 필요.<svg
                                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-box-arrow-up-right"
                                                     viewBox="0 0 32 32">
@@ -545,13 +551,11 @@
                                             <div class="d-block py-1">
                                                 <span class="descTitle">의뢰상태: </span> <span class="redOrangeFont">의뢰의 진행단계.</span>
                                                 크게 전송, 판독, 적용과 오류 및 취소 상태가 있으며, 병원에서 보내는 과정을 전송, 판독의가 판독을 입력하는 과정을 판독,
-                                                판독이 의뢰에 저장되는 과정을 적용으로 나눌 수 있음. <span class="redOrangeFont">응급의뢰 탭에서는 판독중, 판독대기, 판독불가, 예비판독, 적용실패의 의뢰만</span>
+                                                판독이 의뢰정보에 저장되는 과정을 적용으로 나눌 수 있음. <span class="redOrangeFont">응급의뢰 탭에서는 판독중, 판독대기, 판독불가, 예비판독, 적용실패의 의뢰만</span>
                                                 조회됨. 일반의뢰 페이지에서는 모든 의뢰상태 조회가능.<br>
                                             </div>
                                             <div class="d-block py-1">
-
-                                                <span class="descTitle">원내촬영정보: </span> <span class="redOrangeFont">촬영한 신체부위.</span>병원에
-                                                따라 촬영기법을 함께 표기하기도함.<br>
+                                                <span class="descTitle">원내촬영정보: </span> <span class="redOrangeFont">촬영한 신체부위.</span>병원에 따라 촬영기법을 함께 표기하기도하며,<span class="redOrangeFont"> 검진 및 특검 여부</span>를 확인할 수 있음 <br>
                                             </div>
                                             <div class="d-block py-1">
                                                 <span class="descTitle">촬영유형코드: </span><span class="redOrangeFont">영상 촬영기법 혹은 촬영장비.</span>
@@ -583,7 +587,7 @@
                                             </div>
                                             <div class="d-block py-1">
                                                 <span class="descTitle">시리즈: </span>영상 파일 내에서 <span
-                                                    class="redOrangeFont">비슷한 영상끼리 묶은 단위.</span> 100개의 영상에서 비슷한 영상 20개씩
+                                                    class="redOrangeFont">비슷한 영상끼리 묶은 단위.</span> 100개의 영상파일 이미지에서 비슷한 영상 20개씩
                                                 묶어 5개의 시리즈가 생기는 형태.<br>
                                             </div>
                                         </div>
@@ -726,7 +730,7 @@
                                             <div class="row p-2">
                                                 <div class="manual-desc-order col-1">2</div>
                                                 <div class="desc m-0 col-10">
-                                                    <span class="text-emphasis">중복의뢰</span> 제거
+                                                    중복정리한 의뢰 목록에서 <span class="text-emphasis">제거</span>
                                                 </div>
                                             </div>
                                         </div>

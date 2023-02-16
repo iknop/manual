@@ -285,6 +285,7 @@ header.manual-hospital ul + menu ul > li:last-child > a {
 
 .manual-click-border {
     border: var(--redOrange) solid 2.5px !important;
+    cursor: url("../../img/manual/question-mark.png"), auto !important;
 }
 
 .select-readonly {
@@ -441,10 +442,14 @@ ul>li{
 /* 이미지/설명 나눔선 */
 .vr {
     left: 76%;
-    height: 1000px;
     position: absolute;
     border-left: 1px solid rgb(126 126 126 / 28%);
     opacity: 70%;
+}
+
+
+span.pageLink{
+    cursor: url("../../img/manual/question-mark.png"), auto !important;
 }
 
 :root {

@@ -54,7 +54,7 @@
                         <input class="selectboxInput" value="전체(응급)" id="urgent-type" name="urgentType" readonly>
                         <input class="selectboxInput" value="참조여부(전체)" id="isRef" name="isRefYN" readonly>
                         <input class="selectboxInput" value="재판독여부(전체)" id="re-reading" name="reportModifyYN" readonly>
-                        <input class="selectboxInput" value="사용여부(사용)" id="use-yn" name="useYN" readonly>
+                        <input class="selectboxInput" value="사용여부(전체)" id="use-yn" name="useYN" readonly>
                         <input class="selectboxInput" value="촬영유형(전체)" id="study-type-code" name="studyTypeCode"
                                readonly>
                         <input class="selectboxInput" value="배정의(전체)" id="design-doctor" name="readingDrCode" readonly>
@@ -94,7 +94,16 @@
 
             <div class="dataTbForm d-block">
                 <div class="dataTbWrap d-flex">
-                    <span class="my-auto ml-1 py-1 text-danger"> *목록에서 의뢰를 선택 후 우클릭하여 의뢰상세보기 페이지 이동과 영상확인 및 일반의뢰 버튼 메뉴를 선택할 수 있습니다</span>
+                    <span class="my-auto ml-1 pb-2 text-danger"> *목록에서 의뢰를 선택 후 우클릭하여 <span class="pageLink"
+                                                                                            style="font-weight: 700; "
+                                                                                            onclick="location.href='/manual/admin/managers/moreInfo'">의뢰상세보기 페이지<svg
+                            xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
+                            class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+        d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"></path>
+  <path fill-rule="evenodd"
+        d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path>
+</svg></span> 이동과 영상확인 및 일반의뢰 버튼 메뉴를 선택할 수 있습니다</span>
                     <div class="d-flex justify-content-start mr-auto">
                         <button class="dataTbBtn manual-click-border" id="referral-duplicate-btn" type="button">중복정리
                         </button>
@@ -135,7 +144,7 @@
                         <div id="referrals-table_wrapper" class="dataTables_wrapper no-footer">
                             <table class="table table-sm table-head table-hover text-center pointer no-footer"
                                    id="referrals-table" style="width: 2496px;">
-                                <thead class="thead-light">
+                                <thead id="referrals-table-columns" class="thead-light manual-click-border">
                                 <tr>
                                     <th class="sorting_disabled sorting" colspan="1" data-column-index="0" rowspan="1"
                                         scope="col" tabindex="0" aria-controls="referrals-table" aria-label="
@@ -1066,29 +1075,29 @@
                     </div>
 
 
-                    <input type="hidden" id="page" value="1">
-<!--                    <div aria-label="Pagination" id="pagination-content" class="d-inline-flex"-->
-<!--                         style="margin-bottom: 20px;width: 100%;">-->
-<!--                        &lt;!&ndash;                        <button class="dataTbBtn manual-click-border" id="table-desc-btn" type="button">의뢰목록색상&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        </button>&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        <button class="dataTbBtn manual-click-border" id="right-click-btn" type="button">우클릭메뉴&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        </button>&ndash;&gt;-->
-<!--                        <nav aria-label="Pagination" style="margin: auto;">-->
-<!--                            <ul class="pagination">-->
-<!--                                <li class="page-item disabled">-->
-<!--                                    <button class="page-link page-href" tabindex="-1" aria-disabled="true"-->
-<!--                                            data-size="10" data-page="0">Previous-->
-<!--                                    </button>-->
-<!--                                </li>-->
-<!--                                <li class="page-item active">-->
-<!--                                    <button class="page-link page-href" data-size="10" data-page="1">1</button>-->
-<!--                                </li>-->
-<!--                                <li class="page-item ">-->
-<!--                                    <button class="page-link page-href" data-size="10" data-page="2">Next</button>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </nav>-->
-<!--                    </div>-->
+                    <!--         페이징-->
+                    <!--                    <div aria-label="Pagination" id="pagination-content" class="d-inline-flex"-->
+                    <!--                         style="margin-bottom: 20px;width: 100%;">-->
+                    <!--                        &lt;!&ndash;                        <button class="dataTbBtn manual-click-border" id="table-desc-btn" type="button">의뢰목록색상&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        </button>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        <button class="dataTbBtn manual-click-border" id="right-click-btn" type="button">우클릭메뉴&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        </button>&ndash;&gt;-->
+                    <!--                        <nav aria-label="Pagination" style="margin: auto;">-->
+                    <!--                            <ul class="pagination">-->
+                    <!--                                <li class="page-item disabled">-->
+                    <!--                                    <button class="page-link page-href" tabindex="-1" aria-disabled="true"-->
+                    <!--                                            data-size="10" data-page="0">Previous-->
+                    <!--                                    </button>-->
+                    <!--                                </li>-->
+                    <!--                                <li class="page-item active">-->
+                    <!--                                    <button class="page-link page-href" data-size="10" data-page="1">1</button>-->
+                    <!--                                </li>-->
+                    <!--                                <li class="page-item ">-->
+                    <!--                                    <button class="page-link page-href" data-size="10" data-page="2">Next</button>-->
+                    <!--                                </li>-->
+                    <!--                            </ul>-->
+                    <!--                        </nav>-->
+                    <!--                    </div>-->
                     <div class="d-flex justify-content-around mt-3" style="
     background-color: var(--oddBg);
     padding: 1rem;
@@ -1212,6 +1221,158 @@
                 </div>
             </div>
         </main>
+        <!-- MANUAL: 테이블 칼럼 -->
+        <div class="modal fade" index="-1" role="dialog" id="tableColumnsManualModal"
+             aria-labelledby="tableColumnsManualModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl justify-content-around" role="document">
+                <div class="modal-content modal-size-fix">
+                    <div class="modal-header m-0">
+                        <h3 class="modal-title"><span class="descFuncName">의뢰목록 칼럼 설명</span></h3>
+                        <button class="modalClose"></button>
+                    </div>
+                    <div class="modal-body my-3">
+                        <div>
+                            <div class=" mb-3">
+                                <div class="active">
+                                    <div class="my-auto manual-desc-box">
+                                        <div class="columnDesc m-0 ">
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">응급구분: </span>일반적으로 <span class="redOrangeFont">판독보장시간</span>에
+                                                따라 시간이 짧은 건을 응급, 긴 건을 일반으로 나뉨. 병원 혹은 촬영유형에 따라서 시간 기준이 상이함. <span
+                                                    class="redOrangeFont">판독보장일시</span> 칼럼에서 보장시간을 자세히 볼 수 있음.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">병원코드: </span> <span class="redOrangeFont">병원 4자리 숫자로 이루어진 고유번호.</span>
+                                                <br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">의뢰상태: </span> <span class="redOrangeFont">의뢰의 처리과정. </span>정확한
+                                                진행단계 파악과 반복처리를 피하기 위한 값.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">병변(Y/N): </span><span class="redOrangeFont">판독의가 지정한 문제 부위.</span>
+                                                판독 시 이상이 발견되거나 특정 부위에 대한 설명이 필요한 경우 <span class="redOrangeFont">영상의 일부를 지정</span>하여
+                                                판독이 의뢰에 적용이 완료됐을 때 확인 할 수 있음.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">차트번호: </span><span class="redOrangeFont">병원에서 사용하는 환자 고유번호. </span>개인정보보호와
+                                                타병원 진료기록과의 혼잡 문제성을 해결하기 위해 적용됨. 병원 요청 시 <span class="redOrangeFont">차트번호 변경</span>
+                                                버튼을 통해 수정 가능. <br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">재판독여부: </span><span class="redOrangeFont">판독의가 재판독하는 경우 재판독으로 표시.</span>
+                                                병원의 요청이나 판독의가 판독 저장을 잘못한 경우 재판독되며, <span class="redOrangeFont">판독반영일시가 수정됨.</span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">촬영유형: </span>의뢰영상의 <span class="redOrangeFont">촬영유형코드(촬영장비 혹은 촬영기법)와 원내촬영정보(촬영 부위 및 검진 여부)</span>를
+                                                기준으로 <span class="redOrangeFont">의뢰전송 완료 후 생성되는 </span>정보. 검진 및 특수 검진의
+                                                경우 정해진 판독 소견 양식이 있기 때문에 빠른 검진 유무 확인을 위하여 <span class="redOrangeFont">검진 및 특검의 경우 '-HC' 혹은 '-기타코드' 부여.</span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">원내촬영유형: </span> <span class="redOrangeFont">촬영한 신체부위.</span>병원에
+                                                따라 촬영기법을 함께 표기하기도 하며,<span class="redOrangeFont"> 검진 및 특검 여부</span>를 확인할
+                                                수 있음 <br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">의뢰일시: </span><span class="redOrangeFont">병원에서 의뢰를 전송완료한 시간</span>을
+                                                기준으로 함.(2023년 2월 기준)<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">판독일시: </span>판독의가 <span class="redOrangeFont">판독을 저장한 시간</span>을
+                                                기준으로 함.(2023년 2월 기준)<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">판독보장일시: </span> <span class="redOrangeFont">판독이 이뤄져야 하는 마감시간.</span>
+                                                병원, 촬영유형 코드에 따라 상이함.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">판독반영일시: </span><span class="redOrangeFont">병원 프로그램</span>에
+                                                <span class="redOrangeFont">판독이 적용된 시간</span>
+                                                기준으로 함.(2023년 2월 기준)<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">자동배정의: </span><span class="redOrangeFont">촬영유형과 촬영부위</span>를
+                                                기준으로 그 분야를 <span class="redOrangeFont">전공하는 판독의</span>를 자동배정으로 지정. 사업팀에서
+                                                배정.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">강제배정의: </span>자동배정으로 바로 판독을 낼 수 없는 판독의들이 <span
+                                                    class="redOrangeFont">판독 가능한 때 임의로 지정</span>하거나, <span
+                                                    class="redOrangeFont">자동배정의</span>가 휴무 등 개인사정으로 <span
+                                                    class="redOrangeFont">바로 판독이 불가능한 경우</span> 지정.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">중복여부(Y/N): </span><span class="redOrangeFont">의뢰가 나누어져 전송되거나 동일 의뢰가 2번 이상 전송</span>된
+                                                의뢰.
+                                                중복의뢰는 판독이 불가하므로 <span id="columnToDuplicate" class="redOrangeFont"
+                                                                      data-toggle="modal"
+                                                                      data-target="#duplicateManualModal"
+                                                                      data-dismiss="modal">중복제거 필요.<svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-box-arrow-up-right"
+                                                    viewBox="0 0 32 32">
+  <path fill-rule="evenodd"
+        d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"></path>
+  <path fill-rule="evenodd"
+        d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path>
+</svg></span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">Modality: </span><span
+                                                    class="redOrangeFont">촬영장비 혹은 촬영기법</span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">임상소견: </span><span class="redOrangeFont">의뢰병원에서 판독에 참고가 될 사항</span>을
+                                                기입.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">촬영부위: </span><span class="redOrangeFont">촬영한 부위 전체.</span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">판독부위: </span><span class="redOrangeFont">촬영부위 내 판독이 필요한 부위</span>.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">참조여부: </span><span class="redOrangeFont">의뢰 비용이 청구되지 않는 비교용 판독 의뢰</span>.
+                                                참조일 경우 <span class="redOrangeFont">참조</span>로 표시되며, <span
+                                                    class="redOrangeFont">하단의 참조영상 목록은 선택 의뢰의 모든 과거 영상으로 참조여부와 상관없음.</span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">환자나이: </span><span class="redOrangeFont">촬영일시와 생년월일의 차</span>로
+                                                계산.<span class="redOrangeFont"> 나이에 따라 신체 특징이 다르므로</span> 판독 시 필요한
+                                                정보.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">환자성별: </span><span class="redOrangeFont"> 성별에 따라 신체 특징이 다르므로</span> 판독 시 필요한
+                                                정보.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">판독의: </span><span class="redOrangeFont">판독이 적용완료된 의뢰</span>에
+                                                한하여 <span class="redOrangeFont">판독한 판독의</span>가 표시됨.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">시리즈: </span>영상 파일 내에서 <span
+                                                    class="redOrangeFont">비슷한 영상끼리 묶은 단위.</span> 100개의 영상파일 이미지에서 비슷한 영상
+                                                20개씩
+                                                묶어 5개의 시리즈가 생기는 형태.<br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">AccessionNo: </span><span
+                                                    class="redOrangeFont">병원장비 번호</span><br>
+                                            </div>
+                                            <div class="d-block py-1">
+                                                <span class="descTitle">CVR: </span><span
+                                                    class="redOrangeFont">신체 이상이 발견되어 긴급확인이 필요한 경우</span> 판독의가 판독 시 CVR란을 체크, 의뢰목록에서 <span
+                                                    class="redOrangeFont">주황색 배경, CVR란에 긴급으로 표시됨.</span><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- MANUAL: 병원선택 -->
         <div class="modal fade" tabindex="-1" role="dialog" id="selectHospManualModal"
              aria-labelledby="selectHospManualModal" aria-hidden="true">

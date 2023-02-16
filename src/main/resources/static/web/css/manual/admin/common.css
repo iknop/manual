@@ -2087,4 +2087,30 @@ hr {
     line-height: 0;
     margin: 12px auto
 }
+.modal-header {
+    width: 100%;
+    height: 56px;
+    background-color: #a9a9a9;
+    border-bottom: 0 !important;
+    padding: 0 36px !important;
+    margin-bottom: 36px
+}
 
+label.checked {
+    background: url(../../../img/check-on.png) center left no-repeat !important;
+}
+
+/* 의뢰목록 칼럼설명란 */
+.columnDesc{
+    font-size: 14px;
+    line-height: 196%;
+}
+.descTitle{
+    color: var(--darkGray);
+    font-weight: 700;
+}
+
+.redOrangeFont{
+    color: var(--redOrange);
+    font-weight: 600;
+}

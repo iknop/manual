@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/referralStatistics.css}">
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content" style="min-height: 100vh">
+        <main>
+            <div class="d-flex justify-content-center pb-5 pageHead">
+                <div id="pageTitle">
+                    <a class="manual-to-page-link-btn-group active "
+                       aria-current="page">의뢰량 통계</a>
+                </div>
+                <a class="intro" id="siteUrl" style="left: 608px;">통계 페이지</a>
+            </div>
+        </main>
+        <main>
+            <nav>
+                원격판독 &gt;
+                <span>통계</span>
+            </nav>
+
+            <form id="search-form">
+                <menu class="statistics">
+                    <h1 class="current" onclick="location.href=_ctx + 'statistics/week'">주간 의뢰량</h1>
+                    <h1 onclick="location.href=_ctx + 'statistics/month'">월간 의뢰량</h1>
+                    <h1 onclick="location.href=_ctx + 'statistics/year'">연간 의뢰량</h1>
+                    <h1 onclick="location.href=_ctx + 'statistics/requestComparison'">연도별 의뢰량</h1>
+                    <h1 onclick="location.href=_ctx + 'statistics/tat'">TAT 조회</h1>
+                </menu>
+                <!--주간 의뢰량-->
+                <div class="form d-flex">
+                    <label for="dateCondition" class="col-1 labelBlue p-0">조회 일자</label>
+                    <div class="rangeDate d-flex mr-auto justify-content-start">
+                        <div class="dateTxt d-none">조회 일자</div>
+                        <input type="text" class="dateDate sm" id="dateDate">
+                        <input type="hidden" id="start-date" value="2022-11-07">
+                        <input type="hidden" id="end-date" value="2022-11-25">
+                        <button type="button" class="btnCal sm"></button>
+                    </div>
+                    <div class="d-flex justify-content-end ml-auto">
+                        <div class="spinner-border text-info d-none" role="status" id="spinner">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <button class="reset mt-0" id="btn-reset" style="display: none" type="button">조건 초기화</button>
+                        <button type="button" id="btn-search" class="mt-0">검색하기</button>
+                        <button class="download mt-0" id="btn-download" type="button">다운로드</button>
+                    </div>
+                </div>
+
+                <div class="dataTbForm d-block">
+                    <div class="dataTbWrap d-flex">
+                        <div id="weeklyModalityStudyStat-list-table_wrapper" class="dataTables_wrapper no-footer">
+                            <div id="weeklyModalityStudyStat-list-table_processing" class="dataTables_processing"
+                                 style="display: none;">Processing...
+                            </div>
+
+                            <div id="weeklyModalityStudyStat-list-table_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="dt-buttons">
+                                    <button class="dt-button buttons-excel buttons-html5 d-none" tabindex="0"
+                                            aria-controls="weeklyModalityStudyStat-list-table" type="button"><span>Excel Download</span>
+                                    </button>
+                                </div>
+                                <div id="weeklyModalityStudyStat-list-table_processing" class="dataTables_processing"
+                                     style="display: none;">Processing...
+                                </div>
+                                <div class="dataTables_scroll"><div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 1255px; padding-right: 14px;"><table class="table table-head table-hover text-center table-bordered dataTable no-footer" style="margin-left: 0px; width: 1255px;"><thead class="thead-light">
+                                <tr><th class="align-middle sorting_disabled" rowspan="2" scope="col" colspan="1" style="width: 201.375px;">병원</th><th colspan="4" scope="col" rowspan="1" style="width: 299.125px;">전주</th><th colspan="4" scope="col" rowspan="1" style="width: 299.125px;">금주</th><th colspan="4" scope="col" rowspan="1" style="width: 299.375px;">금주-전주</th></tr>
+                                <tr><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">CT</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">MR</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">ETC</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">Total</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">CT</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">MR</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">ETC</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px;">Total</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.3125px;">CT</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.3125px;">MR</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.3125px;">ETC</th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.4375px;">Total</th></tr>
+                                </thead></table></div></div><div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 62vh; height: 62vh; width: 100%;"><table class="table table-head table-hover text-center table-bordered dataTable no-footer" id="weeklyModalityStudyStat-list-table" style="width: 100%;"><thead class="thead-light">
+                                <tr style="height: 0px;"><th class="align-middle sorting_disabled" rowspan="2" scope="col" colspan="1" style="width: 201.375px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">병원</div></th><th colspan="4" scope="col" rowspan="1" style="width: 299.125px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">전주</div></th><th colspan="4" scope="col" rowspan="1" style="width: 299.125px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">금주</div></th><th colspan="4" scope="col" rowspan="1" style="width: 299.375px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">금주-전주</div></th></tr>
+                                <tr style="height: 0px;"><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Total</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.2812px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Total</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.3125px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.3125px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.3125px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC</div></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 46.4375px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Total</div></th></tr>
+                                </thead>
+                                    <tbody><tr class="odd"><td>12345561234556123455612345561234(0249)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>가나(0251)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>강남대로(0253)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>경희한방(0242)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>공차성형(0238)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>구로(0224)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>네이버(0264)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>뉴병(0248)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>미사한방(0243)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>봄겨울(0255)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>부천성모(0203)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>북한(0263)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>사당내과(0244)</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-1</td><td>-1</td></tr><tr class="even"><td>상하(0260)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>서초연세(0231)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>수리남(0222)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>시월이사2(0227)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>신규(0267)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>신병원(0256)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>양종목내과(0230)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>여름병원(0254)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>장안내과(0216)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>준오(0236)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>참배나무(0265)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>참사과1(0221)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>쿠키몬스터(0257)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>크리스(0250)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>테병01(0208)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>테병0247(0247)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>테병1(0215)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>테병1005(0211)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>테병1013_2(0220)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>테병1025(0228)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>테병1026(0241)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>테병1031(0245)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>테병1TEST(0204)</td><td>0</td><td>1</td><td>3</td><td>4</td><td>2</td><td>0</td><td>3</td><td>5</td><td>2</td><td>-1</td><td>0</td><td>1</td></tr><tr class="odd"><td>테병2(0205)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>테병3(0252)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>피자헛(0266)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>하마(0261)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="odd"><td>해운대1(0207)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>홍백(0259)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>0</td><td>1</td><td>2</td><td>3</td></tr><tr class="odd"><td>test1(0235)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="even"><td>test11(0246)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>
+                                </table></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/web/js/manualModal/admin/managers.js}"></script>
+
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/managers`);
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+    </script>
+</th:blcok>
+</html>
