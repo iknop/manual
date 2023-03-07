@@ -233,17 +233,7 @@ header.manual-hospital ul + menu ul > li:last-child > a {
     position: relative;
 }
 
-.intro {
-    position: absolute;
-    top: 35px;
-    font-size: 16px;
-    font-weight: 500;
-    display: block;
-    float: left;
-    margin-top: 0.5rem !important;
-    color: gray;
-    /*padding: 10px 0 10px 0;*/
-}
+
 
 
 .manual-to-page-link-btn {
@@ -281,6 +271,7 @@ header.manual-hospital ul + menu ul > li:last-child > a {
     /*background-color: var(--redOrange);*/
     text-decoration: underline !important;
     text-underline-position: under;
+    font-weight: 400;
 }
 
 .manual-click-border {
@@ -460,3 +451,6 @@ span.pageLink{
     --darkGray: #585858;
     --black: #0D0D0D;
 }
+
+
+

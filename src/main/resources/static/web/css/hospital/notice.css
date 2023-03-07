@@ -7,7 +7,7 @@
     vertical-align: middle;
 }
 
-a:not(.manual-to-page-link-btn-group, .manual-to-page-link-btn) {
+a:not(.manual-to-page-link-btn-group, .manual-to-page-link-btn, .intro) {
     color: #212529 !important;
 }
 

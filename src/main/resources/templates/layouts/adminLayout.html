@@ -35,14 +35,6 @@
     <link rel="icon" type="image/png" th:href="@{/web/img/favicon-32x32.png}" sizes="32x32">
     <link rel="icon" type="image/png" th:href="@{/web/img/favicon-16x16.png}" sizes="16x16">
     <link rel="stylesheet" th:href="@{/web/css/layout/manual.css}">
-
-
-
-    <style>
-        /*.content {*/
-        /*    height: 100%;*/
-        /*}*/
-    </style>
 </head>
 <body>
 
@@ -74,6 +66,7 @@
 <script th:src="@{/web/js/common/toast_generator.js}"></script>
 <script th:src="@{/web/js/common/swal.js}"></script>
 <script th:src="@{/web/ext/handlebars/js/handlebars-v4.1.1.js}"></script>
+<script src="https://kit.fontawesome.com/8e3d7fd204.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
     let status_ctx = "/admin/status"
 </script>
@@ -81,7 +74,14 @@
     const authUrl = "https://stg.xray21.com/auth"
     const webUrl = "https://stg.xray21.com/web"
 </script>
+<script type="text/javascript">
+    const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+    const siteUrl = $('#siteUrl');
+    siteUrl.attr('href', `${webContext}/managers`);
 
+    $('[data-toggle="tooltip"]').tooltip()
+
+</script>
 <!--개별 script-->
 <th:block layout:fragment="script_area">
 </th:block>

@@ -1,0 +1,18 @@
+input.select-text-center{
+    width: 155px;
+    height: 32px;
+    border: 1px solid var(--reGray3);
+    background-color: var(--reGray6);
+    background-image: url(../../img/arrow-00.png);
+    background-position: calc(100% - 8px) center;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--fontDefaultColor);
+    padding-left: 12px;
+    margin-right: 8px;
+    outline: none;
+    margin-bottom: 8px;
+    appearance: none;
+}

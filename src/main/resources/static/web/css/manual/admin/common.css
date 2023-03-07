@@ -1763,7 +1763,7 @@ header.popup button {
     margin-left: 8px
 }
 
-#page_content.contentWrap > main #search-form menu.statistics > h1 ,
+#page_content.contentWrap > main #search-form menu.statistics > h1,
 #page_content.contentWrap > main #edit-form menu.statistics > h1 {
     min-width: 139.5px !important
 }
@@ -1804,7 +1804,7 @@ header.popup button {
     width: 140px;
     height: 40px;
     text-align: left;
-    background-image: url(../../../img/icon-reset.png);
+    background-image: url(../../../img/icon-20-reset.png);
     background-position: 18px center;
     background-repeat: no-repeat;
     padding-left: 42px;
@@ -1820,20 +1820,21 @@ header.popup button {
 #page_content.contentWrap form#edit-form > .form button.reset + button, .refferalDetailCont button + button {
     width: 140px;
     height: 40px;
-    background-color: var(--popupHeader);
+    background-color: #808080;;
     background-image: url(../../../img/icon-search.png);
     color: var(--white);
     margin-left: 8px;
     background-position: 25px center;
     background-repeat: no-repeat;
     padding-left: 36px;
-    border: 1px solid var(--popupHeader);
+    border: 1px solid #808080;;
     border-radius: 4px;
     color: var(--white);
     font-size: 15px;
     font-weight: 500;
     margin-top: 20px
 }
+
 #page_content.contentWrap form#search-form > .form button.download {
     width: 140px;
     height: 40px;
@@ -1953,14 +1954,13 @@ table.dataTable tbody th, table.dataTable tbody td {
 .modal-body table thead th, #weeklyMoalityTable thead th,
 #modalityRule-list-table thead th,
 #hospital-list-table thead th, #contract-list-table thead th, #localReadingDr-list-table thead th, #notice-list-table thead th
-/*, #tat-list-table thead th*/
-, #referral-report-table th {
+    /*, #tat-list-table thead th*/, #referral-report-table th {
     background-color: var(--dTbThColor) !important;
     border-bottom: 0;
     padding: 12px !important;
     position: relative;
     white-space: nowrap;
-    color:var(--mainColor);
+    color: var(--mainColor);
 }
 
 .modal-body table thead th, #modalityRule-list-table thead th {
@@ -2087,6 +2087,7 @@ hr {
     line-height: 0;
     margin: 12px auto
 }
+
 .modal-header {
     width: 100%;
     height: 56px;
@@ -2100,17 +2101,136 @@ label.checked {
     background: url(../../../img/check-on.png) center left no-repeat !important;
 }
 
+/*header*/
+
+ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+}
+
+ul > li {
+    display: inline-block;
+}
+
+li:not(.last) {
+    float: left;
+    /*margin-right: 10rem;*/
+    display: inline-block;
+}
+
+li.last {
+    float: left;
+}
+
+.inner-header-menu {
+    float: left;
+}
+
+/* */
+.adminNav {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f4f4f5;
+}
+
+.main-menu {
+    z-index: 1;
+    display: flex;
+}
+
+.main-menu .item .item-name {
+    padding: 10px 20px 10px 20px;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.main-menu .item .item-contents {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    display: none;
+    background-color: lightgray;
+    justify-content: center;
+    z-index: 3;
+}
+
+.main-menu .item:hover .item-contents {
+    display: block;
+}
+
+.main-menu .item .item-contents .contents-menu {
+    overflow: auto;
+}
+
+.main-menu .item .item-contents .contents-menu > ul {
+    padding: 20px 0;
+    display: flex;
+}
+
+.main-menu .item .item-contents .contents-menu > ul > li {
+    width: 220px;
+}
+
+.main-menu .item .item-contents .contents-menu > ul > li ul {
+    padding: 0;
+}
+
+.main-menu .item .item-contents .contents-menu > ul > li ul li {
+    padding: 5px 0;
+    font-size: 13px;
+    color: #787878;
+    cursor: pointer;
+}
+
+.main-menu .item .item-contents .contents-menu > ul > li ul li > a:hover {
+    color: var(--redOrange);
+}
+
+#page_content.contentWrap form#search-form > .form {
+    z-index: 0;
+}
+
+/* manual info section */
+.infoSection {
+    font-size: 19px;
+    font-weight: 600;
+}
+
 /* 의뢰목록 칼럼설명란 */
-.columnDesc{
+.columnDesc {
     font-size: 14px;
     line-height: 196%;
 }
-.descTitle{
+
+.descTitle {
     color: var(--darkGray);
-    font-weight: 700;
+    font-weight: 600;
 }
 
-.redOrangeFont{
+.redOrangeFont {
     color: var(--redOrange);
-    font-weight: 600;
+}
+
+.oneColumnDescLine {
+    line-height: 1.5;
+}
+
+.intro {
+    position: absolute;
+    top: 46px;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    float: left;
+    margin-top: 0.5rem !important;
+    color: gray;
+    font-weight: 300;
+}
+.columnDot{
+    /*color: var(--redOrange);*/
 }

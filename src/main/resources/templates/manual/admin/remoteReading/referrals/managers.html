@@ -12,7 +12,7 @@
                     <a class="manual-to-page-link-btn-group active "
                        aria-current="page">의뢰목록</a>
                 </div>
-                <a class="intro" id="siteUrl" style="left: 608px;">의뢰확인 페이지</a>
+                <a class="intro" id="siteUrl" style="left: 608px;top: 27px;">의뢰확인 페이지</a>
             </div>
 
 
@@ -103,7 +103,7 @@
         d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"></path>
   <path fill-rule="evenodd"
         d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path>
-</svg></span> 이동과 영상확인 및 일반의뢰 버튼 메뉴를 선택할 수 있습니다</span>
+</svg></span> 이동과 영상확인 및 일반의뢰 페이지 버튼 메뉴를 선택할 수 있습니다.</span>
                     <div class="d-flex justify-content-start mr-auto">
                         <button class="dataTbBtn manual-click-border" id="referral-duplicate-btn" type="button">중복정리
                         </button>
@@ -1137,7 +1137,7 @@
                 <!--참조영상-->
                 <div class="dataTbWrap d-flex">
                     <h3 class="m-0">참조영상</h3>
-                    <span class="my-auto ml-2 text-danger"> *목록에서 선택한 의뢰의 모든 과거 영상 조회</span>
+                    <span class="my-auto ml-2 text-danger"> *목록에서 선택한 의뢰의 모든 과거 의뢰 조회(참조의뢰 제외).</span>
                     <div class="table-responsive" id="reference-table-viewport">
                         <div class="dataTables_wrapper no-footer" id="reference-table_wrapper">
 
@@ -1236,72 +1236,86 @@
                                 <div class="active">
                                     <div class="my-auto manual-desc-box">
                                         <div class="columnDesc m-0 ">
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">응급구분: </span>일반적으로 <span class="redOrangeFont">판독보장시간</span>에
                                                 따라 시간이 짧은 건을 응급, 긴 건을 일반으로 나뉨. 병원 혹은 촬영유형에 따라서 시간 기준이 상이함. <span
-                                                    class="redOrangeFont">판독보장일시</span> 칼럼에서 보장시간을 자세히 볼 수 있음.<br>
+                                                        class="redOrangeFont">판독보장일시</span> 칼럼에서 보장시간을 자세히 볼 수 있음.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">병원코드: </span> <span class="redOrangeFont">병원 4자리 숫자로 이루어진 고유번호.</span>
                                                 <br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">의뢰상태: </span> <span class="redOrangeFont">의뢰의 처리과정. </span>정확한
                                                 진행단계 파악과 반복처리를 피하기 위한 값.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">병변(Y/N): </span><span class="redOrangeFont">판독의가 지정한 문제 부위.</span>
                                                 판독 시 이상이 발견되거나 특정 부위에 대한 설명이 필요한 경우 <span class="redOrangeFont">영상의 일부를 지정</span>하여
                                                 판독이 의뢰에 적용이 완료됐을 때 확인 할 수 있음.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">차트번호: </span><span class="redOrangeFont">병원에서 사용하는 환자 고유번호. </span>개인정보보호와
                                                 타병원 진료기록과의 혼잡 문제성을 해결하기 위해 적용됨. 병원 요청 시 <span class="redOrangeFont">차트번호 변경</span>
                                                 버튼을 통해 수정 가능. <br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">재판독여부: </span><span class="redOrangeFont">판독의가 재판독하는 경우 재판독으로 표시.</span>
                                                 병원의 요청이나 판독의가 판독 저장을 잘못한 경우 재판독되며, <span class="redOrangeFont">판독반영일시가 수정됨.</span><br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">촬영유형: </span>의뢰영상의 <span class="redOrangeFont">촬영유형코드(촬영장비 혹은 촬영기법)와 원내촬영정보(촬영 부위 및 검진 여부)</span>를
                                                 기준으로 <span class="redOrangeFont">의뢰전송 완료 후 생성되는 </span>정보. 검진 및 특수 검진의
                                                 경우 정해진 판독 소견 양식이 있기 때문에 빠른 검진 유무 확인을 위하여 <span class="redOrangeFont">검진 및 특검의 경우 '-HC' 혹은 '-기타코드' 부여.</span><br>
                                             </div>
-                                            <div class="d-block py-1">
-                                                <span class="descTitle">원내촬영유형: </span> <span class="redOrangeFont">촬영한 신체부위.</span>병원에
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
+                                                <span class="descTitle">원내촬영유형: </span> 병원에서 입력한 <span
+                                                    class="redOrangeFont">촬영지시에 대한 정보.</span> <span
+                                                    class="redOrangeFont">촬영한 신체부위</span>와 병원에
                                                 따라 촬영기법을 함께 표기하기도 하며,<span class="redOrangeFont"> 검진 및 특검 여부</span>를 확인할
                                                 수 있음 <br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">의뢰일시: </span><span class="redOrangeFont">병원에서 의뢰를 전송완료한 시간</span>을
                                                 기준으로 함.(2023년 2월 기준)<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">판독일시: </span>판독의가 <span class="redOrangeFont">판독을 저장한 시간</span>을
                                                 기준으로 함.(2023년 2월 기준)<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">판독보장일시: </span> <span class="redOrangeFont">판독이 이뤄져야 하는 마감시간.</span>
                                                 병원, 촬영유형 코드에 따라 상이함.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">판독반영일시: </span><span class="redOrangeFont">병원 프로그램</span>에
                                                 <span class="redOrangeFont">판독이 적용된 시간</span>
                                                 기준으로 함.(2023년 2월 기준)<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">자동배정의: </span><span class="redOrangeFont">촬영유형과 촬영부위</span>를
                                                 기준으로 그 분야를 <span class="redOrangeFont">전공하는 판독의</span>를 자동배정으로 지정. 사업팀에서
                                                 배정.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">강제배정의: </span>자동배정으로 바로 판독을 낼 수 없는 판독의들이 <span
                                                     class="redOrangeFont">판독 가능한 때 임의로 지정</span>하거나, <span
                                                     class="redOrangeFont">자동배정의</span>가 휴무 등 개인사정으로 <span
                                                     class="redOrangeFont">바로 판독이 불가능한 경우</span> 지정.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">중복여부(Y/N): </span><span class="redOrangeFont">의뢰가 나누어져 전송되거나 동일 의뢰가 2번 이상 전송</span>된
                                                 의뢰.
                                                 중복의뢰는 판독이 불가하므로 <span id="columnToDuplicate" class="redOrangeFont"
@@ -1317,52 +1331,82 @@
         d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"></path>
 </svg></span><br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">Modality: </span><span
                                                     class="redOrangeFont">촬영장비 혹은 촬영기법</span><br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">임상소견: </span><span class="redOrangeFont">의뢰병원에서 판독에 참고가 될 사항</span>을
                                                 기입.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">촬영부위: </span><span class="redOrangeFont">촬영한 부위 전체.</span><br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">판독부위: </span><span class="redOrangeFont">촬영부위 내 판독이 필요한 부위</span>.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">참조여부: </span><span class="redOrangeFont">의뢰 비용이 청구되지 않는 비교용 판독 의뢰</span>.
                                                 참조일 경우 <span class="redOrangeFont">참조</span>로 표시되며, <span
                                                     class="redOrangeFont">하단의 참조영상 목록은 선택 의뢰의 모든 과거 영상으로 참조여부와 상관없음.</span><br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">환자나이: </span><span class="redOrangeFont">촬영일시와 생년월일의 차</span>로
                                                 계산.<span class="redOrangeFont"> 나이에 따라 신체 특징이 다르므로</span> 판독 시 필요한
                                                 정보.<br>
                                             </div>
-                                            <div class="d-block py-1">
-                                                <span class="descTitle">환자성별: </span><span class="redOrangeFont"> 성별에 따라 신체 특징이 다르므로</span> 판독 시 필요한
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
+                                                <span class="descTitle">환자성별: </span><span class="redOrangeFont"> 성별에 따라 신체 특징이 다르므로</span>
+                                                판독 시 필요한
                                                 정보.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">판독의: </span><span class="redOrangeFont">판독이 적용완료된 의뢰</span>에
                                                 한하여 <span class="redOrangeFont">판독한 판독의</span>가 표시됨.<br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">시리즈: </span>영상 파일 내에서 <span
                                                     class="redOrangeFont">비슷한 영상끼리 묶은 단위.</span> 100개의 영상파일 이미지에서 비슷한 영상
                                                 20개씩
                                                 묶어 5개의 시리즈가 생기는 형태.<br>
                                             </div>
-                                            <div class="d-block py-1">
-                                                <span class="descTitle">AccessionNo: </span><span
-                                                    class="redOrangeFont">병원장비 번호</span><br>
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
+                                                <span class="descTitle">AccessionNo: </span> 병원에서 <span
+                                                    class="redOrangeFont">PACS와 EMR 연동시 필요한 번호</span><br>
                                             </div>
-                                            <div class="d-block py-1">
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
                                                 <span class="descTitle">CVR: </span><span
-                                                    class="redOrangeFont">신체 이상이 발견되어 긴급확인이 필요한 경우</span> 판독의가 판독 시 CVR란을 체크, 의뢰목록에서 <span
+                                                    class="redOrangeFont">신체 이상이 발견되어 긴급확인이 필요한 경우</span> 판독의가 판독 시
+                                                CVR란을 체크, 의뢰목록에서 <span
                                                     class="redOrangeFont">주황색 배경, CVR란에 긴급으로 표시됨.</span><br>
+                                            </div>
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
+                                                <span class="descTitle">소견서출력여부: </span>
+                                                의뢰상태가 <span class="redOrangeFont">적용완료</span>인 의뢰 중 <span
+                                                    class="redOrangeFont"> 소견서를 출력하지 않으면 미출력</span>, 그 외 빈칸처리<br>
+                                            </div>
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
+                                                <span class="descTitle">대표판독의: </span>
+                                                <span class="redOrangeFont">판독의가 소속된 기관의 대표</span><br>
+                                            </div>
+                                            <div class="d-block py-1 oneColumnDescLine">
+                                                <span class="columnDot">■</span>
+                                                <span class="descTitle">소견: </span>
+                                                <span class="redOrangeFont">판독 소견</span>. 기본 검색 조건인 소견제외를 <span
+                                                    class="redOrangeFont">소견포함으로 바꾸어야 볼 수 있다</span>.
                                             </div>
                                         </div>
                                     </div>
@@ -1463,32 +1507,32 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <div class=" mb-3">
+                            <div class=" my-3">
                                 <div class=" active">
                                     <div class="row manual-area justify-content-around">
-                                        <div class="d-block text-center">
+                                        <div class="d-block text-center my-auto">
                                             <img th:src="@{/web/img/manual/admin/managers/원격판독-의뢰목록-일반의뢰-병원초기화.png}">
                                             <div class="number-on-img" style="
-    left: 3.7rem;
-    top: 8.1rem;
+    left: 13.9rem;
+    top: 4.5rem;
 ">1
                                             </div>
                                             <div class="number-on-img" style="
-    left: 32.7rem;
-    top: 20.1rem;
+    left: 24.6rem;
+    top: 4.5rem;
 ">2
                                             </div>
                                             <div class="border-on-img" style="
-    left: 33.4rem;
-    top: 20.5rem;
-    width: 5.3rem;
-    height: 1.6rem;
+    left: 14.4rem;
+    top: 5.2rem;
+    width: 4rem;
+    height: 1.67rem;
 "></div>
                                             <div class="border-on-img" style="
-    left: 4.rem;
-    top: 9rem;
-    width: 34.1rem;
-    height: 1.4rem;
+    left: 25.1rem;
+    top: 5.2rem;
+    width: 2rem;
+    height: 1.67rem;
 "></div>
                                         </div>
                                         <div class="vr" style="left: 67%;height: 64%;"></div>
@@ -3115,7 +3159,7 @@
     </div>
 </div>
 <th:blcok layout:fragment="script_area">
-    <script th:src="@{/web/js/manualModal/admin/managers.js}"></script>
+    <script th:src="@{/web/js/manualModal/admin/remoteReading/referrals/managers.js}"></script>
 
     <script type="text/javascript">
         const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';

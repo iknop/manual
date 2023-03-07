@@ -1,0 +1,913 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/drStatistics.css}">
+    <style>
+        th {
+            color: var(--mainColor) !important;
+            background-color: var(--dTbThColor) !important;
+        }
+
+        .dateSetInput {
+            border-top-left-radius: 0.25rem !important;
+            border-bottom-left-radius: 0.25rem !important;
+        }
+
+        .calendarIcon {
+            border-top-right-radius: 0.25rem !important;
+            border-bottom-right-radius: 0.25rem !important;
+        }
+    </style>
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content" style="height: 100vh">
+        <main>
+            <nav>원격판독 &gt;<span>판독의 통계</span></nav>
+            <form class="form-register" id="search-form" style="width: 100%!important;">
+                <menu>
+                    <h1 onclick="location.href= '/manual/admin/statistics/month/readingDr'">월별 판독량</h1>
+                    <h1 class="current">시간별 판독량</h1>
+                    <h1 onclick="location.href= '/manual/admin/statistics/day/readingDr'">요일별 판독량</h1>
+                    <h1 onclick="location.href= '/manual/admin/statistics/readingDr/modality'">Modality별 판독량</h1>
+                </menu>
+                <div class="form d-flex pb-0">
+                    <div class="searchCondition d-flex flex-wrap col-9 p-0 mb-0 h-75">
+                        <div class="col-sm-8 input-group text-center date pointer"
+                             style="height: 40px;line-height: 40px;">
+                            <label class="col-form-label text-center align-content-center mr-3"
+                                   for="start-date">조회일자</label>
+                            <input class="form-control my-auto text-center dateSetInput" id="start-date"
+                                   name="startDate" readonly="" type="text"
+                                   value="2022-10-01">
+                            <div class="input-group-append my-auto" id="start-date-icon"
+                                 style="height: 40px !important;">
+                                <span class="input-group-text calendarIcon">
+                                    <i class="fa fa-calendar-alt"></i>
+                                </span>
+                            </div>
+
+                            <label class="col-form-label text-center mx-2" for="end-date">~</label>
+
+                            <input class="form-control my-auto text-center dateSetInput" id="end-date" name="endDate"
+                                   readonly="" type="text"
+                                   value="2023-10-02">
+                            <div class="input-group-append my-auto" id="end-date-icon" style="height: 40px !important;">
+                                <span class="input-group-text calendarIcon"><i class="fa fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                        <div class="spinner-border text-info d-none" id="spinner" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end col-3 p-0 my-2 h-100 align-content-start">
+                        <button class="reset mt-0" id="btn-reset" style="display: none" type="button">조건 초기화</button>
+                        <button class="mt-0" id="btn-search" type="button">검색하기</button>
+                        <button class="download mt-0" id="btn-download" type="button">다운로드</button>
+                    </div>
+                </div>
+            </form>
+            <div class="dataTbForm d-flex d-block">
+                <div class="dataTbWrap d-flex pr-3" style="overflow: scroll;">
+                <div id="hourlyReadingReportStat-list-table_wrapper" class="dataTables_wrapper no-footer">
+                    <div class="dt-buttons">
+                        <button class="dt-button buttons-excel buttons-html5 d-none" tabindex="0"
+                                aria-controls="hourlyReadingReportStat-list-table" type="button">
+                            <span>Excel Download</span>
+                        </button>
+                    </div>
+                    <div id="hourlyReadingReportStat-list-table_processing" class="dataTables_processing"
+                         style="display: none;">Processing...
+                    </div>
+                    <div class="dataTables_scroll dtfc-has-left" style="position: relative;">
+                        <div class="dataTables_scrollHead"
+                             style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+                            <div class="dataTables_scrollHeadInner"
+                                 style="box-sizing: content-box; width: 2276.6px; padding-right: 0px;">
+                                <table class="table table-head text-center table-bordered no-footer dtfc-has-left dataTable"
+                                       style="margin-left: 0px; width: 2276.6px;">
+                                    <thead class="thead-light" id="hourlyReadingReportStat-thead">
+                                    <tr>
+                                        <th class="align-middle dtfc-fixed-left sorting_disabled" scope="col"
+                                            rowspan="2" colspan="1"
+                                            style="width: 150.2px; left: 0px; position: sticky;">판독의
+                                        </th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">00-01</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">02-03</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">04-05</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">06-07</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">08-09</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">10-11</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">12-13</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">14-15</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">16-17</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">18-19</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.163px;">20-21</th>
+                                        <th scope="col" colspan="3" rowspan="1" style="width: 137.613px;">22-23</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.1875px;">ETC
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.3375px;">CT
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.3375px;">MR
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 21.3375px;">ETC
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="dataTables_scrollBody"
+                             style="position: relative; overflow: auto; width: 100%; max-height: 50vh;">
+                            <table class="table table-head text-center table-bordered no-footer dtfc-has-left dataTable"
+                                   id="hourlyReadingReportStat-list-table" style="width: 2275px;">
+                                <thead class="thead-light" id="hourlyReadingReportStat-thead">
+                                <tr style="height: 0px;">
+                                    <th class="align-middle dtfc-fixed-left sorting_disabled" scope="col"
+                                        rowspan="2" colspan="1"
+                                        style="width: 150.2px; left: 0px; position: sticky; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">판독의
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            00-01
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            02-03
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            04-05
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            06-07
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            08-09
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            10-11
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            12-13
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            14-15
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            16-17
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            18-19
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.163px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            20-21
+                                        </div>
+                                    </th>
+                                    <th scope="col" colspan="3" rowspan="1"
+                                        style="width: 137.613px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
+                                            22-23
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr style="height: 0px;">
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.1875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.3375px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.3375px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 21.3375px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr class="odd">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                        김연우456(vksehrrdml3)
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="even">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                        김현준(vksehrdml0407)
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>3</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                        김현준(vksehrdml1025)
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="even">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                        바닐라카푸치노cc(vanilla)
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">최학(chs20919)
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>3</td>
+                                    <td>2</td>
+                                    <td>0</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="even">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                        판독의1021(vksehrdml1021)
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>3</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">홍길동(dr008)</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="even">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">홍서연(drhsy)</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">홍서연2(drhsy2)
+                                    </td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="even">
+                                    <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">홍주형(drhjh)</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>3</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="dtfc-right-top-blocker"
+                             style="background-color: rgb(255, 255, 255); bottom: 0px; display: block; position: absolute; width: 1px; right: 0px; top: 0px; height: 81.6px;"></div>
+                        <div class="dtfc-right-top-blocker"
+                             style="background-color: rgb(255, 255, 255); bottom: 0px; display: block; position: absolute; width: 1px; right: 0px; top: 0px; height: 81.6px;"></div>
+                        <div class="dtfc-right-top-blocker"
+                             style="background-color: rgb(255, 255, 255); bottom: 0px; display: block; position: absolute; width: 1px; right: 0px; top: 0px; height: 81.6px;"></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </main>
+</div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/web/js/manualModal/admin/remoteReading/referrals/managers.js}"></script>
+</th:blcok>
+</html>

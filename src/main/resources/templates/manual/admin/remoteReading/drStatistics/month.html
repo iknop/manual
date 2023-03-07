@@ -1,0 +1,215 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/web/css/managers/drStatistics.css}">
+    <style>
+        .tableHead{
+            color: var(--mainColor) !important;
+            background-color: var(--dTbThColor) !important;
+        }
+    </style>
+</head>
+<div layout:fragment="content_area">
+    <div class="contentWrap" id="page_content" style="height: 100vh;">
+        <main>
+            <nav>원격판독 &gt;<span>판독의 통계</span></nav>
+            <form class="form-register" id="search-form" style="width: 100%!important;">
+                <menu>
+                    <h1 class="current">월별 판독량</h1>
+                    <h1 onclick="location.href= '/manual/admin/statistics/time/readingDr'">시간별 판독량</h1>
+                    <h1 onclick="location.href='/manual/admin/statistics/day/readingDr'">요일별 판독량</h1>
+                    <h1 onclick="location.href= '/manual/admin/statistics/modality/readingDr'">Modality별 판독량</h1>
+                </menu>
+                <div class="form d-flex pb-0">
+                    <div class="searchCondition d-flex flex-wrap col-9 p-0 mb-0 h-75">
+                        <label class="col-1 labelBlue " for="year" style="line-height: 30px">연도</label>
+                        <input class="select-text-center text-center p-0" id="year" name="year" value="2023" >
+                        <div class="d-flex" id="content-month">
+                            <label for="start-month" class="col-sm-2 labelBlue p-0 text-center"
+                                   style="line-height: 30px">시작월</label>
+                            <input class="select-text-center text-center p-0" value="01" >
+                            <label for="end-month" class="col-sm-2 labelBlue p-0 text-center" style="line-height: 30px">종료월</label>
+                            <input class="select-text-center text-center p-0" value="02" >
+                        </div>
+                        <div class="spinner-border text-info d-none" id="spinner" role="status">
+
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end col-3 p-0 mx-auto mb-0 h-100 align-content-start">
+                        <button class="reset mt-0" id="btn-reset" style="display: none" type="button">조건 초기화</button>
+                        <button class="mt-0" id="btn-search" type="button">검색하기</button>
+                        <button class="download mt-0" id="btn-download" type="button">다운로드</button>
+                    </div>
+                </div>
+            </form>
+            <div class="dataTbForm d-flex d-block">
+                <div class="dataTbWrap d-flex pr-3">
+                    <div id="monthlyReadingReportStat-list-table_wrapper" class="dataTables_wrapper no-footer">
+                        <div class="dt-buttons"></div>
+                        <div id="monthlyReadingReportStat-list-table_processing" class="dataTables_processing"
+                             style="display: none;">Processing...
+                        </div>
+                        <div class="dataTables_scroll dtfc-has-left" style="position: relative;">
+                            <div class="dataTables_scrollHead"
+                                 style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+                                <div class="dataTables_scrollHeadInner"
+                                     style="box-sizing: content-box; width: 1269.6px; padding-right: 0px;">
+                                    <table class="table table-head text-center table-bordered dataTable no-footer"
+                                           style="margin-left: 0px; width: 1269.6px;">
+                                        <thead class="thead-light" id="monthlyReadingReportStat-thead">
+                                        <tr>
+                                            <th class="align-middle sorting_disabled dtfc-fixed-left tableHead" scope="col"
+                                                rowspan="2" colspan="1"
+                                                style="width: 150.2px; left: 0px; position: sticky;">판독의
+                                            </th>
+                                            <th class="tableHead text-center" scope="col " colspan="3" rowspan="1" style="width: 503.688px;">01월</th>
+                                            <th class="tableHead text-center" scope="col " colspan="3" rowspan="1" style="width: 503.712px;">02월</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col " class="sorting_disabled tableHead" rowspan="1" colspan="1"
+                                                style="width: 143.363px;">CT
+                                            </th>
+                                            <th scope="col " class="sorting_disabled tableHead" rowspan="1" colspan="1"
+                                                style="width: 143.363px;">MR
+                                            </th>
+                                            <th scope="col " class="sorting_disabled tableHead" rowspan="1" colspan="1"
+                                                style="width: 143.363px;">ETC
+                                            </th>
+                                            <th scope="col " class="sorting_disabled tableHead" rowspan="1" colspan="1"
+                                                style="width: 143.363px;">CT
+                                            </th>
+                                            <th scope="col " class="sorting_disabled tableHead" rowspan="1" colspan="1"
+                                                style="width: 143.363px;">MR
+                                            </th>
+                                            <th scope="col" class="sorting_disabled tableHead" rowspan="1" colspan="1"
+                                                style="width: 143.387px;">ETC
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="dataTables_scrollBody"
+                                 style="position: relative; overflow: auto; max-height: 50vh; width: 100%;">
+                                <table class="table table-head text-center table-bordered dataTable no-footer dtfc-has-left"
+                                       id="monthlyReadingReportStat-list-table" style="width: 100%;">
+                                    <thead class="thead-light" id="monthlyReadingReportStat-thead">
+                                    <tr style="height: 0px;">
+                                        <th class="align-middle sorting_disabled" scope="col" rowspan="2" colspan="1"
+                                            style="width: 150.2px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">판독의
+                                            </div>
+                                        </th>
+                                        <th scope="col" colspan="3" rowspan="1"
+                                            style="width: 503.688px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">01월
+                                            </div>
+                                        </th>
+                                        <th scope="col" colspan="3" rowspan="1"
+                                            style="width: 503.712px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">02월
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr style="height: 0px;">
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 143.363px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 143.363px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 143.363px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 143.363px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">CT
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 143.363px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">MR
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 143.387px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                            <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">ETC
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr class="odd">
+                                        <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">최학(chs20919)
+                                        </td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">홍서연(drhsy)</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>3</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                            바닐라카푸치노cc(vanilla)
+                                        </td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td class="dtfc-fixed-left" style="left: 0px; position: sticky;">
+                                            김현준(vksehrdml0407)
+                                        </td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td>2</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="dtfc-right-top-blocker"
+                                 style="background-color: rgb(255, 255, 255); bottom: 0px; display: block; position: absolute; width: 1px; right: 0px; top: 0px; height: 81.6px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<th:blcok layout:fragment="script_area">
+    <script th:src="@{/web/js/manualModal/admin/remoteReading/referrals/managers.js}"></script>
+
+    <script type="text/javascript">
+        const webContext = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/web';
+        const siteUrl = $('#siteUrl');
+        siteUrl.attr('href', `${webContext}/managers`);
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+    </script>
+</th:blcok>
+</html>
